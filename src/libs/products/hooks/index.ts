@@ -23,7 +23,7 @@ export function useProductDetails(storeId: number, productId: number) {
   return useQuery({
     queryKey: queryKeys.products.detail(storeId, productId),
     queryFn: () => getProductDetails(storeId, productId),
-    enabled: !!storeId && !!productId,
+    enabled: !isNaN(storeId) && !isNaN(productId),
   });
 }
 

@@ -52,6 +52,8 @@ export default function StoreDetailsPage() {
         <div className="flex items-center gap-3">
           {store.logo?.url && (
             <Image
+              placeholder="blur"
+              blurDataURL="/fallback-store.png"
               src={store.logo.url}
               alt={store.name}
               width={48}
