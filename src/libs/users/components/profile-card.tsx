@@ -58,6 +58,8 @@ export default function UserProfileCard({
         <figure className="mx-auto">
           <div className="relative mx-auto h-24 w-24 overflow-hidden rounded-full sm:h-32 sm:w-32">
             <Image
+              placeholder="blur"
+              blurDataURL="/default-profile.png"
               key={user.photo?.url}
               src={user.photo?.url || '/default-profile.png'}
               alt={`Photo of ${displayName}`}

@@ -17,6 +17,8 @@ const StoreSummaryCard = ({ store }: { store: StoreSummary }) => {
         <CardHeader>
           <div className="flex items-end gap-x-4">
             <Image
+              placeholder="blur"
+              blurDataURL="/fallback-store.png"
               src={store.logo?.url ?? '/fallback-store.png'}
               alt={store.name}
               width={48}
