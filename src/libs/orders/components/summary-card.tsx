@@ -1,19 +1,15 @@
 'use client';
 
 import { Card, CardBody, CardHeader, Skeleton } from '@heroui/react';
-import { format, isValid } from 'date-fns';
 import Link from 'next/link';
 
 import PriceComponent from '@/libs/common/components/PriceComponent';
-import { OrderStatus, OrderSummary } from '@/libs/orders/types';
-import OrderStatusChip from '@/libs/orders/components/OrderStatusChip';
+import { formatSafeDate, DATE_FORMATS } from '@/libs/common/utils/date';
+import { OrderSummary } from '@/libs/orders/types';
+import OrderStatusChip from './order-status-chip';
 
 interface OrderSummaryCardProps {
-  order: {
-    store?: {
-      name?: string;
-    };
-  } & OrderSummary;
+  order: OrderSummary;
   href?: string;
   className?: string;
   isLoading?: boolean;
@@ -23,109 +19,57 @@ export default function OrderSummaryCard({
   order,
   href,
   className,
-  isLoading,
+  isLoading = false,
 }: OrderSummaryCardProps) {
   const { id, status, totalAmount, store, deliveryDate, createdAt } = order;
 
-  const formattedCreatedAt = isValid(new Date(createdAt))
-    ? format(new Date(createdAt), 'PP')
-    : 'N/A';
-  const formattedDeliveryDate = isValid(new Date(deliveryDate))
-    ? format(new Date(deliveryDate), 'PP')
-    : 'N/A';
+  if (isLoading) {
+    return (
+      <Card className={`w-full ${className}`}>
+        <CardHeader className="flex items-center justify-between">
+          <div className="flex-1">
+            <Skeleton className="mb-2 h-4 w-24 rounded" />
+            <Skeleton className="h-3 w-32 rounded" />
+          </div>
+          <Skeleton className="h-6 w-16 rounded-full" />
+        </CardHeader>
+        <CardBody>
+          <div className="flex items-center justify-between">
+            <Skeleton className="h-5 w-20 rounded" />
+            <div className="text-right">
+              <Skeleton className="mb-1 h-3 w-16 rounded" />
+              <Skeleton className="h-3 w-20 rounded" />
+            </div>
+          </div>
+        </CardBody>
+      </Card>
+    );
+  }
 
   const cardContent = (
-    <Card
-      className={`w-full ${className} transition-all ${href ? 'cursor-pointer hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-200' : ''}`}
-      role={href ? 'link' : undefined}
-      tabIndex={href ? 0 : undefined}
-    >
-      <CardHeader
-        className="flex items-center justify-between"
-        aria-label={isLoading ? 'Loading order details' : `Order ${id} details`}
-      >
-        <div role="region" aria-labelledby={`order-${id}-heading`}>
-          {isLoading ? (
-            <Skeleton className="h-5 w-24" />
-          ) : (
-            <h3
-              id={`order-${id}-heading`}
-              className="text-sm font-semibold"
-              role="heading"
-              aria-level={3}
-            >
-              Order #{id}
-            </h3>
-          )}
-          <p className="text-muted-foreground text-xs">
-            {isLoading ? (
-              <Skeleton className="mt-1 h-4 w-32" />
-            ) : (
-              <>
-                {formattedCreatedAt} —{' '}
-                {store?.name ? (
-                  <span className="text-muted-foreground/80">{store.name}</span>
-                ) : (
-                  <span className="text-muted-foreground/60 italic">Unknown Store</span>
-                )}
-              </>
-            )}
+    <Card className={`w-full ${className}`}>
+      <CardHeader className="flex items-center justify-between">
+        <div>
+          <h3 className="text-sm font-semibold">Order #{id}</h3>
+          <p className="text-xs text-gray-500">
+            {formatSafeDate(createdAt, DATE_FORMATS.SHORT, 'Unknown date')} —{' '}
+            <span className="text-gray-400">{store.name}</span>
           </p>
         </div>
-        {isLoading ? (
-          <Skeleton className="h-6 w-20 rounded-full" />
-        ) : (
-          <OrderStatusChip
-            status={status}
-            size="sm"
-            formatOrderStatus={formatOrderStatus}
-            aria-label={`Order status: ${formatOrderStatus(status)}`}
-          />
-        )}
+        <OrderStatusChip status={status} />
       </CardHeader>
 
-      <CardBody className="text-sm text-foreground">
+      <CardBody className="text-sm text-gray-700">
         <div className="flex items-center justify-between">
-          {isLoading ? <Skeleton className="h-5 w-20" /> : <PriceComponent amount={totalAmount} />}
-          <div
-            className="text-muted-foreground text-right text-xs"
-            role="region"
-            aria-label="Delivery information"
-          >
-            {isLoading ? (
-              <div className="space-y-1">
-                <Skeleton className="ml-auto h-4 w-16" />
-                <Skeleton className="ml-auto h-4 w-24" />
-              </div>
-            ) : (
-              <>
-                <p className="font-medium" aria-hidden="true">
-                  Est. Delivery
-                </p>
-                <p aria-label={`Estimated delivery date: ${formattedDeliveryDate}`}>
-                  {formattedDeliveryDate}
-                </p>
-              </>
-            )}
+          <PriceComponent amount={totalAmount} />
+          <div className="text-right text-xs text-gray-500">
+            <p className="font-medium">Est. Delivery</p>
+            <p>{formatSafeDate(deliveryDate, DATE_FORMATS.SHORT, 'TBD')}</p>
           </div>
         </div>
       </CardBody>
     </Card>
   );
 
-  return href ? (
-    <Link href={href} className="block hover:no-underline focus:outline-none">
-      {cardContent}
-    </Link>
-  ) : (
-    cardContent
-  );
-}
-
-export function formatOrderStatus(status: OrderStatus): string {
-  return status
-    .toLowerCase()
-    .split('_')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
+  return href ? <Link href={href}>{cardContent}</Link> : cardContent;
 }

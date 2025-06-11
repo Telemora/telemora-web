@@ -1,27 +1,71 @@
-import clsx from 'clsx';
+'use client';
+
+import { Chip } from '@heroui/react';
 
 import { OrderStatus } from '@/libs/orders/types';
 
-const statusStyles: Record<OrderStatus, string> = {
-  [OrderStatus.PENDING]: 'bg-yellow-100 text-yellow-800',
-  [OrderStatus.CONFIRMED]: 'bg-blue-100 text-blue-800',
-  [OrderStatus.PROCESSING]: 'bg-indigo-100 text-indigo-800',
-  [OrderStatus.SHIPPED]: 'bg-purple-100 text-purple-800',
-  [OrderStatus.DELIVERED]: 'bg-emerald-100 text-emerald-800',
-  [OrderStatus.COMPLETED]: 'bg-green-100 text-green-800',
-  [OrderStatus.CANCELED]: 'bg-gray-100 text-gray-600',
-  [OrderStatus.REFUNDED]: 'bg-red-100 text-red-700',
-};
+interface OrderStatusChipProps {
+  status: OrderStatus;
+  size?: 'sm' | 'md' | 'lg';
+  className?: string;
+}
 
-export function OrderStatusChip({ status }: { status: OrderStatus }) {
+type ChipColor = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
+
+const ORDER_STATUS_CONFIG = {
+  [OrderStatus.PENDING]: {
+    color: 'warning' as ChipColor,
+    label: 'Pending',
+  },
+  [OrderStatus.CONFIRMED]: {
+    color: 'secondary' as ChipColor,
+    label: 'Confirmed',
+  },
+  [OrderStatus.PROCESSING]: {
+    color: 'secondary' as ChipColor,
+    label: 'Processing',
+  },
+  [OrderStatus.SHIPPED]: {
+    color: 'primary' as ChipColor,
+    label: 'Shipped',
+  },
+  [OrderStatus.DELIVERED]: {
+    color: 'success' as ChipColor,
+    label: 'Delivered',
+  },
+  [OrderStatus.COMPLETED]: {
+    color: 'success' as ChipColor,
+    label: 'Completed',
+  },
+  [OrderStatus.CANCELED]: {
+    color: 'danger' as ChipColor,
+    label: 'Canceled',
+  },
+  [OrderStatus.REFUNDED]: {
+    color: 'danger' as ChipColor,
+    label: 'Refunded',
+  },
+} as const;
+
+const DEFAULT_STATUS_CONFIG = {
+  color: 'default' as ChipColor,
+  label: 'Unknown',
+} as const;
+
+export default function OrderStatusChip({ status, size = 'sm', className }: OrderStatusChipProps) {
+  const config = ORDER_STATUS_CONFIG[status] || DEFAULT_STATUS_CONFIG;
+
   return (
-    <span
-      className={clsx(
-        'rounded-full px-3 py-1 text-xs font-medium capitalize',
-        statusStyles[status],
-      )}
-    >
-      {status}
-    </span>
+    <Chip color={config.color} size={size} className={className}>
+      {config.label}
+    </Chip>
   );
+}
+
+export function getOrderStatusColor(status: OrderStatus): ChipColor {
+  return ORDER_STATUS_CONFIG[status]?.color || DEFAULT_STATUS_CONFIG.color;
+}
+
+export function getOrderStatusLabel(status: OrderStatus): string {
+  return ORDER_STATUS_CONFIG[status]?.label || DEFAULT_STATUS_CONFIG.label;
 }
