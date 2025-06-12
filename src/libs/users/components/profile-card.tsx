@@ -32,13 +32,11 @@ export default function UserProfileCard({
 }) {
   const router = useRouter();
 
-  // Fallbacks for name display
   const firstName = user?.firstName || '';
   const lastName = user?.lastName || '';
   const hasName = firstName || lastName;
   const displayName = hasName ? `${firstName} ${lastName}`.trim() : 'User';
 
-  // Handle navigation with error handling
   const handleNavigation = (route: string | undefined) => {
     if (!route) return;
     try {
