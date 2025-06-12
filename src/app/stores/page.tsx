@@ -3,6 +3,7 @@
 import { Button, Spinner } from '@heroui/react';
 import { useRouter } from 'next/navigation';
 import React from 'react';
+import { useTranslations } from 'next-intl';
 
 import AppLayout from '@/libs/common/components/AppLayout';
 import ErrorPage from '@/libs/common/components/errorPage';
@@ -11,6 +12,7 @@ import StoreSummaryCard from '@/libs/stores/components/summary-card';
 import { useUserStoresQuery } from '@/libs/stores/hooks';
 
 export default function StoreListPage() {
+  const t = useTranslations('store');
   const router = useRouter();
   const { data: stores, error, isLoading } = useUserStoresQuery();
 
@@ -31,14 +33,17 @@ export default function StoreListPage() {
 
   return (
     <AppLayout>
-      <PageHeader title="My Stores" subtitle="Manage your business from here" />
+      <PageHeader
+        title={t('actions.edit')}
+        subtitle="Manage your business from here" {/* TODO: add intl */}
+      />
 
       {stores && stores.length === 0 ? (
         <div className="mt-12 text-center">
           <div className="mb-2 text-5xl text-gray-400">🏪</div>
-          <p className="mb-4 text-gray-600">You don’t own any stores yet.</p>
+          <p className="mb-4 text-gray-600">{t('creationFailed')}</p>
           <Button size="lg" onPress={handleCreateStore}>
-            Create Your First Store
+            {t('create')}
           </Button>
         </div>
       ) : (
@@ -50,7 +55,7 @@ export default function StoreListPage() {
           ))}
 
           <Button fullWidth variant="bordered" size="lg" onPress={handleCreateStore}>
-            + New Store
+            + {t('create')}
           </Button>
         </div>
       )}
