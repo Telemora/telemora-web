@@ -2,8 +2,8 @@
 
 import { Button, Spinner } from '@heroui/react';
 import { useRouter } from 'next/navigation';
-import React from 'react';
 import { useTranslations } from 'next-intl';
+import React from 'react';
 
 import AppLayout from '@/libs/common/components/AppLayout';
 import ErrorPage from '@/libs/common/components/errorPage';
@@ -33,10 +33,8 @@ export default function StoreListPage() {
 
   return (
     <AppLayout>
-      <PageHeader
-        title={t('actions.edit')}
-        subtitle="Manage your business from here" {/* TODO: add intl */}
-      />
+      {/* TODO: add intl */}
+      <PageHeader title={t('actions.edit')} subtitle="Manage your business from here" />
 
       {stores && stores.length === 0 ? (
         <div className="mt-12 text-center">
