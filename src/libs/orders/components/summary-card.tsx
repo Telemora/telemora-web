@@ -1,20 +1,50 @@
 'use client';
 
-import { Card, CardBody, CardHeader, Chip } from '@heroui/react';
-import { format } from 'date-fns';
+import { Card, CardBody, CardHeader, Skeleton } from '@heroui/react';
 import Link from 'next/link';
 
 import PriceComponent from '@/libs/common/components/PriceComponent';
-import { OrderStatus, OrderSummary } from '@/libs/orders/types';
+import { formatSafeDate, DATE_FORMATS } from '@/libs/common/utils/date';
+import { OrderSummary } from '@/libs/orders/types';
+import OrderStatusChip from './order-status-chip';
 
 interface OrderSummaryCardProps {
   order: OrderSummary;
   href?: string;
   className?: string;
+  isLoading?: boolean;
 }
 
-export default function OrderSummaryCard({ order, href, className }: OrderSummaryCardProps) {
+export default function OrderSummaryCard({
+  order,
+  href,
+  className,
+  isLoading = false,
+}: OrderSummaryCardProps) {
   const { id, status, totalAmount, store, deliveryDate, createdAt } = order;
+
+  if (isLoading) {
+    return (
+      <Card className={`w-full ${className}`}>
+        <CardHeader className="flex items-center justify-between">
+          <div className="flex-1">
+            <Skeleton className="mb-2 h-4 w-24 rounded" />
+            <Skeleton className="h-3 w-32 rounded" />
+          </div>
+          <Skeleton className="h-6 w-16 rounded-full" />
+        </CardHeader>
+        <CardBody>
+          <div className="flex items-center justify-between">
+            <Skeleton className="h-5 w-20 rounded" />
+            <div className="text-right">
+              <Skeleton className="mb-1 h-3 w-16 rounded" />
+              <Skeleton className="h-3 w-20 rounded" />
+            </div>
+          </div>
+        </CardBody>
+      </Card>
+    );
+  }
 
   const cardContent = (
     <Card className={`w-full ${className}`}>
@@ -22,13 +52,11 @@ export default function OrderSummaryCard({ order, href, className }: OrderSummar
         <div>
           <h3 className="text-sm font-semibold">Order #{id}</h3>
           <p className="text-xs text-gray-500">
-            {format(new Date(createdAt), 'PP')} —{' '}
+            {formatSafeDate(createdAt, DATE_FORMATS.SHORT, 'Unknown date')} —{' '}
             <span className="text-gray-400">{store.name}</span>
           </p>
         </div>
-        <Chip color={getOrderStatusColor(status)} size="sm">
-          {status}
-        </Chip>
+        <OrderStatusChip status={status} />
       </CardHeader>
 
       <CardBody className="text-sm text-gray-700">
@@ -36,7 +64,7 @@ export default function OrderSummaryCard({ order, href, className }: OrderSummar
           <PriceComponent amount={totalAmount} />
           <div className="text-right text-xs text-gray-500">
             <p className="font-medium">Est. Delivery</p>
-            <p>{format(new Date(deliveryDate), 'PP')}</p>
+            <p>{formatSafeDate(deliveryDate, DATE_FORMATS.SHORT, 'TBD')}</p>
           </div>
         </div>
       </CardBody>
@@ -44,26 +72,4 @@ export default function OrderSummaryCard({ order, href, className }: OrderSummar
   );
 
   return href ? <Link href={href}>{cardContent}</Link> : cardContent;
-}
-
-export function getOrderStatusColor(
-  status: OrderStatus,
-): 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger' {
-  switch (status) {
-    case OrderStatus.PENDING:
-      return 'warning';
-    case OrderStatus.CONFIRMED:
-    case OrderStatus.PROCESSING:
-      return 'secondary';
-    case OrderStatus.SHIPPED:
-      return 'primary';
-    case OrderStatus.DELIVERED:
-    case OrderStatus.COMPLETED:
-      return 'success';
-    case OrderStatus.CANCELED:
-    case OrderStatus.REFUNDED:
-      return 'danger';
-    default:
-      return 'default';
-  }
 }

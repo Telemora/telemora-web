@@ -42,7 +42,12 @@ export default function OrdersPage() {
       ) : (
         <div className="flex flex-col gap-y-2 pb-10">
           {orders.map((order) => (
-            <OrderSummaryCard key={order.id} order={order} href={`/orders/${order.id}`} />
+            <OrderSummaryCard
+              key={order.id}
+              order={order}
+              href={`/orders/${order.id}`}
+              isLoading={false}
+            />
           ))}
         </div>
       )}
