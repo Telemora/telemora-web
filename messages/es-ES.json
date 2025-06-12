@@ -1,0 +1,138 @@
+{
+  "common": {
+    "back": "Volver",
+    "continue": "Continuar",
+    "save": "Guardar cambios",
+    "skip": "Omitir por ahora",
+    "submit": "Enviar",
+    "create": "Crear",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "loading": "Un momento...",
+    "retry": "Reintentar"
+  },
+  "error": {
+    "generic": "¡Vaya! Algo salió mal.",
+    "invalidOrder": "No pudimos procesar este pedido.",
+    "invalidOrderId": "ID de pedido no válido. Por favor, revísalo e inténtalo de nuevo."
+  },
+  "orders": {
+    "title": "Tus pedidos",
+    "subtitle": "Consulta tus compras anteriores y sigue tus entregas.",
+    "none": "Aún no has hecho ningún pedido.",
+    "gotoMarket": "Explorar el mercado",
+    "backToOrders": "Volver a pedidos",
+    "loadingOrder": "Cargando tu pedido...",
+    "pendingPayment": "Pago pendiente. Complétalo para evitar la cancelación.",
+    "items": "Artículos",
+    "summary": "Resumen del pedido",
+    "totalAmount": "Total",
+    "deliveryDate": "Fecha de entrega",
+    "estimatedDelivery": "Entrega estimada"
+  },
+  "profile": {
+    "title": "Actualizar perfil",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "phoneNumber": "Número de teléfono",
+    "email": "Correo electrónico"
+  },
+  "preferences": {
+    "title": "Preferencias de la app",
+    "language": {
+      "label": "Idioma",
+      "description": "Selecciona tu idioma preferido."
+    },
+    "currency": {
+      "label": "Moneda",
+      "description": "Los precios incluirán conversiones útiles de moneda."
+    }
+  },
+  "store": {
+    "basicInfo": {
+      "title": "Información de la tienda",
+      "subtitle": "Elige un nombre y una descripción que representen tu marca. Esto es lo que verán tus clientes.",
+      "name": "Nombre de la tienda",
+      "description": "Descripción de la tienda",
+      "contactNumber": "Número de contacto",
+      "email": "Correo de contacto",
+      "creating": "Configurando tu tienda..."
+    },
+    "location": {
+      "title": "Ubicación de la tienda",
+      "subtitle": "Haz que tus clientes te encuentren fácilmente.",
+      "useTelegram": "Usar ubicación de Telegram",
+      "openSettings": "Ir a ajustes de Telegram",
+      "country": "País",
+      "state": "Provincia/Región",
+      "city": "Ciudad",
+      "street1": "Dirección",
+      "street2": "Apartamento, piso, etc. (opcional)",
+      "postalCode": "Código postal (opcional)",
+      "saveContinue": "Guardar y continuar",
+      "locationUpdated": "¡Ubicación guardada correctamente!",
+      "locationFailed": "No se pudo guardar la ubicación. Inténtalo de nuevo."
+    },
+    "tags": {
+      "title": "Etiquetas de la tienda",
+      "subtitle": "Las etiquetas ayudan a los clientes a encontrar tu tienda.",
+      "suggestions": "Etiquetas recomendadas",
+      "addCustom": "Añadir tu propia etiqueta",
+      "addButton": "Añadir etiqueta",
+      "saved": "¡Etiquetas actualizadas correctamente!",
+      "failed": "No se pudieron guardar las etiquetas."
+    },
+    "workingHours": {
+      "title": "Horario de la tienda",
+      "subtitle": "Informa a los clientes cuándo estás abierto.",
+      "open": "Abre a las",
+      "close": "Cierra a las",
+      "error": "La hora de apertura debe ser anterior a la de cierre.",
+      "summary": "Horario semanal",
+      "closed": "Cerrado",
+      "saved": "¡Horario guardado correctamente!",
+      "failed": "No se pudo actualizar el horario."
+    },
+    "logo": {
+      "title": "Logo de la tienda",
+      "change": "Cambiar imagen",
+      "submit": "Publicar tienda"
+    },
+    "actions": {
+      "share": "Compartir enlace de la tienda",
+      "edit": "Editar tienda",
+      "delete": "Eliminar tienda"
+    },
+    "created": "¡Tu tienda ya está activa!",
+    "creationFailed": "Algo salió mal al crear tu tienda."
+  },
+  "product": {
+    "create": {
+      "title": "Nuevo producto",
+      "name": "Nombre del producto",
+      "price": "Precio (TON)",
+      "description": "Describe brevemente tu producto...",
+      "stock": "Cantidad disponible",
+      "downloadLink": "Enlace de descarga (si aplica)",
+      "success": "¡Producto añadido con éxito!",
+      "failure": "No se pudo crear el producto. Inténtalo de nuevo."
+    },
+    "edit": {
+      "title": "Editar producto",
+      "success": "¡Cambios guardados!",
+      "failure": "No se pudo actualizar el producto. Inténtalo de nuevo."
+    },
+    "details": {
+      "description": "Descripción",
+      "inStock": "En stock: {stock}",
+      "attributes": "Detalles del producto",
+      "variants": "Variantes"
+    }
+  },
+  "tabs": {
+    "market": "Mercado",
+    "stores": "Mis tiendas",
+    "orders": "Pedidos",
+    "profile": "Perfil"
+  }
+}
