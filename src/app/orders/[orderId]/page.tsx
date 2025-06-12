@@ -3,6 +3,7 @@
 import { Alert, Button, Card, CardBody, CardFooter, Divider, Spinner } from '@heroui/react';
 import { useParams, useRouter } from 'next/navigation';
 import React from 'react';
+import { useTranslations } from 'next-intl';
 
 import AppLayout from '@/libs/common/components/AppLayout';
 import ErrorPage from '@/libs/common/components/errorPage';
@@ -19,6 +20,10 @@ import { TonPaymentButton } from '@/libs/payments/components/ton-payment-button'
 import { PaymentStatus } from '@/libs/payments/types';
 
 export default function OrderDetailsPage() {
+  const t = useTranslations('orders');
+  const tError = useTranslations('error');
+  const tCommon = useTranslations('common');
+
   const { orderId } = useParams<{ orderId: string }>();
   const router = useRouter();
 
@@ -28,15 +33,15 @@ export default function OrderDetailsPage() {
     return (
       <AppLayout>
         <div className="flex h-screen items-center justify-center">
-          <Spinner label="Loading order..." />
+          <Spinner label={t('loadingOrder')} />
         </div>
       </AppLayout>
     );
   }
 
-  if (error || !order) return <ErrorPage error={new Error('Invalid Order')} />;
+  if (error || !order) return <ErrorPage error={new Error(tError('invalidOrder'))} />;
   if (!orderId || isNaN(Number(orderId)))
-    return <ErrorPage error={new Error('Invalid order ID')} />;
+    return <ErrorPage error={new Error(tError('invalidOrderId'))} />;
 
   const isPendingPayment =
     order.status === OrderStatus.PENDING && order.payment?.status !== PaymentStatus.COMPLETED;
@@ -44,8 +49,8 @@ export default function OrderDetailsPage() {
   return (
     <AppLayout>
       <PageHeader
-        title={`Order #${order.id}`}
-        subtitle={`Placed on ${formatDate(order.createdAt)}`}
+        title={`${t('title')} #${order.id}`}
+        subtitle={`${t('summary')}: ${formatDate(order.createdAt)}`}
       />
 
       <div className="mb-4 flex items-center justify-between">
@@ -57,10 +62,7 @@ export default function OrderDetailsPage() {
       {isPendingPayment && (
         <Card>
           <CardBody>
-            <Alert
-              color="warning"
-              description="This order is pending payment. Complete it to avoid cancellation."
-            />
+            <Alert color="warning" description={t('pendingPayment')} />
           </CardBody>
           <CardFooter>
             <TonPaymentButton
@@ -75,7 +77,7 @@ export default function OrderDetailsPage() {
 
       {/* Items */}
       <div className="space-y-4">
-        <h2 className="text-lg font-semibold">Items</h2>
+        <h2 className="text-lg font-semibold">{t('items')}</h2>
         {order.items.map((item) => (
           <OrderItemPreviewCard orderItem={item} key={item.product.id} />
         ))}
@@ -90,21 +92,23 @@ export default function OrderDetailsPage() {
 
       {/* Order Summary */}
       <div className="mb-12">
-        <h2 className="mb-2 text-lg font-semibold">Summary</h2>
+        <h2 className="mb-2 text-lg font-semibold">{t('summary')}</h2>
         <div className="space-y-1 text-sm">
           <div className="flex gap-x-2">
-            <span>Total Amount: </span>
+            <span>{t('totalAmount')}: </span>
             <PriceComponent amount={order.totalAmount} />
           </div>
-          <p>Delivery Date: {formatDate(order.deliveryDate)}</p>
+          <p>
+            {t('deliveryDate')}: {formatDate(order.deliveryDate)}
+          </p>
           <p className="text-sm">
-            Estimated Delivery {formatRelative(order.shipment?.deliveryEstimate ?? '-')}
+            {t('estimatedDelivery')} {formatRelative(order.shipment?.deliveryEstimate ?? '-')}
           </p>
         </div>
       </div>
 
       <Button variant="bordered" fullWidth onPress={() => router.push('/orders')}>
-        Back to Orders
+        {t('backToOrders')}
       </Button>
     </AppLayout>
   );
