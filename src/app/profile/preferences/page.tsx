@@ -13,7 +13,7 @@ import { UpdatePreferencesFormData, updatePreferencesSchema } from '@/libs/users
 const supportedLanguages = [
   { key: 'en', label: 'English' },
   { key: 'ar', label: 'Arabic' },
-  { key: 'ch', label: 'Chinese' },
+  { key: 'zh-CN', label: 'Chinese' },
   { key: 'fa', label: 'Persian' },
   { key: 'ru', label: 'Russian' },
 ];
