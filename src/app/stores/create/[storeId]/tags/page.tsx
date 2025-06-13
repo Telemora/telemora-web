@@ -7,6 +7,7 @@ import { useParams, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { useTranslations } from 'next-intl';
 
 import AppLayout from '@/libs/common/components/AppLayout';
 import { PageHeader } from '@/libs/common/components/page-header';
@@ -31,6 +32,9 @@ const TAG_SUGGESTIONS = [
 ];
 
 export default function CreateStoreTags() {
+  const t = useTranslations('store.tags');
+  const tCommon = useTranslations('common');
+
   const { storeId } = useParams<{ storeId: string }>();
   const router = useRouter();
 
@@ -69,11 +73,11 @@ export default function CreateStoreTags() {
   const onSubmit = async (data: CreateStoreTagsDto) => {
     try {
       await mutateAsync(data);
-      toast.success('Tags saved!');
+      toast.success(t('saved'));
       hapticFeedback.impactOccurred('light');
       router.push(`/stores/create/${storeId}/working-hours`);
     } catch {
-      toast.error('Failed to save tags');
+      toast.error(t('failed'));
     }
   };
 
@@ -82,14 +86,11 @@ export default function CreateStoreTags() {
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Progress label="Step 3 of 5" maxValue={5} value={3} size="sm" />
 
-        <PageHeader
-          title="Tags"
-          subtitle="Choose tags that describe your store. They help customers discover you!"
-        />
+        <PageHeader title={t('title')} subtitle={t('subtitle')} />
 
         {/* Suggestions */}
         <div className="mt-4">
-          <p className="mb-2 text-sm font-medium text-gray-600">Suggestions</p>
+          <p className="mb-2 text-sm font-medium text-gray-600">{t('suggestions')}</p>
           <div className="flex flex-wrap gap-2">
             {TAG_SUGGESTIONS.map((tag) => (
               <Tag
@@ -105,7 +106,7 @@ export default function CreateStoreTags() {
         {/* Custom Tag Input */}
         <div className="mt-6">
           <Input
-            label="Add Custom Tag"
+            label={t('addCustom')}
             placeholder="e.g. Vintage"
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -118,7 +119,7 @@ export default function CreateStoreTags() {
           />
           {input.trim() && (
             <Button size="sm" variant="ghost" className="mt-2" onPress={handleAddCustomTag}>
-              Add &#34;{input.trim()}&#34;
+              {t('addButton')} &#34;{input.trim()}&#34;
             </Button>
           )}
           {errors.tags && <p className="mt-2 text-sm text-red-500">{errors.tags.message}</p>}
@@ -127,14 +128,14 @@ export default function CreateStoreTags() {
         {/* Navigation */}
         <div className="mt-8 flex gap-x-2">
           <Button variant="flat" type="button" onPress={() => router.back()}>
-            Back
+            {tCommon('back')}
           </Button>
           <Button
             variant="flat"
             type="button"
             onPress={() => router.push(`/stores/${storeId}/working-hours`)}
           >
-            Skip
+            {tCommon('skip')}
           </Button>
           <Button
             fullWidth
@@ -143,7 +144,7 @@ export default function CreateStoreTags() {
             isDisabled={selectedTags.length === 0 || isPending}
             isLoading={isPending}
           >
-            Save & Next
+            {tCommon('continue')}
           </Button>
         </div>
       </Form>
