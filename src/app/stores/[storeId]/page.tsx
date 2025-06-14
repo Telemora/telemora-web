@@ -53,7 +53,6 @@ export default function StoreDetailsPage() {
           {store.logo?.url && (
             <Image
               placeholder="blur"
-              blurDataURL="/fallback-store.png"
               src={store.logo.url}
               alt={store.name}
               width={48}

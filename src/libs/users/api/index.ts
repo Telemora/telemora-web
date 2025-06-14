@@ -36,7 +36,10 @@ export async function updateContactLocation(
     : httpClient.patch<UserPrivateProfile>(`/users/contact-location/${telegramId}`, data);
 }
 
-export async function updateUserPreferences(telegramId: number | string, data: UpdatePreferencesDto) {
+export async function updateUserPreferences(
+  telegramId: number | string,
+  data: UpdatePreferencesDto,
+) {
   return isDev
     ? generateMockUserPrivateProfile()
     : httpClient.patch<UserPrivateProfile>(`/users/preferences/${telegramId}`, data);

@@ -52,7 +52,7 @@ export default function BottomTabs() {
         <Tab
           key={key}
           title={
-            <div className="flex flex-col items-center gap-1 text-sm">  
+            <div className="flex flex-col items-center gap-1 text-sm">
               {icon} <span>{label}</span>
             </div>
           }

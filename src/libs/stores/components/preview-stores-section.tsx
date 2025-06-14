@@ -20,9 +20,9 @@ export default function PreviewStoresSection({
           <Button as={'link'} href="/stores/create">
             Create your first Store
           </Button>
-        ) : stores.map((store) => (
-          <StorePreviewCard key={store.id} store={store} />
-        ))}
+        ) : (
+          stores.map((store) => <StorePreviewCard key={store.id} store={store} />)
+        )}
       </div>
     </section>
   );

@@ -1,9 +1,19 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { queryKeys } from '@/libs/common/api/query-keys';
-import { addShipment, createOrder, getMyOrders, getOrderDetails, updateOrder } from '@/libs/orders/api';
+import {
+  addShipment,
+  createOrder,
+  getMyOrders,
+  getOrderDetails,
+  updateOrder,
+} from '@/libs/orders/api';
 import { generateMockOrderDetail, generateMockOrderSummaries } from '@/libs/orders/mocks';
-import { CreateOrderFormData, CreateOrderShipmentFormData, UpdateOrderFormData } from '@/libs/orders/schemas';
+import {
+  CreateOrderFormData,
+  CreateOrderShipmentFormData,
+  UpdateOrderFormData,
+} from '@/libs/orders/schemas';
 import { OrderDetail, OrderSummary } from '@/libs/orders/types';
 
 import { isDev } from '../../common/utils';
@@ -29,7 +39,10 @@ export function useCreateOrder() {
   return useMutation<OrderDetail, Error, CreateOrderFormData>({
     mutationFn: (data) => (isDev ? generateMockOrderDetail() : createOrder(data)),
     onSuccess: async () => {
-      await queryClient.prefetchQuery({ queryKey: queryKeys.orders.all, queryFn: isDev ? generateMockOrderSummaries : getMyOrders });
+      await queryClient.prefetchQuery({
+        queryKey: queryKeys.orders.all,
+        queryFn: isDev ? generateMockOrderSummaries : getMyOrders,
+      });
       queryClient.invalidateQueries({ queryKey: queryKeys.orders.all });
     },
   });

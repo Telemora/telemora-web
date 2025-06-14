@@ -62,9 +62,9 @@ export function useUpdateContactLocationMutation() {
 export function useUpdatePreferencesMutation() {
   return useMutation({
     mutationFn: ({
-                   telegramId,
-                   data,
-                 }: {
+      telegramId,
+      data,
+    }: {
       telegramId: number | string;
       data: UpdatePreferencesFormData;
     }) => updateUserPreferences(telegramId, data),

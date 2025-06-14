@@ -55,7 +55,6 @@ export function useSubmitStoreBasicInfoMutation() {
     mutationFn: (data) => submitStoreBasicInfo(data),
     onSuccess: async () => {
       await queryClient.prefetchQuery({ queryKey: queryKeys.stores.my, queryFn: fetchUserStores });
-
     },
   });
 }

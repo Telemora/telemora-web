@@ -18,7 +18,6 @@ export default function ProductPreviewCard({ product }: ProductPreviewCard) {
         <CardBody className="h-32">
           <Image
             placeholder="blur"
-            blurDataURL="/fallback-product.png"
             src={product.image[0].url || '/fallback-product.png'}
             alt={product.image[0].alt ?? product.name}
             priority={true}

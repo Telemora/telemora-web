@@ -29,11 +29,8 @@ export async function generateMockProductPreview(): Promise<ProductPreview> {
   };
 }
 
-export async function generateMockProductPhotos(): Promise<{imageUrls: string[]}> {
-  const imageUrls = Array.from(
-    { length: 4 },
-    () => faker.image.url()
-  );
+export async function generateMockProductPhotos(): Promise<{ imageUrls: string[] }> {
+  const imageUrls = Array.from({ length: 4 }, () => faker.image.url());
 
   return { imageUrls };
 }

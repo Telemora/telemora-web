@@ -2,9 +2,9 @@ import { format, isValid, parseISO } from 'date-fns';
 
 export function createSafeDate(dateInput: string | number | Date): Date | null {
   if (!dateInput) return null;
-  
+
   let date: Date;
-  
+
   if (typeof dateInput === 'string') {
     date = parseISO(dateInput);
     if (!isValid(date)) {
@@ -13,19 +13,19 @@ export function createSafeDate(dateInput: string | number | Date): Date | null {
   } else {
     date = new Date(dateInput);
   }
-  
+
   return isValid(date) ? date : null;
 }
 
 export function formatSafeDate(
   dateInput: string | number | Date,
   formatString: string = 'PP',
-  fallback: string = 'Invalid Date'
+  fallback: string = 'Invalid Date',
 ): string {
   const date = createSafeDate(dateInput);
-  
+
   if (!date) return fallback;
-  
+
   try {
     return format(date, formatString);
   } catch (error) {

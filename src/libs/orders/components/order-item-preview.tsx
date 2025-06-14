@@ -19,7 +19,6 @@ export default function OrderItemPreviewCard({ orderItem }: { orderItem: OrderIt
             >
               <Image
                 placeholder="blur"
-                blurDataURL="/fallback-order.png"
                 src={orderItem.product.image?.[0]?.url || '/fallback-order.png'}
                 alt={sanitizeAltText(orderItem.product.name)}
                 width={64}
@@ -31,7 +30,6 @@ export default function OrderItemPreviewCard({ orderItem }: { orderItem: OrderIt
           ) : (
             <Image
               placeholder="blur"
-              blurDataURL="/fallback-order.png"
               src={orderItem.product.image?.[0]?.url || '/fallback-order.png'}
               alt={sanitizeAltText(orderItem.product.name)}
               width={64}

@@ -18,7 +18,6 @@ export const StorePreviewCard = ({ store }: { store: StorePreview }) => {
         <CardBody className="flex flex-col items-center space-y-2 text-center">
           <Image
             placeholder="blur"
-            blurDataURL="/fallback-store.png"
             src={store.logo?.url ?? '/fallback-store.png'}
             alt={store.name}
             width={64}

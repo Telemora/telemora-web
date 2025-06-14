@@ -13,7 +13,13 @@ const SHIPMENT_STATUS_STYLES: Record<NonNullable<OrderShipment['status']>, strin
   failed: 'bg-red-100 text-red-800',
 };
 
-export function OrderShipmentCard({ shipment, collapsed = false }: { shipment: OrderShipment, collapsed?: boolean }) {
+export function OrderShipmentCard({
+  shipment,
+  collapsed = false,
+}: {
+  shipment: OrderShipment;
+  collapsed?: boolean;
+}) {
   const {
     trackingNumber,
     courierService,
@@ -23,21 +29,43 @@ export function OrderShipmentCard({ shipment, collapsed = false }: { shipment: O
     carrierTrackingUrl,
   } = shipment;
 
-  const statusStyle = SHIPMENT_STATUS_STYLES[status] || 'bg-gray-100 text-gray-600 border border-dashed border-gray-400';
+  const statusStyle =
+    SHIPMENT_STATUS_STYLES[status] ||
+    'bg-gray-100 text-gray-600 border border-dashed border-gray-400';
   const statusLabel = typeof status === 'string' ? status.replace('_', ' ') : 'unknown';
 
   if (collapsed) {
     return (
-      <section className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4 p-3 border rounded-md bg-white shadow-sm" aria-label="Shipment Summary">
-        <div className="flex items-center gap-2 flex-1 min-w-0">
+      <section
+        className="flex flex-col gap-2 rounded-md border bg-white p-3 shadow-sm sm:flex-row sm:items-center sm:gap-4"
+        aria-label="Shipment Summary"
+      >
+        <div className="flex min-w-0 flex-1 items-center gap-2">
           <FaTruck aria-hidden="true" className="text-gray-500" />
-          <span className={clsx('rounded-full px-2 py-1 text-xs capitalize', statusStyle)} aria-label={`Status: ${statusLabel}`}>
+          <span
+            className={clsx('rounded-full px-2 py-1 text-xs capitalize', statusStyle)}
+            aria-label={`Status: ${statusLabel}`}
+          >
             {statusLabel}
           </span>
-          <span className="truncate max-w-[100px] text-xs text-gray-700" title={trackingNumber || ''} aria-label={trackingNumber || ''}>
-            {trackingNumber ? escapeHtml(trackingNumber) : <span className="text-gray-400">No Tracking</span>}
+          <span
+            className="max-w-[100px] truncate text-xs text-gray-700"
+            title={trackingNumber || ''}
+            aria-label={trackingNumber || ''}
+          >
+            {trackingNumber ? (
+              escapeHtml(trackingNumber)
+            ) : (
+              <span className="text-gray-400">No Tracking</span>
+            )}
           </span>
-          <span className="text-xs text-gray-500">{courierService ? escapeHtml(courierService) : <span className="text-gray-400">No Courier</span>}</span>
+          <span className="text-xs text-gray-500">
+            {courierService ? (
+              escapeHtml(courierService)
+            ) : (
+              <span className="text-gray-400">No Courier</span>
+            )}
+          </span>
         </div>
         {carrierTrackingUrl && (
           <a
@@ -55,7 +83,10 @@ export function OrderShipmentCard({ shipment, collapsed = false }: { shipment: O
     );
   }
   return (
-    <section className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-6" aria-label="Shipment Information">
+    <section
+      className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-6"
+      aria-label="Shipment Information"
+    >
       <div className="flex-1 space-y-3">
         <header className="flex items-center justify-between">
           <div className="mb-2 flex items-center gap-x-2 text-lg font-semibold">
@@ -64,15 +95,20 @@ export function OrderShipmentCard({ shipment, collapsed = false }: { shipment: O
               <span className="sr-only">Section: </span>Shipment Info
             </h2>
           </div>
-          <span className={clsx('rounded-full px-2 py-1 text-xs capitalize', statusStyle)} aria-label={`Status: ${statusLabel}`}>
+          <span
+            className={clsx('rounded-full px-2 py-1 text-xs capitalize', statusStyle)}
+            aria-label={`Status: ${statusLabel}`}
+          >
             {statusLabel}
           </span>
         </header>
-        <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1 text-xs">
+        <dl className="grid grid-cols-1 gap-x-6 gap-y-1 text-xs sm:grid-cols-2">
           <ShipmentDetail label="Tracking:">
             {trackingNumber ? (
               <span title={trackingNumber} className="inline-flex items-center gap-1">
-                <span className="truncate max-w-[120px] align-middle" aria-label={trackingNumber}>{escapeHtml(trackingNumber)}</span>
+                <span className="max-w-[120px] truncate align-middle" aria-label={trackingNumber}>
+                  {escapeHtml(trackingNumber)}
+                </span>
                 <button
                   type="button"
                   aria-label="Copy tracking number"
@@ -80,7 +116,21 @@ export function OrderShipmentCard({ shipment, collapsed = false }: { shipment: O
                   onClick={() => navigator.clipboard.writeText(trackingNumber)}
                   tabIndex={0}
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><title>Copy</title><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16h8a2 2 0 002-2V8a2 2 0 00-2-2H8a2 2 0 00-2 2v6a2 2 0 002 2zm0 0v2a2 2 0 002 2h6a2 2 0 002-2v-2" /></svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-3 w-3"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <title>Copy</title>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M8 16h8a2 2 0 002-2V8a2 2 0 00-2-2H8a2 2 0 00-2 2v6a2 2 0 002 2zm0 0v2a2 2 0 002 2h6a2 2 0 002-2v-2"
+                    />
+                  </svg>
                 </button>
               </span>
             ) : (
@@ -137,11 +187,17 @@ function isValidDate(date: unknown): date is string {
 function ShipmentDetail({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="flex items-baseline gap-1">
-      <dt className="font-semibold min-w-[70px]">{label}</dt>
+      <dt className="min-w-[70px] font-semibold">{label}</dt>
       <dd>{children}</dd>
     </div>
   );
 }
 export function escapeHtml(str: string) {
-  return str.replace(/[&<>'"`]/g, (tag) => ({'&':'&amp;','<':'&lt;','>':'&gt;','\'':'&#39;','"':'&quot;','`':'&#96;'}[tag]||tag));
+  return str.replace(
+    /[&<>'"`]/g,
+    (tag) =>
+      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;', '`': '&#96;' })[
+        tag
+      ] || tag,
+  );
 }

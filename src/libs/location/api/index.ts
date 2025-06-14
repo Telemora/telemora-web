@@ -1,5 +1,9 @@
 import httpClient from '@/libs/common/utils/http-client';
-import { generateMockCities, generateMockCountries, generateMockStates } from '@/libs/location/mocks';
+import {
+  generateMockCities,
+  generateMockCountries,
+  generateMockStates,
+} from '@/libs/location/mocks';
 
 import { isDev } from '../../common/utils';
 import { CanonicalLocation, NearestLocationResponse } from '../types';

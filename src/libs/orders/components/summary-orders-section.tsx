@@ -19,9 +19,9 @@ export default function SummaryOrdersSection({
           <Button as={'link'} href="/orders">
             Create your first order
           </Button>
-        ) : orders.map((order) => (
-          <OrderSummaryCard key={order.id} order={order} />
-        ))}
+        ) : (
+          orders.map((order) => <OrderSummaryCard key={order.id} order={order} />)
+        )}
       </div>
     </section>
   );

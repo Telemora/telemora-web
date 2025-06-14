@@ -46,7 +46,6 @@ export default function ProductDetailsPage() {
             {product.image.map((img, index) => (
               <Image
                 placeholder="blur"
-                blurDataURL="/fallback-product.png"
                 key={index}
                 src={img.url}
                 width={240}

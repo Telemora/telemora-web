@@ -19,11 +19,7 @@ export function UserProvider({ children }: PropsWithChildren) {
     return;
   }
 
-  return (
-    <UserContext.Provider value={{ data, isLoading }}>
-      {children}
-    </UserContext.Provider>
-  );
+  return <UserContext.Provider value={{ data, isLoading }}>{children}</UserContext.Provider>;
 }
 
 export const useUserState = () => {

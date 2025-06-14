@@ -38,7 +38,6 @@ export default function ProductSummaryCard({ product, className }: ProductSummar
       <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-md bg-gray-100">
         <Image
           placeholder="blur"
-          blurDataURL="/fallback-product.png"
           src={image[0].url}
           alt={image[0].alt ?? name}
           fill
