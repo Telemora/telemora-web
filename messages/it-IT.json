@@ -1,0 +1,138 @@
+{
+  "common": {
+    "back": "Indietro",
+    "continue": "Continua",
+    "save": "Salva modifiche",
+    "skip": "Salta per ora",
+    "submit": "Invia",
+    "create": "Crea",
+    "edit": "Modifica",
+    "delete": "Elimina",
+    "loading": "Un momento...",
+    "retry": "Riprova"
+  },
+  "error": {
+    "generic": "Ops! Qualcosa è andato storto.",
+    "invalidOrder": "Non siamo riusciti a elaborare questo ordine.",
+    "invalidOrderId": "ID ordine non valido. Controlla e riprova."
+  },
+  "orders": {
+    "title": "I tuoi ordini",
+    "subtitle": "Visualizza acquisti precedenti e traccia le consegne.",
+    "none": "Non hai ancora effettuato ordini.",
+    "gotoMarket": "Vai al Marketplace",
+    "backToOrders": "Torna agli ordini",
+    "loadingOrder": "Recupero del tuo ordine in corso...",
+    "pendingPayment": "Pagamento in sospeso. Completa l'operazione per evitare la cancellazione.",
+    "items": "Articoli",
+    "summary": "Riepilogo ordine",
+    "totalAmount": "Totale",
+    "deliveryDate": "Data di consegna",
+    "estimatedDelivery": "Consegna stimata"
+  },
+  "profile": {
+    "title": "Aggiorna profilo",
+    "firstName": "Nome",
+    "lastName": "Cognome",
+    "phoneNumber": "Numero di telefono",
+    "email": "Indirizzo email"
+  },
+  "preferences": {
+    "title": "Preferenze app",
+    "language": {
+      "label": "Lingua",
+      "description": "Seleziona la tua lingua preferita."
+    },
+    "currency": {
+      "label": "Valuta",
+      "description": "I prezzi includeranno conversioni utili."
+    }
+  },
+  "store": {
+    "basicInfo": {
+      "title": "Dettagli negozio",
+      "subtitle": "Scegli un nome e una descrizione che rappresentino il tuo brand. Saranno visibili ai clienti.",
+      "name": "Nome del negozio",
+      "description": "Descrizione del negozio",
+      "contactNumber": "Numero di contatto",
+      "email": "Email di contatto",
+      "creating": "Configurazione del negozio in corso..."
+    },
+    "location": {
+      "title": "Posizione del negozio",
+      "subtitle": "Facilita ai clienti la possibilità di trovarti.",
+      "useTelegram": "Usa la posizione da Telegram",
+      "openSettings": "Apri impostazioni Telegram",
+      "country": "Paese",
+      "state": "Regione",
+      "city": "Città",
+      "street1": "Indirizzo",
+      "street2": "Appartamento, interno, ecc. (Opzionale)",
+      "postalCode": "CAP (Opzionale)",
+      "saveContinue": "Salva e continua",
+      "locationUpdated": "Posizione salvata con successo!",
+      "locationFailed": "Impossibile salvare la posizione. Riprova."
+    },
+    "tags": {
+      "title": "Tag del negozio",
+      "subtitle": "I tag aiutano i clienti a trovare il tuo negozio.",
+      "suggestions": "Tag consigliati",
+      "addCustom": "Aggiungi un tuo tag",
+      "addButton": "Aggiungi tag",
+      "saved": "Tag aggiornati con successo!",
+      "failed": "Impossibile salvare i tag."
+    },
+    "workingHours": {
+      "title": "Orari di apertura",
+      "subtitle": "Fai sapere ai clienti quando sei aperto.",
+      "open": "Apre alle",
+      "close": "Chiude alle",
+      "error": "L'orario di apertura deve essere precedente a quello di chiusura.",
+      "summary": "Orari settimanali",
+      "closed": "Chiuso",
+      "saved": "Orari salvati con successo!",
+      "failed": "Impossibile aggiornare gli orari."
+    },
+    "logo": {
+      "title": "Logo del negozio",
+      "change": "Cambia immagine",
+      "submit": "Pubblica negozio"
+    },
+    "actions": {
+      "share": "Condividi link del negozio",
+      "edit": "Modifica negozio",
+      "delete": "Rimuovi negozio"
+    },
+    "created": "Il tuo negozio è online!",
+    "creationFailed": "Qualcosa è andato storto durante la creazione del negozio."
+  },
+  "product": {
+    "create": {
+      "title": "Nuovo prodotto",
+      "name": "Nome del prodotto",
+      "price": "Prezzo (TON)",
+      "description": "Descrivi brevemente il tuo prodotto...",
+      "stock": "Quantità disponibile",
+      "downloadLink": "Link per il download (se disponibile)",
+      "success": "Prodotto aggiunto con successo!",
+      "failure": "Impossibile creare il prodotto. Riprova."
+    },
+    "edit": {
+      "title": "Modifica prodotto",
+      "success": "Modifiche salvate!",
+      "failure": "Impossibile aggiornare il prodotto. Riprova."
+    },
+    "details": {
+      "description": "Descrizione",
+      "inStock": "Disponibili: {stock}",
+      "attributes": "Dettagli del prodotto",
+      "variants": "Varianti"
+    }
+  },
+  "tabs": {
+    "market": "Marketplace",
+    "stores": "I miei negozi",
+    "orders": "Ordini",
+    "profile": "Profilo"
+  }
+}

@@ -4,6 +4,7 @@ import { Button, Form, Input, Progress, Select, SelectItem, Skeleton } from '@he
 import { zodResolver } from '@hookform/resolvers/zod';
 import { hapticFeedback, locationManager, useSignal } from '@telegram-apps/sdk-react';
 import { useParams, useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -21,6 +22,9 @@ import { useSubmitStoreAddressMutation } from '@/libs/stores/hooks';
 import { CreateAddressDto, storeAddressFormSchema } from '@/libs/stores/schemas';
 
 export default function CreateStoreLocation() {
+  const t = useTranslations('store.location');
+  const tCommon = useTranslations('common');
+
   const { storeId } = useParams<{ storeId: string }>();
   const router = useRouter();
 
@@ -89,9 +93,9 @@ export default function CreateStoreLocation() {
     } catch (err) {
       console.error(err);
       if (!isAccessGranted) {
-        setDetectError('Telegram denied location access. Please enable it in settings.');
+        setDetectError(t('locationFailed'));
       } else {
-        setDetectError('Location detection failed. Please try manually.');
+        setDetectError(t('locationFailed'));
       }
     } finally {
       setIsDetecting(false);
@@ -101,12 +105,12 @@ export default function CreateStoreLocation() {
   const onSubmit = async (data: CreateAddressDto) => {
     try {
       await updateLocation(data);
-      toast.success('Store location updated!');
+      toast.success(t('locationUpdated'));
       hapticFeedback.impactOccurred('light');
       router.push(`/stores/create/${storeId}/tags`);
     } catch (error) {
       console.error(error);
-      toast.error('Failed to save location');
+      toast.error(t('locationFailed'));
     }
   };
 
@@ -115,10 +119,7 @@ export default function CreateStoreLocation() {
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Progress label="Step 2 of 5" maxValue={5} value={2} size="sm" />
 
-        <PageHeader
-          title="Store Location"
-          subtitle="Help customers find you by setting your store address."
-        />
+        <PageHeader title={t('title')} subtitle={t('subtitle')} />
 
         <div className="mb-4 flex gap-4">
           <Button
@@ -129,7 +130,7 @@ export default function CreateStoreLocation() {
             isDisabled={!isSupported || isDetecting || nearestLoading}
           >
             <FaLocationDot />
-            {isDetecting ? 'Detecting…' : 'Use Telegram Location'}
+            {isDetecting ? tCommon('loading') : t('useTelegram')}
           </Button>
 
           {!isAccessGranted && (
@@ -140,7 +141,7 @@ export default function CreateStoreLocation() {
               onPress={() => locationManager.openSettings()}
             >
               <FaGear />
-              Open Telegram Settings
+              {t('openSettings')}
             </Button>
           )}
         </div>
@@ -150,7 +151,7 @@ export default function CreateStoreLocation() {
         {/* Country */}
         <Skeleton isLoaded={!loadingCountries}>
           <Select
-            label="Country"
+            label={t('country')}
             selectedKeys={countryId ? new Set([countryId.toString()]) : undefined}
             onSelectionChange={(keys) => {
               const selectedId = Number(Array.from(keys)[0]);
@@ -169,7 +170,7 @@ export default function CreateStoreLocation() {
         {countryId && (
           <Skeleton isLoaded={!loadingStates}>
             <Select
-              label="State"
+              label={t('state')}
               selectedKeys={stateId ? new Set([stateId.toString()]) : undefined}
               onSelectionChange={(keys) => {
                 const selectedId = Number(Array.from(keys)[0]);
@@ -188,7 +189,7 @@ export default function CreateStoreLocation() {
         {stateId && (
           <Skeleton isLoaded={!loadingCities}>
             <Select
-              label="City"
+              label={t('city')}
               selectedKeys={watch('cityId') ? new Set([watch('cityId')!.toString()]) : undefined}
               onSelectionChange={(keys) => {
                 const selectedId = Number(Array.from(keys)[0]);
@@ -204,7 +205,7 @@ export default function CreateStoreLocation() {
 
         {/* Street */}
         <Input
-          label="Street Line 1"
+          label={t('street1')}
           placeholder="e.g. 123 Main Street"
           {...register('streetLine1')}
           errorMessage={errors.streetLine1?.message}
@@ -212,17 +213,17 @@ export default function CreateStoreLocation() {
           className="mt-4"
         />
 
-        <Input label="Street Line 2 (Optional)" {...register('streetLine2')} className="mt-2" />
+        <Input label={t('street2')} {...register('streetLine2')} className="mt-2" />
 
-        <Input label="Postal Code (Optional)" {...register('postalCode')} className="mt-2" />
+        <Input label={t('postalCode')} {...register('postalCode')} className="mt-2" />
 
         {/* Buttons */}
         <div className="mt-6 flex gap-4">
           <Button type="button" variant="bordered" onPress={() => router.back()}>
-            Back
+            {tCommon('back')}
           </Button>
           <Button type="submit" color="primary" isLoading={isPending}>
-            Save & Continue
+            {t('saveContinue')}
           </Button>
         </div>
       </Form>

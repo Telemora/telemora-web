@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { hapticFeedback } from '@telegram-apps/sdk-react';
 import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -15,6 +16,10 @@ import { useSubmitStoreLogoMutation } from '@/libs/stores/hooks';
 import { CreateStoreLogoDto, storeLogoFormSchema } from '@/libs/stores/schemas';
 
 export default function CreateStoreLogoUpload() {
+  const t = useTranslations('store.logo');
+  const tCommon = useTranslations('common');
+  const tStore = useTranslations('store');
+
   const router = useRouter();
   const { storeId } = useParams<{ storeId: string }>();
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -42,7 +47,7 @@ export default function CreateStoreLogoUpload() {
 
         img.onload = () => {
           if (img.width < MIN_RES || img.height < MIN_RES) {
-            toast.error('Image resolution too low. Minimum is 300x300.');
+            toast.error(tStore('creationFailed'));
             resolve(null);
             return;
           }
@@ -111,11 +116,11 @@ export default function CreateStoreLogoUpload() {
 
     try {
       const result = await mutateAsync(data);
-      toast.success('Store created successfully!');
+      toast.success(tStore('created'));
       hapticFeedback.impactOccurred('light');
       router.push(`/stores/${result.id}`);
     } catch {
-      toast.error('Store submission failed.');
+      toast.error(tStore('creationFailed'));
     }
   };
 
@@ -128,8 +133,9 @@ export default function CreateStoreLogoUpload() {
   return (
     <AppLayout>
       <Form onSubmit={form.handleSubmit(onSubmit)}>
-        <Progress label="Final Step" maxValue={5} value={5} size="sm" />
-        <PageHeader title="Upload Store Logo" subtitle="blah blah" />
+        <Progress label={tCommon('submit')} maxValue={5} value={5} size="sm" />
+        <PageHeader title={t('title')} subtitle={t('change')} />
+
         <input type="file" accept="image/*" hidden onChange={handleFileChange} />
 
         {isProcessing && (
@@ -148,7 +154,7 @@ export default function CreateStoreLogoUpload() {
               className="rounded-lg border"
             />
             <Button variant="bordered" className="mt-2" onPress={handleRemoveImage}>
-              Change Image
+              {t('change')}
             </Button>
           </div>
         )}
@@ -159,7 +165,7 @@ export default function CreateStoreLogoUpload() {
           isDisabled={isProcessing || !form.watch('logoFile')}
           isLoading={isPending}
         >
-          Submit Store
+          {t('submit')}
         </Button>
       </Form>
     </AppLayout>

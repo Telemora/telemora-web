@@ -1,0 +1,138 @@
+{
+  "common": {
+    "back": "戻る",
+    "continue": "続ける",
+    "save": "変更を保存",
+    "skip": "今はスキップ",
+    "submit": "送信",
+    "create": "作成",
+    "edit": "編集",
+    "delete": "削除",
+    "loading": "少々お待ちください…",
+    "retry": "再試行"
+  },
+  "error": {
+    "generic": "エラーが発生しました。",
+    "invalidOrder": "ご注文を処理できませんでした。",
+    "invalidOrderId": "注文IDが無効です。ご確認のうえ、再度お試しください。"
+  },
+  "orders": {
+    "title": "ご注文履歴",
+    "subtitle": "過去の購入履歴や配送状況を確認できます。",
+    "none": "まだ注文がありません。",
+    "gotoMarket": "マーケットプレイスを見る",
+    "backToOrders": "注文一覧に戻る",
+    "loadingOrder": "ご注文情報を取得中…",
+    "pendingPayment": "支払いが未完了です。キャンセルを避けるためにお支払いを完了してください。",
+    "items": "商品",
+    "summary": "注文概要",
+    "totalAmount": "合計金額",
+    "deliveryDate": "配達日",
+    "estimatedDelivery": "配達予定日"
+  },
+  "profile": {
+    "title": "プロフィールを更新",
+    "firstName": "名",
+    "lastName": "姓",
+    "phoneNumber": "電話番号",
+    "email": "メールアドレス"
+  },
+  "preferences": {
+    "title": "アプリの設定",
+    "language": {
+      "label": "言語",
+      "description": "ご希望の言語を選択してください。"
+    },
+    "currency": {
+      "label": "通貨",
+      "description": "価格に通貨換算を表示します。"
+    }
+  },
+  "store": {
+    "basicInfo": {
+      "title": "店舗情報",
+      "subtitle": "お客様に表示される店舗名と説明を設定しましょう。",
+      "name": "店舗名",
+      "description": "店舗の説明",
+      "contactNumber": "連絡先電話番号",
+      "email": "連絡先メールアドレス",
+      "creating": "店舗を作成しています…"
+    },
+    "location": {
+      "title": "店舗の所在地",
+      "subtitle": "お客様が店舗を見つけやすくなります。",
+      "useTelegram": "Telegramの位置情報を使用",
+      "openSettings": "Telegramの設定を開く",
+      "country": "国",
+      "state": "都道府県",
+      "city": "市区町村",
+      "street1": "住所（番地）",
+      "street2": "建物名・部屋番号など（任意）",
+      "postalCode": "郵便番号（任意）",
+      "saveContinue": "保存して次へ",
+      "locationUpdated": "所在地を保存しました！",
+      "locationFailed": "所在地を保存できませんでした。もう一度お試しください。"
+    },
+    "tags": {
+      "title": "店舗のタグ",
+      "subtitle": "タグを設定すると、お客様が店舗を見つけやすくなります。",
+      "suggestions": "おすすめのタグ",
+      "addCustom": "独自のタグを追加",
+      "addButton": "タグを追加",
+      "saved": "タグを更新しました！",
+      "failed": "タグを保存できませんでした。"
+    },
+    "workingHours": {
+      "title": "営業時間",
+      "subtitle": "営業している時間をお知らせしましょう。",
+      "open": "開店時間",
+      "close": "閉店時間",
+      "error": "開店時間は閉店時間より前に設定してください。",
+      "summary": "週間スケジュール",
+      "closed": "定休日",
+      "saved": "営業時間を保存しました！",
+      "failed": "営業時間を更新できませんでした。"
+    },
+    "logo": {
+      "title": "店舗ロゴ",
+      "change": "画像を変更",
+      "submit": "店舗を公開"
+    },
+    "actions": {
+      "share": "店舗リンクを共有",
+      "edit": "店舗を編集",
+      "delete": "店舗を削除"
+    },
+    "created": "店舗が公開されました！",
+    "creationFailed": "店舗作成中にエラーが発生しました。"
+  },
+  "product": {
+    "create": {
+      "title": "新しい商品",
+      "name": "商品名",
+      "price": "価格（TON）",
+      "description": "商品について簡単に説明してください…",
+      "stock": "在庫数",
+      "downloadLink": "ダウンロードリンク（該当する場合）",
+      "success": "商品を追加しました！",
+      "failure": "商品を作成できませんでした。もう一度お試しください。"
+    },
+    "edit": {
+      "title": "商品を編集",
+      "success": "変更を保存しました！",
+      "failure": "商品を更新できませんでした。再度お試しください。"
+    },
+    "details": {
+      "description": "商品説明",
+      "inStock": "在庫数: {stock}",
+      "attributes": "商品情報",
+      "variants": "バリエーション"
+    }
+  },
+  "tabs": {
+    "market": "マーケット",
+    "stores": "マイストア",
+    "orders": "注文履歴",
+    "profile": "プロフィール"
+  }
+}

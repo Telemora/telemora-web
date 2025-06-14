@@ -6,10 +6,12 @@ import React from 'react';
 import AppLayout from '@/libs/common/components/AppLayout';
 import { StorePreviewCard } from '@/libs/stores/components/preview-card';
 import { useDiscoverableStoresQuery, useFeaturedStoresQuery } from '@/libs/stores/hooks';
+import { useTranslations } from 'next-intl';
 
 export default function MarketPage() {
   const { data: discoverStores, isLoading: isDiscoverStoresLoading } = useDiscoverableStoresQuery();
   const { data: featuredStores, isLoading: isFeaturedStoresLoading } = useFeaturedStoresQuery();
+  const t = useTranslations('market');
 
   return (
     <AppLayout>

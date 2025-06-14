@@ -1,0 +1,138 @@
+{
+  "common": {
+    "back": "Geri",
+    "continue": "Davam et",
+    "save": "Dəyişiklikləri yadda saxla",
+    "skip": "İndilik keç",
+    "submit": "Təsdiqlə",
+    "create": "Yarat",
+    "edit": "Redaktə et",
+    "delete": "Sil",
+    "loading": "Zəhmət olmasa gözləyin...",
+    "retry": "Təkrar cəhd et"
+  },
+  "error": {
+    "generic": "Oops! Nəsə səhv getdi.",
+    "invalidOrder": "Sifarişi emal edə bilmədik.",
+    "invalidOrderId": "Sifariş ID-si yanlışdır. Zəhmət olmasa yoxlayın və yenidən cəhd edin."
+  },
+  "orders": {
+    "title": "Sifarişlərin",
+    "subtitle": "Əvvəlki alışları gör və çatdırılmanı izlə.",
+    "none": "Hələ heç bir sifariş verməmisən.",
+    "gotoMarket": "Bazara bax",
+    "backToOrders": "Sifarişlərə qayıt",
+    "loadingOrder": "Sifarişin yüklənir...",
+    "pendingPayment": "Ödəniş gözlənilir. Ləğv olunmaması üçün tamamla.",
+    "items": "Məhsullar",
+    "summary": "Sifariş xülasəsi",
+    "totalAmount": "Cəmi məbləğ",
+    "deliveryDate": "Çatdırılma tarixi",
+    "estimatedDelivery": "Təxmini çatdırılma"
+  },
+  "profile": {
+    "title": "Profilə düzəliş et",
+    "firstName": "Ad",
+    "lastName": "Soyad",
+    "phoneNumber": "Telefon nömrəsi",
+    "email": "E-poçt ünvanı"
+  },
+  "preferences": {
+    "title": "Tətbiq ayarları",
+    "language": {
+      "label": "Dil",
+      "description": "İstədiyin dili seç."
+    },
+    "currency": {
+      "label": "Valyuta",
+      "description": "Qiymətlər uyğun valyutada göstəriləcək."
+    }
+  },
+  "store": {
+    "basicInfo": {
+      "title": "Mağaza Məlumatı",
+      "subtitle": "Brendini əks etdirən ad və təsvir seç. Müştərilər bunu görəcək.",
+      "name": "Mağaza adı",
+      "description": "Mağaza təsviri",
+      "contactNumber": "Əlaqə nömrəsi",
+      "email": "Əlaqə e-poçtu",
+      "creating": "Mağazan qurulur..."
+    },
+    "location": {
+      "title": "Mağaza Ünvanı",
+      "subtitle": "Müştərilərin səni asan tapması üçün.",
+      "useTelegram": "Telegram ünvanını istifadə et",
+      "openSettings": "Telegram ayarlarına keç",
+      "country": "Ölkə",
+      "state": "Vilayət / Region",
+      "city": "Şəhər",
+      "street1": "Küçə ünvanı",
+      "street2": "Mənzil, blok və s. (İsteğe bağlı)",
+      "postalCode": "Poçt indeksi (İsteğe bağlı)",
+      "saveContinue": "Yadda saxla və davam et",
+      "locationUpdated": "Ünvan uğurla yadda saxlanıldı!",
+      "locationFailed": "Ünvan saxlanılmadı. Yenidən cəhd edin."
+    },
+    "tags": {
+      "title": "Mağaza Etiketləri",
+      "subtitle": "Etiketlər mağazanı tapmaqda kömək edir.",
+      "suggestions": "Tövsiyə olunan etiketlər",
+      "addCustom": "Öz etiketini əlavə et",
+      "addButton": "Etiket əlavə et",
+      "saved": "Etiketlər uğurla yeniləndi!",
+      "failed": "Etiketləri saxlamaq mümkün olmadı."
+    },
+    "workingHours": {
+      "title": "Mağaza Saatları",
+      "subtitle": "Müştərilərə açıq olduğun vaxtı göstər.",
+      "open": "Açılış saatı",
+      "close": "Bağlanış saatı",
+      "error": "Açılış saatı bağlanışdan əvvəl olmalıdır.",
+      "summary": "Həftəlik qrafik",
+      "closed": "Bağlıdır",
+      "saved": "Saatlar uğurla yadda saxlanıldı!",
+      "failed": "Saatları yeniləmək mümkün olmadı."
+    },
+    "logo": {
+      "title": "Mağaza Loqosu",
+      "change": "Şəkli dəyiş",
+      "submit": "Mağazanı yayımla"
+    },
+    "actions": {
+      "share": "Mağaza linkini paylaş",
+      "edit": "Mağazanı redaktə et",
+      "delete": "Mağazanı sil"
+    },
+    "created": "Mağazan artıq aktivdir!",
+    "creationFailed": "Mağaza yaradılarkən səhv baş verdi."
+  },
+  "product": {
+    "create": {
+      "title": "Yeni Məhsul",
+      "name": "Məhsulun adı",
+      "price": "Qiymət (TON)",
+      "description": "Məhsulu qısa təsvir et...",
+      "stock": "Əldə olan miqdar",
+      "downloadLink": "Yükləmə linki (əgər varsa)",
+      "success": "Məhsul uğurla əlavə olundu!",
+      "failure": "Məhsul yaradıla bilmədi. Yenidən cəhd et."
+    },
+    "edit": {
+      "title": "Məhsulu redaktə et",
+      "success": "Dəyişikliklər yadda saxlanıldı!",
+      "failure": "Məhsul yenilənmədi. Zəhmət olmasa yenidən cəhd et."
+    },
+    "details": {
+      "description": "Təsvir",
+      "inStock": "Anbarda: {stock}",
+      "attributes": "Məhsul detalları",
+      "variants": "Variantlar"
+    }
+  },
+  "tabs": {
+    "market": "Bazar",
+    "stores": "Mağazalarım",
+    "orders": "Sifarişlər",
+    "profile": "Profil"
+  }
+}

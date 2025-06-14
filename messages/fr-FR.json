@@ -1,0 +1,138 @@
+{
+  "common": {
+    "back": "Retour",
+    "continue": "Continuer",
+    "save": "Enregistrer les modifications",
+    "skip": "Ignorer pour l’instant",
+    "submit": "Envoyer",
+    "create": "Créer",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "loading": "Un instant...",
+    "retry": "Réessayer"
+  },
+  "error": {
+    "generic": "Oups ! Une erreur s’est produite.",
+    "invalidOrder": "Nous n’avons pas pu traiter cette commande.",
+    "invalidOrderId": "ID de commande invalide. Veuillez vérifier et réessayer."
+  },
+  "orders": {
+    "title": "Vos commandes",
+    "subtitle": "Consultez vos achats et suivez vos livraisons.",
+    "none": "Vous n’avez encore passé aucune commande.",
+    "gotoMarket": "Parcourir le marché",
+    "backToOrders": "Retour aux commandes",
+    "loadingOrder": "Chargement de votre commande...",
+    "pendingPayment": "Paiement en attente. Finalisez-le pour éviter l’annulation.",
+    "items": "Articles",
+    "summary": "Récapitulatif de commande",
+    "totalAmount": "Total",
+    "deliveryDate": "Date de livraison",
+    "estimatedDelivery": "Livraison estimée"
+  },
+  "profile": {
+    "title": "Mettre à jour le profil",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "phoneNumber": "Numéro de téléphone",
+    "email": "Adresse e-mail"
+  },
+  "preferences": {
+    "title": "Préférences de l’application",
+    "language": {
+      "label": "Langue",
+      "description": "Choisissez votre langue préférée."
+    },
+    "currency": {
+      "label": "Devise",
+      "description": "Les prix incluront des conversions utiles."
+    }
+  },
+  "store": {
+    "basicInfo": {
+      "title": "Informations sur la boutique",
+      "subtitle": "Choisissez un nom et une description qui reflètent votre marque. C’est ce que verront vos clients.",
+      "name": "Nom de la boutique",
+      "description": "Description de la boutique",
+      "contactNumber": "Numéro de contact",
+      "email": "E-mail de contact",
+      "creating": "Configuration de votre boutique..."
+    },
+    "location": {
+      "title": "Localisation de la boutique",
+      "subtitle": "Facilitez la recherche de votre boutique pour les clients.",
+      "useTelegram": "Utiliser la localisation Telegram",
+      "openSettings": "Accéder aux paramètres Telegram",
+      "country": "Pays",
+      "state": "Région/Département",
+      "city": "Ville",
+      "street1": "Adresse",
+      "street2": "Appartement, suite, etc. (optionnel)",
+      "postalCode": "Code postal (optionnel)",
+      "saveContinue": "Enregistrer et continuer",
+      "locationUpdated": "Localisation enregistrée avec succès !",
+      "locationFailed": "Impossible d’enregistrer la localisation. Veuillez réessayer."
+    },
+    "tags": {
+      "title": "Étiquettes de la boutique",
+      "subtitle": "Les étiquettes aident les clients à trouver votre boutique.",
+      "suggestions": "Étiquettes recommandées",
+      "addCustom": "Ajouter votre propre étiquette",
+      "addButton": "Ajouter une étiquette",
+      "saved": "Étiquettes mises à jour avec succès !",
+      "failed": "Impossible d’enregistrer les étiquettes."
+    },
+    "workingHours": {
+      "title": "Horaires d’ouverture",
+      "subtitle": "Informez vos clients de vos horaires.",
+      "open": "Ouvre à",
+      "close": "Ferme à",
+      "error": "L’heure d’ouverture doit être avant l’heure de fermeture.",
+      "summary": "Horaires hebdomadaires",
+      "closed": "Fermé",
+      "saved": "Horaires enregistrés avec succès !",
+      "failed": "Impossible de mettre à jour les horaires."
+    },
+    "logo": {
+      "title": "Logo de la boutique",
+      "change": "Changer l’image",
+      "submit": "Publier la boutique"
+    },
+    "actions": {
+      "share": "Partager le lien de la boutique",
+      "edit": "Modifier la boutique",
+      "delete": "Supprimer la boutique"
+    },
+    "created": "Votre boutique est en ligne !",
+    "creationFailed": "Une erreur est survenue lors de la création de votre boutique."
+  },
+  "product": {
+    "create": {
+      "title": "Nouveau produit",
+      "name": "Nom du produit",
+      "price": "Prix (TON)",
+      "description": "Décrivez brièvement votre produit...",
+      "stock": "Quantité disponible",
+      "downloadLink": "Lien de téléchargement (si applicable)",
+      "success": "Produit ajouté avec succès !",
+      "failure": "Impossible de créer le produit. Veuillez réessayer."
+    },
+    "edit": {
+      "title": "Modifier le produit",
+      "success": "Modifications enregistrées !",
+      "failure": "Impossible de mettre à jour le produit. Veuillez réessayer."
+    },
+    "details": {
+      "description": "Description",
+      "inStock": "En stock : {stock}",
+      "attributes": "Détails du produit",
+      "variants": "Variantes"
+    }
+  },
+  "tabs": {
+    "market": "Marché",
+    "stores": "Mes boutiques",
+    "orders": "Commandes",
+    "profile": "Profil"
+  }
+}

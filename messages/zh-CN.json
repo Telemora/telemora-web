@@ -1,0 +1,138 @@
+{
+  "common": {
+    "back": "返回",
+    "continue": "继续",
+    "save": "保存更改",
+    "skip": "暂时跳过",
+    "submit": "提交",
+    "create": "创建",
+    "edit": "编辑",
+    "delete": "删除",
+    "loading": "请稍候...",
+    "retry": "重试"
+  },
+  "error": {
+    "generic": "哎呀！出了点问题。",
+    "invalidOrder": "我们无法处理该订单。",
+    "invalidOrderId": "订单编号无效，请检查后重试。"
+  },
+  "orders": {
+    "title": "我的订单",
+    "subtitle": "查看历史订单并跟踪配送进度。",
+    "none": "你还没有下过订单。",
+    "gotoMarket": "前往市场浏览",
+    "backToOrders": "返回订单页面",
+    "loadingOrder": "正在获取订单信息...",
+    "pendingPayment": "等待付款，尽快完成以避免订单被取消。",
+    "items": "商品",
+    "summary": "订单摘要",
+    "totalAmount": "总金额",
+    "deliveryDate": "送达日期",
+    "estimatedDelivery": "预计送达时间"
+  },
+  "profile": {
+    "title": "更新个人资料",
+    "firstName": "名字",
+    "lastName": "姓氏",
+    "phoneNumber": "手机号码",
+    "email": "邮箱地址"
+  },
+  "preferences": {
+    "title": "应用偏好设置",
+    "language": {
+      "label": "语言",
+      "description": "选择你偏好的语言。"
+    },
+    "currency": {
+      "label": "货币",
+      "description": "价格将显示对应的货币换算。"
+    }
+  },
+  "store": {
+    "basicInfo": {
+      "title": "店铺信息",
+      "subtitle": "为你的品牌起一个合适的名称和描述，客户将看到这些内容。",
+      "name": "店铺名称",
+      "description": "店铺描述",
+      "contactNumber": "联系电话",
+      "email": "联系邮箱",
+      "creating": "正在创建店铺..."
+    },
+    "location": {
+      "title": "店铺地址",
+      "subtitle": "让客户能轻松找到你。",
+      "useTelegram": "使用 Telegram 位置",
+      "openSettings": "打开 Telegram 设置",
+      "country": "国家",
+      "state": "省/地区",
+      "city": "城市",
+      "street1": "街道地址",
+      "street2": "楼层/房号（可选）",
+      "postalCode": "邮政编码（可选）",
+      "saveContinue": "保存并继续",
+      "locationUpdated": "地址保存成功！",
+      "locationFailed": "地址保存失败，请重试。"
+    },
+    "tags": {
+      "title": "店铺标签",
+      "subtitle": "标签有助于客户发现你的店铺。",
+      "suggestions": "推荐标签",
+      "addCustom": "添加自定义标签",
+      "addButton": "添加标签",
+      "saved": "标签更新成功！",
+      "failed": "标签保存失败。"
+    },
+    "workingHours": {
+      "title": "营业时间",
+      "subtitle": "让客户知道你什么时候营业。",
+      "open": "开始营业时间",
+      "close": "结束营业时间",
+      "error": "开始时间必须早于结束时间。",
+      "summary": "每周营业时间",
+      "closed": "休息",
+      "saved": "营业时间保存成功！",
+      "failed": "营业时间更新失败。"
+    },
+    "logo": {
+      "title": "店铺标志",
+      "change": "更换图片",
+      "submit": "发布店铺"
+    },
+    "actions": {
+      "share": "分享店铺链接",
+      "edit": "编辑店铺",
+      "delete": "删除店铺"
+    },
+    "created": "你的店铺已上线！",
+    "creationFailed": "创建店铺时发生错误。"
+  },
+  "product": {
+    "create": {
+      "title": "新增商品",
+      "name": "商品名称",
+      "price": "价格（TON）",
+      "description": "简要描述你的商品...",
+      "stock": "库存数量",
+      "downloadLink": "下载链接（如适用）",
+      "success": "商品添加成功！",
+      "failure": "创建商品失败，请重试。"
+    },
+    "edit": {
+      "title": "编辑商品",
+      "success": "更改已保存！",
+      "failure": "更新失败，请稍后再试。"
+    },
+    "details": {
+      "description": "商品描述",
+      "inStock": "库存：{stock}",
+      "attributes": "商品详情",
+      "variants": "商品规格"
+    }
+  },
+  "tabs": {
+    "market": "市场",
+    "stores": "我的店铺",
+    "orders": "订单",
+    "profile": "我的资料"
+  }
+}

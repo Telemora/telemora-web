@@ -1,0 +1,138 @@
+{
+  "common": {
+    "back": "뒤로가기",
+    "continue": "계속하기",
+    "save": "변경사항 저장",
+    "skip": "나중에 하기",
+    "submit": "제출하기",
+    "create": "생성하기",
+    "edit": "편집하기",
+    "delete": "삭제하기",
+    "loading": "잠시만 기다려주세요...",
+    "retry": "다시 시도하기"
+  },
+  "error": {
+    "generic": "문제가 발생했어요.",
+    "invalidOrder": "주문을 처리할 수 없어요.",
+    "invalidOrderId": "잘못된 주문 번호입니다. 다시 확인해주세요."
+  },
+  "orders": {
+    "title": "내 주문",
+    "subtitle": "지난 주문을 확인하고 배송을 추적하세요.",
+    "none": "아직 주문한 내역이 없어요.",
+    "gotoMarket": "마켓 둘러보기",
+    "backToOrders": "주문 목록으로 돌아가기",
+    "loadingOrder": "주문 정보를 불러오는 중이에요...",
+    "pendingPayment": "결제가 완료되지 않았어요. 취소되지 않도록 완료해주세요.",
+    "items": "상품",
+    "summary": "주문 요약",
+    "totalAmount": "총 금액",
+    "deliveryDate": "배송일",
+    "estimatedDelivery": "예상 배송일"
+  },
+  "profile": {
+    "title": "프로필 수정",
+    "firstName": "이름",
+    "lastName": "성",
+    "phoneNumber": "전화번호",
+    "email": "이메일 주소"
+  },
+  "preferences": {
+    "title": "앱 설정",
+    "language": {
+      "label": "언어",
+      "description": "선호하는 언어를 선택하세요."
+    },
+    "currency": {
+      "label": "통화",
+      "description": "가격에 환율 정보를 함께 표시합니다."
+    }
+  },
+  "store": {
+    "basicInfo": {
+      "title": "상점 정보",
+      "subtitle": "브랜드를 잘 보여줄 수 있는 이름과 설명을 입력하세요. 고객에게 이렇게 보입니다.",
+      "name": "상점 이름",
+      "description": "상점 설명",
+      "contactNumber": "연락처",
+      "email": "이메일",
+      "creating": "상점을 설정 중입니다..."
+    },
+    "location": {
+      "title": "상점 위치",
+      "subtitle": "고객이 쉽게 찾을 수 있도록 해보세요.",
+      "useTelegram": "텔레그램 위치 사용",
+      "openSettings": "텔레그램 설정 열기",
+      "country": "국가",
+      "state": "도/지역",
+      "city": "도시",
+      "street1": "주소",
+      "street2": "상세 주소 (선택사항)",
+      "postalCode": "우편번호 (선택사항)",
+      "saveContinue": "저장 후 계속하기",
+      "locationUpdated": "위치가 저장되었어요!",
+      "locationFailed": "위치를 저장하지 못했어요. 다시 시도해주세요."
+    },
+    "tags": {
+      "title": "상점 태그",
+      "subtitle": "태그를 통해 고객이 상점을 더 쉽게 찾을 수 있어요.",
+      "suggestions": "추천 태그",
+      "addCustom": "직접 태그 추가",
+      "addButton": "태그 추가",
+      "saved": "태그가 저장되었어요!",
+      "failed": "태그를 저장하지 못했어요."
+    },
+    "workingHours": {
+      "title": "운영 시간",
+      "subtitle": "언제 영업 중인지 알려주세요.",
+      "open": "오픈 시간",
+      "close": "마감 시간",
+      "error": "오픈 시간은 마감 시간보다 빨라야 해요.",
+      "summary": "주간 운영 시간",
+      "closed": "휴무",
+      "saved": "운영 시간이 저장되었어요!",
+      "failed": "운영 시간을 저장하지 못했어요."
+    },
+    "logo": {
+      "title": "상점 로고",
+      "change": "이미지 변경",
+      "submit": "상점 등록하기"
+    },
+    "actions": {
+      "share": "상점 링크 공유",
+      "edit": "상점 편집",
+      "delete": "상점 삭제"
+    },
+    "created": "상점이 등록되었어요!",
+    "creationFailed": "상점을 생성하는 중에 문제가 발생했어요."
+  },
+  "product": {
+    "create": {
+      "title": "새 상품",
+      "name": "상품명",
+      "price": "가격 (TON)",
+      "description": "상품을 간단히 소개해주세요...",
+      "stock": "재고 수량",
+      "downloadLink": "다운로드 링크 (해당되는 경우)",
+      "success": "상품이 등록되었어요!",
+      "failure": "상품을 등록하지 못했어요. 다시 시도해주세요."
+    },
+    "edit": {
+      "title": "상품 편집",
+      "success": "변경사항이 저장되었어요!",
+      "failure": "상품 정보를 수정하지 못했어요. 다시 시도해주세요."
+    },
+    "details": {
+      "description": "상품 설명",
+      "inStock": "재고: {stock}개",
+      "attributes": "상품 정보",
+      "variants": "옵션"
+    }
+  },
+  "tabs": {
+    "market": "마켓",
+    "stores": "내 상점",
+    "orders": "주문",
+    "profile": "프로필"
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "common": {
+    "back": "Zurück",
+    "continue": "Weiter",
+    "save": "Änderungen speichern",
+    "skip": "Jetzt überspringen",
+    "submit": "Absenden",
+    "create": "Erstellen",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "loading": "Einen Moment bitte...",
+    "retry": "Erneut versuchen"
+  },
+  "error": {
+    "generic": "Ups! Da ist etwas schiefgelaufen.",
+    "invalidOrder": "Wir konnten diese Bestellung nicht verarbeiten.",
+    "invalidOrderId": "Ungültige Bestellnummer. Bitte überprüfe sie und versuche es erneut."
+  },
+  "orders": {
+    "title": "Deine Bestellungen",
+    "subtitle": "Vergangene Käufe einsehen und Lieferungen verfolgen.",
+    "none": "Du hast noch keine Bestellungen aufgegeben.",
+    "gotoMarket": "Marktplatz durchsuchen",
+    "backToOrders": "Zurück zu den Bestellungen",
+    "loadingOrder": "Bestellung wird geladen...",
+    "pendingPayment": "Zahlung ausstehend. Bitte abschließen, um eine Stornierung zu vermeiden.",
+    "items": "Artikel",
+    "summary": "Bestellübersicht",
+    "totalAmount": "Gesamtsumme",
+    "deliveryDate": "Lieferdatum",
+    "estimatedDelivery": "Voraussichtliche Lieferung"
+  },
+  "profile": {
+    "title": "Profil aktualisieren",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "phoneNumber": "Telefonnummer",
+    "email": "E-Mail-Adresse"
+  },
+  "preferences": {
+    "title": "App-Einstellungen",
+    "language": {
+      "label": "Sprache",
+      "description": "Bevorzugte Sprache auswählen."
+    },
+    "currency": {
+      "label": "Währung",
+      "description": "Preise werden mit hilfreichen Umrechnungen angezeigt."
+    }
+  },
+  "store": {
+    "basicInfo": {
+      "title": "Shop-Details",
+      "subtitle": "Wähle einen Namen und eine Beschreibung, die zu deiner Marke passen. Diese sind für Kunden sichtbar.",
+      "name": "Shop-Name",
+      "description": "Shop-Beschreibung",
+      "contactNumber": "Kontakttelefon",
+      "email": "Kontakt-E-Mail",
+      "creating": "Shop wird eingerichtet..."
+    },
+    "location": {
+      "title": "Shop-Standort",
+      "subtitle": "Mach es Kunden leicht, dich zu finden.",
+      "useTelegram": "Telegram-Standort verwenden",
+      "openSettings": "Telegram-Einstellungen öffnen",
+      "country": "Land",
+      "state": "Bundesland/Region",
+      "city": "Stadt",
+      "street1": "Straße und Hausnummer",
+      "street2": "Wohnung, Suite etc. (optional)",
+      "postalCode": "Postleitzahl (optional)",
+      "saveContinue": "Speichern und weiter",
+      "locationUpdated": "Standort erfolgreich gespeichert!",
+      "locationFailed": "Standort konnte nicht gespeichert werden. Bitte erneut versuchen."
+    },
+    "tags": {
+      "title": "Shop-Tags",
+      "subtitle": "Tags helfen Kunden, deinen Shop zu entdecken.",
+      "suggestions": "Empfohlene Tags",
+      "addCustom": "Eigenes Tag hinzufügen",
+      "addButton": "Tag hinzufügen",
+      "saved": "Tags erfolgreich aktualisiert!",
+      "failed": "Tags konnten nicht gespeichert werden."
+    },
+    "workingHours": {
+      "title": "Öffnungszeiten",
+      "subtitle": "Zeige deinen Kunden, wann du geöffnet hast.",
+      "open": "Öffnet um",
+      "close": "Schließt um",
+      "error": "Die Öffnungszeit muss vor der Schließzeit liegen.",
+      "summary": "Wöchentliche Öffnungszeiten",
+      "closed": "Geschlossen",
+      "saved": "Öffnungszeiten erfolgreich gespeichert!",
+      "failed": "Öffnungszeiten konnten nicht aktualisiert werden."
+    },
+    "logo": {
+      "title": "Shop-Logo",
+      "change": "Bild ändern",
+      "submit": "Shop veröffentlichen"
+    },
+    "actions": {
+      "share": "Shop-Link teilen",
+      "edit": "Shop bearbeiten",
+      "delete": "Shop entfernen"
+    },
+    "created": "Dein Shop ist jetzt online!",
+    "creationFailed": "Beim Erstellen des Shops ist etwas schiefgelaufen."
+  },
+  "product": {
+    "create": {
+      "title": "Neues Produkt",
+      "name": "Produktname",
+      "price": "Preis (TON)",
+      "description": "Beschreibe dein Produkt kurz...",
+      "stock": "Verfügbare Menge",
+      "downloadLink": "Download-Link (falls zutreffend)",
+      "success": "Produkt erfolgreich hinzugefügt!",
+      "failure": "Produkt konnte nicht erstellt werden. Bitte erneut versuchen."
+    },
+    "edit": {
+      "title": "Produkt bearbeiten",
+      "success": "Änderungen gespeichert!",
+      "failure": "Produkt konnte nicht aktualisiert werden. Bitte erneut versuchen."
+    },
+    "details": {
+      "description": "Beschreibung",
+      "inStock": "Auf Lager: {stock}",
+      "attributes": "Produktdetails",
+      "variants": "Varianten"
+    }
+  },
+  "tabs": {
+    "market": "Marktplatz",
+    "stores": "Meine Shops",
+    "orders": "Bestellungen",
+    "profile": "Profil"
+  }
+}
