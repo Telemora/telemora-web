@@ -18,10 +18,10 @@ export default function ProductDetailsPage() {
   const { storeId, productId } = useParams();
   const storeIdNum = parseInt(storeId as string, 10);
   const productIdNum = parseInt(productId as string, 10);
+  const { data: product, isLoading, error, refetch } = useProductDetails(storeIdNum, productIdNum);
   if (isNaN(storeIdNum) || isNaN(productIdNum)) {
     return <div>Error: Invalid store or product ID</div>;
   }
-  const { data: product, isLoading, error, refetch } = useProductDetails(storeIdNum, productIdNum);
 
   if (isLoading) {
     return (
@@ -45,6 +45,8 @@ export default function ProductDetailsPage() {
           <ScrollShadow orientation="horizontal" className="flex gap-x-4 overflow-x-auto pb-2">
             {product.image.map((img, index) => (
               <Image
+                placeholder="blur"
+                blurDataURL="/fallback-product.png"
                 key={index}
                 src={img.url}
                 width={240}
