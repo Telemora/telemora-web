@@ -1,6 +1,6 @@
 import { format, isValid, parseISO } from 'date-fns';
 
-export function createSafeDate(dateInput: string | number | Date): Date | null {
+function createSafeDate(dateInput: string | number | Date): Date | null {
   if (!dateInput) return null;
 
   let date: Date;

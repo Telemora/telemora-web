@@ -8,10 +8,10 @@ import AppLayout from '@/libs/common/components/AppLayout';
 import ErrorPage from '@/libs/common/components/errorPage';
 import { PageHeader } from '@/libs/common/components/page-header';
 import PriceComponent from '@/libs/common/components/PriceComponent';
-import { formatDate, formatRelative } from '@/libs/common/utils/date';
+import { formatSafeDate } from '@/libs/common/utils/date';
 import OrderItemPreviewCard from '@/libs/orders/components/order-item-preview';
 import { OrderShipmentCard } from '@/libs/orders/components/order-shipment-card';
-import { OrderStatusChip } from '@/libs/orders/components/order-status-chip';
+import OrderStatusChip from '@/libs/orders/components/order-status-chip';
 import { useOrderDetails } from '@/libs/orders/hooks';
 import { OrderStatus } from '@/libs/orders/types';
 import { PaymentStatusChip } from '@/libs/payments/components/payment-status-chip';
@@ -45,7 +45,7 @@ export default function OrderDetailsPage() {
     <AppLayout>
       <PageHeader
         title={`Order #${order.id}`}
-        subtitle={`Placed on ${formatDate(order.createdAt)}`}
+        subtitle={`Placed on ${formatSafeDate(order.createdAt)}`}
       />
 
       <div className="mb-4 flex items-center justify-between">
@@ -96,9 +96,9 @@ export default function OrderDetailsPage() {
             <span>Total Amount: </span>
             <PriceComponent amount={order.totalAmount} />
           </div>
-          <p>Delivery Date: {formatDate(order.deliveryDate)}</p>
+          <p>Delivery Date: {formatSafeDate(order.deliveryDate)}</p>
           <p className="text-sm">
-            Estimated Delivery {formatRelative(order.shipment?.deliveryEstimate ?? '-')}
+            Estimated Delivery {formatSafeDate(order.shipment?.deliveryEstimate ?? '-')}
           </p>
         </div>
       </div>
