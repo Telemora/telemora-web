@@ -7,6 +7,7 @@ import { useParams, useRouter } from 'next/navigation';
 import React, { useMemo } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { useTranslations } from 'next-intl';
 
 import AppLayout from '@/libs/common/components/AppLayout';
 import { PageHeader } from '@/libs/common/components/page-header';
@@ -16,6 +17,9 @@ import { CreateStoreWorkingHoursDto, storeWorkingHoursFormSchema } from '@/libs/
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 export default function CreateStoreWorkingHours() {
+  const t = useTranslations('store.workingHours');
+  const tCommon = useTranslations('common');
+
   const router = useRouter();
   const { storeId } = useParams<{ storeId: string }>();
   const { mutateAsync, isPending } = useSubmitStoreWorkingHoursMutation(storeId);
@@ -68,17 +72,17 @@ export default function CreateStoreWorkingHours() {
     );
 
     if (hasInvalidRange) {
-      toast.error('Fix time ranges (open < close)');
+      toast.error(t('error'));
       return;
     }
 
     try {
       await mutateAsync(data);
-      toast.success('Working hours saved');
+      toast.success(t('saved'));
       hapticFeedback.impactOccurred('light');
       router.push(`/stores/create/${storeId}/logo-upload`);
     } catch {
-      toast.error('Failed to save working hours');
+      toast.error(t('failed'));
     }
   };
 
@@ -87,10 +91,7 @@ export default function CreateStoreWorkingHours() {
       <Form onSubmit={handleSubmit(handleNext)}>
         <Progress label="Step 4 of 5" maxValue={5} value={4} size="sm" />
 
-        <PageHeader
-          title="Working Hours"
-          subtitle="Optionally set your store’s weekly availability"
-        />
+        <PageHeader title={t('title')} subtitle={t('subtitle')} />
 
         <div className="mt-6 space-y-5">
           {DAYS.map((day) => {
@@ -104,7 +105,7 @@ export default function CreateStoreWorkingHours() {
                 <div className="mb-2 flex items-center justify-between">
                   <span className="font-medium">{day}</span>
                   <Switch isSelected={isEnabled} onChange={() => toggleDay(day)} size="sm">
-                    Open
+                    {t('open')}
                   </Switch>
                 </div>
 
@@ -118,7 +119,7 @@ export default function CreateStoreWorkingHours() {
                           <Input
                             {...field}
                             type="time"
-                            label="Open"
+                            label={t('open')}
                             size="sm"
                             isInvalid={!!invalid}
                           />
@@ -131,18 +132,14 @@ export default function CreateStoreWorkingHours() {
                           <Input
                             {...field}
                             type="time"
-                            label="Close"
+                            label={t('close')}
                             size="sm"
                             isInvalid={!!invalid}
                           />
                         )}
                       />
                     </div>
-                    {invalid && (
-                      <p className="mt-1 text-xs text-red-500">
-                        Opening time must be earlier than closing time.
-                      </p>
-                    )}
+                    {invalid && <p className="mt-1 text-xs text-red-500">{t('error')}</p>}
                   </>
                 )}
               </div>
@@ -152,7 +149,7 @@ export default function CreateStoreWorkingHours() {
 
         {/* Summary */}
         <div className="mt-10" id="summary">
-          <h2 className="mb-2 text-lg font-semibold">Weekly Summary</h2>
+          <h2 className="mb-2 text-lg font-semibold">{t('summary')}</h2>
           <ul className="space-y-1 text-sm text-default-600">
             {DAYS.map((day) => {
               const isOpen = enabledDays.has(day);
@@ -161,7 +158,7 @@ export default function CreateStoreWorkingHours() {
                 <li key={day} className="flex justify-between">
                   <span>{day}</span>
                   <span className={isOpen ? 'text-green-600' : 'text-gray-400'}>
-                    {isOpen ? `${open} – ${close}` : 'Closed'}
+                    {isOpen ? `${open} – ${close}` : t('closed')}
                   </span>
                 </li>
               );
@@ -171,17 +168,17 @@ export default function CreateStoreWorkingHours() {
 
         <div className="mt-8 flex gap-x-2">
           <Button variant="bordered" type="button" onPress={() => router.back()}>
-            Back
+            {tCommon('back')}
           </Button>
           <Button
             variant="ghost"
             type="button"
             onPress={() => router.push(`/stores/create/${storeId}/logo-upload`)}
           >
-            Skip
+            {tCommon('skip')}
           </Button>
           <Button fullWidth type="submit" isLoading={isPending}>
-            Next
+            {tCommon('continue')}
           </Button>
         </div>
       </Form>

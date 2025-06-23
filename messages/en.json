@@ -1,0 +1,138 @@
+{
+  "common": {
+    "back": "Back",
+    "continue": "Continue",
+    "save": "Save Changes",
+    "skip": "Skip for Now",
+    "submit": "Submit",
+    "create": "Create",
+    "edit": "Edit",
+    "delete": "Delete",
+    "loading": "Just a moment...",
+    "retry": "Retry"
+  },
+  "error": {
+    "generic": "Oops! Something went wrong.",
+    "invalidOrder": "We couldn’t process this order.",
+    "invalidOrderId": "Invalid order ID. Please check and try again."
+  },
+  "orders": {
+    "title": "Your Orders",
+    "subtitle": "View past purchases and track deliveries.",
+    "none": "You haven’t placed any orders yet.",
+    "gotoMarket": "Browse Marketplace",
+    "backToOrders": "Return to Orders",
+    "loadingOrder": "Fetching your order...",
+    "pendingPayment": "Payment pending. Complete it to avoid cancellation.",
+    "items": "Items",
+    "summary": "Order Summary",
+    "totalAmount": "Total",
+    "deliveryDate": "Delivery Date",
+    "estimatedDelivery": "Estimated Delivery"
+  },
+  "profile": {
+    "title": "Update Profile",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "phoneNumber": "Phone Number",
+    "email": "Email Address"
+  },
+  "preferences": {
+    "title": "App Preferences",
+    "language": {
+      "label": "Language",
+      "description": "Select your preferred language."
+    },
+    "currency": {
+      "label": "Currency",
+      "description": "Prices will include helpful currency conversions."
+    }
+  },
+  "store": {
+    "basicInfo": {
+      "title": "Store Details",
+      "subtitle": "Choose a name and description that reflects your brand. This is what customers will see.",
+      "name": "Store Name",
+      "description": "Store Description",
+      "contactNumber": "Contact Number",
+      "email": "Contact Email",
+      "creating": "Setting up your store..."
+    },
+    "location": {
+      "title": "Store Location",
+      "subtitle": "Make it easy for customers to find you.",
+      "useTelegram": "Use Telegram Location",
+      "openSettings": "Go to Telegram Settings",
+      "country": "Country",
+      "state": "State/Region",
+      "city": "City",
+      "street1": "Street Address",
+      "street2": "Apartment, Suite, etc. (Optional)",
+      "postalCode": "Postal Code (Optional)",
+      "saveContinue": "Save and Continue",
+      "locationUpdated": "Location saved successfully!",
+      "locationFailed": "Couldn’t save location. Try again."
+    },
+    "tags": {
+      "title": "Store Tags",
+      "subtitle": "Tags help customers discover your store.",
+      "suggestions": "Recommended Tags",
+      "addCustom": "Add Your Own Tag",
+      "addButton": "Add Tag",
+      "saved": "Tags updated successfully!",
+      "failed": "Couldn’t save tags."
+    },
+    "workingHours": {
+      "title": "Store Hours",
+      "subtitle": "Let customers know when you’re open.",
+      "open": "Opens At",
+      "close": "Closes At",
+      "error": "Opening time must be earlier than closing time.",
+      "summary": "Weekly Hours",
+      "closed": "Closed",
+      "saved": "Hours saved successfully!",
+      "failed": "Couldn’t update hours."
+    },
+    "logo": {
+      "title": "Store Logo",
+      "change": "Change Image",
+      "submit": "Publish Store"
+    },
+    "actions": {
+      "share": "Share Store Link",
+      "edit": "Edit Store",
+      "delete": "Remove Store"
+    },
+    "created": "Your store is live!",
+    "creationFailed": "Something went wrong while creating your store."
+  },
+  "product": {
+    "create": {
+      "title": "New Product",
+      "name": "Product Name",
+      "price": "Price (TON)",
+      "description": "Briefly describe your product...",
+      "stock": "Available Quantity",
+      "downloadLink": "Download Link (if applicable)",
+      "success": "Product added successfully!",
+      "failure": "Couldn’t create product. Try again."
+    },
+    "edit": {
+      "title": "Edit Product",
+      "success": "Changes saved!",
+      "failure": "Couldn’t update product. Please try again."
+    },
+    "details": {
+      "description": "Description",
+      "inStock": "In Stock: {stock}",
+      "attributes": "Product Details",
+      "variants": "Variants"
+    }
+  },
+  "tabs": {
+    "market": "Marketplace",
+    "stores": "My Stores",
+    "orders": "Orders",
+    "profile": "Profile"
+  }
+}

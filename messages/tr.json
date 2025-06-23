@@ -1,0 +1,138 @@
+{
+  "common": {
+    "back": "Geri",
+    "continue": "Devam Et",
+    "save": "Değişiklikleri Kaydet",
+    "skip": "Şimdilik Geç",
+    "submit": "Gönder",
+    "create": "Oluştur",
+    "edit": "Düzenle",
+    "delete": "Sil",
+    "loading": "Lütfen bekleyin...",
+    "retry": "Tekrar Dene"
+  },
+  "error": {
+    "generic": "Bir şeyler ters gitti.",
+    "invalidOrder": "Sipariş işlenemedi.",
+    "invalidOrderId": "Geçersiz sipariş numarası. Lütfen kontrol edip tekrar deneyin."
+  },
+  "orders": {
+    "title": "Siparişlerin",
+    "subtitle": "Geçmiş siparişlerini görüntüle ve teslimatlarını takip et.",
+    "none": "Henüz hiç sipariş vermedin.",
+    "gotoMarket": "Mağazayı Keşfet",
+    "backToOrders": "Siparişlere Dön",
+    "loadingOrder": "Siparişin getiriliyor...",
+    "pendingPayment": "Ödeme bekleniyor. İptal olmaması için tamamlayın.",
+    "items": "Ürünler",
+    "summary": "Sipariş Özeti",
+    "totalAmount": "Toplam",
+    "deliveryDate": "Teslimat Tarihi",
+    "estimatedDelivery": "Tahmini Teslimat"
+  },
+  "profile": {
+    "title": "Profili Güncelle",
+    "firstName": "Ad",
+    "lastName": "Soyad",
+    "phoneNumber": "Telefon Numarası",
+    "email": "E-posta Adresi"
+  },
+  "preferences": {
+    "title": "Uygulama Tercihleri",
+    "language": {
+      "label": "Dil",
+      "description": "Tercih ettiğin dili seç."
+    },
+    "currency": {
+      "label": "Para Birimi",
+      "description": "Fiyatlar faydalı para birimi dönüşümleriyle gösterilir."
+    }
+  },
+  "store": {
+    "basicInfo": {
+      "title": "Mağaza Bilgileri",
+      "subtitle": "Markanı yansıtan bir isim ve açıklama seç. Müşteriler bunları görecek.",
+      "name": "Mağaza Adı",
+      "description": "Mağaza Açıklaması",
+      "contactNumber": "İletişim Numarası",
+      "email": "İletişim E-postası",
+      "creating": "Mağazan hazırlanıyor..."
+    },
+    "location": {
+      "title": "Mağaza Konumu",
+      "subtitle": "Müşterilerin seni kolayca bulmasını sağla.",
+      "useTelegram": "Telegram Konumunu Kullan",
+      "openSettings": "Telegram Ayarlarına Git",
+      "country": "Ülke",
+      "state": "İl/Bölge",
+      "city": "Şehir",
+      "street1": "Açık Adres",
+      "street2": "Daire, Bina vs. (İsteğe Bağlı)",
+      "postalCode": "Posta Kodu (Opsiyonel)",
+      "saveContinue": "Kaydet ve Devam Et",
+      "locationUpdated": "Konum başarıyla kaydedildi!",
+      "locationFailed": "Konum kaydedilemedi. Lütfen tekrar deneyin."
+    },
+    "tags": {
+      "title": "Mağaza Etiketleri",
+      "subtitle": "Etiketler mağazanı keşfedilebilir kılar.",
+      "suggestions": "Önerilen Etiketler",
+      "addCustom": "Kendi Etiketini Ekle",
+      "addButton": "Etiket Ekle",
+      "saved": "Etiketler başarıyla güncellendi!",
+      "failed": "Etiketler kaydedilemedi."
+    },
+    "workingHours": {
+      "title": "Çalışma Saatleri",
+      "subtitle": "Açık olduğun saatleri müşterilere bildir.",
+      "open": "Açılış Saati",
+      "close": "Kapanış Saati",
+      "error": "Açılış saati kapanış saatinden önce olmalı.",
+      "summary": "Haftalık Saatler",
+      "closed": "Kapalı",
+      "saved": "Çalışma saatleri kaydedildi!",
+      "failed": "Saatler güncellenemedi."
+    },
+    "logo": {
+      "title": "Mağaza Logosu",
+      "change": "Görseli Değiştir",
+      "submit": "Mağazayı Yayınla"
+    },
+    "actions": {
+      "share": "Mağaza Linkini Paylaş",
+      "edit": "Mağazayı Düzenle",
+      "delete": "Mağazayı Kaldır"
+    },
+    "created": "Mağazan yayında!",
+    "creationFailed": "Mağaza oluşturulurken bir sorun oluştu."
+  },
+  "product": {
+    "create": {
+      "title": "Yeni Ürün",
+      "name": "Ürün Adı",
+      "price": "Fiyat (TON)",
+      "description": "Ürünü kısaca tanımlayın...",
+      "stock": "Stok Adedi",
+      "downloadLink": "İndirme Linki (varsa)",
+      "success": "Ürün başarıyla eklendi!",
+      "failure": "Ürün oluşturulamadı. Lütfen tekrar deneyin."
+    },
+    "edit": {
+      "title": "Ürünü Düzenle",
+      "success": "Değişiklikler kaydedildi!",
+      "failure": "Ürün güncellenemedi. Lütfen tekrar deneyin."
+    },
+    "details": {
+      "description": "Açıklama",
+      "inStock": "Stokta: {stock}",
+      "attributes": "Ürün Detayları",
+      "variants": "Varyantlar"
+    }
+  },
+  "tabs": {
+    "market": "Pazar Yeri",
+    "stores": "Mağazalarım",
+    "orders": "Siparişler",
+    "profile": "Profil"
+  }
+}

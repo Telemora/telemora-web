@@ -4,6 +4,7 @@ import { Accordion, AccordionItem, Button, Chip, Spinner, Tooltip } from '@herou
 import { hapticFeedback } from '@telegram-apps/sdk-react';
 import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 import { FaEdit, FaShareAlt, FaTrashAlt } from 'react-icons/fa';
 import { FaPlus } from 'react-icons/fa6';
@@ -17,6 +18,10 @@ import { useStoreDetailsQuery } from '@/libs/stores/hooks';
 import { useUserState } from '@/libs/users/context/userContext';
 
 export default function StoreDetailsPage() {
+  const tStore = useTranslations('store');
+  const tCommon = useTranslations('common');
+  const tProduct = useTranslations('product');
+
   const { storeId } = useParams<{ storeId: string }>();
   const router = useRouter();
   const { data: user } = useUserState();
@@ -68,13 +73,13 @@ export default function StoreDetailsPage() {
         </div>
 
         <div className="flex gap-2">
-          <Tooltip content="Share store link">
+          <Tooltip content={tStore('actions.share')}>
             <Button isIconOnly size="sm" variant="flat" onPress={handleShare}>
               <FaShareAlt />
             </Button>
           </Tooltip>
           {isOwner && (
-            <Tooltip content="Edit Store">
+            <Tooltip content={tStore('actions.edit')}>
               <Button size="sm" variant="ghost" onPress={handleEdit}>
                 <FaEdit />
               </Button>
@@ -95,7 +100,7 @@ export default function StoreDetailsPage() {
 
         {store.workingHours && (
           <Accordion>
-            <AccordionItem title="📅 Working Hours">
+            <AccordionItem title={`📅 ${tStore('workingHours.title')}`}>
               <ul>
                 {Object.entries(store.workingHours).map(([day, time]) => (
                   <li key={day}>
@@ -127,9 +132,9 @@ export default function StoreDetailsPage() {
       {/* Products Section */}
       <div className="mb-6">
         <div className="mb-2 flex items-center justify-between">
-          <h2 className="text-lg font-semibold">Featured Products</h2>
+          <h2 className="text-lg font-semibold">{tProduct('details.variants')}</h2>
           <Button variant="ghost" size="sm" onPress={handleViewAll}>
-            View All
+            {tCommon('continue')}
           </Button>
         </div>
 
@@ -143,7 +148,7 @@ export default function StoreDetailsPage() {
         {isOwner && (
           <div className="mt-4 text-center">
             <Button onPress={handleAddProduct} startContent={<FaPlus />}>
-              Add Product
+              {tProduct('create.title')}
             </Button>
           </div>
         )}
@@ -159,7 +164,7 @@ export default function StoreDetailsPage() {
             onPress={handleDelete}
             startContent={<FaTrashAlt />}
           >
-            Delete Store
+            {tStore('actions.delete')}
           </Button>
         </div>
       )}

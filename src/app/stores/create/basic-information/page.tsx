@@ -1,8 +1,10 @@
 'use client';
+
 import { Button, Form, Input, Progress, Textarea } from '@heroui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { hapticFeedback } from '@telegram-apps/sdk';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -13,6 +15,9 @@ import { useSubmitStoreBasicInfoMutation } from '@/libs/stores/hooks';
 import { CreateStoreBasicDto, storeBasicFormSchema } from '@/libs/stores/schemas';
 
 export default function CreateStoreBasicInformation() {
+  const t = useTranslations('store.basicInfo');
+  const tCommon = useTranslations('common');
+
   const {
     register,
     handleSubmit,
@@ -33,13 +38,12 @@ export default function CreateStoreBasicInformation() {
   const onSubmit = async (formData: CreateStoreBasicDto) => {
     try {
       const result = await mutateAsync(formData);
-      console.log('Store created:', result);
-      toast.success('Store created successfully!');
+      toast.success(t('creating'));
       hapticFeedback.impactOccurred('light');
       router.push(`/stores/create/${result.id}/location`);
     } catch (err) {
       console.error('Create store error:', err);
-      toast.error('Failed to create store');
+      toast.error(t('creationFailed'));
     }
   };
 
@@ -47,30 +51,27 @@ export default function CreateStoreBasicInformation() {
     <AppLayout>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Progress label="Step 1 of 5" maxValue={5} aria-label="Step 1 of 5" size="sm" value={1} />
-        <PageHeader
-          title="Basic Information"
-          subtitle="Your store's name and description will be visible to customers. Choose a name that reflects your brand."
-        />
+        <PageHeader title={t('title')} subtitle={t('subtitle')} />
         <Input
-          label="Store Name"
+          label={t('name')}
           {...register('name')}
           isInvalid={!!errors.name}
           errorMessage={errors.name?.message}
         />
         <Textarea
-          label="Description"
+          label={t('description')}
           {...register('description')}
           isInvalid={!!errors.description}
           errorMessage={errors.description?.message}
         />
         <Input
-          label="Contact Number"
+          label={t('contactNumber')}
           {...register('contactNumber')}
           isInvalid={!!errors.contactNumber}
           errorMessage={errors.contactNumber?.message}
         />
         <Input
-          label="Email"
+          label={t('email')}
           {...register('email')}
           isInvalid={!!errors.email}
           errorMessage={errors.email?.message}
@@ -82,7 +83,7 @@ export default function CreateStoreBasicInformation() {
             isDisabled={isSubmitting || isPending}
             isLoading={isSubmitting || isPending}
           >
-            {isSubmitting || isPending ? 'Creating...' : 'Next'}
+            {isSubmitting || isPending ? t('creating') : tCommon('continue')}
           </Button>
 
           <Button
@@ -91,7 +92,7 @@ export default function CreateStoreBasicInformation() {
             disabled={isSubmitting || isPending}
             onPress={() => router.back()}
           >
-            Back
+            {tCommon('back')}
           </Button>
         </div>
       </Form>

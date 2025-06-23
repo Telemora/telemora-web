@@ -3,6 +3,7 @@
 import { Button, Form, Select, SelectItem } from '@heroui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { useTranslations } from 'next-intl';
 
 import AppLayout from '@/libs/common/components/AppLayout';
 import { PageHeader } from '@/libs/common/components/page-header';
@@ -13,7 +14,7 @@ import { UpdatePreferencesFormData, updatePreferencesSchema } from '@/libs/users
 const supportedLanguages = [
   { key: 'en', label: 'English' },
   { key: 'ar', label: 'Arabic' },
-  { key: 'ch', label: 'Chinese' },
+  { key: 'zh-CN', label: 'Chinese' },
   { key: 'fa', label: 'Persian' },
   { key: 'ru', label: 'Russian' },
 ];
@@ -27,8 +28,12 @@ const localCurrencies = [
 ];
 
 export default function PreferencesPage() {
+  const tPrefs = useTranslations('preferences');
+  const tCommon = useTranslations('common');
+
   const { data: user } = useUserState();
   const { mutate } = useUpdatePreferencesMutation();
+
   const {
     register,
     handleSubmit,
@@ -44,10 +49,14 @@ export default function PreferencesPage() {
 
   return (
     <AppLayout>
-      <PageHeader title="Preferences" />
+      <PageHeader title={tPrefs('title')} />
 
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Select {...register('languageCode')} description="Choose your language" label="Language">
+        <Select
+          {...register('languageCode')}
+          label={tPrefs('language.label')}
+          description={tPrefs('language.description')}
+        >
           {supportedLanguages.map((language) => (
             <SelectItem key={language.key}>{language.label}</SelectItem>
           ))}
@@ -55,8 +64,8 @@ export default function PreferencesPage() {
 
         <Select
           {...register('currencyCode')}
-          description="We will show you the equal value as hint"
-          label="Local Currency"
+          label={tPrefs('currency.label')}
+          description={tPrefs('currency.description')}
         >
           {localCurrencies.map((currency) => (
             <SelectItem key={currency.key}>{currency.label}</SelectItem>
@@ -64,7 +73,7 @@ export default function PreferencesPage() {
         </Select>
 
         <Button fullWidth disabled={isSubmitting} type="submit">
-          Save
+          {tCommon('save')}
         </Button>
       </Form>
     </AppLayout>
