@@ -40,3 +40,10 @@ export class UpdatePaymentDto {
   gasFee?: string;
   commission?: string;
 }
+
+export interface BuildTxOpts {
+  amountTon: number;
+  sellerAddress: string;
+  smartContractAddress: string;
+  orderId?: string;
+}

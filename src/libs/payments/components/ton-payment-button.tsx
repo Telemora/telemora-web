@@ -3,7 +3,7 @@
 import { environment } from '@environments';
 import { Button } from '@heroui/react';
 import { hapticFeedback } from '@telegram-apps/sdk-react';
-import { Cell } from '@ton/core';
+import { Cell, toNano } from '@ton/core';
 import { useTonAddress, useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
 import toast from 'react-hot-toast';
 
@@ -21,9 +21,7 @@ export function TonPaymentButton({ amountTon, sellerAddress, orderId }: TonPayme
   const wallet = useTonWallet();
   const userAddress = useTonAddress(false);
   const { mutateAsync: createPayment } = useCreatePayment();
-  const marketplaceAddress = environment.apiUrl;
   const smartContractAddress = environment.smartContractAddress;
-  const commissionPercent = environment.commissionPercent;
 
   const handlePay = async () => {
     if (!wallet) {
@@ -33,14 +31,13 @@ export function TonPaymentButton({ amountTon, sellerAddress, orderId }: TonPayme
     }
 
     try {
-      const nanoAmount = (amountTon * 1e9).toFixed(0);
+      const nanoAmount = toNano(amountTon);
 
       const transactionRequest = buildMarketplaceTransaction({
         amountTon,
         sellerAddress,
-        marketplaceAddress,
         smartContractAddress,
-        commissionPercent: Number(commissionPercent),
+        orderId,
       });
       const { boc } = await tonConnectUI.sendTransaction(transactionRequest);
 
@@ -48,7 +45,7 @@ export function TonPaymentButton({ amountTon, sellerAddress, orderId }: TonPayme
 
       await createPayment({
         orderId,
-        amount: nanoAmount,
+        amount: nanoAmount.toString(),
         fromWalletAddress: userAddress,
         toWalletAddress: sellerAddress,
         transactionHash: hash,
