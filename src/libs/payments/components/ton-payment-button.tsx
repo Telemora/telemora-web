@@ -16,7 +16,11 @@ interface TonPaymentButtonProps {
   orderId?: string;
 }
 
-export function TonPaymentButton({ amountTon, sellerAddress, orderId }: TonPaymentButtonProps) {
+export function TonPaymentButton({
+  amountTon,
+  sellerAddress,
+  orderId = '0',
+}: TonPaymentButtonProps) {
   const [tonConnectUI] = useTonConnectUI();
   const wallet = useTonWallet();
   const userAddress = useTonAddress(false);

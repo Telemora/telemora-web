@@ -45,5 +45,7 @@ export interface BuildTxOpts {
   amountTon: number;
   sellerAddress: string;
   smartContractAddress: string;
-  orderId?: string;
+  opcode?: number;
+  queryId?: number;
+  orderId: string;
 }

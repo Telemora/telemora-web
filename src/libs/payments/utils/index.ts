@@ -6,15 +6,29 @@ export function buildMarketplaceTransaction({
   amountTon,
   sellerAddress,
   smartContractAddress,
-  orderId = '0',
+  opcode = 0,
+  queryId = 0,
+  orderId,
 }: BuildTxOpts) {
+  if (amountTon <= 0) {
+    throw new Error('Amount must be greater than zero');
+  }
+
   const amountNano = toNano(amountTon);
-  const orderIdBigInt = BigInt(orderId);
+
+  let parsedSeller: Address;
+  try {
+    parsedSeller = Address.parse(sellerAddress);
+  } catch {
+    throw new Error('Invalid seller address');
+  }
 
   const body = beginCell()
-    .storeUint(orderIdBigInt, 64)
+    .storeUint(opcode, 32)
+    .storeUint(BigInt(queryId), 64)
+    .storeUint(BigInt(orderId), 64)
     .storeCoins(amountNano)
-    .storeAddress(Address.parse(sellerAddress))
+    .storeAddress(parsedSeller)
     .endCell();
 
   return {
