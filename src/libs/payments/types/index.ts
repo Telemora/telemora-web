@@ -46,6 +46,5 @@ export interface BuildTxOpts {
   sellerAddress: string;
   smartContractAddress: string;
   opcode?: number;
-  queryId?: number;
   orderId: string;
 }

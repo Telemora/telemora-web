@@ -7,7 +7,6 @@ export function buildMarketplaceTransaction({
   sellerAddress,
   smartContractAddress,
   opcode = 0,
-  queryId = 0,
   orderId,
 }: BuildTxOpts) {
   if (amountTon <= 0) {
@@ -25,7 +24,6 @@ export function buildMarketplaceTransaction({
 
   const body = beginCell()
     .storeUint(opcode, 32)
-    .storeUint(BigInt(queryId), 64)
     .storeUint(BigInt(orderId), 64)
     .storeCoins(amountNano)
     .storeAddress(parsedSeller)
