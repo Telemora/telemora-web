@@ -3,7 +3,7 @@
 import { environment } from '@environments';
 import { Button } from '@heroui/react';
 import { hapticFeedback } from '@telegram-apps/sdk-react';
-import { Cell, toNano } from '@ton/core';
+import { toNano } from '@ton/core';
 import { useTonAddress, useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
 import toast from 'react-hot-toast';
 
@@ -43,16 +43,13 @@ export function TonPaymentButton({
         smartContractAddress,
         orderId,
       });
-      const { boc } = await tonConnectUI.sendTransaction(transactionRequest);
-
-      const hash = Cell.fromBoc(Buffer.from(boc, 'base64'))[0].hash().toString('hex');
+      await tonConnectUI.sendTransaction(transactionRequest);
 
       await createPayment({
         orderId,
         amount: nanoAmount.toString(),
         fromWalletAddress: userAddress,
         toWalletAddress: sellerAddress,
-        transactionHash: hash,
       });
       toast.success('Payment sent & saved!');
       hapticFeedback.impactOccurred('light');

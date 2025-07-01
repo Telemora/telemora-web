@@ -31,7 +31,6 @@ export interface CreatePaymentDto {
   amount: string;
   fromWalletAddress?: string;
   toWalletAddress?: string;
-  transactionHash: string;
 }
 
 export class UpdatePaymentDto {
