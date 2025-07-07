@@ -24,7 +24,6 @@ interface LanguageSelectorProps {
 }
 
 export default function LanguageSelector({
-  telegramId,
   onClose,
   defaultLanguage = 'en',
 }: LanguageSelectorProps) {
@@ -43,7 +42,7 @@ export default function LanguageSelector({
 
   const onSubmit = async (formData: UpdateLanguageFormData) => {
     try {
-      await mutateAsync({ telegramId, data: formData });
+      await mutateAsync({ data: formData });
       toast.success('Language updated successfully');
       onClose?.();
     } catch {

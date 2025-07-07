@@ -15,32 +15,26 @@ export async function telegramLogin() {
     : httpClient.get<UserPrivateProfile>('/users/login');
 }
 
-export async function updateProfile(telegramId: number | string, data: UpdateProfileDto) {
+export async function updateProfile(data: UpdateProfileDto) {
   return isDev
     ? generateMockUserPrivateProfile()
-    : httpClient.patch<UserPrivateProfile>(`/users/profile/${telegramId}`, data);
+    : httpClient.patch<UserPrivateProfile>(`/users/profile`, data);
 }
 
-export async function updateLanguage(telegramId: number | string, data: UpdateLanguageDto) {
+export async function updateLanguage(data: UpdateLanguageDto) {
   return isDev
     ? generateMockUserPrivateProfile()
-    : httpClient.patch<UserPrivateProfile>(`/users/language/${telegramId}`, data);
+    : httpClient.patch<UserPrivateProfile>(`/users/language`, data);
 }
 
-export async function updateContactLocation(
-  telegramId: number | string,
-  data: UpdateContactLocationDto,
-) {
+export async function updateContactLocation(data: UpdateContactLocationDto) {
   return isDev
     ? generateMockUserPrivateProfile()
-    : httpClient.patch<UserPrivateProfile>(`/users/contact-location/${telegramId}`, data);
+    : httpClient.patch<UserPrivateProfile>(`/users/contact-location`, data);
 }
 
-export async function updateUserPreferences(
-  telegramId: number | string,
-  data: UpdatePreferencesDto,
-) {
+export async function updateUserPreferences(data: UpdatePreferencesDto) {
   return isDev
     ? generateMockUserPrivateProfile()
-    : httpClient.patch<UserPrivateProfile>(`/users/preferences/${telegramId}`, data);
+    : httpClient.patch<UserPrivateProfile>(`/users/preferences`, data);
 }

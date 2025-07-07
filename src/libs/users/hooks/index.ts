@@ -25,48 +25,24 @@ export function useTelegramLoginQuery() {
 
 export function useUpdateProfileMutation() {
   return useMutation({
-    mutationFn: ({
-      telegramId,
-      data,
-    }: {
-      telegramId: number | string;
-      data: UpdateProfileFormData;
-    }) => updateProfile(telegramId, data),
+    mutationFn: ({ data }: { data: UpdateProfileFormData }) => updateProfile(data),
   });
 }
 
 export function useUpdateLanguageMutation() {
   return useMutation({
-    mutationFn: ({
-      telegramId,
-      data,
-    }: {
-      telegramId: number | string;
-      data: UpdateLanguageFormData;
-    }) => updateLanguage(telegramId, data),
+    mutationFn: ({ data }: { data: UpdateLanguageFormData }) => updateLanguage(data),
   });
 }
 
 export function useUpdateContactLocationMutation() {
   return useMutation({
-    mutationFn: ({
-      telegramId,
-      data,
-    }: {
-      telegramId: number | string;
-      data: UpdateContactLocationFormData;
-    }) => updateContactLocation(telegramId, data),
+    mutationFn: ({ data }: { data: UpdateContactLocationFormData }) => updateContactLocation(data),
   });
 }
 
 export function useUpdatePreferencesMutation() {
   return useMutation({
-    mutationFn: ({
-      telegramId,
-      data,
-    }: {
-      telegramId: number | string;
-      data: UpdatePreferencesFormData;
-    }) => updateUserPreferences(telegramId, data),
+    mutationFn: ({ data }: { data: UpdatePreferencesFormData }) => updateUserPreferences(data),
   });
 }
