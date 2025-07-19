@@ -18,7 +18,7 @@ const availableLanguages = [
 ];
 
 interface LanguageSelectorProps {
-  telegramId: string;
+  telegramUserId: string;
   onClose?: () => void;
   defaultLanguage?: string;
 }
