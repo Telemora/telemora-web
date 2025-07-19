@@ -14,7 +14,7 @@ export interface ProductPreview {
   name: string;
   slug?: string;
   price: number;
-  image: Media[];
+  primaryImage: Media;
   storeId: number | string;
 }
 
@@ -24,6 +24,7 @@ export interface ProductSummary extends ProductPreview {
 }
 
 export interface ProductDetail extends ProductSummary {
+  images: Media[];
   description?: string;
   attributes?: ProductAttribute[];
   variants?: ProductVariant[];

@@ -14,7 +14,7 @@ interface ProductSummaryCardProps {
 }
 
 export default function ProductSummaryCard({ product, className }: ProductSummaryCardProps) {
-  const { id, slug, name, price, image, productType, store } = product;
+  const { id, slug, name, price, primaryImage, productType, store } = product;
 
   const href = `/products/${slug ?? id}`;
 
@@ -38,8 +38,8 @@ export default function ProductSummaryCard({ product, className }: ProductSummar
       <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-md bg-gray-100">
         <Image
           placeholder="blur"
-          src={image[0].url}
-          alt={image[0].alt ?? name}
+          src={primaryImage[0].url}
+          alt={primaryImage[0].alt ?? name}
           fill
           className="object-cover"
         />

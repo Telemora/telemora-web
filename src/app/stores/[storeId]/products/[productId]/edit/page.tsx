@@ -11,11 +11,11 @@ import toast from 'react-hot-toast';
 import AppLayout from '@/libs/common/components/AppLayout';
 import { PageHeader } from '@/libs/common/components/page-header';
 import { ProductAttributeFields } from '@/libs/products/components/product-attributes-field';
+import { ProductPhotosUploader } from '@/libs/products/components/product-photos-uploader';
 import { ProductTypeSelector } from '@/libs/products/components/product-type-selector';
 import { ProductVariantFields } from '@/libs/products/components/product-variants-field';
 import { useProductDetails, useUpdateProductMutation } from '@/libs/products/hooks';
 import { UpdateProductFormData, updateProductSchema } from '@/libs/products/schemas';
-import { ProductPhotosUploader } from '@/libs/products/components/product-photos-uploader';
 
 export default function EditProductPage() {
   const { storeId, productId } = useParams<{ storeId: string; productId: string }>();
@@ -35,7 +35,7 @@ export default function EditProductPage() {
       name: product?.name,
       price: product?.price,
       description: product?.description,
-      imageUrls: product?.image.map((m) => m.url),
+      imageUrls: product?.primaryImage.map((m) => m.url),
       productType: product?.productType,
       downloadLink: product?.downloadLink,
       stock: product?.stock,

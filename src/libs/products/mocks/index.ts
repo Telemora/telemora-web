@@ -19,7 +19,7 @@ export async function generateMockProductPreview(): Promise<ProductPreview> {
     name: faker.commerce.productName(),
     slug: faker.helpers.slugify(faker.commerce.productName()),
     price: Number(faker.commerce.price({ min: 10, max: 500 })),
-    image: Array.from({ length: 4 }, () => ({
+    primaryImage: Array.from({ length: 4 }, () => ({
       url: faker.image.urlPicsumPhotos(),
       alt: faker.commerce.productAdjective(),
       width: 600,
