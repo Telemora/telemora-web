@@ -63,9 +63,10 @@ export default function OrderDetailsPage() {
             />
           </CardBody>
           <CardFooter>
+            {/* TODO: I must to edit this part, to access store's wallet address */}
             <TonPaymentButton
               amountTon={order.totalAmount}
-              sellerAddress={order.store.walletAddress}
+              sellerAddress={order.store.displayName}
             />
           </CardFooter>
         </Card>

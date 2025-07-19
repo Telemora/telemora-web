@@ -59,9 +59,9 @@ export default function ProductDetailsPage() {
 
         <div>
           <User
-            name={product.store.name}
+            name={product.store.displayName}
             avatarProps={{ src: product.store.logo?.url }}
-            description={<StarRating rating={product.store.reputation} />}
+            description={<StarRating rating={product.store.vendorScore} />}
           />
         </div>
 

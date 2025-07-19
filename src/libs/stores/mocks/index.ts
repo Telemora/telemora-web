@@ -4,44 +4,45 @@ import { generateMockAddress } from '@/libs/location/mocks';
 import { generateMockProductPreviews } from '@/libs/products/mocks';
 import { generateMockUserSummary } from '@/libs/users/mocks';
 
-import { StoreDetail, StorePreview, StoreSummary } from '../types';
+import { StoreDetail, StorePreview, StoreStatusEnum, StoreSummary } from '../types';
 
 export async function generateMockStorePreview(): Promise<StorePreview> {
   return {
     id: faker.number.int(),
-    name: faker.company.name(),
+    displayName: faker.company.name(),
     slug: faker.helpers.slugify(faker.company.name()),
     logo: {
       url: faker.image.url(),
       alt: faker.company.name(),
     },
-    reputation: faker.number.float({ min: 1, max: 5, fractionDigits: 1 }),
-    isActive: true,
-    walletAddress: faker.finance.litecoinAddress(),
+    vendorScore: faker.number.float({ min: 1, max: 5, fractionDigits: 1 }),
+    status: StoreStatusEnum.ACTIVE,
   };
 }
 
 export async function generateMockStoreSummary(): Promise<StoreSummary> {
   return {
     ...(await generateMockStorePreview()),
-    address: generateMockAddress(),
-    description: faker.lorem.paragraph(),
-    tags: Array.from({ length: faker.number.int({ min: 1, max: 5 }) }, () => faker.lorem.word()),
+    businessLocations: Array.from({ length: 5 }, () => generateMockAddress()),
+    storeBio: faker.lorem.paragraph(),
+    categories: Array.from({ length: faker.number.int({ min: 1, max: 5 }) }, () =>
+      faker.lorem.word(),
+    ),
   };
 }
 
 export async function generateMockStoreDetail(): Promise<StoreDetail> {
   return {
     ...(await generateMockStoreSummary()),
-    owner: await generateMockUserSummary(),
+    vendor: await generateMockUserSummary(),
     products: await generateMockProductPreviews(),
-    contactNumber: faker.phone.number(),
-    email: faker.internet.email(),
-    socialMediaLinks: {
+    supportPhone: faker.phone.number(),
+    supportEmail: faker.internet.email(),
+    socialProfiles: {
       instagram: faker.internet.url(),
       twitter: faker.internet.url(),
     },
-    workingHours: {
+    serviceHours: {
       mon: { open: '09:00', close: '17:00' },
       tue: { open: '09:00', close: '17:00' },
     },

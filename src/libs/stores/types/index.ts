@@ -4,28 +4,34 @@ import { UserSummary } from '@/libs/users/types';
 
 import { Media } from '../../common/types';
 
+export enum StoreStatusEnum {
+  PENDING_APPROVAL = 'PENDING_APPROVAL',
+  ACTIVE = 'ACTIVE',
+  SUSPENDED = 'SUSPENDED',
+  CLOSED = 'CLOSED',
+}
+
 export interface StorePreview {
   id: number | string;
-  name: string;
+  displayName: string;
   slug?: string;
   logo?: Media;
-  reputation: number;
-  isActive: boolean;
-  walletAddress: string;
+  vendorScore: number;
+  status: StoreStatusEnum;
 }
 
 export interface StoreSummary extends StorePreview {
-  tags?: string[];
-  address: Address;
-  description?: string;
+  categories?: string[];
+  businessLocations: Address[];
+  storeBio?: string;
 }
 
 export interface StoreDetail extends StoreSummary {
-  owner: UserSummary;
-  contactNumber?: string;
-  email?: string;
-  socialMediaLinks?: Record<string, string>;
-  workingHours?: Record<string, DailyWorkingHours>;
+  vendor: UserSummary;
+  supportPhone?: string;
+  supportEmail?: string;
+  socialProfiles?: Record<string, string>;
+  serviceHours?: Record<string, DailyWorkingHours>;
   products: ProductPreview[];
   createdAt: Date;
 }

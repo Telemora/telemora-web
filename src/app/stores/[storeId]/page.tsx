@@ -21,7 +21,7 @@ export default function StoreDetailsPage() {
   const router = useRouter();
   const { data: user } = useUserState();
   const { data: store, isLoading, error } = useStoreDetailsQuery(storeId);
-  const isOwner = user && store && store.owner.userId === user.userId;
+  const isOwner = user && store && store.vendor.userId === user.userId;
 
   const handleShare = () => {
     copyToClipboard(window.location.href);
@@ -54,16 +54,16 @@ export default function StoreDetailsPage() {
             <Image
               placeholder="blur"
               src={store.logo.url}
-              alt={store.name}
+              alt={store.displayName}
               width={48}
               height={48}
               className="aspect-square rounded-full object-cover"
             />
           )}
           <div>
-            <h1 className="text-xl font-bold">{store.name}</h1>
-            <div>{store.tags?.map((tag) => <Chip key={tag}>{tag}</Chip>)}</div>
-            <StarRating rating={store.reputation} />
+            <h1 className="text-xl font-bold">{store.displayName}</h1>
+            <div>{store.categories?.map((tag) => <Chip key={tag}>{tag}</Chip>)}</div>
+            <StarRating rating={store.vendorScore} />
           </div>
         </div>
 
@@ -84,20 +84,20 @@ export default function StoreDetailsPage() {
       </div>
 
       {/* Store Description */}
-      {store.description && (
-        <p className="mb-4 text-sm leading-snug text-gray-700">{store.description}</p>
+      {store.storeBio && (
+        <p className="mb-4 text-sm leading-snug text-gray-700">{store.storeBio} </p>
       )}
 
       {/* Contact & Working Hours */}
       <div className="mb-6 space-y-1 text-sm text-gray-600">
-        {store.contactNumber && <p>📞 {store.contactNumber}</p>}
-        {store.email && <p>✉️ {store.email}</p>}
+        {store.supportPhone && <p>📞 {store.supportPhone}</p>}
+        {store.supportEmail && <p>✉️ {store.supportEmail}</p>}
 
-        {store.workingHours && (
+        {store.serviceHours && (
           <Accordion>
             <AccordionItem title="📅 Working Hours">
               <ul>
-                {Object.entries(store.workingHours).map(([day, time]) => (
+                {Object.entries(store.serviceHours).map(([day, time]) => (
                   <li key={day}>
                     {day}: {time.open} - {time.close}
                   </li>
@@ -107,9 +107,9 @@ export default function StoreDetailsPage() {
           </Accordion>
         )}
 
-        {store.socialMediaLinks && (
+        {store.socialProfiles && (
           <div className="pt-2">
-            {Object.entries(store.socialMediaLinks).map(([platform, url]) => (
+            {Object.entries(store.socialProfiles).map(([platform, url]) => (
               <a
                 key={platform}
                 href={url}

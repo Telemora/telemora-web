@@ -4,7 +4,7 @@ import { Card, CardBody, CardHeader, Skeleton } from '@heroui/react';
 import Link from 'next/link';
 
 import PriceComponent from '@/libs/common/components/PriceComponent';
-import { formatSafeDate, DATE_FORMATS } from '@/libs/common/utils/date';
+import { DATE_FORMATS, formatSafeDate } from '@/libs/common/utils/date';
 import { OrderSummary } from '@/libs/orders/types';
 import OrderStatusChip from './order-status-chip';
 
@@ -53,7 +53,7 @@ export default function OrderSummaryCard({
           <h3 className="text-sm font-semibold">Order #{id}</h3>
           <p className="text-xs text-gray-500">
             {formatSafeDate(createdAt, DATE_FORMATS.SHORT, 'Unknown date')} —{' '}
-            <span className="text-gray-400">{store.name}</span>
+            <span className="text-gray-400">{store.displayName}</span>
           </p>
         </div>
         <OrderStatusChip status={status} />

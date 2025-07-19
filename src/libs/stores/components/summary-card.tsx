@@ -19,24 +19,24 @@ const StoreSummaryCard = ({ store }: { store: StoreSummary }) => {
             <Image
               placeholder="blur"
               src={store.logo?.url ?? '/fallback-store.png'}
-              alt={store.name}
+              alt={store.displayName}
               width={48}
               height={48}
               className="inline-block h-12 w-12 rounded-full object-cover"
             />
             <div>
-              <h3 className="truncate font-semibold">{store.name}</h3>
-              <StarRating rating={store.reputation} />
+              <h3 className="truncate font-semibold">{store.displayName}</h3>
+              <StarRating rating={store.vendorScore} />
             </div>
           </div>
         </CardHeader>
         <CardBody>
-          <p className="truncate text-xs">{store.description}</p>
+          <p className="truncate text-xs">{store.storeBio}</p>
         </CardBody>
         <CardFooter className="block space-y-2">
-          <p className="truncate text-xs">{formatAddress(store.address)}</p>
+          <p className="truncate text-xs">{formatAddresses(store.businessLocations)}</p>
           <div className="flex gap-2">
-            {store.tags?.slice(0, 3).map((tag) => (
+            {store.categories?.slice(0, 3).map((tag) => (
               <Chip key={tag} size="sm">
                 {tag}
               </Chip>
@@ -48,8 +48,10 @@ const StoreSummaryCard = ({ store }: { store: StoreSummary }) => {
   );
 };
 
-const formatAddress = (address: Address) => {
-  return [address.city?.name, address.state?.name, address.country.name].filter(Boolean).join(', ');
+const formatAddresses = (address: Address[]) => {
+  return [address[0].city?.name, address[0].state?.name, address[0].country.name]
+    .filter(Boolean)
+    .join(', ');
 };
 
 export default StoreSummaryCard;

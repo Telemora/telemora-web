@@ -38,8 +38,7 @@ export default function PreferencesPage() {
   });
 
   const onSubmit = (data: UpdatePreferencesFormData) => {
-    const telegramId = user.telegramUserId;
-    mutate({ telegramId, data });
+    mutate({ data });
   };
 
   return (

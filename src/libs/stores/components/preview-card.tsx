@@ -4,7 +4,7 @@ import Link from 'next/link';
 import React from 'react';
 
 import StarRating from '@/libs/common/components/star-rating';
-import { StorePreview } from '@/libs/stores/types';
+import { StorePreview, StoreStatusEnum } from '@/libs/stores/types';
 
 export const StorePreviewCard = ({ store }: { store: StorePreview }) => {
   return (
@@ -12,21 +12,21 @@ export const StorePreviewCard = ({ store }: { store: StorePreview }) => {
       <Card
         className={cn(
           'rounded-xl p-4 transition hover:shadow-md',
-          !store.isActive && 'pointer-events-none opacity-50',
+          store.status !== StoreStatusEnum.ACTIVE && 'pointer-events-none opacity-50',
         )}
       >
         <CardBody className="flex flex-col items-center space-y-2 text-center">
           <Image
             placeholder="blur"
             src={store.logo?.url ?? '/fallback-store.png'}
-            alt={store.name}
+            alt={store.displayName}
             width={64}
             height={64}
             className="h-16 w-16 rounded-full object-cover"
           />
           <div className="w-full">
-            <h3 className="truncate text-sm font-medium">{store.name}</h3>
-            <StarRating rating={store.reputation} />
+            <h3 className="truncate text-sm font-medium">{store.displayName}</h3>
+            <StarRating rating={store.vendorScore} />
           </div>
         </CardBody>
       </Card>
