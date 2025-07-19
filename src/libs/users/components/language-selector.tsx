@@ -36,7 +36,7 @@ export default function LanguageSelector({
   } = useForm<UpdateLanguageFormData>({
     resolver: zodResolver(updateLanguageSchema),
     defaultValues: {
-      languageCode: defaultLanguage,
+      preferredLanguage: defaultLanguage,
     },
   });
 
@@ -55,7 +55,7 @@ export default function LanguageSelector({
       <PageHeader title="Select your preferred language" />
 
       <Controller
-        name="languageCode"
+        name="preferredLanguage"
         control={control}
         render={({ field }) => (
           <Select
@@ -65,8 +65,8 @@ export default function LanguageSelector({
               const selected = Array.from(keys)[0];
               if (typeof selected === 'string') field.onChange(selected);
             }}
-            isInvalid={!!errors.languageCode}
-            errorMessage={errors.languageCode?.message}
+            isInvalid={!!errors.preferredLanguage}
+            errorMessage={errors.preferredLanguage?.message}
           >
             {availableLanguages.map(({ value, label }) => (
               <SelectItem key={value}>{label}</SelectItem>

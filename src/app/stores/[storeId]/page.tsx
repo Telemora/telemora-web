@@ -21,7 +21,7 @@ export default function StoreDetailsPage() {
   const router = useRouter();
   const { data: user } = useUserState();
   const { data: store, isLoading, error } = useStoreDetailsQuery(storeId);
-  const isOwner = user && store && store.owner.id === user.id;
+  const isOwner = user && store && store.owner.userId === user.userId;
 
   const handleShare = () => {
     copyToClipboard(window.location.href);

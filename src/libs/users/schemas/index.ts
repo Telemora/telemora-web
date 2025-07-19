@@ -6,19 +6,19 @@ export const updateProfileSchema = z.object({
 });
 
 export const updateLanguageSchema = z.object({
-  languageCode: z.string().min(2, 'Language code is required'),
+  preferredLanguage: z.string().min(2, 'Language code is required'),
 });
 
 export const updateContactLocationSchema = z.object({
-  phoneNumber: z.string().min(5, 'Phone number is required'),
-  email: z.string().email('Invalid email address'),
+  contactPhone: z.string().min(5, 'Phone number is required'),
+  contactEmail: z.string().email('Invalid email address'),
   countryId: z.number(),
   stateId: z.number(),
   cityId: z.number(),
 });
 
 export const updatePreferencesSchema = z.object({
-  currencyCode: z.string(),
+  fiatCurrencyCode: z.string(),
   languageCode: z.string(),
 });
 

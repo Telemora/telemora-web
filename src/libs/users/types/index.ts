@@ -5,13 +5,13 @@ import { StorePreview } from '@/libs/stores/types';
 import { Media } from '../../common/types';
 
 export enum UserRole {
-  BUYER = 'buyer',
-  SELLER = 'seller',
-  BOTH = 'both',
+  CUSTOMER = 'customer',
+  VENDOR = 'vendor',
+  ADMIN = 'admin',
 }
 
 export interface UserPublicPreview {
-  id: number | string;
+  userId: number | string;
   username?: string;
   handle?: string;
   photo?: Media;
@@ -21,7 +21,7 @@ export interface UserSummary extends UserPublicPreview {
   firstName: string;
   lastName?: string;
   role: UserRole;
-  address: Address;
+  addresses: Address[];
 }
 
 export interface CurrencyInfo {
@@ -31,25 +31,25 @@ export interface CurrencyInfo {
 }
 
 export interface UserPrivateProfile extends UserSummary {
-  telegramId: string;
-  phoneNumber?: string;
-  email?: string;
-  walletAddress?: string;
+  telegramUserId: string;
+  contactPhone?: string;
+  contactEmail?: string;
+  cryptoWalletAddress?: string;
   stores?: StorePreview[];
   orders?: OrderSummary[];
   currencyInfo: CurrencyInfo;
 }
 
 export interface UpdateContactLocationDto {
-  phoneNumber: string;
-  email: string;
+  contactPhone: string;
+  contactEmail: string;
   countryId: number;
   stateId: number;
   cityId: number;
 }
 
 export interface UpdateLanguageDto {
-  languageCode: string;
+  preferredLanguage: string;
 }
 
 export interface UpdateProfileDto {
@@ -59,5 +59,5 @@ export interface UpdateProfileDto {
 
 export interface UpdatePreferencesDto {
   languageCode: string;
-  currencyCode: string;
+  fiatCurrencyCode: string;
 }

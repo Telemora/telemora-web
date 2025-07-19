@@ -38,7 +38,8 @@ export default function PreferencesPage() {
   });
 
   const onSubmit = (data: UpdatePreferencesFormData) => {
-    mutate({ data });
+    const telegramId = user.telegramUserId;
+    mutate({ telegramId, data });
   };
 
   return (
@@ -53,7 +54,7 @@ export default function PreferencesPage() {
         </Select>
 
         <Select
-          {...register('currencyCode')}
+          {...register('fiatCurrencyCode')}
           description="We will show you the equal value as hint"
           label="Local Currency"
         >

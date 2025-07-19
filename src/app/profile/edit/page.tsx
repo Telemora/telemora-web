@@ -37,7 +37,7 @@ export default function EditProfilePage() {
           type="tel"
           label="Phone Number"
           disabled={isLoading}
-          defaultValue={data?.phoneNumber}
+          defaultValue={data?.contactPhone}
         ></Input>
         <Input
           endContent={<FaPen />}
@@ -45,7 +45,7 @@ export default function EditProfilePage() {
           type="email"
           label="E-Mail"
           disabled={isLoading}
-          defaultValue={data?.email}
+          defaultValue={data?.contactEmail}
         ></Input>
       </Form>
     </AppLayout>
