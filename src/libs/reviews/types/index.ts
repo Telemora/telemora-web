@@ -24,7 +24,7 @@ export interface ReviewPreview {
   rating: number;
   comment?: string;
   productId: number | string;
-  buyer: UserPublicPreview;
+  customer: UserPublicPreview;
   createdAt: Date;
 }
 
@@ -38,7 +38,7 @@ export interface ReviewDetail extends ReviewPreview {
 
 export interface ReviewReplyPreview {
   id: number;
-  seller: UserPublicPreview;
+  vendor: UserPublicPreview;
   replyText: string;
   createdAt: Date;
 }

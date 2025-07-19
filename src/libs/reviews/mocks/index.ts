@@ -16,7 +16,7 @@ export async function generateMockReviewPreview(productId: number): Promise<Revi
     rating: faker.number.int({ min: 1, max: 5 }),
     comment: faker.lorem.sentence(),
     productId,
-    buyer: await generateMockUserPublicPreview(),
+    customer: await generateMockUserPublicPreview(),
     createdAt: faker.date.recent(),
   };
 }
@@ -35,7 +35,7 @@ export async function generateMockReviewDetail(): Promise<ReviewDetail> {
 export async function generateMockReviewReplyPreview(): Promise<ReviewReplyPreview> {
   return {
     id: faker.number.int(),
-    seller: await generateMockUserPublicPreview(),
+    vendor: await generateMockUserPublicPreview(),
     replyText: faker.lorem.sentence(),
     createdAt: faker.date.recent(),
   };

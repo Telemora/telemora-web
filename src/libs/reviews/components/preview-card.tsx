@@ -14,8 +14,8 @@ export default function ReviewPreviewCard({ content }: { content: ReviewPreview 
         <div className="mb-2 flex items-center justify-between">
           <div>
             <User
-              name={`${content.buyer.username}`}
-              avatarProps={{ src: content.buyer.photo?.url }}
+              name={`${content.customer.username}`}
+              avatarProps={{ src: content.customer.photo?.url }}
               description={formatDistanceToNow(new Date(content.createdAt), { addSuffix: true })}
             />
           </div>
