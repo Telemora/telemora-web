@@ -24,64 +24,37 @@ export interface ProductSummary extends ProductPreview {
 }
 
 export interface ProductDetail extends ProductSummary {
-  images: Media[];
   description?: string;
-  attributes?: ProductAttribute[];
-  variants?: ProductVariant[];
+  images: Media[];
+  attributes?: ProductAttributeDto[];
+  variants?: ProductVariantDto[];
   categoryId: number;
   categoryPath?: ProductCategoryPath;
-  stock?: number;
-  downloadLink?: string;
   reviews?: ReviewPreview[];
   createdAt: Date;
 }
 
-export interface ProductAttribute {
-  id: number;
-  attributeName: string;
-  attributeValue: string;
-}
-
-export interface ProductVariant {
-  id: number;
-  variantName: string;
-  variantValue: string;
-  additionalPrice?: number;
-}
-
 export interface CreateProductDto {
   name: string;
-  price: number;
+  basePrice: number;
   description?: string;
-  imageUrls: string[];
   productType: ProductType;
-  downloadLink?: string;
-  stock?: number;
-  attributes?: CreateProductAttributeDto[];
-  variants?: CreateProductVariantDto[];
+  attributes?: ProductAttributeDto[];
+  variants?: ProductVariantDto[];
 }
 
-export interface CreateProductAttributeDto {
-  attributeName: string;
-  attributeValue: string;
+export interface ProductAttributeDto {
+  name: string;
+  value: string;
 }
 
-export interface CreateProductVariantDto {
+export interface ProductVariantDto {
   variantName: string;
   variantValue: string;
-  additionalPrice?: number;
+  priceOverride?: number;
 }
 
-export interface UpdateProductDto {
-  name?: string;
-  price?: number;
-  description?: string;
-  imageUrl?: string;
-  downloadLink?: string;
-  stock?: number;
-  attributes?: CreateProductAttributeDto[];
-  variants?: CreateProductVariantDto[];
-}
+export type UpdateProductDto = Partial<CreateProductDto>;
 
 export interface ProductCategoryNode {
   id: number;

@@ -82,9 +82,9 @@ export default function CreateProductPage() {
         <Input
           label="Price (TON)"
           type="number"
-          {...register('price', { valueAsNumber: true })}
-          isInvalid={!!errors.price}
-          errorMessage={errors.price?.message}
+          {...register('basePrice', { valueAsNumber: true })}
+          isInvalid={!!errors.basePrice}
+          errorMessage={errors.basePrice?.message}
         />
 
         <Textarea
@@ -94,23 +94,6 @@ export default function CreateProductPage() {
         />
 
         <ProductTypeSelector name="productType" control={control} errors={errors} />
-
-        {productType === 'physical' && (
-          <Input
-            label="Stock Quantity"
-            type="number"
-            {...register('stock', { valueAsNumber: true })}
-          />
-        )}
-
-        {productType === 'digital' && (
-          <Input
-            label="Download Link"
-            {...register('downloadLink')}
-            isInvalid={!!errors.downloadLink}
-            errorMessage={errors.downloadLink?.message}
-          />
-        )}
 
         <ProductAttributeFields
           fields={attributeFields}

@@ -3,8 +3,8 @@ import { z } from 'zod';
 import { ProductType } from '@/libs/products/types';
 
 export const productAttributeSchema = z.object({
-  attributeName: z.string().min(1, 'Attribute name is required'),
-  attributeValue: z.string().min(1, 'Attribute value is required'),
+  name: z.string().min(1, 'Attribute name is required'),
+  value: z.string().min(1, 'Attribute value is required'),
 });
 
 export const productVariantSchema = z.object({
@@ -15,12 +15,10 @@ export const productVariantSchema = z.object({
 
 export const createProductSchema = z.object({
   name: z.string().min(1, 'Product name is required'),
-  price: z.number().positive('Price must be greater than zero'),
+  basePrice: z.number().positive('Price must be greater than zero'),
   description: z.string().optional(),
   imageUrls: z.array(z.string().url()).min(1, 'At least one image is required'),
   productType: z.nativeEnum(ProductType),
-  downloadLink: z.string().url('Download link must be a valid URL').optional(),
-  stock: z.number().int().nonnegative().optional(),
   attributes: z.array(productAttributeSchema).optional(),
   variants: z.array(productVariantSchema).optional(),
 });
