@@ -30,12 +30,9 @@ export function ProductAttributeFields<TFieldValues extends Record<string, unkno
       <h2 className="mb-2 font-semibold">Attributes</h2>
       {fields.map((field, index) => (
         <div key={field.id} className="mb-2 flex items-center gap-2">
+          <Input {...register(`${name}.${index}.name` as Path<TFieldValues>)} placeholder="Name" />
           <Input
-            {...register(`${name}.${index}.attributeName` as Path<TFieldValues>)}
-            placeholder="Name"
-          />
-          <Input
-            {...register(`${name}.${index}.attributeValue` as Path<TFieldValues>)}
+            {...register(`${name}.${index}.value` as Path<TFieldValues>)}
             placeholder="Value"
           />
           <Button variant="light" size="sm" onPress={() => remove(index)}>
