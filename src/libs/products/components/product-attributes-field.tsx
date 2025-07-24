@@ -49,8 +49,8 @@ export function ProductAttributeFields<TFieldValues extends Record<string, unkno
         startContent={<FaPlus />}
         onPress={() =>
           append({
-            attributeName: '',
-            attributeValue: '',
+            name: '',
+            value: '',
           } as FieldArray<TFieldValues, ArrayPath<TFieldValues>>)
         }
       >
