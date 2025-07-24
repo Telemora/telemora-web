@@ -18,8 +18,8 @@ export default function ProductPreviewCard({ product }: ProductPreviewCard) {
         <CardBody className="h-32">
           <Image
             placeholder="blur"
-            src={product.primaryImage[0].url || '/fallback-product.png'}
-            alt={product.primaryImage[0].alt ?? product.name}
+            src={product.primaryImage.url || '/fallback-product.png'}
+            alt={product.primaryImage.alt ?? product.name}
             priority={true}
             width={100}
             height={100}
