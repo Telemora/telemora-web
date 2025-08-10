@@ -1,8 +1,8 @@
 import { faker } from '@faker-js/faker';
 
-import { Address, CanonicalLocation } from '../types';
+import { AddressDto, CanonicalLocationDto } from '../types';
 
-function generateMockCanonicalLocation(type: CanonicalLocation['type']): CanonicalLocation {
+function generateMockCanonicalLocation(type: CanonicalLocationDto['type']): CanonicalLocationDto {
   return {
     id: faker.number.int(),
     name:
@@ -19,7 +19,7 @@ function generateMockCanonicalLocation(type: CanonicalLocation['type']): Canonic
   };
 }
 
-export function generateMockAddress(): Address {
+export function generateMockAddress(): AddressDto {
   return {
     id: faker.number.int(),
     label: 'Home',
@@ -37,14 +37,14 @@ export function generateMockAddress(): Address {
   };
 }
 
-export const generateMockCountries = (): CanonicalLocation[] => {
+export const generateMockCountries = (): CanonicalLocationDto[] => {
   return Array.from({ length: 5 }, () => generateMockCanonicalLocation('country'));
 };
 
-export const generateMockStates = (): CanonicalLocation[] => {
+export const generateMockStates = (): CanonicalLocationDto[] => {
   return Array.from({ length: 5 }, () => generateMockCanonicalLocation('state'));
 };
 
-export const generateMockCities = (): CanonicalLocation[] => {
+export const generateMockCities = (): CanonicalLocationDto[] => {
   return Array.from({ length: 5 }, () => generateMockCanonicalLocation('city'));
 };

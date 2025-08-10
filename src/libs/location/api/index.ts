@@ -6,26 +6,26 @@ import {
 } from '@/libs/location/mocks';
 
 import { isDev } from '../../common/utils';
-import { CanonicalLocation, NearestLocationResponse } from '../types';
+import { CanonicalLocationDto, NearestLocationResponseDto } from '../types';
 
 export async function getCountries() {
   return isDev
     ? generateMockCountries()
-    : httpClient.get<CanonicalLocation[]>(`/locations/countries`);
+    : httpClient.get<CanonicalLocationDto[]>(`/locations/countries`);
 }
 
 export async function getStatesByCountry(countryId: number) {
   return isDev
     ? generateMockStates()
-    : httpClient.get<CanonicalLocation[]>(`countries/${countryId}/states`);
+    : httpClient.get<CanonicalLocationDto[]>(`countries/${countryId}/states`);
 }
 
 export async function getCitiesByState(stateId: number) {
   return isDev
     ? generateMockCities()
-    : httpClient.get<CanonicalLocation[]>(`states/${stateId}/cities`);
+    : httpClient.get<CanonicalLocationDto[]>(`states/${stateId}/cities`);
 }
 
 export async function getNearestLocation(lat: number, lng: number) {
-  return httpClient.get<NearestLocationResponse>(`/locations/nearest?lat=${lat}&lng=${lng}`);
+  return httpClient.get<NearestLocationResponseDto>(`/locations/nearest?lat=${lat}&lng=${lng}`);
 }

@@ -1,46 +1,71 @@
-export interface CanonicalLocation {
+/**
+ * Defines the type of canonical location entity.
+ * Used for categorizing countries, states, and cities.
+ */
+export enum CanonicalLocationType {
+  COUNTRY = 'country',
+  STATE = 'state',
+  CITY = 'city',
+}
+
+/**
+ * Enum to distinguish different address use cases in the system.
+ */
+export enum AddressType {
+  USER = 'user',
+  STORE = 'store',
+  SHIPPING = 'shipping',
+  BILLING = 'billing',
+  PICKUP = 'pickup',
+}
+
+export interface GeoPoint {
+  latitude: number;
+  longitude: number;
+}
+
+export interface CanonicalLocationDto {
   id: number;
   name: string;
-  type: 'country' | 'state' | 'city';
+  type: CanonicalLocationType;
   parentId?: number;
   postalCode?: string;
   latitude?: number;
   longitude?: number;
 }
 
-export interface Address {
+export interface AddressDto {
   id: number;
   label?: string;
-  country: CanonicalLocation;
-  state?: CanonicalLocation;
-  city?: CanonicalLocation;
-  fullText?: string;
+  country: CanonicalLocationDto;
+  state?: CanonicalLocationDto;
+  city?: CanonicalLocationDto;
   streetLine1: string;
   streetLine2?: string;
   postalCode?: string;
-  latitude?: number;
-  longitude?: number;
-  type?: 'user' | 'store' | 'shipping' | 'billing' | 'pickup';
+  geoPoint: GeoPoint;
+  type: AddressType;
   isDefault?: boolean;
-  createdAt: Date;
 }
 
-export interface RegionFilter {
+export interface RegionFilterDto {
   countryId?: number;
   stateId?: number;
   cityId?: number;
 }
 
-export interface GeoFilter {
-  center: {
-    latitude: number;
-    longitude: number;
-  };
+export interface GeoFilterDto {
+  center: GeoPoint;
   radiusKm: number;
 }
 
-export interface NearestLocationResponse {
-  country: CanonicalLocation;
-  state?: CanonicalLocation;
-  city?: CanonicalLocation;
+export interface NearestLocationResponseDto {
+  country: CanonicalLocationDto;
+  state?: CanonicalLocationDto;
+  city?: CanonicalLocationDto;
+}
+
+export interface GetNearestLocationQuery extends GeoPoint {
+  radius?: number;
+  limit?: number;
 }
