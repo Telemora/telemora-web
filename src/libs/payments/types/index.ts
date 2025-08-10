@@ -9,10 +9,17 @@ export enum PaymentStatus {
   REFUNDED = 'refunded',
 }
 
+export enum TokenSymbol {
+  TON = 'TON',
+  ETH = 'ETH',
+  USDT = 'USDT',
+}
+
 export interface PaymentSummary {
-  id: number | string;
+  id: string;
   status: PaymentStatus;
   amount: string;
+  tokenSymbol: TokenSymbol;
   transactionHash: string;
   createdAt: Date;
 }
@@ -27,7 +34,7 @@ export interface PaymentDetail extends PaymentSummary {
 }
 
 export interface CreatePaymentDto {
-  orderId?: string;
+  orderId: string;
   amount: string;
   fromWalletAddress?: string;
   toWalletAddress?: string;
