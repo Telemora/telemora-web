@@ -4,9 +4,9 @@ import Link from 'next/link';
 import React from 'react';
 
 import PriceComponent from '@/libs/common/components/PriceComponent';
-import { OrderItemPreview } from '@/libs/orders/types';
+import { OrderItemPreviewDto } from '@/libs/orders/types';
 
-export default function OrderItemPreviewCard({ orderItem }: { orderItem: OrderItemPreview }) {
+export default function OrderItemPreviewCard({ orderItem }: { orderItem: OrderItemPreviewDto }) {
   return (
     <Card>
       <CardBody className="flex flex-row justify-between text-sm">

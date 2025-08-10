@@ -5,9 +5,9 @@ import { generateMockProductPreview } from '@/libs/products/mocks';
 import { generateMockStorePreview } from '@/libs/stores/mocks';
 import { generateMockUserSummary } from '@/libs/users/mocks';
 
-import { OrderDetail, OrderItemPreview, OrderStatus, OrderSummary } from '../types';
+import { OrderDetail, OrderItemPreviewDto, OrderStatus, OrderSummary } from '../types';
 
-export async function generateMockOrderItemPreview(): Promise<OrderItemPreview> {
+export async function generateMockOrderItemPreview(): Promise<OrderItemPreviewDto> {
   return {
     product: await generateMockProductPreview(),
     quantity: faker.number.int({ min: 1, max: 5 }),
@@ -21,7 +21,7 @@ export async function generateMockOrderSummary(): Promise<OrderSummary> {
     status: faker.helpers.enumValue(OrderStatus),
     totalAmount: Number(faker.commerce.price({ min: 50, max: 500 })),
     store: await generateMockStorePreview(),
-    deliveryDate: faker.date.soon(),
+    expectedDeliveryDate: faker.date.soon(),
     createdAt: faker.date.past(),
   };
 }
@@ -34,7 +34,7 @@ export async function generateMockOrderDetail(): Promise<OrderDetail> {
       id: faker.number.int(),
       trackingNumber: faker.string.uuid(),
       courierService: faker.company.name(),
-      deliveryEstimate: faker.date.future(),
+      expectedDeliveryDate: faker.date.future(),
       shippedAt: faker.date.past(),
     },
     payment: await generateMockPaymentSummary(),
@@ -46,6 +46,6 @@ export async function generateMockOrderSummaries(): Promise<OrderSummary[]> {
   return Promise.all(Array.from({ length: 3 }, () => generateMockOrderSummary()));
 }
 
-export async function generateMockOrderItemPreviews(): Promise<OrderItemPreview[]> {
+export async function generateMockOrderItemPreviews(): Promise<OrderItemPreviewDto[]> {
   return Promise.all(Array.from({ length: 3 }, () => generateMockOrderItemPreview()));
 }

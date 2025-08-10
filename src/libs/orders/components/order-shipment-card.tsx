@@ -24,7 +24,7 @@ export function OrderShipmentCard({
     trackingNumber,
     courierService,
     status = 'created',
-    deliveryEstimate,
+    expectedDeliveryDate,
     shippedAt,
     carrierTrackingUrl,
   } = shipment;
@@ -152,8 +152,10 @@ export function OrderShipmentCard({
             )}
           </ShipmentDetail>
           <ShipmentDetail label="Est. Delivery:">
-            {isValidDate(deliveryEstimate) ? (
-              <time dateTime={deliveryEstimate}>{format(new Date(deliveryEstimate!), 'PPP')}</time>
+            {isValidDate(expectedDeliveryDate) ? (
+              <time dateTime={expectedDeliveryDate}>
+                {format(new Date(expectedDeliveryDate!), 'PPP')}
+              </time>
             ) : (
               <span className="text-gray-400">Not available</span>
             )}

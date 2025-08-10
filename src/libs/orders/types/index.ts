@@ -1,6 +1,6 @@
 import { PaymentSummary } from '@/libs/payments/types';
-import { ProductPreview } from '@/libs/products/types';
-import { StorePreview } from '@/libs/stores/types';
+import { ProductPreviewDto } from '@/libs/products/types';
+import { StorePreviewDto } from '@/libs/stores/types';
 import { UserSummary } from '@/libs/users/types';
 
 export enum OrderStatus {
@@ -14,8 +14,9 @@ export enum OrderStatus {
   REFUNDED = 'refunded',
 }
 
-export interface OrderItemPreview {
-  product: ProductPreview;
+export interface OrderItemPreviewDto {
+  product: ProductPreviewDto;
+  unitPrice: number;
   quantity: number;
   totalPrice: number;
 }
@@ -24,13 +25,13 @@ export interface OrderSummary {
   id: number | string;
   status: OrderStatus;
   totalAmount: number;
-  store: StorePreview;
-  deliveryDate: Date;
+  store: StorePreviewDto;
+  expectedDeliveryDate: Date;
   createdAt: Date;
 }
 
 export interface OrderDetail extends OrderSummary {
-  items: OrderItemPreview[];
+  items: OrderItemPreviewDto[];
   shipment?: OrderShipment;
   payment?: PaymentSummary;
   buyer: UserSummary;
@@ -42,14 +43,12 @@ export interface OrderShipment {
   carrierTrackingUrl?: string;
   status?: 'created' | 'in_transit' | 'delivered' | 'failed';
   courierService: string;
-  deliveryEstimate: Date;
+  expectedDeliveryDate: Date;
   shippedAt: Date;
 }
 
 export interface CreateOrderDto {
-  buyerId: number;
   items: CreateOrderItemDto[];
-  status?: OrderStatus;
   shippingAddress?: string;
 }
 
@@ -59,9 +58,9 @@ interface CreateOrderItemDto {
 }
 
 export interface CreateOrderShipmentDto {
-  trackingNumber: string;
-  courierService: string;
-  deliveryEstimate?: string;
+  trackingNumber?: string;
+  courierService?: string;
+  expectedDeliveryDate?: string;
 }
 
 export interface UpdateOrderDto {

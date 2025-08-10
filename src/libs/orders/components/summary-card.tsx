@@ -6,6 +6,7 @@ import Link from 'next/link';
 import PriceComponent from '@/libs/common/components/PriceComponent';
 import { DATE_FORMATS, formatSafeDate } from '@/libs/common/utils/date';
 import { OrderSummary } from '@/libs/orders/types';
+
 import OrderStatusChip from './order-status-chip';
 
 interface OrderSummaryCardProps {
@@ -21,7 +22,7 @@ export default function OrderSummaryCard({
   className,
   isLoading = false,
 }: OrderSummaryCardProps) {
-  const { id, status, totalAmount, store, deliveryDate, createdAt } = order;
+  const { id, status, totalAmount, store, expectedDeliveryDate, createdAt } = order;
 
   if (isLoading) {
     return (
@@ -64,7 +65,7 @@ export default function OrderSummaryCard({
           <PriceComponent amount={totalAmount} />
           <div className="text-right text-xs text-gray-500">
             <p className="font-medium">Est. Delivery</p>
-            <p>{formatSafeDate(deliveryDate, DATE_FORMATS.SHORT, 'TBD')}</p>
+            <p>{formatSafeDate(expectedDeliveryDate, DATE_FORMATS.SHORT, 'TBD')}</p>
           </div>
         </div>
       </CardBody>
