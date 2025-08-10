@@ -4,9 +4,9 @@ import Link from 'next/link';
 import React from 'react';
 
 import StarRating from '@/libs/common/components/star-rating';
-import { StorePreview, StoreStatusEnum } from '@/libs/stores/types';
+import { StorePreviewDto, StoreStatusEnum } from '@/libs/stores/types';
 
-export const StorePreviewCard = ({ store }: { store: StorePreview }) => {
+export const StorePreviewCard = ({ store }: { store: StorePreviewDto }) => {
   return (
     <Link href={`/stores/${store.id}`} className="block" passHref>
       <Card

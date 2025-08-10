@@ -1,8 +1,8 @@
-import { Address } from '@/libs/location/types';
-import { ProductPreview } from '@/libs/products/types';
+import { AddressDto } from '@/libs/location/types';
+import { ProductPreviewDto } from '@/libs/products/types';
 import { UserSummary } from '@/libs/users/types';
 
-import { Media } from '../../common/types';
+import { MediaDto } from '../../common/types';
 
 export enum StoreStatusEnum {
   PENDING_APPROVAL = 'PENDING_APPROVAL',
@@ -11,18 +11,39 @@ export enum StoreStatusEnum {
   CLOSED = 'CLOSED',
 }
 
-export interface StorePreview {
+export enum Weekday {
+  MONDAY = 'monday',
+  TUESDAY = 'tuesday',
+  WEDNESDAY = 'wednesday',
+  THURSDAY = 'thursday',
+  FRIDAY = 'friday',
+  SATURDAY = 'saturday',
+  SUNDAY = 'sunday',
+}
+
+export enum SocialMediaPlatform {
+  INSTAGRAM = 'instagram',
+  FACEBOOK = 'facebook',
+  X = 'x',
+  TIKTOK = 'tiktok',
+  YOUTUBE = 'youtube',
+  TELEGRAM = 'telegram',
+  WEBSITE = 'website',
+  OTHER = 'other',
+}
+
+export interface StorePreviewDto {
   id: number | string;
   displayName: string;
   slug?: string;
-  logo?: Media;
+  logo?: MediaDto;
   vendorScore: number;
   status: StoreStatusEnum;
 }
 
-export interface StoreSummary extends StorePreview {
+export interface StoreSummary extends StorePreviewDto {
   categories?: string[];
-  businessLocations: Address[];
+  businessLocations: AddressDto[];
   storeBio?: string;
 }
 
@@ -31,12 +52,14 @@ export interface StoreDetail extends StoreSummary {
   supportPhone?: string;
   supportEmail?: string;
   socialProfiles?: Record<string, string>;
-  serviceHours?: Record<string, DailyWorkingHours>;
-  products: ProductPreview[];
+  serviceHours?: Record<string, ServiceHoursDto>;
+  products: ProductPreviewDto[];
   createdAt: Date;
 }
 
-export interface DailyWorkingHours {
+export interface ServiceHoursDto {
+  day: Weekday;
   open: string;
   close: string;
+  interval: number;
 }

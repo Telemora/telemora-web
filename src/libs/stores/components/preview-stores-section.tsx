@@ -2,13 +2,13 @@ import { Button, Divider } from '@heroui/react';
 import React from 'react';
 
 import { StorePreviewCard } from '@/libs/stores/components/preview-card';
-import { StorePreview } from '@/libs/stores/types';
+import { StorePreviewDto } from '@/libs/stores/types';
 
 export default function PreviewStoresSection({
   stores,
   title,
 }: {
-  stores: StorePreview[];
+  stores: StorePreviewDto[];
   title: string;
 }) {
   return (

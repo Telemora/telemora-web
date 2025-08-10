@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import StarRating from '@/libs/common/components/star-rating';
-import { Address } from '@/libs/location/types';
+import { AddressDto } from '@/libs/location/types';
 import { StoreSummary } from '@/libs/stores/types';
 
 const StoreSummaryCard = ({ store }: { store: StoreSummary }) => {
@@ -48,7 +48,7 @@ const StoreSummaryCard = ({ store }: { store: StoreSummary }) => {
   );
 };
 
-const formatAddresses = (address: Address[]) => {
+const formatAddresses = (address: AddressDto[]) => {
   return [address[0].city?.name, address[0].state?.name, address[0].country.name]
     .filter(Boolean)
     .join(', ');

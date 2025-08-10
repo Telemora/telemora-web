@@ -4,9 +4,9 @@ import { generateMockAddress } from '@/libs/location/mocks';
 import { generateMockProductPreviews } from '@/libs/products/mocks';
 import { generateMockUserSummary } from '@/libs/users/mocks';
 
-import { StoreDetail, StorePreview, StoreStatusEnum, StoreSummary } from '../types';
+import { StoreDetail, StorePreviewDto, StoreStatusEnum, StoreSummary } from '../types';
 
-export async function generateMockStorePreview(): Promise<StorePreview> {
+export async function generateMockStorePreview(): Promise<StorePreviewDto> {
   return {
     id: faker.number.int(),
     displayName: faker.company.name(),
@@ -54,6 +54,6 @@ export async function generateMockStoreSummaries(): Promise<StoreSummary[]> {
   return Promise.all(Array.from({ length: 5 }, () => generateMockStoreSummary()));
 }
 
-export async function generateMockStorePreviews(): Promise<StorePreview[]> {
+export async function generateMockStorePreviews(): Promise<StorePreviewDto[]> {
   return Promise.all(Array.from({ length: 5 }, () => generateMockStorePreview()));
 }
