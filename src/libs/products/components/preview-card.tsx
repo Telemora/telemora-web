@@ -5,10 +5,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import PriceComponent from '@/libs/common/components/PriceComponent';
-import { ProductPreview } from '@/libs/products/types';
+import { ProductPreviewDto } from '@/libs/products/types';
 
 interface ProductPreviewCard {
-  product: ProductPreview;
+  product: ProductPreviewDto;
 }
 
 export default function ProductPreviewCard({ product }: ProductPreviewCard) {

@@ -1,7 +1,15 @@
-import { ReviewPreview } from '@/libs/reviews/types';
-import { StorePreview } from '@/libs/stores/types';
+import { MediaDto } from '@/libs/common/types';
+import { ReviewPreviewDto } from '@/libs/reviews/types';
+import { StorePreviewDto } from '@/libs/stores/types';
 
-import { Media } from '../../common/types';
+export enum InventoryEventType {
+  INITIAL = 'initial',
+  MANUAL_ADJUSTMENT = 'manual',
+  SALE = 'sale',
+  RETURN = 'return',
+  RESTOCK = 'restock',
+  CANCELLED = 'cancelled',
+}
 
 export enum ProductType {
   PHYSICAL = 'physical',
@@ -9,73 +17,108 @@ export enum ProductType {
   SERVICE = 'service',
 }
 
-export interface ProductPreview {
-  id: number | string;
+export enum ProductVisibility {
+  PUBLISHED = 'published',
+  HIDDEN = 'hidden',
+  DRAFT = 'draft',
+}
+
+export enum ProductStatus {
+  PENDING = 'pending',
+  APPROVED = 'approved',
+  REJECTED = 'rejected',
+}
+
+export interface ProductImageDto extends MediaDto {
+  isPrimary: boolean;
+  sortOrder: number;
+}
+
+export interface AttributeDto {
+  id: string;
   name: string;
-  slug?: string;
-  price: number;
-  primaryImage: Media;
-  storeId: number | string;
 }
 
-export interface ProductSummary extends ProductPreview {
-  productType: ProductType;
-  store: StorePreview;
-}
-
-export interface ProductDetail extends ProductSummary {
-  description?: string;
-  images: Media[];
-  attributes?: ProductAttributeDto[];
-  variants?: ProductVariantDto[];
-  categoryId: number;
-  categoryPath?: ProductCategoryPath;
-  reviews?: ReviewPreview[];
-  createdAt: Date;
-}
-
-export interface CreateProductDto {
+export interface ProductAttributeValueDto {
+  id: string;
   name: string;
-  basePrice: number;
-  description?: string;
-  productType: ProductType;
-  attributes?: ProductAttributeDto[];
-  variants?: ProductVariantDto[];
+  value: string;
 }
 
-export interface ProductAttributeDto {
+export interface VariantAttributeValueDto {
+  id: string;
   name: string;
   value: string;
 }
 
 export interface ProductVariantDto {
-  variantName: string;
-  variantValue: string;
+  id: number;
+  sku?: string;
   priceOverride?: number;
+  quantityAvailable: number;
+  isActive: boolean;
+  images?: ProductImageDto[];
+  attributes: VariantAttributeValueDto[];
 }
 
-export type UpdateProductDto = Partial<CreateProductDto>;
-
-export interface ProductCategoryNode {
-  id: number;
+export interface ProductPreviewDto {
+  id: number | string;
   name: string;
-  slug: string;
-  level: number;
-  parentId?: number;
-  children?: ProductCategoryNode[];
+  slug?: string;
+  primaryImage: MediaDto;
+  price: number;
+  currency: string;
+  storeId: number | string;
+  storeName: string;
+  averageRating?: number;
+  numberOfReviews?: number;
 }
 
-export type ProductCategoryTree = ProductCategoryNode[];
-export type ProductCategoryFlat = Omit<ProductCategoryNode, 'children'>;
-export type ProductCategoryMap = Record<number, ProductCategoryNode>;
+export interface ProductSummary extends ProductPreviewDto {
+  productType: ProductType;
+  store: StorePreviewDto;
+}
 
-export type ProductCategoryPath = {
-  id: number;
+export interface ProductDetail extends ProductSummary {
+  description?: string;
+  images: MediaDto[];
+  attributes?: ProductAttributeValueDto[];
+  variants?: ProductVariantDto[];
+  reviews?: ReviewPreviewDto[];
+  visibility: ProductVisibility;
+  status: ProductStatus;
+  totalQuantityAvailable?: number;
+  categoryId: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface CreateProductAttributeValueInputDto {
+  attributeId: number;
+  value: string;
+}
+
+export interface CreateProductVariantInputDto {
+  sku?: string;
+  priceOverride?: number;
+  initialQuantity: number;
+  attributeValueIds: string[];
+  attributes: CreateProductAttributeValueInputDto[];
+}
+
+export interface CreateProductDto {
   name: string;
-  slug: string;
-}[];
+  basePrice: number;
+  currency: string;
+  description?: string;
+  productType: ProductType;
+  attributes?: CreateProductAttributeValueInputDto[];
+  variants?: ProductVariantDto[];
+  visibility?: ProductVisibility;
+  quantityAvailable?: number;
+}
 
-export interface ProductCategoryFilter {
-  categoryId?: number;
-  includeDescendants?: boolean;
+export interface UpdateProductDto extends Partial<CreateProductDto> {
+  id?: number;
+  quantityAvailable?: number;
 }

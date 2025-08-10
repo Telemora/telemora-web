@@ -8,14 +8,14 @@ import {
 import {
   CreateProductDto,
   ProductDetail,
-  ProductPreview,
+  ProductPreviewDto,
   UpdateProductDto,
 } from '@/libs/products/types';
 
 export async function getStoreProducts(storeId: number) {
   return isDev
     ? generateMockProductPreviews()
-    : httpClient.get<ProductPreview[]>(`/products/${storeId}`);
+    : httpClient.get<ProductPreviewDto[]>(`/products/${storeId}`);
 }
 
 export async function getProductDetails(storeId: number, productId: number) {

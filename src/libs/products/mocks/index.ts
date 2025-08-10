@@ -7,13 +7,13 @@ import {
   ProductAttribute,
   ProductCategoryNode,
   ProductDetail,
-  ProductPreview,
+  ProductPreviewDto,
   ProductSummary,
   ProductType,
   ProductVariant,
 } from '../types';
 
-export async function generateMockProductPreview(): Promise<ProductPreview> {
+export async function generateMockProductPreview(): Promise<ProductPreviewDto> {
   return {
     id: faker.number.int(),
     name: faker.commerce.productName(),
@@ -134,6 +134,6 @@ export async function generateMockCategoryTree(count: number = 8): Promise<Produ
   return tree;
 }
 
-export async function generateMockProductPreviews(): Promise<ProductPreview[]> {
+export async function generateMockProductPreviews(): Promise<ProductPreviewDto[]> {
   return Promise.all(Array.from({ length: 10 }, () => generateMockProductPreview()));
 }
