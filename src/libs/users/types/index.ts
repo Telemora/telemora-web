@@ -1,8 +1,8 @@
-import { Address } from '@/libs/location/types';
+import { AddressDto } from '@/libs/location/types';
 import { OrderSummary } from '@/libs/orders/types';
-import { StorePreview } from '@/libs/stores/types';
+import { StorePreviewDto } from '@/libs/stores/types';
 
-import { Media } from '../../common/types';
+import { MediaDto } from '../../common/types';
 
 export enum UserRole {
   CUSTOMER = 'customer',
@@ -13,15 +13,13 @@ export enum UserRole {
 export interface UserPublicPreview {
   userId: number | string;
   username?: string;
-  handle?: string;
-  photo?: Media;
+  photo?: MediaDto;
 }
 
 export interface UserSummary extends UserPublicPreview {
   firstName: string;
   lastName?: string;
   role: UserRole;
-  addresses: Address[];
 }
 
 export interface CurrencyInfo {
@@ -35,7 +33,8 @@ export interface UserPrivateProfile extends UserSummary {
   contactPhone?: string;
   contactEmail?: string;
   cryptoWalletAddress?: string;
-  stores?: StorePreview[];
+  addresses: AddressDto[];
+  stores?: StorePreviewDto[];
   orders?: OrderSummary[];
   currencyInfo: CurrencyInfo;
 }
@@ -43,6 +42,7 @@ export interface UserPrivateProfile extends UserSummary {
 export interface UpdateContactLocationDto {
   contactPhone: string;
   contactEmail: string;
+  addressId: number;
   countryId: number;
   stateId: number;
   cityId: number;
