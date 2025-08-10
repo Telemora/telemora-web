@@ -1,4 +1,4 @@
-export interface Media {
+export interface MediaDto {
   url: string;
   alt?: string;
   width?: number;
