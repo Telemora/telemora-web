@@ -5,12 +5,12 @@ import { generateMockUserPublicPreview } from '@/libs/users/mocks';
 import {
   ReportReason,
   ReviewDetail,
-  ReviewPreview,
+  ReviewPreviewDto,
   ReviewReplyPreview,
   ReviewReportPreview,
 } from '../types';
 
-export async function generateMockReviewPreview(productId: number): Promise<ReviewPreview> {
+export async function generateMockReviewPreview(productId: number): Promise<ReviewPreviewDto> {
   return {
     id: faker.number.int(),
     rating: faker.number.int({ min: 1, max: 5 }),
@@ -51,7 +51,7 @@ export async function generateMockReviewReportPreview(): Promise<ReviewReportPre
   };
 }
 
-export async function generateMockReviewPreviews(): Promise<ReviewPreview[]> {
+export async function generateMockReviewPreviews(): Promise<ReviewPreviewDto[]> {
   return Promise.all(
     Array.from({ length: 5 }, () => generateMockReviewPreview(faker.number.int())),
   );

@@ -5,9 +5,9 @@ import { User } from '@heroui/user';
 import { formatDistanceToNow } from 'date-fns';
 
 import StarRating from '@/libs/common/components/star-rating';
-import { ReviewPreview } from '@/libs/reviews/types';
+import { ReviewPreviewDto } from '@/libs/reviews/types';
 
-export default function ReviewPreviewCard({ content }: { content: ReviewPreview }) {
+export default function ReviewPreviewCard({ content }: { content: ReviewPreviewDto }) {
   return (
     <Card>
       <CardBody>

@@ -19,7 +19,7 @@ export enum ReportReason {
   OTHER = 'Other',
 }
 
-export interface ReviewPreview {
+export interface ReviewPreviewDto {
   id: number | string;
   rating: number;
   comment?: string;
@@ -28,12 +28,10 @@ export interface ReviewPreview {
   createdAt: Date;
 }
 
-export interface ReviewDetail extends ReviewPreview {
-  images?: string[];
-  videos?: string[];
+export interface ReviewDetail extends ReviewPreviewDto {
   replies: ReviewReplyPreview[];
   reports: ReviewReportPreview[];
-  isFlagged?: boolean;
+  isFlagged: boolean;
 }
 
 export interface ReviewReplyPreview {

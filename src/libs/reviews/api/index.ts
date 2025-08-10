@@ -11,7 +11,7 @@ import {
   CreateReviewReplyDto,
   CreateReviewReportDto,
   ReviewDetail,
-  ReviewPreview,
+  ReviewPreviewDto,
   ReviewReplyPreview,
   ReviewReportPreview,
 } from '@/libs/reviews/types';
@@ -25,7 +25,7 @@ export async function createReview(productId: number, data: CreateReviewDto) {
 export async function getProductReviews(productId: number) {
   return isDev
     ? generateMockReviewPreviews()
-    : httpClient.get<ReviewPreview[]>(`/reviews/product/${productId}`);
+    : httpClient.get<ReviewPreviewDto[]>(`/reviews/product/${productId}`);
 }
 
 export async function getReviewsById(id: string | number) {

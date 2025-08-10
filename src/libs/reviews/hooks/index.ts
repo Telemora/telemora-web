@@ -14,10 +14,10 @@ import {
   CreateReviewReplyFormData,
   CreateReviewReportFormData,
 } from '@/libs/reviews/schemas';
-import { ReviewDetail, ReviewPreview } from '@/libs/reviews/types';
+import { ReviewDetail, ReviewPreviewDto } from '@/libs/reviews/types';
 
 export function useProductReviews(productId: number) {
-  return useQuery<ReviewPreview[]>({
+  return useQuery<ReviewPreviewDto[]>({
     queryKey: queryKeys.reviews.byProduct(productId),
     queryFn: () => getProductReviews(productId),
   });
