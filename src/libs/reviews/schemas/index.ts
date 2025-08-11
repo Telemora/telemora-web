@@ -1,25 +1,25 @@
 import { z } from 'zod';
+import {
+  type CreateReviewDto,
+  type CreateReviewReplyDto,
+  type CreateReviewReportDto,
+  ReportReason,
+} from '@/libs/reviews/types';
 
-import { ReportReason } from '@/libs/reviews/types';
+export const reportReasonSchema = z.nativeEnum(ReportReason);
 
-export const createReviewSchema = z.object({
-  rating: z.number().min(1).max(5),
-  comment: z.string().max(1000).optional(),
-  images: z.array(z.string().url()).optional(),
-  videos: z.array(z.string().url()).optional(),
-});
+export const createReviewDtoSchema = z.object({
+  rating: z.number().min(0),
+  comment: z.string().optional(),
+  images: z.array(z.string()).optional(),
+  videos: z.array(z.string()).optional(),
+}) satisfies z.ZodType<CreateReviewDto>;
 
-export const createReviewReplySchema = z.object({
-  replyText: z.string().min(1, 'Reply text is required'),
-});
+export const createReviewReplyDtoSchema = z.object({
+  replyText: z.string().min(1),
+}) satisfies z.ZodType<CreateReviewReplyDto>;
 
-export const createReviewReportSchema = z.object({
-  reason: z.nativeEnum(ReportReason, {
-    errorMap: () => ({ message: 'Select a valid reason' }),
-  }),
-  comment: z.string().max(1000).optional(),
-});
-
-export type CreateReviewFormData = z.infer<typeof createReviewSchema>;
-export type CreateReviewReplyFormData = z.infer<typeof createReviewReplySchema>;
-export type CreateReviewReportFormData = z.infer<typeof createReviewReportSchema>;
+export const createReviewReportDtoSchema = z.object({
+  reason: reportReasonSchema,
+  comment: z.string().optional(),
+}) satisfies z.ZodType<CreateReviewReportDto>;

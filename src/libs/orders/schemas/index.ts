@@ -1,31 +1,28 @@
 import { z } from 'zod';
+import {
+  type CreateOrderDto,
+  type CreateOrderShipmentDto,
+  type UpdateOrderDto,
+} from '@/libs/orders/types';
 
-import { OrderStatus } from '@/libs/orders/types';
-
-export const createOrderItemSchema = z.object({
-  productId: z.number().int().positive(),
-  quantity: z.number().int().min(1, 'Quantity must be at least 1'),
+export const createOrderItemDtoSchema = z.object({
+  productId: z.number().int(),
+  quantity: z.number().int().positive(),
 });
 
-export const createOrderSchema = z.object({
-  buyerId: z.number().int().positive(),
-  items: z.array(createOrderItemSchema).min(1, 'At least one product is required'),
-  status: z.nativeEnum(OrderStatus).optional(),
-  shippingAddress: z.string().min(5, 'Shipping address is too short').optional(),
-});
-
-export const createOrderShipmentSchema = z.object({
-  trackingNumber: z.string().min(3, 'Tracking number is required'),
-  courierService: z.string().min(2, 'Courier service is required'),
-  deliveryEstimate: z.string().optional(),
-});
-
-export const updateOrderSchema = z.object({
-  status: z.nativeEnum(OrderStatus).optional(),
+export const createOrderDtoSchema = z.object({
+  items: z.array(createOrderItemDtoSchema).min(1),
   shippingAddress: z.string().optional(),
-  items: z.array(createOrderItemSchema).optional(),
-});
+}) satisfies z.ZodType<CreateOrderDto>;
 
-export type CreateOrderFormData = z.infer<typeof createOrderSchema>;
-export type UpdateOrderFormData = z.infer<typeof updateOrderSchema>;
-export type CreateOrderShipmentFormData = z.infer<typeof createOrderShipmentSchema>;
+export const createOrderShipmentDtoSchema = z.object({
+  trackingNumber: z.string().optional(),
+  courierService: z.string().optional(),
+  expectedDeliveryDate: z.string().optional(), 
+}) satisfies z.ZodType<CreateOrderShipmentDto>;
+
+export const updateOrderDtoSchema = z.object({
+  status: z.string().optional(), 
+  shippingAddress: z.string().optional(),
+  items: z.array(createOrderItemDtoSchema).optional(),
+}) satisfies z.ZodType<UpdateOrderDto>;

@@ -1,28 +1,46 @@
 import { z } from 'zod';
+import { mediaDtoSchema } from '@/libs/common/schemas';
+import { UserRole } from '@/libs/users/types';
 
-export const updateProfileSchema = z.object({
-  firstName: z.string().min(1, 'First name is required').optional(),
-  lastName: z.string().min(1, 'Last name is required').optional(),
+export const userRoleSchema = z.nativeEnum(UserRole);
+
+export const userPublicPreviewSchema = z.object({
+  userId: z.union([z.number(), z.string().min(1)]),
+  username: z.string().min(1).optional(),
+  photo: mediaDtoSchema.optional(),
 });
 
-export const updateLanguageSchema = z.object({
-  preferredLanguage: z.string().min(2, 'Language code is required'),
+export const userSummarySchema = userPublicPreviewSchema.extend({
+  firstName: z.string().min(1),
+  lastName: z.string().min(1).optional(),
+  role: userRoleSchema,
+});
+
+export const currencyInfoSchema = z.object({
+  tonToUsdRate: z.string(),
+  localCurrencyToUsdRate: z.string(),
+  localCurrencyCode: z.string(),
 });
 
 export const updateContactLocationSchema = z.object({
-  contactPhone: z.string().min(5, 'Phone number is required'),
-  contactEmail: z.string().email('Invalid email address'),
-  countryId: z.number(),
-  stateId: z.number(),
-  cityId: z.number(),
+  contactPhone: z.string().min(1),
+  contactEmail: z.string().email(),
+  addressId: z.number().int().positive(),
+  countryId: z.number().int().positive(),
+  stateId: z.number().int().positive(),
+  cityId: z.number().int().positive(),
+});
+
+export const updateLanguageSchema = z.object({
+  preferredLanguage: z.string().min(1),
+});
+
+export const updateProfileSchema = z.object({
+  firstName: z.string().min(1).optional(),
+  lastName: z.string().min(1).optional(),
 });
 
 export const updatePreferencesSchema = z.object({
-  fiatCurrencyCode: z.string(),
-  languageCode: z.string(),
+  languageCode: z.string().min(1),
+  fiatCurrencyCode: z.string().min(1),
 });
-
-export type UpdateProfileFormData = z.infer<typeof updateProfileSchema>;
-export type UpdateLanguageFormData = z.infer<typeof updateLanguageSchema>;
-export type UpdateContactLocationFormData = z.infer<typeof updateContactLocationSchema>;
-export type UpdatePreferencesFormData = z.infer<typeof updatePreferencesSchema>;

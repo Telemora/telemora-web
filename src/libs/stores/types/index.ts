@@ -63,3 +63,32 @@ export interface ServiceHoursDto {
   close: string;
   interval: number;
 }
+
+export interface CreateStoreBasicDto {
+  displayName: string;
+  storeBio: string;
+  supportPhone?: string;
+  supportEmail?: string;
+}
+
+export interface CreateStoreTagsDto {
+  tags?: string[];
+}
+
+export interface SetStoreServiceHoursDto {
+  serviceHours?: ServiceHoursDto[];
+}
+
+export interface CreateStoreLogoDto {
+  logoFile?: any;
+}
+
+export interface UpdateStoreDto {
+  displayName?: string;
+  storeBio?: string;
+  supportPhone?: string;
+  supportEmail?: string;
+  categories?: string[];
+  logoUrl?: string;
+  serviceHours?: ServiceHoursDto[];
+}

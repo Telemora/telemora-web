@@ -1,0 +1,31 @@
+import { z } from 'zod';
+import {
+  PaymentStatus,
+  type CreatePaymentDto,
+  type UpdatePaymentDto,
+  type BuildTxOpts,
+} from '@/libs/payments/types';
+
+export const paymentStatusSchema = z.nativeEnum(PaymentStatus);
+
+export const createPaymentDtoSchema = z.object({
+  orderId: z.string(),
+  amount: z.string(),
+  fromWalletAddress: z.string().optional(),
+  toWalletAddress: z.string().optional(),
+}) satisfies z.ZodType<CreatePaymentDto>;
+
+export const updatePaymentDtoSchema = z.object({
+  status: paymentStatusSchema.optional(),
+  transactionHash: z.string().optional(),
+  gasFee: z.string().optional(),
+  commission: z.string().optional(),
+}) satisfies z.ZodType<UpdatePaymentDto>;
+
+export const buildTxOptsSchema = z.object({
+  amountTon: z.number().nonnegative(),
+  sellerAddress: z.string(),
+  smartContractAddress: z.string(),
+  opcode: z.number().int().optional(),
+  orderId: z.string(),
+}) satisfies z.ZodType<BuildTxOpts>;
