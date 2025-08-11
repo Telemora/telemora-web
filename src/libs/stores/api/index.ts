@@ -1,14 +1,12 @@
 import httpClient from '@/libs/common/utils/http-client';
 import { generateMockStoreDetail, generateMockStoreSummaries } from '@/libs/stores/mocks';
 import {
-  CreateAddressDto,
-  CreateStoreBasicDto,
-  CreateStoreLogoDto,
-  CreateStoreTagsDto,
-  CreateStoreWorkingHoursDto,
+  CreateStoreBasicDto, CreateStoreLogoDto,
+  CreateStoreTagsDto, SetStoreServiceHoursDto,
+  StoreDetail,
+  StoreSummary,
   UpdateStoreDto,
-} from '@/libs/stores/schemas';
-import { StoreDetail, StoreSummary } from '@/libs/stores/types';
+} from '@/libs/stores/types';
 
 import { isDev } from '../../common/utils';
 
@@ -46,7 +44,7 @@ export async function submitStoreTagsSelection(storeId: string, data: CreateStor
     : httpClient.patch<StoreDetail>(`/stores/${storeId}/tags`, data);
 }
 
-export async function submitStoreWorkingHours(storeId: string, data: CreateStoreWorkingHoursDto) {
+export async function submitStoreWorkingHours(storeId: string, data: SetStoreServiceHoursDto) {
   return isDev
     ? generateMockStoreDetail()
     : httpClient.patch<StoreDetail>(`/stores/${storeId}/working_hours`, data);

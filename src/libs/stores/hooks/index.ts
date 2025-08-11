@@ -13,13 +13,13 @@ import {
   submitStoreWorkingHours,
 } from '@/libs/stores/api';
 import {
-  CreateAddressDto,
   CreateStoreBasicDto,
   CreateStoreLogoDto,
   CreateStoreTagsDto,
-  CreateStoreWorkingHoursDto,
-} from '@/libs/stores/schemas';
-import { StoreDetail, StoreSummary } from '@/libs/stores/types';
+  SetStoreServiceHoursDto,
+  StoreDetail,
+  StoreSummary,
+} from '@/libs/stores/types';
 
 export function useUserStoresQuery() {
   return useQuery<StoreSummary[]>({
@@ -71,9 +71,9 @@ export function useSubmitStoreTagsMutation(storeId: string) {
   });
 }
 
-export function useSubmitStoreWorkingHoursMutation(storeId: string) {
+export function useSubmitStoreServiceHoursMutation(storeId: string) {
   return useMutation({
-    mutationFn: (data: CreateStoreWorkingHoursDto) => submitStoreWorkingHours(storeId, data),
+    mutationFn: (data: SetStoreServiceHoursDto) => submitStoreWorkingHours(storeId, data),
   });
 }
 

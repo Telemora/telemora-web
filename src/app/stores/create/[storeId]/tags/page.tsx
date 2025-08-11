@@ -12,7 +12,8 @@ import AppLayout from '@/libs/common/components/AppLayout';
 import { PageHeader } from '@/libs/common/components/page-header';
 import { Tag } from '@/libs/common/components/tag';
 import { useSubmitStoreTagsMutation } from '@/libs/stores/hooks';
-import { CreateStoreTagsDto, storeTagsFormSchema } from '@/libs/stores/schemas';
+import { CreateStoreTagsDto } from '@/libs/stores/types';
+import { createStoreTagsSchema } from '@/libs/stores/schemas';
 
 const TAG_SUGGESTIONS = [
   'Clothing',
@@ -41,7 +42,7 @@ export default function CreateStoreTags() {
     setValue,
     formState: { errors },
   } = useForm<CreateStoreTagsDto>({
-    resolver: zodResolver(storeTagsFormSchema),
+    resolver: zodResolver(createStoreTagsSchema),
     defaultValues: {
       tags: [],
     },

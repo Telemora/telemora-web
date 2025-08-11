@@ -10,15 +10,16 @@ import toast from 'react-hot-toast';
 
 import AppLayout from '@/libs/common/components/AppLayout';
 import { PageHeader } from '@/libs/common/components/page-header';
-import { useSubmitStoreWorkingHoursMutation } from '@/libs/stores/hooks';
-import { CreateStoreWorkingHoursDto, storeWorkingHoursFormSchema } from '@/libs/stores/schemas';
+import { useSubmitStoreServiceHoursMutation } from '@/libs/stores/hooks';
+import { SetStoreServiceHoursDto } from '@/libs/stores/types';
+import { setStoreServiceHoursSchema } from '@/libs/stores/schemas';
 
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-export default function CreateStoreWorkingHours() {
+export default function SetStoreServiceHours() {
   const router = useRouter();
   const { storeId } = useParams<{ storeId: string }>();
-  const { mutateAsync, isPending } = useSubmitStoreWorkingHoursMutation(storeId);
+  const { mutateAsync, isPending } = useSubmitStoreServiceHoursMutation(storeId);
 
   const {
     handleSubmit,
@@ -26,35 +27,35 @@ export default function CreateStoreWorkingHours() {
     setValue,
     watch,
     formState: { errors },
-  } = useForm<CreateStoreWorkingHoursDto>({
-    resolver: zodResolver(storeWorkingHoursFormSchema),
+  } = useForm<SetStoreServiceHoursDto>({
+    resolver: zodResolver(setStoreServiceHoursSchema),
     defaultValues: {
-      workingHours: {},
+      serviceHours: [],
     },
   });
 
-  const workingHours = watch('workingHours');
+  const serviceHours = watch('serviceHours');
 
   const enabledDays = useMemo(
     () =>
       new Set(
-        Object.entries(workingHours || {})
+        Object.entries(serviceHours || {})
           .filter(([_, val]) => val.open && val.close)
           .map(([day]) => day),
       ),
-    [workingHours],
+    [serviceHours],
   );
 
   const toggleDay = (day: string) => {
     if (enabledDays.has(day)) {
-      const updated = { ...workingHours };
+      const updated = { ...serviceHours };
       delete updated[day];
-      setValue('workingHours', updated, { shouldValidate: true });
+      setValue('serviceHours', updated, { shouldValidate: true });
     } else {
       setValue(
-        'workingHours',
+        'serviceHours',
         {
-          ...workingHours,
+          ...serviceHours,
           [day]: { open: '09:00', close: '17:00' },
         },
         { shouldValidate: true },
@@ -62,8 +63,8 @@ export default function CreateStoreWorkingHours() {
     }
   };
 
-  const handleNext = async (data: CreateStoreWorkingHoursDto) => {
-    const hasInvalidRange = Object.entries(data.workingHours || {}).some(
+  const handleNext = async (data: SetStoreServiceHoursDto) => {
+    const hasInvalidRange = Object.entries(data.serviceHours || {}).some(
       ([_, { open, close }]) => open >= close,
     );
 
@@ -95,8 +96,8 @@ export default function CreateStoreWorkingHours() {
         <div className="mt-6 space-y-5">
           {DAYS.map((day) => {
             const isEnabled = enabledDays.has(day);
-            const open = workingHours?.[day]?.open ?? '';
-            const close = workingHours?.[day]?.close ?? '';
+            const open = serviceHours?.[day]?.open ?? '';
+            const close = serviceHours?.[day]?.close ?? '';
             const invalid = isEnabled && open && close && open >= close;
 
             return (
@@ -113,7 +114,7 @@ export default function CreateStoreWorkingHours() {
                     <div className="flex gap-4">
                       <Controller
                         control={control}
-                        name={`workingHours.${day}.open`}
+                        name={`serviceHours.${day}.open`}
                         render={({ field }) => (
                           <Input
                             {...field}
@@ -126,7 +127,7 @@ export default function CreateStoreWorkingHours() {
                       />
                       <Controller
                         control={control}
-                        name={`workingHours.${day}.close`}
+                        name={`serviceHours.${day}.close`}
                         render={({ field }) => (
                           <Input
                             {...field}
@@ -156,7 +157,7 @@ export default function CreateStoreWorkingHours() {
           <ul className="space-y-1 text-sm text-default-600">
             {DAYS.map((day) => {
               const isOpen = enabledDays.has(day);
-              const { open, close } = workingHours?.[day] || {};
+              const { open, close } = serviceHours?.[day] || {};
               return (
                 <li key={day} className="flex justify-between">
                   <span>{day}</span>

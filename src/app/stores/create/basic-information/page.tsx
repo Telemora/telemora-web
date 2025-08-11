@@ -10,7 +10,8 @@ import toast from 'react-hot-toast';
 import AppLayout from '@/libs/common/components/AppLayout';
 import { PageHeader } from '@/libs/common/components/page-header';
 import { useSubmitStoreBasicInfoMutation } from '@/libs/stores/hooks';
-import { CreateStoreBasicDto, storeBasicFormSchema } from '@/libs/stores/schemas';
+import { CreateStoreBasicDto } from '@/libs/stores/types';
+import { createStoreBasicSchema } from '@/libs/stores/schemas';
 
 export default function CreateStoreBasicInformation() {
   const {
@@ -18,13 +19,12 @@ export default function CreateStoreBasicInformation() {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<CreateStoreBasicDto>({
-    resolver: zodResolver(storeBasicFormSchema),
+    resolver: zodResolver(createStoreBasicSchema),
     defaultValues: {
-      name: '',
-      description: '',
-      contactNumber: '',
-      email: '',
-      walletAddress: '',
+      displayName: '',
+      storeBio: '',
+      supportPhone: '',
+      supportEmail: '',
     },
   });
   const { mutateAsync, isPending } = useSubmitStoreBasicInfoMutation();
@@ -53,27 +53,27 @@ export default function CreateStoreBasicInformation() {
         />
         <Input
           label="Store Name"
-          {...register('name')}
-          isInvalid={!!errors.name}
-          errorMessage={errors.name?.message}
+          {...register('displayName')}
+          isInvalid={!!errors.displayName}
+          errorMessage={errors.displayName?.message}
         />
         <Textarea
           label="Description"
-          {...register('description')}
-          isInvalid={!!errors.description}
-          errorMessage={errors.description?.message}
+          {...register('storeBio')}
+          isInvalid={!!errors.storeBio}
+          errorMessage={errors.storeBio?.message}
         />
         <Input
           label="Contact Number"
-          {...register('contactNumber')}
-          isInvalid={!!errors.contactNumber}
-          errorMessage={errors.contactNumber?.message}
+          {...register('supportPhone')}
+          isInvalid={!!errors.supportPhone}
+          errorMessage={errors.supportPhone?.message}
         />
         <Input
           label="Email"
-          {...register('email')}
-          isInvalid={!!errors.email}
-          errorMessage={errors.email?.message}
+          {...register('supportEmail')}
+          isInvalid={!!errors.supportEmail}
+          errorMessage={errors.supportEmail?.message}
         />
         <div className="flex justify-between">
           <Button

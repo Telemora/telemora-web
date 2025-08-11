@@ -12,7 +12,8 @@ import toast from 'react-hot-toast';
 import AppLayout from '@/libs/common/components/AppLayout';
 import { PageHeader } from '@/libs/common/components/page-header';
 import { useSubmitStoreLogoMutation } from '@/libs/stores/hooks';
-import { CreateStoreLogoDto, storeLogoFormSchema } from '@/libs/stores/schemas';
+import { CreateStoreLogoDto } from '@/libs/stores/types';
+import { createStoreLogoSchema } from '@/libs/stores/schemas';
 
 export default function CreateStoreLogoUpload() {
   const router = useRouter();
@@ -26,7 +27,7 @@ export default function CreateStoreLogoUpload() {
   const MAX_RES = 1000;
 
   const form = useForm<CreateStoreLogoDto>({
-    resolver: zodResolver(storeLogoFormSchema),
+    resolver: zodResolver(createStoreLogoSchema),
     defaultValues: {
       logoFile: undefined,
     },
