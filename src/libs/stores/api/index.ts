@@ -1,8 +1,11 @@
 import httpClient from '@/libs/common/utils/http-client';
+import { AddressDto } from '@/libs/location/types';
 import { generateMockStoreDetail, generateMockStoreSummaries } from '@/libs/stores/mocks';
 import {
-  CreateStoreBasicDto, CreateStoreLogoDto,
-  CreateStoreTagsDto, SetStoreServiceHoursDto,
+  CreateStoreBasicDto,
+  CreateStoreLogoDto,
+  CreateStoreTagsDto,
+  SetStoreServiceHoursDto,
   StoreDetail,
   StoreSummary,
   UpdateStoreDto,
@@ -32,7 +35,7 @@ export async function submitStoreBasicInfo(data: CreateStoreBasicDto) {
     : httpClient.post<StoreDetail>('/stores/create/basic', data);
 }
 
-export async function submitStoreAddressUpdate(storeId: string, data: CreateAddressDto) {
+export async function submitStoreAddressUpdate(storeId: string, data: AddressDto) {
   return isDev
     ? generateMockStoreDetail()
     : httpClient.patch<StoreDetail>(`/stores/${storeId}/address`, data);

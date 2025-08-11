@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { queryKeys } from '@/libs/common/api/query-keys';
+import { AddressDto } from '@/libs/location/types';
 import {
   fetchDiscoverableStores,
   fetchFeaturedStores,
@@ -61,7 +62,7 @@ export function useSubmitStoreBasicInfoMutation() {
 
 export function useSubmitStoreAddressMutation(storeId: string) {
   return useMutation({
-    mutationFn: (data: CreateAddressDto) => submitStoreAddressUpdate(storeId, data),
+    mutationFn: (data: AddressDto) => submitStoreAddressUpdate(storeId, data),
   });
 }
 
