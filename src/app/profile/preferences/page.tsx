@@ -8,7 +8,8 @@ import AppLayout from '@/libs/common/components/AppLayout';
 import { PageHeader } from '@/libs/common/components/page-header';
 import { useUserState } from '@/libs/users/context/userContext';
 import { useUpdatePreferencesMutation } from '@/libs/users/hooks';
-import { UpdatePreferencesFormData, updatePreferencesSchema } from '@/libs/users/schemas';
+import { updatePreferencesSchema } from '@/libs/users/schemas';
+import { UpdatePreferencesDto } from '@/libs/users/types';
 
 const supportedLanguages = [
   { key: 'en', label: 'English' },
@@ -33,11 +34,11 @@ export default function PreferencesPage() {
     register,
     handleSubmit,
     formState: { isSubmitting },
-  } = useForm<UpdatePreferencesFormData>({
+  } = useForm<UpdatePreferencesDto>({
     resolver: zodResolver(updatePreferencesSchema),
   });
 
-  const onSubmit = (data: UpdatePreferencesFormData) => {
+  const onSubmit = (data: UpdatePreferencesDto) => {
     mutate({ data });
   };
 

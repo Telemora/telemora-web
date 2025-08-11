@@ -97,9 +97,9 @@ export default function OrderDetailsPage() {
             <span>Total Amount: </span>
             <PriceComponent amount={order.totalAmount} />
           </div>
-          <p>Delivery Date: {formatSafeDate(order.deliveryDate)}</p>
+          <p>Delivery Date: {formatSafeDate(order.expectedDeliveryDate)}</p>
           <p className="text-sm">
-            Estimated Delivery {formatSafeDate(order.shipment?.deliveryEstimate ?? '-')}
+            Estimated Delivery {formatSafeDate(order.shipment?.expectedDeliveryDate ?? '-')}
           </p>
         </div>
       </div>
