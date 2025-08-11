@@ -1,4 +1,5 @@
 import { z } from 'zod';
+
 import {
   type CreateProductAttributeValueInputDto,
   type CreateProductDto,
@@ -36,9 +37,7 @@ export const createProductDtoSchema = z.object({
   quantityAvailable: z.number().int().nonnegative().optional(),
 }) satisfies z.ZodType<CreateProductDto>;
 
-export const updateProductDtoSchema = createProductDtoSchema
-  .partial()
-  .extend({
-    id: z.number().int().optional(),
-    quantityAvailable: z.number().int().nonnegative().optional(),
-  }) satisfies z.ZodType<UpdateProductDto>;
+export const updateProductDtoSchema = createProductDtoSchema.partial().extend({
+  id: z.number().int().optional(),
+  quantityAvailable: z.number().int().nonnegative().optional(),
+}) satisfies z.ZodType<UpdateProductDto>;

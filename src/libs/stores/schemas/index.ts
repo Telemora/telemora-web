@@ -1,4 +1,5 @@
 import { z } from 'zod';
+
 import {
   type CreateStoreBasicDto,
   type CreateStoreLogoDto,
@@ -17,7 +18,6 @@ export const serviceHoursDtoSchema = z.object({
   close: z.string(),
   interval: z.number().int().positive(),
 }) satisfies z.ZodType<ServiceHoursDto>;
-
 
 export const createStoreBasicSchema = z.object({
   displayName: z.string().min(1),
