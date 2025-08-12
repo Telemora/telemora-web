@@ -5,11 +5,11 @@ interface Props {
   register: UseFormRegister<FieldValues>;
 }
 
-export function CanonicalLocationForm({ register }: Props) {
+export function GeoPointForm({ register }: Props) {
   return (
     <div>
-      <Input {...register('name')} label="Name" />
-      <Input {...register('type')} readOnly />
+      <Input {...register('latitude')}></Input>
+      <Input {...register('longitude')}></Input>
     </div>
   );
 }
