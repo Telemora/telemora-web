@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createAddressSchema } from '@/libs/location/schemas';
 import { Form, Input, Select, SelectItem, Switch } from '@heroui/react';
-import { AddressType } from '@/libs/location/types';
+import { AddressType, CanonicalLocationType } from '@/libs/location/types';
 import { CanonicalLocationForm } from '@/libs/location/components/CanonicalLocationForm';
 import { GeoPointForm } from '@/libs/location/components/GeoPointForm';
 
@@ -14,7 +14,9 @@ export function AddressForm() {
   return (
     <Form>
       <Input {...register('label')} label="Label" />
-      <CanonicalLocationForm register={register} />
+      <CanonicalLocationForm reg={register} type={CanonicalLocationType.COUNTRY} />
+      <CanonicalLocationForm reg={register} type={CanonicalLocationType.STATE} />
+      <CanonicalLocationForm reg={register} type={CanonicalLocationType.CITY} />
       <Input {...register('streetLine1')} label="Street Line 1" />
       <Input {...register('streetLine2')} label="Street Line 2" />
       <Input {...register('postalCode')} label="Postal Code" />

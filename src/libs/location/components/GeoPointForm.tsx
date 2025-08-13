@@ -1,15 +1,16 @@
 import { Input } from '@heroui/react';
-import { FieldValues, UseFormRegister } from 'react-hook-form';
+import { UseFormRegister } from 'react-hook-form';
+import { AddressDto } from '@/libs/location/types';
 
 interface Props {
-  register: UseFormRegister<FieldValues>;
+  register: UseFormRegister<AddressDto>;
 }
 
 export function GeoPointForm({ register }: Props) {
   return (
     <div>
-      <Input {...register('latitude')}></Input>
-      <Input {...register('longitude')}></Input>
+      <Input {...register('geoPoint.latitude')}></Input>
+      <Input {...register('geoPoint.longitude')}></Input>
     </div>
   );
 }
