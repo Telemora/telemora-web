@@ -113,7 +113,7 @@ export interface CreateProductDto {
   description?: string;
   productType: ProductType;
   attributes?: CreateProductAttributeValueInputDto[];
-  variants?: ProductVariantDto[];
+  variants?: CreateProductVariantInputDto[];
   visibility?: ProductVisibility;
   quantityAvailable?: number;
 }
