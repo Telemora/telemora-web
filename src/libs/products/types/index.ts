@@ -65,7 +65,7 @@ export interface ProductPreviewDto {
   id: number | string;
   name: string;
   slug?: string;
-  primaryImage: MediaDto;
+  primaryImage: ProductImageDto;
   price: number;
   currency: string;
   storeId: number | string;

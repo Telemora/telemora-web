@@ -5,17 +5,16 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { hapticFeedback } from '@telegram-apps/sdk';
 import { useParams, useRouter } from 'next/navigation';
 import React from 'react';
-import { useFieldArray, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
 import AppLayout from '@/libs/common/components/AppLayout';
 import { PageHeader } from '@/libs/common/components/page-header';
-import { ProductAttributeFields } from '@/libs/products/components/product-attributes-field';
 import { ProductPhotosUploader } from '@/libs/products/components/product-photos-uploader';
 import { ProductTypeSelector } from '@/libs/products/components/product-type-selector';
-import { ProductVariantFields } from '@/libs/products/components/product-variants-field';
 import { useProductDetails, useUpdateProductMutation } from '@/libs/products/hooks';
-import { UpdateProductFormData, updateProductSchema } from '@/libs/products/schemas';
+import { ProductVisibility, UpdateProductDto } from '@/libs/products/types';
+import { updateProductDtoSchema } from '@/libs/products/schemas';
 
 export default function EditProductPage() {
   const { storeId, productId } = useParams<{ storeId: string; productId: string }>();
@@ -27,46 +26,32 @@ export default function EditProductPage() {
     register,
     handleSubmit,
     control,
-    watch,
     formState: { errors, isSubmitting },
-  } = useForm<UpdateProductFormData>({
-    resolver: zodResolver(updateProductSchema),
+  } = useForm<UpdateProductDto>({
+    resolver: zodResolver(updateProductDtoSchema),
     defaultValues: {
+      id: +productId,
       name: product?.name,
-      price: product?.price,
+      basePrice: product?.price,
       description: product?.description,
-      imageUrls: product?.primaryImage.map((m) => m.url),
       productType: product?.productType,
-      downloadLink: product?.downloadLink,
-      stock: product?.stock,
       attributes: product?.attributes,
       variants: product?.variants,
+      currency: 'TON',
+      visibility: ProductVisibility.DRAFT,
+      quantityAvailable: 1,
     },
   });
-
-  const productType = watch('productType');
-
-  const {
-    fields: attributeFields,
-    append: appendAttribute,
-    remove: removeAttribute,
-  } = useFieldArray({ control, name: 'attributes' });
-
-  const {
-    fields: variantFields,
-    append: appendVariant,
-    remove: removeVariant,
-  } = useFieldArray({ control, name: 'variants' });
 
   const { mutateAsync } = useUpdateProductMutation(storeIdNum, productIdNum);
   const router = useRouter();
 
-  const onSubmit = async (data: UpdateProductFormData) => {
+  const onSubmit = async (data: UpdateProductDto) => {
     try {
       const result = await mutateAsync(data);
       toast.success('Product updated successfully!');
       hapticFeedback.impactOccurred('light');
-      router.push(`/stores/${result.store.id}`);
+      router.push(`/stores/${result.store.id}/${result.id}`);
     } catch (error) {
       console.error(error);
       toast.error('Failed to create components');
@@ -90,9 +75,9 @@ export default function EditProductPage() {
         <Input
           label="Price (TON)"
           type="number"
-          {...register('price', { valueAsNumber: true })}
-          isInvalid={!!errors.price}
-          errorMessage={errors.price?.message}
+          {...register('basePrice', { valueAsNumber: true })}
+          isInvalid={!!errors.basePrice}
+          errorMessage={errors.basePrice?.message}
         />
 
         <Textarea
@@ -102,39 +87,6 @@ export default function EditProductPage() {
         />
 
         <ProductTypeSelector name="productType" control={control} errors={errors} />
-
-        {productType === 'physical' && (
-          <Input
-            label="Stock Quantity"
-            type="number"
-            {...register('stock', { valueAsNumber: true })}
-          />
-        )}
-
-        {productType === 'digital' && (
-          <Input
-            label="Download Link"
-            {...register('downloadLink')}
-            isInvalid={!!errors.downloadLink}
-            errorMessage={errors.downloadLink?.message}
-          />
-        )}
-
-        <ProductAttributeFields
-          fields={attributeFields}
-          register={register}
-          append={appendAttribute}
-          remove={removeAttribute}
-          name="attributes"
-        />
-
-        <ProductVariantFields
-          fields={variantFields}
-          register={register}
-          append={appendVariant}
-          remove={removeVariant}
-          name="variants"
-        />
 
         <Button
           type="submit"

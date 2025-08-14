@@ -2,19 +2,21 @@ import { faker } from '@faker-js/faker';
 
 import { generateMockReviewPreviews } from '@/libs/reviews/mocks';
 import { generateMockStorePreview } from '@/libs/stores/mocks';
-
 import {
-  ProductAttribute,
-  ProductCategoryNode,
+  ProductAttributeValueDto,
   ProductDetail,
   ProductPreviewDto,
   ProductSummary,
   ProductType,
-  ProductVariant,
-} from '../types';
+  ProductVariantDto,
+} from '@/libs/products/types';
 
 export async function generateMockProductPreview(): Promise<ProductPreviewDto> {
   return {
+    averageRating: 0,
+    currency: '',
+    numberOfReviews: 0,
+    storeName: '',
     id: faker.number.int(),
     name: faker.commerce.productName(),
     slug: faker.helpers.slugify(faker.commerce.productName()),
@@ -25,7 +27,7 @@ export async function generateMockProductPreview(): Promise<ProductPreviewDto> {
       width: 600,
       height: 400,
     })),
-    storeId: faker.number.int({ min: 10, max: 300 }),
+    storeId: faker.number.int({ min: 10,, max: 300 }),
   };
 }
 
@@ -50,17 +52,17 @@ export async function generateMockProductDetail(): Promise<ProductDetail> {
     description: faker.commerce.productDescription(),
     attributes: Array.from(
       { length: 3 },
-      (_, i): ProductAttribute => ({
+      (_, i): ProductAttributeValueDto => ({
         id: i + 1,
-        attributeName: faker.commerce.productAdjective(),
-        attributeValue: faker.commerce.productMaterial(),
+        name: faker.commerce.productAdjective(),
+        value: faker.commerce.productMaterial(),
       }),
     ),
     variants: Array.from(
       { length: 2 },
-      (_, i): ProductVariant => ({
+      (_, i): ProductVariantDto => ({
         id: i + 1,
-        variantName: faker.color.human(),
+        name: faker.color.human(),
         variantValue: faker.commerce.product(),
         additionalPrice: Number(faker.commerce.price({ min: 1, max: 20 })),
       }),

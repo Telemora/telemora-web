@@ -9,7 +9,7 @@ import {
   updateProduct,
   uploadProductPhotos,
 } from '@/libs/products/api';
-import { CreateProductFormData, UpdateProductFormData } from '@/libs/products/schemas';
+import { CreateProductDto, UpdateProductDto } from '@/libs/products/types';
 
 export function useStoreProducts(storeId: number) {
   return useQuery({
@@ -42,7 +42,7 @@ export function useCreateProductMutation(storeId: number) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: CreateProductFormData) => createProduct(storeId, data),
+    mutationFn: (data: CreateProductDto) => createProduct(storeId, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.products.byStore(storeId) });
     },
@@ -53,7 +53,7 @@ export function useUpdateProductMutation(storeId: number, productId: number) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: UpdateProductFormData) => updateProduct(storeId, productId, data),
+    mutationFn: (data: UpdateProductDto) => updateProduct(storeId, productId, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.products.detail(storeId, productId) });
       queryClient.invalidateQueries({ queryKey: queryKeys.products.byStore(storeId) });
