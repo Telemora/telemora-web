@@ -13,7 +13,7 @@ import { PageHeader } from '@/libs/common/components/page-header';
 import { ProductPhotosUploader } from '@/libs/products/components/product-photos-uploader';
 import { ProductTypeSelector } from '@/libs/products/components/product-type-selector';
 import { useProductDetails, useUpdateProductMutation } from '@/libs/products/hooks';
-import { ProductVisibility, UpdateProductDto } from '@/libs/products/types';
+import { UpdateProductDto } from '@/libs/products/types';
 import { updateProductDtoSchema } from '@/libs/products/schemas';
 
 export default function EditProductPage() {
@@ -29,18 +29,6 @@ export default function EditProductPage() {
     formState: { errors, isSubmitting },
   } = useForm<UpdateProductDto>({
     resolver: zodResolver(updateProductDtoSchema),
-    defaultValues: {
-      id: +productId,
-      name: product?.name,
-      basePrice: product?.price,
-      description: product?.description,
-      productType: product?.productType,
-      attributes: product?.attributes,
-      variants: product?.variants,
-      currency: 'TON',
-      visibility: ProductVisibility.DRAFT,
-      quantityAvailable: 1,
-    },
   });
 
   const { mutateAsync } = useUpdateProductMutation(storeIdNum, productIdNum);

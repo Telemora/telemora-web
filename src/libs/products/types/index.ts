@@ -74,14 +74,14 @@ export interface ProductPreviewDto {
   numberOfReviews?: number;
 }
 
-export interface ProductSummary extends ProductPreviewDto {
+export interface ProductSummaryDto extends ProductPreviewDto {
   productType: ProductType;
   store: StorePreviewDto;
 }
 
-export interface ProductDetail extends ProductSummary {
+export interface ProductDetailDto extends ProductSummaryDto {
   description?: string;
-  images: MediaDto[];
+  images: ProductImageDto[];
   attributes?: ProductAttributeValueDto[];
   variants?: ProductVariantDto[];
   reviews?: ReviewPreviewDto[];

@@ -7,7 +7,7 @@ import {
 } from '@/libs/products/mocks';
 import {
   CreateProductDto,
-  ProductDetail,
+  ProductDetailDto,
   ProductPreviewDto,
   UpdateProductDto,
 } from '@/libs/products/types';
@@ -21,7 +21,7 @@ export async function getStoreProducts(storeId: number) {
 export async function getProductDetails(storeId: number, productId: number) {
   return isDev
     ? generateMockProductDetail()
-    : httpClient.get<ProductDetail>(`/products/store/${storeId}/${productId}`);
+    : httpClient.get<ProductDetailDto>(`/products/store/${storeId}/${productId}`);
 }
 
 export async function uploadProductPhotos(data: File[]) {
@@ -38,13 +38,13 @@ export async function uploadProductPhotos(data: File[]) {
 export async function createProduct(storeId: number, data: CreateProductDto) {
   return isDev
     ? generateMockProductDetail()
-    : httpClient.post<ProductDetail>(`/products/store/${storeId}/create`, data);
+    : httpClient.post<ProductDetailDto>(`/products/store/${storeId}/create`, data);
 }
 
 export async function updateProduct(storeId: number, productId: number, data: UpdateProductDto) {
   return isDev
     ? generateMockProductDetail()
-    : httpClient.patch<ProductDetail>(`/products/store/${storeId}/${productId}/update`, data);
+    : httpClient.patch<ProductDetailDto>(`/products/store/${storeId}/${productId}/update`, data);
 }
 
 export async function deleteProduct(storeId: number, productId: number) {

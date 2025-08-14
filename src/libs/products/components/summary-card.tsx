@@ -6,10 +6,10 @@ import Link from 'next/link';
 import { FaStore } from 'react-icons/fa6';
 
 import PriceComponent from '@/libs/common/components/PriceComponent';
-import { ProductSummary, ProductType } from '@/libs/products/types';
+import { ProductSummaryDto, ProductType } from '@/libs/products/types';
 
 interface ProductSummaryCardProps {
-  product: ProductSummary;
+  product: ProductSummaryDto;
   className?: string;
 }
 
