@@ -41,9 +41,9 @@ export default function ProductDetailsPage() {
   return (
     <AppLayout>
       <main className="space-y-6 px-2 py-4">
-        {product.primaryImage?.length ? (
+        {product.images?.length ? (
           <ScrollShadow orientation="horizontal" className="flex gap-x-4 overflow-x-auto pb-2">
-            {product.primaryImage.map((img, index) => (
+            {product.images.map((img, index) => (
               <Image
                 placeholder="blur"
                 key={index}
@@ -85,7 +85,9 @@ export default function ProductDetailsPage() {
 
         {product.description && <PageHeader title={'Description'} subtitle={product.description} />}
 
-        {product.stock !== undefined && <p className=" ">In Stock: {product.stock}</p>}
+        {product.totalQuantityAvailable !== undefined && (
+          <p className=" ">In Stock: {product.totalQuantityAvailable}</p>
+        )}
 
         {Array.isArray(product.attributes) && product.attributes.length > 0 && (
           <div>
@@ -93,7 +95,7 @@ export default function ProductDetailsPage() {
             <ul className="list-inside list-disc text-sm text-neutral-400">
               {product.attributes.map((attr, i) => (
                 <li key={i}>
-                  {attr.attributeName}: {attr.attributeValue}
+                  {attr.name}: {attr.value}
                 </li>
               ))}
             </ul>
@@ -105,10 +107,7 @@ export default function ProductDetailsPage() {
             <h3 className="mb-2 font-semibold">Variants</h3>
             <ul className="list-inside list-disc text-sm text-neutral-400">
               {product.variants.map((variant, i) => (
-                <li key={i}>
-                  {variant.variantName}: {variant.variantValue}
-                  {variant.additionalPrice && ` (+${variant.additionalPrice})`}
-                </li>
+                <li key={i}>{variant.priceOverride && ` (${variant.priceOverride})`}</li>
               ))}
             </ul>
           </div>
