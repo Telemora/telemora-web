@@ -105,9 +105,9 @@ export function AddressForm({ isPending, onSubmit }: Props) {
           </Button>
         )}
       </div>
-      <CanonicalLocationForm reg={register} type={CanonicalLocationType.COUNTRY} />
-      <CanonicalLocationForm reg={register} type={CanonicalLocationType.STATE} />
-      <CanonicalLocationForm reg={register} type={CanonicalLocationType.CITY} />
+      <CanonicalLocationForm reg={register} data={countries} type={CanonicalLocationType.COUNTRY} />
+      <CanonicalLocationForm reg={register} data={states} type={CanonicalLocationType.STATE} />
+      <CanonicalLocationForm reg={register} data={cities} type={CanonicalLocationType.CITY} />
       <Input {...register('streetLine1')} label="Street Line 1" />
       <Input {...register('streetLine2')} label="Street Line 2" />
       <Input {...register('postalCode')} label="Postal Code" />

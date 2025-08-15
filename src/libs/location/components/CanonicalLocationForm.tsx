@@ -1,17 +1,19 @@
-import { Input } from '@heroui/react';
+import { Select, SelectItem } from '@heroui/react';
 import { UseFormRegister } from 'react-hook-form';
-import { AddressDto, CanonicalLocationType } from '@/libs/location/types';
+import { AddressDto, CanonicalLocationDto, CanonicalLocationType } from '@/libs/location/types';
 
 interface Props {
   reg: UseFormRegister<AddressDto>;
+  data: CanonicalLocationDto[];
   type: CanonicalLocationType;
 }
 
-export function CanonicalLocationForm({ reg, type }: Props) {
+export function CanonicalLocationForm({ reg, data, type }: Props) {
   return (
-    <div>
-      <Input {...reg(`${type}.name`)} label="Name" />
-      <Input {...reg('type')} readOnly />
-    </div>
+    <Select {...reg(`${type}.id`)}>
+      {data.map((item) => (
+        <SelectItem key={item.id}>{item.name}</SelectItem>
+      ))}
+    </Select>
   );
 }
