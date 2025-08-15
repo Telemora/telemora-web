@@ -48,7 +48,7 @@ export default function CreateStoreTags() {
     },
   });
 
-  const selectedTags = watch('tags');
+  const selectedTags = watch('tags') || [];
   const [input, setInput] = useState('');
   const { mutateAsync, isPending } = useSubmitStoreTagsMutation(storeId);
 
