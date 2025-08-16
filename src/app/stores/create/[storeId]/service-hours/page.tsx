@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
+import { Time } from '@internationalized/date';
 import {
   Button,
   Input,
@@ -12,13 +13,14 @@ import {
   ModalHeader,
   Select,
   SelectItem,
+  TimeInput,
   useDisclosure,
 } from '@heroui/react';
 import { useSubmitStoreServiceHoursMutation } from '@/libs/stores/hooks';
 import { ServiceHoursDto, SetStoreServiceHoursDto, Weekday } from '@/libs/stores/types';
 import { serviceHoursDtoSchema, setStoreServiceHoursSchema } from '@/libs/stores/schemas';
-import { hapticFeedback } from '@telegram-apps/sdk-react';
 import toast from 'react-hot-toast';
+import { hapticFeedback } from '@telegram-apps/sdk-react';
 
 export function ServiceHoursForm() {
   const router = useRouter();
@@ -40,6 +42,17 @@ export function ServiceHoursForm() {
     key: day,
     label: day.charAt(0).toUpperCase() + day.slice(1).toLowerCase(),
   }));
+
+  // Convert string time (e.g., "09:00") to Time object
+  const parseTimeString = (timeStr: string): Time => {
+    const [hours, minutes] = timeStr.split(':').map(Number);
+    return new Time(hours, minutes);
+  };
+
+  // Convert Time object to string (e.g., "09:00")
+  const formatTimeString = (time: Time): string => {
+    return `${time.hour.toString().padStart(2, '0')}:${time.minute.toString().padStart(2, '0')}`;
+  };
 
   const handleAddOrUpdate = () => {
     try {
@@ -89,14 +102,14 @@ export function ServiceHoursForm() {
 
   const handleSubmit = async () => {
     try {
-      const data: SetStoreServiceHoursDto = { serviceHours };
-      setStoreServiceHoursSchema.parse(data);
-      await mutateAsync(data);
+      const payload: SetStoreServiceHoursDto = { serviceHours };
+      setStoreServiceHoursSchema.parse(payload);
+      await mutateAsync(payload);
       toast.success('Working hours saved');
       hapticFeedback.impactOccurred('light');
       router.push(`/stores/create/${storeId}/logo-upload`);
-    } catch {
-      toast.error('Failed to save service hours. Please try again.');
+    } catch (err) {
+      setError('Failed to save service hours. Please try again.');
     }
   };
 
@@ -184,21 +197,25 @@ export function ServiceHoursForm() {
                       <SelectItem key={option.key}>{option.label}</SelectItem>
                     ))}
                   </Select>
-                  <Input
+                  <TimeInput
                     label="Open Time"
-                    type="time"
-                    value={newHour.open}
-                    onChange={(e) =>
-                      setNewHour({ ...newHour, open: e.target.value })
-                    }
+                    value={parseTimeString(newHour.open)}
+                    onChange={(time) => {
+                      if (!time) return;
+                      setNewHour({ ...newHour, open: formatTimeString(time) });
+                    }}
+                    hourCycle={24}
+                    granularity="minute"
                   />
-                  <Input
+                  <TimeInput
                     label="Close Time"
-                    type="time"
-                    value={newHour.close}
-                    onChange={(e) =>
-                      setNewHour({ ...newHour, close: e.target.value })
-                    }
+                    value={parseTimeString(newHour.close)}
+                    onChange={(time) => {
+                      if (!time) return;
+                      setNewHour({ ...newHour, close: formatTimeString(time) });
+                    }}
+                    hourCycle={24}
+                    granularity="minute"
                   />
                   <Input
                     label="Interval (minutes)"
