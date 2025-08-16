@@ -42,10 +42,6 @@ export async function generateMockStoreDetail(): Promise<StoreDetail> {
       instagram: faker.internet.url(),
       twitter: faker.internet.url(),
     },
-    serviceHours: {
-      mon: { open: '09:00', close: '17:00' },
-      tue: { open: '09:00', close: '17:00' },
-    },
     createdAt: faker.date.past(),
   };
 }

@@ -24,11 +24,9 @@ export async function generateMockReviewPreview(productId: number): Promise<Revi
 export async function generateMockReviewDetail(): Promise<ReviewDetail> {
   return {
     ...(await generateMockReviewPreview(1)),
-    images: [],
     isFlagged: false,
     replies: [await generateMockReviewReplyPreview()],
     reports: [await generateMockReviewReportPreview()],
-    videos: [],
   };
 }
 

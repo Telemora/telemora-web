@@ -7,7 +7,8 @@ import toast from 'react-hot-toast';
 
 import { PageHeader } from '@/libs/common/components/page-header';
 import { useUpdateLanguageMutation } from '@/libs/users/hooks';
-import { UpdateLanguageFormData, updateLanguageSchema } from '@/libs/users/schemas';
+import { UpdateLanguageDto } from '@/libs/users/types';
+import { updateLanguageSchema } from '@/libs/users/schemas';
 
 const availableLanguages = [
   { value: 'en', label: 'English' },
@@ -33,14 +34,14 @@ export default function LanguageSelector({
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<UpdateLanguageFormData>({
+  } = useForm<UpdateLanguageDto>({
     resolver: zodResolver(updateLanguageSchema),
     defaultValues: {
       preferredLanguage: defaultLanguage,
     },
   });
 
-  const onSubmit = async (formData: UpdateLanguageFormData) => {
+  const onSubmit = async (formData: UpdateLanguageDto) => {
     try {
       await mutateAsync({ data: formData });
       toast.success('Language updated successfully');

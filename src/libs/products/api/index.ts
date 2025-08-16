@@ -8,6 +8,7 @@ import {
 import {
   CreateProductDto,
   ProductDetailDto,
+  ProductImageDto,
   ProductPreviewDto,
   UpdateProductDto,
 } from '@/libs/products/types';
@@ -32,7 +33,7 @@ export async function uploadProductPhotos(data: File[]) {
 
   return isDev
     ? generateMockProductPhotos()
-    : httpClient.post<{ imageUrls: string[] }>(`/products/photo`);
+    : httpClient.post<ProductImageDto[]>(`/products/photo`);
 }
 
 export async function createProduct(storeId: number, data: CreateProductDto) {

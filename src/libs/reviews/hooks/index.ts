@@ -10,11 +10,12 @@ import {
   reportReview,
 } from '@/libs/reviews/api';
 import {
-  CreateReviewFormData,
-  CreateReviewReplyFormData,
-  CreateReviewReportFormData,
-} from '@/libs/reviews/schemas';
-import { ReviewDetail, ReviewPreviewDto } from '@/libs/reviews/types';
+  CreateReviewDto,
+  CreateReviewReplyDto,
+  CreateReviewReportDto,
+  ReviewDetail,
+  ReviewPreviewDto,
+} from '@/libs/reviews/types';
 
 export function useProductReviews(productId: number) {
   return useQuery<ReviewPreviewDto[]>({
@@ -33,7 +34,7 @@ export function useReviewDetail(id: string | number) {
 export function useCreateReviewMutation(productId: number) {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (data: CreateReviewFormData) => createReview(productId, data),
+    mutationFn: (data: CreateReviewDto) => createReview(productId, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.reviews.byProduct(productId) });
     },
@@ -42,13 +43,13 @@ export function useCreateReviewMutation(productId: number) {
 
 export function useReplyToReviewMutation(reviewId: number) {
   return useMutation({
-    mutationFn: (data: CreateReviewReplyFormData) => replyToReview(reviewId, data),
+    mutationFn: (data: CreateReviewReplyDto) => replyToReview(reviewId, data),
   });
 }
 
 export function useReportReviewMutation(reviewId: number) {
   return useMutation({
-    mutationFn: (data: CreateReviewReportFormData) => reportReview(reviewId, data),
+    mutationFn: (data: CreateReviewReportDto) => reportReview(reviewId, data),
   });
 }
 

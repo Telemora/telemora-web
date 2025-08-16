@@ -15,6 +15,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useUploadProductPhotosMutation } from '@/libs/products/hooks';
 import { useForm } from 'react-hook-form';
+import { ProductImageDto } from '@/libs/products/types';
 
 const DEFAULT_ACCEPT = [
   'image/jpeg',
@@ -28,7 +29,7 @@ const MAX_FILES = 4;
 export function ProductPhotosUploader() {
   const imageInputRef = useRef<HTMLInputElement | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
-  const [uploadedImageUrls, setUploadedImageUrls] = useState<string[]>([]);
+  const [uploadedImageUrls, setUploadedImageUrls] = useState<ProductImageDto[]>([]);
   const [selectedImages, setSelectedImages] = useState<File[]>([]);
   const [previews, setPreviews] = useState<string[]>([]);
 
@@ -79,8 +80,8 @@ export function ProductPhotosUploader() {
 
     try {
       const result = await uploadImages(selectedImages);
-      setUploadedImageUrls(result.imageUrls);
-      setValue('imageUrls', result.imageUrls);
+      setUploadedImageUrls(result);
+      setValue('imageUrls', result);
       toast.success('Images uploaded!');
     } catch (err) {
       toast.error('Image upload failed');
@@ -115,7 +116,7 @@ export function ProductPhotosUploader() {
           {uploadedImageUrls.map((src, i) => (
             <Image
               key={`preview-${i}`}
-              src={src}
+              src={src.url}
               alt={`Preview ${i + 1}`}
               width={100}
               height={100}
@@ -160,7 +161,7 @@ export function ProductPhotosUploader() {
             <Button
               variant="light"
               onPress={() => {
-                selectedImages.forEach((_, i) => URL.revokeObjectURL(uploadedImageUrls[i]));
+                selectedImages.forEach((_, i) => URL.revokeObjectURL(uploadedImageUrls[i].url));
                 setSelectedImages([]);
                 setUploadedImageUrls([]);
                 setModalOpen(false);

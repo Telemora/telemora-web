@@ -16,7 +16,6 @@ export async function generateMockUserPublicPreview(): Promise<UserPublicPreview
   return {
     userId: faker.number.int(),
     username: faker.internet.username(),
-    handle: faker.helpers.slugify(faker.internet.username()),
     photo: {
       url: faker.image.personPortrait(),
     },
@@ -29,7 +28,6 @@ export async function generateMockUserSummary(): Promise<UserSummary> {
     firstName: faker.person.firstName(),
     lastName: faker.person.lastName(),
     role: faker.helpers.arrayElement(Object.values(UserRole)),
-    addresses: await Promise.all(Array.from({ length: 5 }, generateMockAddress)),
   };
 }
 
@@ -48,6 +46,7 @@ export async function generateMockUserPrivateProfile(): Promise<UserPrivateProfi
     contactPhone: faker.phone.number(),
     contactEmail: faker.internet.email(),
     cryptoWalletAddress: faker.finance.ethereumAddress(),
+    addresses: [generateMockAddress()],
     stores: await generateMockStorePreviews(),
     orders: await Promise.all(Array.from({ length: 5 }, generateMockOrderSummary)),
     currencyInfo: await generateMockCurrencyInfo(),

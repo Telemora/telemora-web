@@ -8,11 +8,11 @@ import {
   updateUserPreferences,
 } from '@/libs/users/api';
 import {
-  UpdateContactLocationFormData,
-  UpdateLanguageFormData,
-  UpdatePreferencesFormData,
-  UpdateProfileFormData,
-} from '@/libs/users/schemas';
+  UpdateContactLocationDto,
+  UpdateLanguageDto,
+  UpdatePreferencesDto,
+  UpdateProfileDto,
+} from '@/libs/users/types';
 
 export function useTelegramLoginQuery() {
   return useQuery({
@@ -25,24 +25,24 @@ export function useTelegramLoginQuery() {
 
 export function useUpdateProfileMutation() {
   return useMutation({
-    mutationFn: ({ data }: { data: UpdateProfileFormData }) => updateProfile(data),
+    mutationFn: ({ data }: { data: UpdateProfileDto }) => updateProfile(data),
   });
 }
 
 export function useUpdateLanguageMutation() {
   return useMutation({
-    mutationFn: ({ data }: { data: UpdateLanguageFormData }) => updateLanguage(data),
+    mutationFn: ({ data }: { data: UpdateLanguageDto }) => updateLanguage(data),
   });
 }
 
 export function useUpdateContactLocationMutation() {
   return useMutation({
-    mutationFn: ({ data }: { data: UpdateContactLocationFormData }) => updateContactLocation(data),
+    mutationFn: ({ data }: { data: UpdateContactLocationDto }) => updateContactLocation(data),
   });
 }
 
 export function useUpdatePreferencesMutation() {
   return useMutation({
-    mutationFn: ({ data }: { data: UpdatePreferencesFormData }) => updateUserPreferences(data),
+    mutationFn: ({ data }: { data: UpdatePreferencesDto }) => updateUserPreferences(data),
   });
 }
