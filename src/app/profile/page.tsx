@@ -7,9 +7,20 @@ import SummaryOrdersSection from '@/libs/orders/components/summary-orders-sectio
 import PreviewStoresSection from '@/libs/stores/components/preview-stores-section';
 import ProfileCard from '@/libs/users/components/profile-card';
 import { useUserState } from '@/libs/users/context/userContext';
+import { Spinner } from '@heroui/react';
 
 export default function ProfilePage() {
   const { data, isLoading } = useUserState();
+
+  if (isLoading || !data) {
+    return (
+      <AppLayout>
+        <div className="flex min-h-screen items-center justify-center">
+          <Spinner size="lg" />
+        </div>
+      </AppLayout>
+    );
+  }
 
   return (
     <AppLayout>

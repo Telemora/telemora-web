@@ -10,13 +10,13 @@ interface UserContext {
   isLoading: boolean;
 }
 
-const UserContext = createContext<UserContext | undefined>(undefined);
+const UserContext = createContext<UserContext | null>(null);
 
 export function UserProvider({ children }: PropsWithChildren) {
   const { data, isLoading, error } = useTelegramLoginQuery();
 
   if (error || !data) {
-    return;
+    return null;
   }
 
   return <UserContext.Provider value={{ data, isLoading }}>{children}</UserContext.Provider>;

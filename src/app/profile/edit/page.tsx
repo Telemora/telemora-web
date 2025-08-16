@@ -1,14 +1,25 @@
 'use client';
 
-import { Form, Input } from '@heroui/react';
+import { Form, Input, Spinner } from '@heroui/react';
 import { FaPen } from 'react-icons/fa';
 
 import AppLayout from '@/libs/common/components/AppLayout';
 import { PageHeader } from '@/libs/common/components/page-header';
 import { useUserState } from '@/libs/users/context/userContext';
+import React from 'react';
 
 export default function EditProfilePage() {
   const { data, isLoading } = useUserState();
+
+  if (isLoading || !data) {
+    return (
+      <AppLayout>
+        <div className="flex min-h-screen items-center justify-center">
+          <Spinner size="lg" />
+        </div>
+      </AppLayout>
+    );
+  }
 
   return (
     <AppLayout>

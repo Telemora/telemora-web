@@ -6,6 +6,7 @@ import { PropsWithChildren } from 'react';
 import { QueryContext } from '@/libs/common/context/queryContext';
 import { UserProvider } from '@/libs/users/context/userContext';
 import TonConnectClientProvider from '@/providers/TonConnectClientProvider';
+import { HeroUIProvider } from '@heroui/react';
 
 const InitTelegram = dynamic(() => import('@/libs/common/components/init-telegram'), {
   ssr: false,
@@ -14,13 +15,15 @@ const InitTelegram = dynamic(() => import('@/libs/common/components/init-telegra
 export function AppProvider({ children }: PropsWithChildren) {
   return (
     <>
-      <InitTelegram>
-        <TonConnectClientProvider>
-          <QueryContext>
-            <UserProvider>{children}</UserProvider>
-          </QueryContext>
-        </TonConnectClientProvider>
-      </InitTelegram>
+      <HeroUIProvider>
+        <InitTelegram>
+          <TonConnectClientProvider>
+            <QueryContext>
+              <UserProvider>{children}</UserProvider>
+            </QueryContext>
+          </TonConnectClientProvider>
+        </InitTelegram>
+      </HeroUIProvider>
     </>
   );
 }

@@ -17,17 +17,17 @@ export default function OrdersPage() {
 
   const goToMarket = () => router.push('/market');
 
-  if (isLoading) {
+  if (isLoading || !orders) {
     return (
       <AppLayout>
-        <div className="flex h-screen items-center justify-center">
+        <div className="flex min-h-screen items-center justify-center">
           <Spinner size="lg" />
         </div>
       </AppLayout>
     );
   }
 
-  if (error || !orders) return <ErrorPage />;
+  if (error) return <ErrorPage />;
 
   return (
     <AppLayout>

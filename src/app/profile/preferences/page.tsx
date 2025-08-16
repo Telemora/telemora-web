@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Form, Select, SelectItem } from '@heroui/react';
+import { Button, Form, Select, SelectItem, Spinner } from '@heroui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
@@ -10,6 +10,7 @@ import { useUserState } from '@/libs/users/context/userContext';
 import { useUpdatePreferencesMutation } from '@/libs/users/hooks';
 import { updatePreferencesSchema } from '@/libs/users/schemas';
 import { UpdatePreferencesDto } from '@/libs/users/types';
+import React from 'react';
 
 const supportedLanguages = [
   { key: 'en', label: 'English' },
@@ -36,11 +37,25 @@ export default function PreferencesPage() {
     formState: { isSubmitting },
   } = useForm<UpdatePreferencesDto>({
     resolver: zodResolver(updatePreferencesSchema),
+    defaultValues: {
+      languageCode: 'en',
+      fiatCurrencyCode: 'usd',
+    },
   });
 
   const onSubmit = (data: UpdatePreferencesDto) => {
     mutate({ data });
   };
+
+  if (!user) {
+    return (
+      <AppLayout>
+        <div className="flex min-h-screen items-center justify-center">
+          <Spinner size="lg" />
+        </div>
+      </AppLayout>
+    );
+  }
 
   return (
     <AppLayout>
@@ -54,6 +69,7 @@ export default function PreferencesPage() {
         </Select>
 
         <Select
+          value={user.currencyInfo.localCurrencyCode}
           {...register('fiatCurrencyCode')}
           description="We will show you the equal value as hint"
           label="Local Currency"
