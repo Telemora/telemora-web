@@ -15,7 +15,7 @@ export default function OrderItemPreviewCard({ orderItem }: { orderItem: OrderIt
             <Link
               href={`/products/${orderItem.product.slug}`}
               aria-label={`View details for ${orderItem.product.name}`}
-              className="rounded focus:outline-none focus:ring-2 focus:ring-primary"
+              className="focus:ring-primary rounded focus:ring-2 focus:outline-none"
             >
               <Image
                 placeholder="blur"
@@ -43,7 +43,7 @@ export default function OrderItemPreviewCard({ orderItem }: { orderItem: OrderIt
               <Link
                 href={`/products/${orderItem.product.slug}`}
                 aria-label={`View details for ${orderItem.product.name}`}
-                className="line-clamp-1 block max-w-[10rem] truncate rounded font-bold text-inherit focus:outline-none focus:ring-2 focus:ring-primary"
+                className="focus:ring-primary line-clamp-1 block max-w-40 truncate rounded font-bold text-inherit focus:ring-2 focus:outline-none"
               >
                 <h3 className="truncate" aria-label={orderItem.product.name}>
                   {orderItem.product.name}
@@ -51,7 +51,7 @@ export default function OrderItemPreviewCard({ orderItem }: { orderItem: OrderIt
               </Link>
             ) : (
               <h3
-                className="line-clamp-1 block max-w-[10rem] truncate"
+                className="line-clamp-1 block max-w-40 truncate"
                 aria-label={orderItem.product.name}
               >
                 <strong>{orderItem.product.name}</strong>
