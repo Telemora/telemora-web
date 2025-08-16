@@ -1,29 +1,32 @@
 'use client';
 
+import { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import {
   Button,
   Input,
   Modal,
+  ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
   Select,
+  SelectItem,
+  useDisclosure,
 } from '@heroui/react';
 import { useSubmitStoreServiceHoursMutation } from '@/libs/stores/hooks';
 import { ServiceHoursDto, SetStoreServiceHoursDto, Weekday } from '@/libs/stores/types';
 import { serviceHoursDtoSchema, setStoreServiceHoursSchema } from '@/libs/stores/schemas';
-import { useState } from 'react';
-import toast from 'react-hot-toast';
 import { hapticFeedback } from '@telegram-apps/sdk-react';
+import toast from 'react-hot-toast';
 
-export function SetStoreServiceHours() {
+export function ServiceHoursForm() {
   const router = useRouter();
   const { storeId } = useParams<{ storeId: string }>();
   const { mutateAsync, isPending } = useSubmitStoreServiceHoursMutation(storeId);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const [serviceHours, setServiceHours] = useState<ServiceHoursDto[]>([]);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [newHour, setNewHour] = useState<ServiceHoursDto>({
     day: Weekday.MONDAY,
     open: '09:00',
@@ -34,7 +37,7 @@ export function SetStoreServiceHours() {
   const [error, setError] = useState<string | null>(null);
 
   const weekdayOptions = Object.values(Weekday).map((day) => ({
-    value: day,
+    key: day,
     label: day.charAt(0).toUpperCase() + day.slice(1).toLowerCase(),
   }));
 
@@ -43,7 +46,12 @@ export function SetStoreServiceHours() {
       serviceHoursDtoSchema.parse(newHour);
 
       // Check for duplicate days
-      if (serviceHours.some((hour, index) => hour.day === newHour.day && index !== editIndex)) {
+      if (
+        serviceHours.some(
+          (hour, index) =>
+            hour.day === newHour.day && index !== editIndex,
+        )
+      ) {
         setError('This day already has service hours defined.');
         return;
       }
@@ -55,7 +63,7 @@ export function SetStoreServiceHours() {
       } else {
         setServiceHours([...serviceHours, newHour]);
       }
-      setIsDialogOpen(false);
+      onOpenChange();
       setNewHour({
         day: Weekday.MONDAY,
         open: '09:00',
@@ -72,7 +80,7 @@ export function SetStoreServiceHours() {
   const handleEdit = (index: number) => {
     setNewHour(serviceHours[index]);
     setEditIndex(index);
-    setIsDialogOpen(true);
+    onOpen();
   };
 
   const handleDelete = (index: number) => {
@@ -93,60 +101,51 @@ export function SetStoreServiceHours() {
   };
 
   return (
-    <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
-      <h1 style={{ fontSize: '24px', marginBottom: '20px' }}>
+    <div className="p-5 max-w-2xl mx-auto">
+      <h1 className="text-2xl mb-5">
         {editIndex !== null ? 'Edit' : 'Manage'} Store Service Hours
       </h1>
 
-      {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
+      {error && (
+        <div className="text-red-500 mb-3">{error}</div>
+      )}
 
-      <div style={{ marginBottom: '20px' }}>
+      <div className="mb-5">
         <Button
           color="primary"
-          onPress={() => {
-            setNewHour({
-              day: Weekday.MONDAY,
-              open: '09:00',
-              close: '17:00',
-              interval: 30,
-            });
-            setEditIndex(null);
-            setIsDialogOpen(true);
-          }}
+          onPress={onOpen}
         >
           Add Service Hours
         </Button>
       </div>
 
-      <div style={{ marginBottom: '20px' }}>
+      <div className="mb-5">
         {serviceHours.length === 0 ? (
           <p>No service hours defined.</p>
         ) : (
-          <ul style={{ listStyle: 'none', padding: 0 }}>
+          <ul className="list-none p-0">
             {serviceHours.map((hour, index) => (
               <li
                 key={index}
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  padding: '10px',
-                  borderBottom: '1px solid #ddd',
-                }}
+                className="flex justify-between items-center p-3 border-b border-gray-200"
               >
                 <span>
-                  {hour.day.charAt(0).toUpperCase() + hour.day.slice(1).toLowerCase()}: {hour.open}{' '}
-                  - {hour.close}, Interval: {hour.interval} min
+                  {hour.day.charAt(0).toUpperCase() +
+                    hour.day.slice(1).toLowerCase()}: {hour.open} - {hour.close}, Interval: {hour.interval} min
                 </span>
-                <div>
+                <div className="flex gap-2">
                   <Button
-                    color="secondary"
+                    color="primary"
+                    variant="light"
                     onPress={() => handleEdit(index)}
-                    style={{ marginRight: '10px' }}
                   >
                     Edit
                   </Button>
-                  <Button color="danger" onPress={() => handleDelete(index)}>
+                  <Button
+                    color="danger"
+                    variant="light"
+                    onPress={() => handleDelete(index)}
+                  >
                     Delete
                   </Button>
                 </div>
@@ -156,48 +155,72 @@ export function SetStoreServiceHours() {
         )}
       </div>
 
-      <Button color="primary" onPress={handleSubmit} disabled={isPending} style={{ width: '100%' }}>
+      <Button
+        color="primary"
+        onPress={handleSubmit}
+        isDisabled={isPending}
+        className="w-full"
+      >
         {isPending ? 'Saving...' : 'Save Service Hours'}
       </Button>
 
-      <Modal open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
-        <ModalHeader>{editIndex !== null ? 'Edit Service Hours' : 'Add Service Hours'}</ModalHeader>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-            <Select
-              label="Day"
-              options={weekdayOptions}
-              value={newHour.day}
-              onChange={(value) => setNewHour({ ...newHour, day: value as Weekday })}
-            />
-            <Input
-              label="Open Time"
-              type="time"
-              value={newHour.open}
-              onChange={(e) => setNewHour({ ...newHour, open: e.target.value })}
-            />
-            <Input
-              label="Close Time"
-              type="time"
-              value={newHour.close}
-              onChange={(e) => setNewHour({ ...newHour, close: e.target.value })}
-            />
-            <Input
-              label="Interval (minutes)"
-              type="number"
-              value={newHour.interval.toString()}
-              onChange={(e) => setNewHour({ ...newHour, interval: parseInt(e.target.value) || 30 })}
-            />
-          </div>
+          {() => (
+            <>
+              <ModalHeader>
+                {editIndex !== null ? 'Edit Service Hours' : 'Add Service Hours'}
+              </ModalHeader>
+              <ModalBody>
+                <div className="flex flex-col gap-4">
+                  <Select
+                    label="Day"
+                    selectedKeys={[newHour.day]}
+                    onChange={(e) =>
+                      setNewHour({ ...newHour, day: e.target.value as Weekday })
+                    }
+                  >
+                    {weekdayOptions.map((option) => (
+                      <SelectItem key={option.key}>{option.label}</SelectItem>
+                    ))}
+                  </Select>
+                  <Input
+                    label="Open Time"
+                    type="time"
+                    value={newHour.open}
+                    onChange={(e) =>
+                      setNewHour({ ...newHour, open: e.target.value })
+                    }
+                  />
+                  <Input
+                    label="Close Time"
+                    type="time"
+                    value={newHour.close}
+                    onChange={(e) =>
+                      setNewHour({ ...newHour, close: e.target.value })
+                    }
+                  />
+                  <Input
+                    label="Interval (minutes)"
+                    type="number"
+                    value={newHour.interval.toString()}
+                    onChange={(e) =>
+                      setNewHour({ ...newHour, interval: parseInt(e.target.value) || 30 })
+                    }
+                  />
+                </div>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="danger" variant="light" onPress={onOpenChange}>
+                  Cancel
+                </Button>
+                <Button color="primary" onPress={handleAddOrUpdate}>
+                  {editIndex !== null ? 'Update' : 'Add'}
+                </Button>
+              </ModalFooter>
+            </>
+          )}
         </ModalContent>
-        <ModalFooter>
-          <Button color="secondary" onPress={() => setIsDialogOpen(false)}>
-            Cancel
-          </Button>
-          <Button color="primary" onPress={handleAddOrUpdate}>
-            {editIndex !== null ? 'Update' : 'Add'}
-          </Button>
-        </ModalFooter>
       </Modal>
     </div>
   );
