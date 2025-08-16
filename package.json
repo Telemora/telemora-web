@@ -29,7 +29,7 @@
     "start": "next start",
     "lint": "next lint",
     "lint-fix": "eslint --fix .",
-    "format": "prettier . --write",
+    "format": "prettier ./src --write",
     "prepare": "husky"
   },
   "dependencies": {

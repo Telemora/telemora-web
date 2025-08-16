@@ -1,7 +1,6 @@
 'use client';
 
-import { Card, CardBody } from '@heroui/react';
-import { User } from '@heroui/user';
+import { Card, CardBody, User } from '@heroui/react';
 import { formatDistanceToNow } from 'date-fns';
 
 import StarRating from '@/libs/common/components/star-rating';

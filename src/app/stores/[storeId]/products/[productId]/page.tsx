@@ -1,7 +1,6 @@
 'use client';
 
-import { Button, Divider, ScrollShadow, Skeleton } from '@heroui/react';
-import { User } from '@heroui/user';
+import { Button, Divider, ScrollShadow, Skeleton, User } from '@heroui/react';
 import { hapticFeedback } from '@telegram-apps/sdk-react';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
