@@ -43,13 +43,11 @@ export function ServiceHoursForm() {
     label: day.charAt(0).toUpperCase() + day.slice(1).toLowerCase(),
   }));
 
-  // Convert string time (e.g., "09:00") to Time object
   const parseTimeString = (timeStr: string): Time => {
     const [hours, minutes] = timeStr.split(':').map(Number);
     return new Time(hours, minutes);
   };
 
-  // Convert Time object to string (e.g., "09:00")
   const formatTimeString = (time: Time): string => {
     return `${time.hour.toString().padStart(2, '0')}:${time.minute.toString().padStart(2, '0')}`;
   };
@@ -58,7 +56,6 @@ export function ServiceHoursForm() {
     try {
       serviceHoursDtoSchema.parse(newHour);
 
-      // Check for duplicate days
       if (
         serviceHours.some(
           (hour, index) =>
