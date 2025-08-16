@@ -10,12 +10,12 @@ import {
 } from '@/libs/orders/api';
 import { generateMockOrderDetail, generateMockOrderSummaries } from '@/libs/orders/mocks';
 import {
-  CreateOrderFormData,
-  CreateOrderShipmentFormData,
-  UpdateOrderFormData,
-} from '@/libs/orders/schemas';
-import { OrderDetail, OrderSummary } from '@/libs/orders/types';
-
+  CreateOrderDto,
+  CreateOrderShipmentDto,
+  OrderDetail,
+  OrderSummary,
+  UpdateOrderDto,
+} from '@/libs/orders/types';
 import { isDev } from '../../common/utils';
 
 export function useMyOrders() {
@@ -36,7 +36,7 @@ export function useOrderDetails(id: number) {
 export function useCreateOrder() {
   const queryClient = useQueryClient();
 
-  return useMutation<OrderDetail, Error, CreateOrderFormData>({
+  return useMutation<OrderDetail, Error, CreateOrderDto>({
     mutationFn: (data) => (isDev ? generateMockOrderDetail() : createOrder(data)),
     onSuccess: async () => {
       await queryClient.prefetchQuery({
@@ -51,7 +51,7 @@ export function useCreateOrder() {
 export function useUpdateOrder(id: number) {
   const queryClient = useQueryClient();
 
-  return useMutation<OrderDetail, Error, UpdateOrderFormData>({
+  return useMutation<OrderDetail, Error, UpdateOrderDto>({
     mutationFn: (data) => (isDev ? generateMockOrderDetail() : updateOrder(id, data)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.orders.all });
@@ -63,7 +63,7 @@ export function useUpdateOrder(id: number) {
 export function useAddShipment(id: number) {
   const queryClient = useQueryClient();
 
-  return useMutation<OrderDetail, Error, CreateOrderShipmentFormData>({
+  return useMutation<OrderDetail, Error, CreateOrderShipmentDto>({
     mutationFn: (data) => (isDev ? generateMockOrderDetail() : addShipment(id, data)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.orders.detail(id) });

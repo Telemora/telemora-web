@@ -3,11 +3,12 @@ import { faker } from '@faker-js/faker';
 import { generateMockOrderSummary } from '@/libs/orders/mocks';
 import { generateMockUserSummary } from '@/libs/users/mocks';
 
-import { PaymentDetail, PaymentStatus, PaymentSummary } from '../types';
+import { PaymentDetail, PaymentStatus, PaymentSummary, TokenSymbol } from '../types';
 
 export async function generateMockPaymentSummary(): Promise<PaymentSummary> {
   return {
     id: faker.string.uuid(),
+    tokenSymbol: faker.helpers.arrayElement(['USDC', 'ETH']) as TokenSymbol,
     status: faker.helpers.arrayElement(['PENDING', 'COMPLETED', 'FAILED']) as PaymentStatus,
     amount: faker.finance.amount(),
     transactionHash: faker.string.hexadecimal({ length: 64 }),

@@ -19,7 +19,7 @@ export default function OrderItemPreviewCard({ orderItem }: { orderItem: OrderIt
             >
               <Image
                 placeholder="blur"
-                src={orderItem.product.primaryImage?.[0]?.url || '/fallback-order.png'}
+                src={orderItem.product.primaryImage.url || '/fallback-order.png'}
                 alt={sanitizeAltText(orderItem.product.name)}
                 width={64}
                 height={64}
@@ -30,7 +30,7 @@ export default function OrderItemPreviewCard({ orderItem }: { orderItem: OrderIt
           ) : (
             <Image
               placeholder="blur"
-              src={orderItem.product.primaryImage?.[0]?.url || '/fallback-order.png'}
+              src={orderItem.product.primaryImage.url || '/fallback-order.png'}
               alt={sanitizeAltText(orderItem.product.name)}
               width={64}
               height={64}

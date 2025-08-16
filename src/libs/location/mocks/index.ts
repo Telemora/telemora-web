@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-import { AddressDto, CanonicalLocationDto } from '../types';
+import { AddressDto, AddressType, CanonicalLocationDto, CanonicalLocationType } from '../types';
 
 function generateMockCanonicalLocation(type: CanonicalLocationDto['type']): CanonicalLocationDto {
   return {
@@ -21,30 +21,35 @@ function generateMockCanonicalLocation(type: CanonicalLocationDto['type']): Cano
 
 export function generateMockAddress(): AddressDto {
   return {
+    geoPoint: {
+      latitude: Number(faker.location.latitude()),
+      longitude: Number(faker.location.longitude()),
+    },
     id: faker.number.int(),
     label: 'Home',
-    country: generateMockCanonicalLocation('country'),
-    state: generateMockCanonicalLocation('state'),
-    city: generateMockCanonicalLocation('city'),
+    country: generateMockCanonicalLocation(CanonicalLocationType.COUNTRY),
+    state: generateMockCanonicalLocation(CanonicalLocationType.STATE),
+    city: generateMockCanonicalLocation(CanonicalLocationType.CITY),
     streetLine1: faker.location.streetAddress(),
     streetLine2: faker.location.secondaryAddress(),
     postalCode: faker.location.zipCode(),
-    latitude: Number(faker.location.latitude()),
-    longitude: Number(faker.location.longitude()),
-    type: 'shipping',
+    type: AddressType.SHIPPING,
     isDefault: true,
-    createdAt: faker.date.past(),
   };
 }
 
 export const generateMockCountries = (): CanonicalLocationDto[] => {
-  return Array.from({ length: 5 }, () => generateMockCanonicalLocation('country'));
+  return Array.from({ length: 5 }, () =>
+    generateMockCanonicalLocation(CanonicalLocationType.COUNTRY),
+  );
 };
 
 export const generateMockStates = (): CanonicalLocationDto[] => {
-  return Array.from({ length: 5 }, () => generateMockCanonicalLocation('state'));
+  return Array.from({ length: 5 }, () =>
+    generateMockCanonicalLocation(CanonicalLocationType.STATE),
+  );
 };
 
 export const generateMockCities = (): CanonicalLocationDto[] => {
-  return Array.from({ length: 5 }, () => generateMockCanonicalLocation('city'));
+  return Array.from({ length: 5 }, () => generateMockCanonicalLocation(CanonicalLocationType.CITY));
 };

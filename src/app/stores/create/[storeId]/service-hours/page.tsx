@@ -22,7 +22,7 @@ import { serviceHoursDtoSchema, setStoreServiceHoursSchema } from '@/libs/stores
 import toast from 'react-hot-toast';
 import { hapticFeedback } from '@telegram-apps/sdk-react';
 
-export function ServiceHoursForm() {
+export default function ServiceHoursPage() {
   const router = useRouter();
   const { storeId } = useParams<{ storeId: string }>();
   const { mutateAsync, isPending } = useSubmitStoreServiceHoursMutation(storeId);
@@ -56,12 +56,7 @@ export function ServiceHoursForm() {
     try {
       serviceHoursDtoSchema.parse(newHour);
 
-      if (
-        serviceHours.some(
-          (hour, index) =>
-            hour.day === newHour.day && index !== editIndex,
-        )
-      ) {
+      if (serviceHours.some((hour, index) => hour.day === newHour.day && index !== editIndex)) {
         setError('This day already has service hours defined.');
         return;
       }
@@ -111,20 +106,15 @@ export function ServiceHoursForm() {
   };
 
   return (
-    <div className="p-5 max-w-2xl mx-auto">
-      <h1 className="text-2xl mb-5">
+    <div className="mx-auto max-w-2xl p-5">
+      <h1 className="mb-5 text-2xl">
         {editIndex !== null ? 'Edit' : 'Manage'} Store Service Hours
       </h1>
 
-      {error && (
-        <div className="text-red-500 mb-3">{error}</div>
-      )}
+      {error && <div className="mb-3 text-red-500">{error}</div>}
 
       <div className="mb-5">
-        <Button
-          color="primary"
-          onPress={onOpen}
-        >
+        <Button color="primary" onPress={onOpen}>
           Add Service Hours
         </Button>
       </div>
@@ -137,25 +127,17 @@ export function ServiceHoursForm() {
             {serviceHours.map((hour, index) => (
               <li
                 key={index}
-                className="flex justify-between items-center p-3 border-b border-gray-200"
+                className="flex items-center justify-between border-b border-gray-200 p-3"
               >
                 <span>
-                  {hour.day.charAt(0).toUpperCase() +
-                    hour.day.slice(1).toLowerCase()}: {hour.open} - {hour.close}, Interval: {hour.interval} min
+                  {hour.day.charAt(0).toUpperCase() + hour.day.slice(1).toLowerCase()}: {hour.open}{' '}
+                  - {hour.close}, Interval: {hour.interval} min
                 </span>
                 <div className="flex gap-2">
-                  <Button
-                    color="primary"
-                    variant="light"
-                    onPress={() => handleEdit(index)}
-                  >
+                  <Button color="primary" variant="light" onPress={() => handleEdit(index)}>
                     Edit
                   </Button>
-                  <Button
-                    color="danger"
-                    variant="light"
-                    onPress={() => handleDelete(index)}
-                  >
+                  <Button color="danger" variant="light" onPress={() => handleDelete(index)}>
                     Delete
                   </Button>
                 </div>
@@ -165,12 +147,7 @@ export function ServiceHoursForm() {
         )}
       </div>
 
-      <Button
-        color="primary"
-        onPress={handleSubmit}
-        isDisabled={isPending}
-        className="w-full"
-      >
+      <Button color="primary" onPress={handleSubmit} isDisabled={isPending} className="w-full">
         {isPending ? 'Saving...' : 'Save Service Hours'}
       </Button>
 
@@ -186,9 +163,7 @@ export function ServiceHoursForm() {
                   <Select
                     label="Day"
                     selectedKeys={[newHour.day]}
-                    onChange={(e) =>
-                      setNewHour({ ...newHour, day: e.target.value as Weekday })
-                    }
+                    onChange={(e) => setNewHour({ ...newHour, day: e.target.value as Weekday })}
                   >
                     {weekdayOptions.map((option) => (
                       <SelectItem key={option.key}>{option.label}</SelectItem>

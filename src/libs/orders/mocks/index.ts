@@ -10,6 +10,7 @@ import { OrderDetail, OrderItemPreviewDto, OrderStatus, OrderSummary } from '../
 export async function generateMockOrderItemPreview(): Promise<OrderItemPreviewDto> {
   return {
     product: await generateMockProductPreview(),
+    unitPrice: Number(faker.commerce.price({ min: 10, max: 300 })),
     quantity: faker.number.int({ min: 1, max: 5 }),
     totalPrice: Number(faker.commerce.price({ min: 10, max: 300 })),
   };
