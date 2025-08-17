@@ -1,4 +1,3 @@
-import { retrieveRawInitData } from '@telegram-apps/sdk-react';
 import axios from 'axios';
 
 const axiosInstance = axios.create({
@@ -9,10 +8,11 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use((config) => {
-  if (typeof window !== 'undefined') {
-    const rawInitData = retrieveRawInitData();
-    if (rawInitData) {
-      config.headers['Authorization'] = `tma ${rawInitData}`;
+  if (typeof window !== 'undefined' && window.Telegram && window.Telegram.WebApp) {
+    const initData = window.Telegram.WebApp.initData;
+
+    if (initData) {
+      config.headers['Authorization'] = `tma ${initData}`;
     }
   }
   return config;

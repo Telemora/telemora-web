@@ -1,5 +1,3 @@
-import { OpenLinkOptions } from '@telegram-apps/sdk';
-
 type CssColorKey = 'bg_color' | 'bottom_bar_bg_color' | 'secondary_bg_color';
 type ChooseChatType = 'bots' | 'channels' | 'groups' | 'users';
 type ColorScheme = 'dark' | 'light';
@@ -676,7 +674,7 @@ export interface TelegramWebApp {
   ): this;
 
   /** A method that opens a link in an external browser. The Mini App will not be closed. */
-  openLink(url: string, options?: OpenLinkOptions): this;
+  openLink(url: string): this;
 
   /** A method that opens a telegram link inside the Telegram app. The Mini App will not be closed after this method is called. Up to Bot API 7.0 The Mini App will be closed after this method is called. */
   openTelegramLink(url: string): this;
