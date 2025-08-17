@@ -24,7 +24,7 @@
     ]
   },
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -44,9 +44,9 @@
     "decimal.js": "^10.5.0",
     "eruda": "^3.4.1",
     "framer-motion": "^12.23.12",
-    "next": "^14.2.24",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "next": "15.4.6",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
     "react-easy-crop": "^5.4.1",
     "react-hook-form": "^7.54.2",
     "react-hot-toast": "^2.5.2",
@@ -59,10 +59,10 @@
     "@faker-js/faker": "^9.6.0",
     "@tanstack/eslint-plugin-query": "^5.66.1",
     "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/react": "19.1.10",
+    "@types/react-dom": "19.1.7",
     "eslint": "^9",
-    "eslint-config-next": "15.1.7",
+    "eslint-config-next": "15.4.6",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "husky": "^9.1.7",
     "lint-staged": "^15.5.2",
@@ -71,5 +71,9 @@
     "prettier-plugin-tailwindcss": "^0.6.11",
     "tailwindcss": "^4.1.12",
     "typescript": "^5.9.2"
+  },
+  "overrides": {
+    "@types/react": "19.1.10",
+    "@types/react-dom": "19.1.7"
   }
 }
