@@ -20,8 +20,10 @@ import { useSubmitStoreServiceHoursMutation } from '@/libs/stores/hooks';
 import { ServiceHoursDto, SetStoreServiceHoursDto, Weekday } from '@/libs/stores/types';
 import { serviceHoursDtoSchema, setStoreServiceHoursSchema } from '@/libs/stores/schemas';
 import toast from 'react-hot-toast';
+import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 
 export default function ServiceHoursPage() {
+  const { webApp, loading } = useTelegramWebApp();
   const router = useRouter();
   const { storeId } = useParams<{ storeId: string }>();
   const { mutateAsync, isPending } = useSubmitStoreServiceHoursMutation(storeId);

@@ -8,8 +8,10 @@ import { PageHeader } from '@/libs/common/components/page-header';
 import { useSubmitStoreAddressMutation } from '@/libs/stores/hooks';
 import { AddressDto } from '@/libs/location/types';
 import { AddressForm } from '@/libs/location/components/AddressForm';
+import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 
 export default function CreateStoreLocation() {
+  const { webApp, loading } = useTelegramWebApp();
   const { storeId } = useParams<{ storeId: string }>();
   const router = useRouter();
 

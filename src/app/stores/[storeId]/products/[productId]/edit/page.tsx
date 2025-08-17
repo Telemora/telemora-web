@@ -14,8 +14,10 @@ import { ProductTypeSelector } from '@/libs/products/components/product-type-sel
 import { useProductDetails, useUpdateProductMutation } from '@/libs/products/hooks';
 import { UpdateProductDto } from '@/libs/products/types';
 import { updateProductDtoSchema } from '@/libs/products/schemas';
+import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 
 export default function EditProductPage() {
+  const { webApp, loading } = useTelegramWebApp();
   const { storeId, productId } = useParams<{ storeId: string; productId: string }>();
   const storeIdNum = parseInt(storeId, 10);
   const productIdNum = parseInt(productId, 10);

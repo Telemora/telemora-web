@@ -1,5 +1,4 @@
 import './globals.css';
-import '@telegram-apps/telegram-ui/dist/styles.css';
 
 import type { Metadata } from 'next';
 import type { PropsWithChildren } from 'react';

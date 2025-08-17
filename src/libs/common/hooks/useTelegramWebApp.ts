@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { TelegramWebApp } from '@/libs/common/types/telegram';
+import { TelegramWebApp } from '@/telegram';
 
 /**
  * A custom hook to safely access the Telegram WebApp object.

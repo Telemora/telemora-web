@@ -11,8 +11,10 @@ import { PageHeader } from '@/libs/common/components/page-header';
 import { useSubmitStoreBasicInfoMutation } from '@/libs/stores/hooks';
 import { CreateStoreBasicDto } from '@/libs/stores/types';
 import { createStoreBasicSchema } from '@/libs/stores/schemas';
+import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 
 export default function CreateStoreBasicInformation() {
+  const { webApp, loading } = useTelegramWebApp();
   const {
     register,
     handleSubmit,

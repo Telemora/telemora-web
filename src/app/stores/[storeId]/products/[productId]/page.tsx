@@ -11,8 +11,10 @@ import PriceComponent from '@/libs/common/components/PriceComponent';
 import StarRating from '@/libs/common/components/star-rating';
 import { useProductDetails } from '@/libs/products/hooks';
 import ReviewPreviewCard from '@/libs/reviews/components/preview-card';
+import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 
 export default function ProductDetailsPage() {
+  const { webApp, loading } = useTelegramWebApp();
   const { storeId, productId } = useParams();
   const storeIdNum = parseInt(storeId as string, 10);
   const productIdNum = parseInt(productId as string, 10);

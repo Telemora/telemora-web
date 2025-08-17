@@ -14,8 +14,10 @@ import { useCreateProductMutation } from '@/libs/products/hooks';
 import { CreateProductDto, ProductType, ProductVisibility } from '@/libs/products/types';
 import { ProductPhotosUploader } from '@/libs/products/components/product-photos-uploader';
 import { createProductDtoSchema } from '@/libs/products/schemas';
+import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 
 export default function CreateProductPage() {
+  const { webApp, loading } = useTelegramWebApp();
   const { storeId } = useParams();
   const {
     register,

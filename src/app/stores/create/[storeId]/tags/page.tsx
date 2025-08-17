@@ -13,6 +13,7 @@ import { Tag } from '@/libs/common/components/tag';
 import { useSubmitStoreTagsMutation } from '@/libs/stores/hooks';
 import { CreateStoreTagsDto } from '@/libs/stores/types';
 import { createStoreTagsSchema } from '@/libs/stores/schemas';
+import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 
 const TAG_SUGGESTIONS = [
   'Clothing',
@@ -31,6 +32,7 @@ const TAG_SUGGESTIONS = [
 ];
 
 export default function CreateStoreTags() {
+  const { webApp, loading } = useTelegramWebApp();
   const { storeId } = useParams<{ storeId: string }>();
   const router = useRouter();
 

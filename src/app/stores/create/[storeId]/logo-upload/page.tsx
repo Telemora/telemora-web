@@ -13,8 +13,10 @@ import { PageHeader } from '@/libs/common/components/page-header';
 import { useSubmitStoreLogoMutation } from '@/libs/stores/hooks';
 import { CreateStoreLogoDto } from '@/libs/stores/types';
 import { createStoreLogoSchema } from '@/libs/stores/schemas';
+import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 
 export default function CreateStoreLogoUpload() {
+  const { webApp, loading } = useTelegramWebApp();
   const router = useRouter();
   const { storeId } = useParams<{ storeId: string }>();
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);

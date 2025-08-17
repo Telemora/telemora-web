@@ -14,8 +14,10 @@ import { copyToClipboard } from '@/libs/common/utils/clipboard';
 import ProductPreviewCard from '@/libs/products/components/preview-card';
 import { useStoreDetailsQuery } from '@/libs/stores/hooks';
 import { useUserState } from '@/libs/users/context/userContext';
+import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 
 export default function StoreDetailsPage() {
+  const { webApp, loading } = useTelegramWebApp();
   const { storeId } = useParams<{ storeId: string }>();
   const router = useRouter();
   const { data: user } = useUserState();
