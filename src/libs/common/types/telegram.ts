@@ -71,6 +71,7 @@ export interface WebAppInitData {
 }
 
 type ErrorFirstCallback<T = unknown> = (error: string | null, result?: T, extra?: unknown) => void;
+type BiometricCallback = (isAuthenticated: boolean, biometricToken?: string | null) => void;
 
 /**
  * This object provides access to a secure storage on the user’s device for sensitive data. On **iOS**, it uses the system **Keychain**; on **Android**, it uses the **Keystore**. This ensures that all stored values are encrypted at rest and inaccessible to unauthorized applications.
@@ -81,20 +82,20 @@ export interface SecureStorage {
   clear(callback?: ErrorFirstCallback<boolean>): this;
 
   /** A method that receives a value from the device's secure storage using the specified key. In case of an error, the callback function will be called and the first argument will contain the error. In case of success, the first argument will be null and the value will be passed as the second argument. If the key was not found, the second argument will be null, and the third argument will be a boolean indicating whether the key can be restored from the current device. */
-  getItem(key: string, callback?: ErrorFirstCallback<string | null | undefined>): this;
+  getItem(key: string, callback?: ErrorFirstCallback<string | null | boolean>): this;
 
   /** A method that removes a value from the device's secure storage using the specified key. If an optional callback parameter was passed, the callback function will be called. In case of an error, the first argument will contain the error. In case of success, the first argument will be null and the second argument will be a boolean indicating whether the value was removed. */
   removeItem(key: string, callback?: ErrorFirstCallback<boolean>): this;
 
   /** Attempts to restore a key that previously existed on the current device. When called, the user will be asked for permission to restore the value. If the user declines or an error occurs, the first argument in the callback will contain the error. If restored successfully, the first argument will be null and the second argument will contain the restored value. */
-  restoreItem(key: string, callback?: ErrorFirstCallback<string | null | undefined>): this;
+  restoreItem(key: string, callback?: ErrorFirstCallback<string | null>): this;
 
-  /**  A method that stores a value in the device's secure storage using the specified key. If an optional callback parameter was passed, the callback function will be called. In case of an error, the first argument will contain the error. In case of success, the first argument will be null and the second argument will be a boolean indicating whether the value was stored. */
+  /** A method that stores a value in the device's secure storage using the specified key. If an optional callback parameter was passed, the callback function will be called. In case of an error, the first argument will contain the error. In case of success, the first argument will be null and the second argument will be a boolean indicating whether the value was stored. */
   setItem(key: string, value: string, callback?: ErrorFirstCallback<boolean>): this;
 }
 
 interface DeviceStorage {
-  /** A method that stores a value in the device's local storage using the specified key. If an optional callback parameter was passed, the callback function will be called. In case of an error, the first argument will contain the error. In case of success, the first argument will be null and the second argument will be a boolean indicating whether the value was stored. */
+  /** A method that clears all keys previously stored by the bot in the device's local storage. If an optional callback parameter was passed, the callback function will be called. In case of an error, the first argument will contain the error. In case of success, the first argument will be null and the second argument will be a boolean indicating whether all values were removed. */
   clear(callback?: ErrorFirstCallback<boolean>): this;
 
   /** A method that receives a value from the device's local storage using the specified key. In case of an error, the callback function will be called and the first argument will contain the error. In case of success, the first argument will be null and the value will be passed as the second argument. */
@@ -103,7 +104,7 @@ interface DeviceStorage {
   /** A method that removes a value from the device's local storage using the specified key. If an optional callback parameter was passed, the callback function will be called. In case of an error, the first argument will contain the error. In case of success, the first argument will be null and the second argument will be a boolean indicating whether the value was removed. */
   removeItem(key: string, callback?: ErrorFirstCallback<boolean>): this;
 
-  /** A method that clears all keys previously stored by the bot in the device's local storage. If an optional callback parameter was passed, the callback function will be called. In case of an error, the first argument will contain the error. In case of success, the first argument will be null and the second argument will be a boolean indicating whether all values were removed. */
+  /** A method that stores a value in the device's local storage using the specified key. If an optional callback parameter was passed, the callback function will be called. In case of an error, the first argument will contain the error. In case of success, the first argument will be null and the second argument will be a boolean indicating whether the value was stored. */
   setItem(key: string, value: string, callback?: ErrorFirstCallback<boolean>): this;
 }
 
@@ -258,16 +259,12 @@ interface BiometricManager {
   readonly isInited: boolean;
 
   /** A method that authenticates the user using biometrics according to the params argument of type BiometricAuthenticateParams. If an optional callback parameter was passed, the callback function will be called and the first argument will be a boolean indicating whether the user authenticated successfully. If so, the second argument will be a biometric token. */
-  authenticate(
-    parameters: { reason?: string },
-    callback?: (isAuthenticated: boolean, biometricToken?: string | null) => void,
-  ): this;
+  authenticate(parameters: { reason?: string }, callback?: BiometricCallback): this;
 
   /** A method that initializes the BiometricManager object. It should be called before the object's first use. If an optional callback parameter was passed, the callback function will be called when the object is initialized. */
   init(callback?: () => void): this;
 
   /** A method that opens the biometric access settings for bots. Useful when you need to request biometrics access to users who haven't granted it yet.
-
    Note that this method can be called only in response to user interaction with the Mini App interface (e.g. a click inside the Mini App or on the main button) */
   openSettings(): this;
 
@@ -278,43 +275,25 @@ interface BiometricManager {
   updateBiometricToken(token: string, callback?: (applied: boolean) => void): this;
 }
 
-/** This object controls biometrics on the device. Before the first use of this object, it needs to be initialized using the init method. */
+/** This object controls the cloud storage. Each bot can store up to 1024 items per user in the cloud storage. */
 export interface CloudStorage {
-  /** Shows whether biometrics object is initialized. */
-  isInited: boolean;
-  /** Shows whether biometrics is available on the current device. */
-  isBiometricAvailable: boolean;
-  /**
-   * The type of biometrics currently available on the device. Can be one of these values:
-   *    - finger, fingerprint-based biometrics,
-   *    - face, face-based biometrics,
-   *    - unknown, biometrics of an unknown type.
-   */
-  biometricType: String;
-  /** Shows whether permission to use biometrics has been requested. */
-  isAccessRequested: boolean;
-  /** Shows whether permission to use biometrics has been granted. */
-  isAccessGranted: boolean;
-  /** Shows whether the token is saved in secure storage on the device. */
-  isBiometricTokenSaved: boolean;
-  /** A unique device identifier that can be used to match the token to the device. */
-  deviceId: string;
+  /** A method that stores a value in the cloud storage using the specified key. The key should contain 1-128 characters, only `A-Z`, `a-z`, `0-9`, `_` and `-` are allowed. The value should contain 0-4096 characters. You can store up to 1024 keys in the cloud storage. If an optional callback parameter was passed, the callback function will be called. In case of an error, the first argument will contain the error. In case of success, the first argument will be null and the second argument will be a boolean indicating whether the value was stored. */
+  setItem(key: string, value: string, callback?: ErrorFirstCallback<boolean>): this;
 
-  /** Bot API 7.2+ A method that initializes the BiometricManager object. It should be called before the object's first use. If an optional callback parameter was passed, the callback function will be called when the object is initialized. */
-  init(callback: () => void): this;
+  /** A method that receives a value from the cloud storage using the specified key. The key should contain 1-128 characters, only `A-Z`, `a-z`, `0-9`, `_` and `-` are allowed. In case of an error, the callback function will be called and the first argument will contain the error. In case of success, the first argument will be null and the value will be passed as the second argument. */
+  getItem(key: string, callback: ErrorFirstCallback<string | null>): this;
 
-  /** Bot API 7.2+ A method that requests permission to use biometrics according to the params argument of type BiometricRequestAccessParams. If an optional callback parameter was passed, the callback function will be called and the first argument will be a boolean indicating whether the user granted access. */
-  requestAccess(params: { reason?: string }, callback: () => void): this;
+  /** A method that receives values from the cloud storage using the specified keys. The keys should contain 1-128 characters, only `A-Z`, `a-z`, `0-9`, `_` and `-` are allowed. In case of an error, the callback function will be called and the first argument will contain the error. In case of success, the first argument will be null and the values will be passed as the second argument. */
+  getItems(keys: string[], callback: ErrorFirstCallback<Record<string, string>>): this;
 
-  /** Bot API 7.2+ A method that authenticates the user using biometrics according to the params argument of type BiometricAuthenticateParams. If an optional callback parameter was passed, the callback function will be called and the first argument will be a boolean indicating whether the user authenticated successfully. If so, the second argument will be a biometric token. */
-  authenticate(params: { reason?: string }, callback: () => void): this;
+  /** A method that removes a value from the cloud storage using the specified key. The key should contain 1-128 characters, only `A-Z`, `a-z`, `0-9`, `_` and `-` are allowed. If an optional callback parameter was passed, the callback function will be called. In case of an error, the first argument will contain the error. In case of success, the first argument will be null and the second argument will be a boolean indicating whether the value was removed. */
+  removeItem(key: string, callback?: ErrorFirstCallback<boolean>): this;
 
-  /** Bot API 7.2+ A method that updates the biometric token in secure storage on the device. To remove the token, pass an empty string. If an optional callback parameter was passed, the callback function will be called and the first argument will be a boolean indicating whether the token was updated. */
-  updateBiometricToken(token: string, callback: () => void): this;
+  /** A method that removes values from the cloud storage using the specified keys. The keys should contain 1-128 characters, only `A-Z`, `a-z`, `0-9`, `_` and `-` are allowed. If an optional callback parameter was passed, the callback function will be called. In case of an error, the first argument will contain the error. In case of success, the first argument will be null and the second argument will be a boolean indicating whether the values were removed. */
+  removeItems(keys: string[], callback?: ErrorFirstCallback<boolean>): this;
 
-  /** Bot API 7.2+ A method that opens the biometric access settings for bots. Useful when you need to request biometrics access to users who haven't granted it yet.
-   Note that this method can be called only in response to user interaction with the Mini App interface (e.g. a click inside the Mini App or on the main button) */
-  openSettings(): this;
+  /** A method that receives the list of all keys stored in the cloud storage. In case of an error, the callback function will be called and the first argument will contain the error. In case of success, the first argument will be null and the list of keys will be passed as the second argument. */
+  getKeys(callback: ErrorFirstCallback<string[]>): this;
 }
 
 /**
@@ -666,6 +645,10 @@ export interface TelegramWebApp {
 
   requestEmojiStatusAccess(callback?: (allowed: boolean) => void): void;
 
+  requestWriteAccess(callback?: (allowed: boolean) => void): void;
+
+  requestContact(callback?: (allowed: boolean) => void): void;
+
   requestFullscreen(): void;
 
   /* Bot channel */
@@ -744,7 +727,6 @@ interface TelegramUtils {
 
 declare global {
   interface Window {
-    external?: { notify?: (payload: string) => void };
     Telegram: {
       TelegramGameProxy?: {
         receiveEvent: (eventType: string, eventData?: any) => void;
