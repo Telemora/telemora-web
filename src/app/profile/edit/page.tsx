@@ -4,7 +4,7 @@ import { Form, Input, Spinner } from '@heroui/react';
 import { FaPen } from 'react-icons/fa';
 
 import AppLayout from '@/libs/common/components/AppLayout';
-import { PageHeader } from '@/libs/common/components/page-header';
+import { PageHeader } from '@/libs/common/components/PageHeader';
 import { useUserState } from '@/libs/users/context/userContext';
 import React from 'react';
 

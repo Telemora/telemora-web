@@ -4,7 +4,7 @@ import { Progress } from '@heroui/react';
 import { useParams, useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import AppLayout from '@/libs/common/components/AppLayout';
-import { PageHeader } from '@/libs/common/components/page-header';
+import { PageHeader } from '@/libs/common/components/PageHeader';
 import { useSubmitStoreAddressMutation } from '@/libs/stores/hooks';
 import { AddressDto } from '@/libs/location/types';
 import { AddressForm } from '@/libs/location/components/AddressForm';

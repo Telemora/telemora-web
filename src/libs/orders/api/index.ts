@@ -1,4 +1,4 @@
-import httpClient from '@/libs/common/utils/http-client';
+import httpClient from '@/libs/common/utils/httpClient';
 import {
   CreateOrderDto,
   CreateOrderShipmentDto,

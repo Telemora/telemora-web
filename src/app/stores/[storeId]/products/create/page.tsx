@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
 import AppLayout from '@/libs/common/components/AppLayout';
-import { PageHeader } from '@/libs/common/components/page-header';
+import { PageHeader } from '@/libs/common/components/PageHeader';
 import { ProductTypeSelector } from '@/libs/products/components/product-type-selector';
 import { useCreateProductMutation } from '@/libs/products/hooks';
 import { CreateProductDto, ProductType, ProductVisibility } from '@/libs/products/types';

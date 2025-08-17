@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
-import { PageHeader } from '@/libs/common/components/page-header';
+import { PageHeader } from '@/libs/common/components/PageHeader';
 import { useUpdateLanguageMutation } from '@/libs/users/hooks';
 import { UpdateLanguageDto } from '@/libs/users/types';
 import { updateLanguageSchema } from '@/libs/users/schemas';

@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
-import SplashScreen from '@/libs/common/components/splash-screen';
+import SplashScreen from '@/libs/common/components/SplashScreen';
 
 export default function Redirect() {
   const router = useRouter();

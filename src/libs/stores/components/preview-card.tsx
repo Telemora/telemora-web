@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-import StarRating from '@/libs/common/components/star-rating';
+import StarRating from '@/libs/common/components/StarRating';
 import { StorePreviewDto, StoreStatusEnum } from '@/libs/stores/types';
 
 export const StorePreviewCard = ({ store }: { store: StorePreviewDto }) => {

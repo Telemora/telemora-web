@@ -5,10 +5,10 @@ import Image from 'next/image';
 import { useParams } from 'next/navigation';
 
 import AppLayout from '@/libs/common/components/AppLayout';
-import ErrorPage from '@/libs/common/components/errorPage';
-import { PageHeader } from '@/libs/common/components/page-header';
+import ErrorPage from '@/libs/common/components/ErrorPage';
+import { PageHeader } from '@/libs/common/components/PageHeader';
 import PriceComponent from '@/libs/common/components/PriceComponent';
-import StarRating from '@/libs/common/components/star-rating';
+import StarRating from '@/libs/common/components/StarRating';
 import { useProductDetails } from '@/libs/products/hooks';
 import ReviewPreviewCard from '@/libs/reviews/components/preview-card';
 import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';

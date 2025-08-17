@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
 import AppLayout from '@/libs/common/components/AppLayout';
-import { PageHeader } from '@/libs/common/components/page-header';
+import { PageHeader } from '@/libs/common/components/PageHeader';
 import { useUserState } from '@/libs/users/context/userContext';
 import { useUpdatePreferencesMutation } from '@/libs/users/hooks';
 import { updatePreferencesSchema } from '@/libs/users/schemas';

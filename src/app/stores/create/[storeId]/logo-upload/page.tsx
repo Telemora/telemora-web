@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
 import AppLayout from '@/libs/common/components/AppLayout';
-import { PageHeader } from '@/libs/common/components/page-header';
+import { PageHeader } from '@/libs/common/components/PageHeader';
 import { useSubmitStoreLogoMutation } from '@/libs/stores/hooks';
 import { CreateStoreLogoDto } from '@/libs/stores/types';
 import { createStoreLogoSchema } from '@/libs/stores/schemas';

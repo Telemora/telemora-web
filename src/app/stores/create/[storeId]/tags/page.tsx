@@ -8,8 +8,8 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
 import AppLayout from '@/libs/common/components/AppLayout';
-import { PageHeader } from '@/libs/common/components/page-header';
-import { Tag } from '@/libs/common/components/tag';
+import { PageHeader } from '@/libs/common/components/PageHeader';
+import { Tag } from '@/libs/common/components/Tag';
 import { useSubmitStoreTagsMutation } from '@/libs/stores/hooks';
 import { CreateStoreTagsDto } from '@/libs/stores/types';
 import { createStoreTagsSchema } from '@/libs/stores/schemas';

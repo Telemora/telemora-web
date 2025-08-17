@@ -4,7 +4,7 @@ import { Card, CardBody, CardFooter, CardHeader, Chip } from '@heroui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import StarRating from '@/libs/common/components/star-rating';
+import StarRating from '@/libs/common/components/StarRating';
 import { AddressDto } from '@/libs/location/types';
 import { StoreSummary } from '@/libs/stores/types';
 

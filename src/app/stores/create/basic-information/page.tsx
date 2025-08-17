@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
 import AppLayout from '@/libs/common/components/AppLayout';
-import { PageHeader } from '@/libs/common/components/page-header';
+import { PageHeader } from '@/libs/common/components/PageHeader';
 import { useSubmitStoreBasicInfoMutation } from '@/libs/stores/hooks';
 import { CreateStoreBasicDto } from '@/libs/stores/types';
 import { createStoreBasicSchema } from '@/libs/stores/schemas';

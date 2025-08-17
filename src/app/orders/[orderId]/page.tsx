@@ -5,8 +5,8 @@ import { useParams, useRouter } from 'next/navigation';
 import React from 'react';
 
 import AppLayout from '@/libs/common/components/AppLayout';
-import ErrorPage from '@/libs/common/components/errorPage';
-import { PageHeader } from '@/libs/common/components/page-header';
+import ErrorPage from '@/libs/common/components/ErrorPage';
+import { PageHeader } from '@/libs/common/components/PageHeader';
 import PriceComponent from '@/libs/common/components/PriceComponent';
 import { formatSafeDate } from '@/libs/common/utils/date';
 import OrderItemPreviewCard from '@/libs/orders/components/order-item-preview';

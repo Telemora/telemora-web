@@ -6,8 +6,8 @@ import React from 'react';
 import { FaBoxOpen } from 'react-icons/fa6';
 
 import AppLayout from '@/libs/common/components/AppLayout';
-import ErrorPage from '@/libs/common/components/errorPage';
-import { PageHeader } from '@/libs/common/components/page-header';
+import ErrorPage from '@/libs/common/components/ErrorPage';
+import { PageHeader } from '@/libs/common/components/PageHeader';
 import OrderSummaryCard from '@/libs/orders/components/summary-card';
 import { useMyOrders } from '@/libs/orders/hooks';
 

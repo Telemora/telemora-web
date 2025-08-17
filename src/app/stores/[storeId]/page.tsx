@@ -8,8 +8,8 @@ import { FaEdit, FaShareAlt, FaTrashAlt } from 'react-icons/fa';
 import { FaPlus } from 'react-icons/fa6';
 
 import AppLayout from '@/libs/common/components/AppLayout';
-import ErrorPage from '@/libs/common/components/errorPage';
-import StarRating from '@/libs/common/components/star-rating';
+import ErrorPage from '@/libs/common/components/ErrorPage';
+import StarRating from '@/libs/common/components/StarRating';
 import { copyToClipboard } from '@/libs/common/utils/clipboard';
 import ProductPreviewCard from '@/libs/products/components/preview-card';
 import { useStoreDetailsQuery } from '@/libs/stores/hooks';
