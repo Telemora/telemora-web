@@ -1,7 +1,6 @@
 'use client';
 
 import { Progress } from '@heroui/react';
-import { hapticFeedback } from '@telegram-apps/sdk-react';
 import { useParams, useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import AppLayout from '@/libs/common/components/AppLayout';
@@ -20,7 +19,7 @@ export default function CreateStoreLocation() {
     try {
       await updateLocation(data);
       toast.success('Store location updated!');
-      hapticFeedback.impactOccurred('light');
+      webApp?.HapticFeedback.impactOccurred('light');
       router.push(`/stores/create/${storeId}/tags`);
     } catch (error) {
       console.error(error);

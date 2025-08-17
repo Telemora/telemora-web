@@ -2,7 +2,6 @@
 
 import { Button, Form, Input, Textarea } from '@heroui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { hapticFeedback } from '@telegram-apps/sdk';
 import { useParams, useRouter } from 'next/navigation';
 import React from 'react';
 import { useForm } from 'react-hook-form';
@@ -38,7 +37,7 @@ export default function EditProductPage() {
     try {
       const result = await mutateAsync(data);
       toast.success('Product updated successfully!');
-      hapticFeedback.impactOccurred('light');
+      webApp?.HapticFeedback.impactOccurred('light');
       router.push(`/stores/${result.store.id}/${result.id}`);
     } catch (error) {
       console.error(error);

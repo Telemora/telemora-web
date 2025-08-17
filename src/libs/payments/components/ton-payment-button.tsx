@@ -2,11 +2,11 @@
 
 import { environment } from '@environments';
 import { Button } from '@heroui/react';
-import { hapticFeedback } from '@telegram-apps/sdk-react';
 import { toNano } from '@ton/core';
 import { useTonAddress, useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
 import toast from 'react-hot-toast';
 
+import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 import { useCreatePayment } from '@/libs/payments/hooks';
 import { buildMarketplaceTransaction } from '@/libs/payments/utils';
 
@@ -21,6 +21,7 @@ export function TonPaymentButton({
   sellerAddress,
   orderId = '0',
 }: TonPaymentButtonProps) {
+  const { webApp, loading } = useTelegramWebApp();
   const [tonConnectUI] = useTonConnectUI();
   const wallet = useTonWallet();
   const userAddress = useTonAddress(false);
@@ -52,7 +53,7 @@ export function TonPaymentButton({
         toWalletAddress: sellerAddress,
       });
       toast.success('Payment sent & saved!');
-      hapticFeedback.impactOccurred('light');
+      webApp?.HapticFeedback.impactOccurred('light');
     } catch (error) {
       console.error('TON payment failed:', error);
       toast.error('Payment failed or cancelled');

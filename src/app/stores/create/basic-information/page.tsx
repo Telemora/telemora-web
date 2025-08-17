@@ -1,7 +1,6 @@
 'use client';
 import { Button, Form, Input, Progress, Textarea } from '@heroui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { hapticFeedback } from '@telegram-apps/sdk';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import { useForm } from 'react-hook-form';
@@ -35,7 +34,7 @@ export default function CreateStoreBasicInformation() {
       const result = await mutateAsync(formData);
       console.log('Store created:', result);
       toast.success('Store created successfully!');
-      hapticFeedback.impactOccurred('light');
+      webApp?.HapticFeedback.impactOccurred('light');
       router.push(`/stores/create/${result.id}/location`);
     } catch (err) {
       console.error('Create store error:', err);

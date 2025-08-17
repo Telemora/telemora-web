@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
-import { locationManager, useSignal } from '@telegram-apps/sdk-react';
 import { Button, Form, Input, Select, SelectItem, Switch } from '@heroui/react';
 import { FaGear, FaLocationDot } from 'react-icons/fa6';
 import {
@@ -15,6 +14,7 @@ import { GeoPointForm } from '@/libs/location/components/GeoPointForm';
 import { AddressDto, AddressType, CanonicalLocationType } from '@/libs/location/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createAddressSchema } from '@/libs/location/schemas';
+import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 
 interface Props {
   isPending: boolean;
@@ -32,8 +32,9 @@ export function AddressForm({ isPending, onSubmit }: Props) {
     resolver: zodResolver(createAddressSchema),
   });
 
+  const { webApp, loading } = useTelegramWebApp();
   const router = useRouter();
-  const [coords, setCoords] = useState<{ lat: number; lng: number } | null>(null);
+  const [coords, setCoords] = useState<{ lat?: number; lng?: number } | null>(null);
   const [isDetecting, setIsDetecting] = useState(false);
   const [detectError, setDetectError] = useState<string | null>(null);
 
@@ -44,8 +45,8 @@ export function AddressForm({ isPending, onSubmit }: Props) {
     coords?.lat,
     coords?.lng,
   );
-  const isSupported = useSignal(locationManager.isSupported);
-  const isAccessGranted = useSignal(locationManager.isAccessGranted);
+  const isSupported = webApp?.LocationManager.isLocationAvailable;
+  const isAccessGranted = webApp?.LocationManager.isAccessGranted;
   const { data: countries = [], isLoading: loadingCountries } = useCountries();
   const { data: states = [], isLoading: loadingStates } = useStatesByCountry(countryId);
   const { data: cities = [], isLoading: loadingCities } = useCitiesByState(stateId);
@@ -68,9 +69,10 @@ export function AddressForm({ isPending, onSubmit }: Props) {
     setDetectError(null);
 
     try {
-      await locationManager.mount();
-      const location = await locationManager.requestLocation();
-      setCoords({ lat: location.latitude, lng: location.longitude });
+      webApp?.LocationManager.init();
+      webApp?.LocationManager.getLocation((data) => {
+        setCoords({ lat: data?.latitude, lng: data?.longitude });
+      });
     } catch (err) {
       console.error(err);
       if (!isAccessGranted) {
@@ -99,7 +101,12 @@ export function AddressForm({ isPending, onSubmit }: Props) {
         </Button>
 
         {!isAccessGranted && (
-          <Button fullWidth size="sm" variant="flat" onPress={() => locationManager.openSettings()}>
+          <Button
+            fullWidth
+            size="sm"
+            variant="flat"
+            onPress={() => webApp?.LocationManager.openSettings()}
+          >
             <FaGear />
             Open Telegram Settings
           </Button>

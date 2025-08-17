@@ -8,8 +8,8 @@ import {
 } from '@/libs/location/types';
 
 export const geoPointSchema = z.object({
-  latitude: z.number(),
-  longitude: z.number(),
+  latitude: z.number().optional(),
+  longitude: z.number().optional(),
 }) satisfies z.ZodType<GeoPoint>;
 
 export const canonicalLocationSchema = z.object({

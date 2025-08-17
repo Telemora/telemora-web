@@ -2,7 +2,6 @@
 
 import { Button, Form, Progress, Spinner } from '@heroui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { hapticFeedback } from '@telegram-apps/sdk-react';
 import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
@@ -113,7 +112,7 @@ export default function CreateStoreLogoUpload() {
     try {
       const result = await mutateAsync(data);
       toast.success('Store created successfully!');
-      hapticFeedback.impactOccurred('light');
+      webApp?.HapticFeedback.impactOccurred('light');
       router.push(`/stores/${result.id}`);
     } catch {
       toast.error('Store submission failed.');

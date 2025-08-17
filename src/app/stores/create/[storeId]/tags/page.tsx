@@ -2,7 +2,6 @@
 
 import { Button, Form, Input, Progress } from '@heroui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { hapticFeedback } from '@telegram-apps/sdk-react';
 import { useParams, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -71,7 +70,7 @@ export default function CreateStoreTags() {
     try {
       await mutateAsync(data);
       toast.success('Tags saved!');
-      hapticFeedback.impactOccurred('light');
+      webApp?.HapticFeedback.impactOccurred('light');
       router.push(`/stores/create/${storeId}/working-hours`);
     } catch {
       toast.error('Failed to save tags');

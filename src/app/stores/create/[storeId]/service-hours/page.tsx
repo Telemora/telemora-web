@@ -20,7 +20,6 @@ import { useSubmitStoreServiceHoursMutation } from '@/libs/stores/hooks';
 import { ServiceHoursDto, SetStoreServiceHoursDto, Weekday } from '@/libs/stores/types';
 import { serviceHoursDtoSchema, setStoreServiceHoursSchema } from '@/libs/stores/schemas';
 import toast from 'react-hot-toast';
-import { hapticFeedback } from '@telegram-apps/sdk-react';
 
 export default function ServiceHoursPage() {
   const router = useRouter();
@@ -98,7 +97,7 @@ export default function ServiceHoursPage() {
       setStoreServiceHoursSchema.parse(payload);
       await mutateAsync(payload);
       toast.success('Working hours saved');
-      hapticFeedback.impactOccurred('light');
+      webApp?.HapticFeedback.impactOccurred('light');
       router.push(`/stores/create/${storeId}/logo-upload`);
     } catch (err) {
       setError('Failed to save service hours. Please try again.');

@@ -1,7 +1,6 @@
 'use client';
 
 import { Accordion, AccordionItem, Button, Chip, Spinner, Tooltip } from '@heroui/react';
-import { hapticFeedback } from '@telegram-apps/sdk-react';
 import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import React from 'react';
@@ -25,7 +24,7 @@ export default function StoreDetailsPage() {
 
   const handleShare = () => {
     copyToClipboard(window.location.href);
-    hapticFeedback.impactOccurred('light');
+    webApp?.HapticFeedback.impactOccurred('light');
   };
 
   const handleEdit = () => router.push(`/stores/${store?.id}/edit`);

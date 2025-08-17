@@ -1,7 +1,6 @@
 'use client';
 
 import { Button, Divider, ScrollShadow, Skeleton, User } from '@heroui/react';
-import { hapticFeedback } from '@telegram-apps/sdk-react';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 
@@ -74,7 +73,7 @@ export default function ProductDetailsPage() {
           size="lg"
           className="mt-4"
           onPress={() => {
-            hapticFeedback.impactOccurred('light');
+            webApp?.HapticFeedback.impactOccurred('light');
           }}
         >
           Add to Cart
