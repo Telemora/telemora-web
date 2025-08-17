@@ -554,142 +554,198 @@ export interface ThemeParameters {
 }
 
 export interface TelegramWebApp {
+  /** An object for accessing accelerometer data on the device. */
   readonly Accelerometer: Accelerometer;
-  /* Controls */
+  /** An object for controlling the back button which can be displayed in the header of the Mini App in the Telegram interface. */
   readonly BackButton: BackButton;
+  /** Current background color in the `#RRGGBB` format. */
   readonly backgroundColor: string;
+  /** An object for controlling biometrics on the device. */
   readonly BiometricManager: BiometricManager;
+  /** Current bottom bar color in the `#RRGGBB` format. */
   readonly bottomBarColor: string;
+  /** An object for controlling cloud storage. */
   readonly CloudStorage: CloudStorage;
-  /* Theme & layout */
+  /** The color scheme currently used in the Telegram app. Either “light” or “dark”. Also, available as the CSS variable `var(--tg-color-scheme)`. */
   readonly colorScheme: ColorScheme;
+  /** An object representing the safe area for displaying content within the app, free from overlapping Telegram UI elements. */
   readonly contentSafeAreaInset: ContentSafeAreaInset;
+  /** An object for accessing device orientation data on the device. */
   readonly DeviceOrientation: DeviceOrientation;
+  /** An object for storing and retrieving data from the device's local storage. */
   readonly DeviceStorage: DeviceStorage;
+  /** An object for accessing gyroscope data on the device. */
   readonly Gyroscope: Gyroscope;
-  /* Subsystems */
+  /** An object for controlling haptic feedback. */
   readonly HapticFeedback: HapticFeedback;
-  /* Colors (READ returns #RRGGBB; use setters below to assign keywords) */
+  /** Current header color in the `#RRGGBB` format. */
   readonly headerColor: string;
+  /** A string with raw data transferred to the Mini App, convenient for validating data. WARNING: Validate data from this field before using it on the bot's server. */
   readonly initData: string;
+  /** An object with input data transferred to the Mini App. WARNING: Data from this field should not be trusted. You should only use data from `initData` on the bot's server and only after it has been validated. */
   readonly initDataUnsafe: WebAppInitData;
+  /** Bot API 8.0+ True, if the Mini App is currently active. False, if the Mini App is minimized. */
   readonly isActive: boolean;
-  /* Toggles / state */
+  /** True, if the confirmation dialog is enabled while the user is trying to close the Mini App. False, if the confirmation dialog is disabled. */
   isClosingConfirmationEnabled: boolean;
+  /** True, if the Mini App is expanded to the maximum available height. False, if the Mini App occupies part of the screen and can be expanded to the full height using the expand() method. */
   readonly isExpanded: boolean;
+  /** True, if the Mini App is currently being displayed in fullscreen mode. */
   readonly isFullscreen: boolean;
+  /** True, if the Mini App’s orientation is currently locked. False, if orientation changes freely based on the device’s rotation. */
   isOrientationLocked: boolean;
+  /** True, if vertical swipes to close or minimize the Mini App are enabled. False, if vertical swipes to close or minimize the Mini App are disabled. In any case, the user will still be able to minimize and close the Mini App by swiping the Mini App's header. */
   isVerticalSwipesEnabled: boolean;
+  /** An object for controlling location on the device. */
   readonly LocationManager: LocationManager;
+  /** An object for controlling the main button, which is displayed at the bottom of the Mini App in the Telegram interface. */
   readonly MainButton: BottomButton;
+  /** The name of the platform of the user's Telegram app. */
   readonly platform: string;
+  /** An object representing the device's safe area insets, accounting for system UI elements like notches or navigation bars. */
   readonly safeAreaInset: SafeAreaInset;
+  /** An object for controlling the secondary button, which is displayed at the bottom of the Mini App in the Telegram interface. */
   readonly SecondaryButton: BottomButton;
+  /** An object for storing and retrieving data from the device's secure storage. */
   readonly SecureStorage: SecureStorage;
+  /** An object for controlling the Settings item in the context menu of the Mini App in the Telegram interface. */
   readonly SettingsButton: SettingsButton;
+  /** An object containing the current theme settings used in the Telegram app. */
   readonly themeParams: ThemeParameters;
+  /** The version of the Bot API available in the user's Telegram app. */
   readonly version: string;
+  /** The current height of the visible area of the Mini App. Also available in CSS as the variable `var(--tg-viewport-height)`. */
   readonly viewportHeight: number;
+  /** The height of the visible area of the Mini App in its last stable state. Also available in CSS as a variable `var(--tg-viewport-stable-height)`. */
   readonly viewportStableHeight: number;
 
+  /** Bot API 8.0+ A method that prompts the user to add the Mini App to the home screen. */
   addToHomeScreen(): void;
 
+  /** Bot API 8.0+ A method that checks if adding to the home screen is supported and if the Mini App has already been added. */
   checkHomeScreenStatus(
     callback?: (status: 'added' | 'missed' | 'unknown' | 'unsupported') => void,
   ): void;
 
+  /** A method that closes the Mini App. */
   close(): void;
 
+  /** Bot API 6.4+ A method that closes the native popup for scanning a QR code opened with the `showScanQrPopup` method. */
   closeScanQrPopup(): void;
 
+  /** Bot API 6.2+ A method that disables the confirmation dialog while the user is trying to close the Mini App. */
   disableClosingConfirmation(): void;
 
+  /** Bot API 7.7+ A method that disables vertical swipes to close or minimize the Mini App. */
   disableVerticalSwipes(): void;
 
-  /* Files & clipboard */
+  /** Bot API 8.0+ A method that displays a native popup prompting the user to download a file specified by the `params` argument. */
   downloadFile(parameters: DownloadFileParameters, callback?: (accepted: boolean) => void): void;
 
-  /* Confirmation & gestures */
+  /** Bot API 6.2+ A method that enables a confirmation dialog while the user is trying to close the Mini App. */
   enableClosingConfirmation(): void;
 
+  /** Bot API 7.7+ A method that enables vertical swipes to close or minimize the Mini App. */
   enableVerticalSwipes(): void;
 
+  /** Bot API 8.0+ A method that requests exiting fullscreen mode. */
   exitFullscreen(): void;
 
+  /** A method that expands the Mini App to the maximum available height. */
   expand(): void;
 
+  /** Bot API 9.1+ A method that hides the on-screen keyboard, if it is currently visible. Does nothing if the keyboard is not active. */
   hideKeyboard(): void;
 
-  /* Version helper */
+  /** Returns true if the user's app supports a version of the Bot API that is equal to or higher than the version passed as the parameter. */
   isVersionAtLeast(version: string): boolean;
 
+  /** Bot API 8.0+ A method that locks the Mini App’s orientation to its current mode (either portrait or landscape). */
   lockOrientation(): void;
 
+  /** A method that deletes a previously set event handler. */
   offEvent(eventType: string, handler: (...arguments_: any[]) => void): void;
 
-  /* Events */
+  /** A method that sets the app event handler. */
   onEvent(eventType: string, handler: (...arguments_: any[]) => void): void;
 
-  /* Payments & share */
-  openInvoice(url: string, callback?: (status: 'cancelled' | 'failed' | 'paid') => void): void;
+  /** Bot API 6.1+ A method that opens an invoice using the link `url`. */
+  openInvoice(
+    url: string,
+    callback?: (status: 'cancelled' | 'failed' | 'paid' | 'pending') => void,
+  ): this;
 
-  /* Links */
-  openLink(url: string, options?: OpenLinkOptions): void;
+  /** A method that opens a link in an external browser. The Mini App will not be closed. */
+  openLink(url: string, options?: OpenLinkOptions): this;
 
-  openTelegramLink(url: string): void;
+  /** A method that opens a telegram link inside the Telegram app. The Mini App will not be closed after this method is called. Up to Bot API 7.0 The Mini App will be closed after this method is called. */
+  openTelegramLink(url: string): this;
 
+  /** Bot API 6.4+ A method that requests text from the clipboard. */
   readTextFromClipboard(callback?: (text: string | null) => void): void;
 
-  /* Lifecycle */
+  /** A method that informs the Telegram app that the Mini App is ready to be displayed. */
   ready(): void;
 
+  /** Bot API 8.0+ A method that shows a native popup requesting permission for the bot to manage user's emoji status. */
   requestEmojiStatusAccess(callback?: (allowed: boolean) => void): void;
 
-  requestWriteAccess(callback?: (allowed: boolean) => void): void;
+  /** Bot API 6.9+ A method that shows a native popup prompting the user for their phone number. */
+  requestContact(callback?: (granted: boolean) => void): void;
 
-  requestContact(callback?: (allowed: boolean) => void): void;
+  /** Bot API 6.9+ A method that shows a native popup requesting permission for the bot to send messages to the user. */
+  requestWriteAccess(callback?: (granted: boolean) => void): void;
 
+  /** Bot API 8.0+ A method that requests opening the Mini App in fullscreen mode. */
   requestFullscreen(): void;
 
-  /* Bot channel */
+  /** A method used to send data to the bot. */
   sendData(data: string): void;
 
+  /** Bot API 6.1+ A method that sets the app background color in the `#RRGGBB` format. */
   setBackgroundColor(color: Extract<CssColorKey, 'bg_color' | 'secondary_bg_color'> | string): void;
 
+  /** Bot API 7.10+ A method that sets the app's bottom bar color in the `#RRGGBB` format. */
   setBottomBarColor(color: CssColorKey | string): void;
 
-  /* Emoji status (8.0+) */
+  /** Bot API 8.0+ A method that opens a dialog allowing the user to set the specified custom emoji as their status. */
   setEmojiStatus(
     custom_emoji_id: string,
     parameters?: EmojiStatusParameters,
     callback?: (ok: boolean) => void,
   ): void;
 
-  /* Color setters (accept keys or #RRGGBB) */
+  /** Bot API 6.1+ A method that sets the app header color in the `#RRGGBB` format. */
   setHeaderColor(color: Extract<CssColorKey, 'bg_color' | 'secondary_bg_color'> | string): void;
 
+  /** Bot API 8.0+ A method that opens a dialog allowing the user to share a message provided by the bot. */
   shareMessage(message_id: number | string, callback?: (sent: boolean) => void): void;
 
+  /** Bot API 7.8+ A method that opens the native story editor with the media specified in the `media_url` parameter. */
   shareToStory(media_url: string, parameters?: StoryShareParameters): void;
 
+  /** Bot API 6.2+ A method that shows `message` in a simple alert with a 'Close' button. */
   showAlert(message: string, callback?: () => void): void;
 
+  /** Bot API 6.2+ A method that shows `message` in a simple confirmation window with 'OK' and 'Cancel' buttons. */
   showConfirm(message: string, callback?: (ok: boolean) => void): void;
 
-  /* QR / popups */
+  /** Bot API 6.2+ A method that shows a native popup described by the `params` argument. */
   showPopup(
     parameters: { buttons?: PopupButton[]; message: string; title?: string },
     callback?: (buttonId: string | null) => void,
   ): void;
 
+  /** Bot API 6.4+ A method that shows a native popup for scanning a QR code described by the `params` argument. */
   showScanQrPopup(
     parameters: ScanQrPopupParameters,
     callback?: (data: string | null) => boolean,
   ): void;
 
-  /* Inline mode (6.7+) */
+  /** Bot API 6.7+ A method that inserts the bot's username and the specified inline `query` in the current chat's input field. */
   switchInlineQuery(query?: string, choose_chat_types?: ChooseChatType[]): void;
 
+  /** Bot API 8.0+ A method that unlocks the Mini App’s orientation, allowing it to follow the device's rotation freely. */
   unlockOrientation(): void;
 }
 
