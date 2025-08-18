@@ -49,6 +49,21 @@ module.exports = {
         section: 'var(--tg-theme-section-separator-color)',
       },
     },
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: '0',
+        sm: '1rem',
+        lg: '2rem',
+        xl: '3rem',
+      },
+      screens: {
+        sm: '320px',
+        md: '375px',
+        lg: '425px',
+        xl: '768px',
+      },
+    },
   },
   darkMode: 'class',
   plugins: [

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="antialiased">
+      <body className="container antialiased">
         <AppProvider>{children}</AppProvider>
         <Script src="https://telegram.org/js/telegram-web-app.js?59" strategy="beforeInteractive" />
       </body>
