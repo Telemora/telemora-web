@@ -1,8 +1,6 @@
 @import "tailwindcss";
 
-@plugin './hero.ts';
-@source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
-@custom-variant dark (&:is(.dark *));
+@config "../../tailwind.config.js";
 
 :root {
   --background: #ffffff;
@@ -28,11 +26,6 @@
 
 * {
   scrollbar-width: none;
-}
-
-html {
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
 }
 
 body {

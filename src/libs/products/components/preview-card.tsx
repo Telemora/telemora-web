@@ -17,7 +17,6 @@ export default function ProductPreviewCard({ product }: ProductPreviewCard) {
       <Card>
         <CardBody className="h-32">
           <Image
-            placeholder="blur"
             src={product.primaryImage.url || '/fallback-product.png'}
             alt={product.primaryImage.alt ?? product.name}
             priority={true}

@@ -53,7 +53,6 @@ export default function StoreDetailsPage() {
         <div className="flex items-center gap-3">
           {store.logo?.url && (
             <Image
-              placeholder="blur"
               src={store.logo.url}
               alt={store.displayName}
               width={48}

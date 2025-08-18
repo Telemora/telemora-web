@@ -17,7 +17,6 @@ export const StorePreviewCard = ({ store }: { store: StorePreviewDto }) => {
       >
         <CardBody className="flex flex-col items-center space-y-2 text-center">
           <Image
-            placeholder="blur"
             src={store.logo?.url ?? '/fallback-store.png'}
             alt={store.displayName}
             width={64}

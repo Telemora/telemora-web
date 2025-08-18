@@ -45,7 +45,6 @@ export default function ProductDetailsPage() {
           <ScrollShadow orientation="horizontal" className="flex gap-x-4 overflow-x-auto pb-2">
             {product.images.map((img, index) => (
               <Image
-                placeholder="blur"
                 key={index}
                 src={img.url}
                 width={240}

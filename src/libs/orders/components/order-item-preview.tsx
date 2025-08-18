@@ -18,7 +18,6 @@ export default function OrderItemPreviewCard({ orderItem }: { orderItem: OrderIt
               className="focus:ring-primary rounded focus:ring-2 focus:outline-none"
             >
               <Image
-                placeholder="blur"
                 src={orderItem.product.primaryImage.url || '/fallback-order.png'}
                 alt={sanitizeAltText(orderItem.product.name)}
                 width={64}
@@ -29,7 +28,6 @@ export default function OrderItemPreviewCard({ orderItem }: { orderItem: OrderIt
             </Link>
           ) : (
             <Image
-              placeholder="blur"
               src={orderItem.product.primaryImage.url || '/fallback-order.png'}
               alt={sanitizeAltText(orderItem.product.name)}
               width={64}
