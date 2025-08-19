@@ -21,7 +21,7 @@ export const StorePreviewCard = ({ store }: { store: StorePreviewDto }) => {
             alt={store.displayName}
             width={64}
             height={64}
-            className="h-16 w-16 rounded-full object-cover"
+            className="size-16 rounded-full object-cover"
           />
           <div className="w-full">
             <h3 className="truncate text-sm font-medium">{store.displayName}</h3>

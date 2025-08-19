@@ -22,7 +22,7 @@ export default function ProductPreviewCard({ product }: ProductPreviewCard) {
             priority={true}
             width={100}
             height={100}
-            className="relative aspect-square w-full rounded object-cover"
+            className="relative aspect-square size-full rounded object-cover"
           />
         </CardBody>
         <CardFooter className="block space-y-2">
