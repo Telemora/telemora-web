@@ -1,3 +1,4 @@
+import httpClient from '@/libs/common/utils/httpClient';
 import { AddressDto } from '@/libs/location/types';
 import { generateMockStoreDetail, generateMockStoreSummaries } from '@/libs/stores/mocks';
 import {
@@ -5,39 +6,51 @@ import {
   CreateStoreLogoDto,
   CreateStoreTagsDto,
   SetStoreServiceHoursDto,
+  StoreDetail,
+  StoreSummary,
   UpdateStoreDto,
 } from '@/libs/stores/types';
 
+import { isDev } from '../../common/utils';
+
 export async function fetchUserStores() {
-  return generateMockStoreSummaries();
+  return isDev ? generateMockStoreSummaries() : httpClient.get<StoreSummary[]>('/stores');
 }
 
 export async function fetchStoreDetails(storeId: string) {
-  return generateMockStoreDetail();
+  return isDev ? generateMockStoreDetail() : httpClient.get<StoreDetail>(`/stores/${storeId}`);
 }
 
 export async function fetchDiscoverableStores() {
-  return generateMockStoreSummaries();
+  return isDev ? generateMockStoreSummaries() : httpClient.get<StoreSummary[]>('/stores/discover');
 }
 
 export async function fetchFeaturedStores() {
-  return generateMockStoreSummaries();
+  return isDev ? generateMockStoreSummaries() : httpClient.get<StoreSummary[]>('/stores/featured');
 }
 
 export async function submitStoreBasicInfo(data: CreateStoreBasicDto) {
-  return generateMockStoreDetail();
+  return isDev
+    ? generateMockStoreDetail()
+    : httpClient.post<StoreDetail>('/stores/create/basic', data);
 }
 
 export async function submitStoreAddressUpdate(storeId: string, data: AddressDto) {
-  return generateMockStoreDetail();
+  return isDev
+    ? generateMockStoreDetail()
+    : httpClient.patch<StoreDetail>(`/stores/${storeId}/address`, data);
 }
 
 export async function submitStoreTagsSelection(storeId: string, data: CreateStoreTagsDto) {
-  return generateMockStoreDetail();
+  return isDev
+    ? generateMockStoreDetail()
+    : httpClient.patch<StoreDetail>(`/stores/${storeId}/tags`, data);
 }
 
 export async function submitStoreWorkingHours(storeId: string, data: SetStoreServiceHoursDto) {
-  return generateMockStoreDetail();
+  return isDev
+    ? generateMockStoreDetail()
+    : httpClient.patch<StoreDetail>(`/stores/${storeId}/working_hours`, data);
 }
 
 export async function submitStoreLogoUpload(storeId: string, data: CreateStoreLogoDto) {
@@ -45,10 +58,16 @@ export async function submitStoreLogoUpload(storeId: string, data: CreateStoreLo
   if (data.logoFile) {
     const fileBlob = new Blob([data.logoFile], { type: 'image/*' });
     formData.append('logo', fileBlob);
-    return generateMockStoreDetail();
+    return isDev
+      ? generateMockStoreDetail()
+      : httpClient.post<StoreDetail>(`/stores/${storeId}/logo`, formData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
   } else throw new Error('No file provided');
 }
 
 export async function submitStoreUpdate(storeId: string, data: UpdateStoreDto) {
-  return generateMockStoreDetail();
+  return isDev
+    ? generateMockStoreDetail()
+    : httpClient.patch<StoreDetail>(`/stores/${storeId}/update`, data);
 }

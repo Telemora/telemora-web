@@ -1,31 +1,49 @@
+import { isDev } from '@/libs/common/utils';
+import httpClient from '@/libs/common/utils/httpClient';
 import {
   generateMockReviewDetail,
   generateMockReviewPreviews,
   generateMockReviewReplyPreview,
   generateMockReviewReportPreview,
 } from '@/libs/reviews/mocks';
-import { CreateReviewDto, CreateReviewReplyDto, CreateReviewReportDto } from '@/libs/reviews/types';
+import {
+  CreateReviewDto,
+  CreateReviewReplyDto,
+  CreateReviewReportDto,
+  ReviewDetail,
+  ReviewPreviewDto,
+  ReviewReplyPreview,
+  ReviewReportPreview,
+} from '@/libs/reviews/types';
 
 export async function createReview(productId: number, data: CreateReviewDto) {
-  return generateMockReviewDetail();
+  return isDev
+    ? generateMockReviewDetail()
+    : httpClient.post<ReviewDetail>(`/reviews/product/${productId}/create`, data);
 }
 
 export async function getProductReviews(productId: number) {
-  return generateMockReviewPreviews();
+  return isDev
+    ? generateMockReviewPreviews()
+    : httpClient.get<ReviewPreviewDto[]>(`/reviews/product/${productId}`);
 }
 
 export async function getReviewsById(id: string | number) {
-  return generateMockReviewDetail();
+  return isDev ? generateMockReviewDetail() : httpClient.get<ReviewDetail>(`/reviews/${id}`);
 }
 
 export async function replyToReview(reviewId: number, data: CreateReviewReplyDto) {
-  return generateMockReviewReplyPreview();
+  return isDev
+    ? generateMockReviewReplyPreview()
+    : httpClient.post<ReviewReplyPreview>(`/reviews/${reviewId}/reply`, data);
 }
 
 export async function reportReview(reviewId: number, data: CreateReviewReportDto) {
-  return generateMockReviewReportPreview();
+  return isDev
+    ? generateMockReviewReportPreview()
+    : httpClient.post<ReviewReportPreview>(`/reviews/${reviewId}/report`, data);
 }
 
 export async function deleteReviews(id: string | number) {
-  return;
+  return httpClient.delete<void>(`/reviews/${id}/delete`);
 }
