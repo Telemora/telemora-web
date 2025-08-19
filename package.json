@@ -28,7 +28,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "lint-fix": "eslint --fix .",
     "format": "prettier ./src --write",
     "prepare": "husky"
   },
