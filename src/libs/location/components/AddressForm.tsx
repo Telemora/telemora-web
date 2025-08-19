@@ -120,7 +120,7 @@ export function AddressForm({ isPending, onSubmit }: Props) {
       <Input {...register('postalCode')} label="Postal Code" />
       <Select {...register('type')}>
         {Object.values<string>(AddressType).map((type) => (
-          <SelectItem>{type}</SelectItem>
+          <SelectItem key={type}>{type}</SelectItem>
         ))}
       </Select>
       <GeoPointForm register={register} />

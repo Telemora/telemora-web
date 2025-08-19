@@ -39,7 +39,7 @@ export function ProductPhotosUploader() {
   useEffect(() => {
     const initial = getValues('imageUrls') || [];
     setUploadedImageUrls(initial);
-  }, []);
+  }, [getValues]);
 
   const handleSelectFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selected = Array.from(e.target.files ?? []);
@@ -145,7 +145,7 @@ export function ProductPhotosUploader() {
                     <button
                       type="button"
                       onClick={() => handleRemove(i)}
-                      className="absolute right-1 top-1 rounded-full bg-black/60 p-1 text-xs text-white"
+                      className="absolute top-1 right-1 rounded-full bg-black/60 p-1 text-xs text-white"
                     >
                       <FaTrash />
                     </button>
