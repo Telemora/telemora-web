@@ -12,7 +12,7 @@ export async function generateMockStorePreview(): Promise<StorePreviewDto> {
     displayName: faker.company.name(),
     slug: faker.helpers.slugify(faker.company.name()),
     logo: {
-      url: faker.image.url(),
+      url: faker.image.personPortrait(),
       alt: faker.company.name(),
     },
     vendorScore: faker.number.float({ min: 1, max: 5, fractionDigits: 1 }),

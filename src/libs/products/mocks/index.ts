@@ -54,7 +54,7 @@ export async function generateMockProductDetail(): Promise<ProductDetailDto> {
 
 export async function generateMockProductPhoto(): Promise<ProductImageDto> {
   return {
-    url: faker.image.urlPicsumPhotos(),
+    url: faker.image.personPortrait(),
     alt: faker.commerce.productAdjective(),
     width: 600,
     height: 400,
