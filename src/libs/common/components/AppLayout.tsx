@@ -4,7 +4,7 @@ import React, { PropsWithChildren } from 'react';
 
 import BottomTabs from '@/libs/common/components/BottomTabs';
 
-import CustomNavbar from './Navbar';
+import CustomNavbar from './CustomNavbar';
 
 export default function AppLayout({ children }: PropsWithChildren) {
   return (

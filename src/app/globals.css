@@ -3,21 +3,32 @@
 @config "../../tailwind.config.js";
 
 :root {
+  --tg-theme-accent-text-color: #168acd;
+  --tg-color-scheme: light;
   --tg-theme-bg-color: #ffffff;
-  --tg-theme-text-color: #000000;
-  --tg-theme-hint-color: #8e8e93;
-  --tg-theme-link-color: #2672cb;
-  --tg-theme-button-color: #2672cb;
+  --tg-theme-bottom-bar-bg-color: #ffffff;
+  --tg-theme-button-color: #40a7e3;
   --tg-theme-button-text-color: #ffffff;
-  --tg-theme-secondary-bg-color: #f4f4f5;
-  --tg-theme-header-bg-color: #f4f4f5;
-  --tg-theme-bottom-bar-bg-color: #f4f4f5;
-  --tg-theme-accent-text-color: #2672cb;
+  --tg-theme-destructive-text-color: #d14e4e;
+  --tg-theme-header-bg-color: #ffffff;
+  --tg-theme-hint-color: #999999;
+  --tg-theme-link-color: #168acd;
+  --tg-theme-secondary-bg-color: #f1f1f1;
   --tg-theme-section-bg-color: #ffffff;
-  --tg-theme-section-header-text-color: #8e8e93;
-  --tg-theme-section-separator-color: #d3d3d3;
-  --tg-theme-subtitle-text-color: #8e8e93;
-  --tg-theme-destructive-text-color: #ff3b30;
+  --tg-theme-section-header-text-color: #168acd;
+  --tg-theme-section-separator-color: #e7e7e7;
+  --tg-theme-subtitle-text-color: #999999;
+  --tg-theme-text-color: #000000;
+  --tg-viewport-height: 762px;
+  --tg-viewport-stable-height: 762px;
+  --tg-safe-area-inset-top: 0px;
+  --tg-safe-area-inset-bottom: 0px;
+  --tg-safe-area-inset-left: 0px;
+  --tg-safe-area-inset-right: 0px;
+  --tg-content-safe-area-inset-top: 0px;
+  --tg-content-safe-area-inset-bottom: 0px;
+  --tg-content-safe-area-inset-left: 0px;
+  --tg-content-safe-area-inset-right: 0px;
 }
 
 ::-webkit-scrollbar {
