@@ -7,7 +7,7 @@ import { useUserState } from '@/libs/users/context/userContext';
 export default function CustomNavbar() {
   const { data } = useUserState();
   return (
-    <Navbar>
+    <Navbar classNames={{ base: 'bg-default/5 backdrop-blur-md shadow-md' }}>
       <NavbarBrand>
         <Link href="/profile/preferences">
           <FaGear aria-label="Preferences" />

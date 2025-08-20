@@ -19,16 +19,16 @@
   --tg-theme-section-separator-color: #e7e7e7;
   --tg-theme-subtitle-text-color: #999999;
   --tg-theme-text-color: #000000;
-  --tg-viewport-height: 762px;
-  --tg-viewport-stable-height: 762px;
-  --tg-safe-area-inset-top: 0px;
-  --tg-safe-area-inset-bottom: 0px;
-  --tg-safe-area-inset-left: 0px;
-  --tg-safe-area-inset-right: 0px;
-  --tg-content-safe-area-inset-top: 0px;
-  --tg-content-safe-area-inset-bottom: 0px;
-  --tg-content-safe-area-inset-left: 0px;
-  --tg-content-safe-area-inset-right: 0px;
+  --tg-viewport-height: 0;
+  --tg-viewport-stable-height: 0;
+  --tg-safe-area-inset-top: 0;
+  --tg-safe-area-inset-bottom: 0;
+  --tg-safe-area-inset-left: 0;
+  --tg-safe-area-inset-right: 0;
+  --tg-content-safe-area-inset-top: 0;
+  --tg-content-safe-area-inset-bottom: 0;
+  --tg-content-safe-area-inset-left: 0;
+  --tg-content-safe-area-inset-right: 0;
 }
 
 ::-webkit-scrollbar {

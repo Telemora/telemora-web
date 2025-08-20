@@ -4,6 +4,12 @@ const { heroui } = require('@heroui/react');
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}', './node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}'],
   theme: {
+    borderRadius: {
+      DEFAULT: '4px',
+      sm: '0.5rem',
+      md: '0.7rem',
+      lg: '0.9rem',
+    },
     extend: {
       fontSize: {
         tiny: '0.65rem',
@@ -12,7 +18,7 @@ module.exports = {
         large: '1.125rem',
       },
       colors: {
-        default: 'var(--tg-theme-text-color)',
+        default: 'var(--tg-theme-secondary-bg-color)',
         background: 'var(--tg-theme-bg-color)',
         foreground: 'var(--tg-theme-text-color)',
         primary: 'var(--tg-theme-button-color)',
@@ -90,7 +96,7 @@ module.exports = {
         dividerWeight: '0.75px',
       },
       prefix: 'tg',
-      addCommonColors: true,
+      // addCommonColors: true,
       themes: {
         telegram: {
           extend: 'var(--tg-color-scheme)',
@@ -199,6 +205,38 @@ module.exports = {
               900: 'var(--tg-theme-destructive-text-color)',
               foreground: 'var(--tg-theme-button-text-color)',
               DEFAULT: 'var(--tg-theme-destructive-text-color)',
+            },
+          },
+          layout: {
+            fontSize: {
+              tiny: '0.3rem',
+              small: '0.5rem',
+              medium: '0.7rem',
+              large: '0.9rem',
+            },
+            lineHeight: {
+              tiny: '0.3rem',
+              small: '0.5rem',
+              medium: '0.7rem',
+              large: '0.9rem',
+            },
+            radius: {
+              small: '0.5rem',
+              medium: '0.7rem',
+              large: '0.9rem',
+            },
+            disabledOpacity: 0.5,
+            hoverOpacity: 0.7,
+            dividerWeight: '1px',
+            borderWidth: {
+              small: '1px',
+              medium: '2px',
+              large: '3px',
+            },
+            boxShadow: {
+              small: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+              medium: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+              large: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
             },
           },
         },
