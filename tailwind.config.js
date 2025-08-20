@@ -92,7 +92,7 @@ module.exports = {
       addCommonColors: true,
       themes: {
         telegram: {
-          extend: 'dark',
+          extend: 'light',
           layout: {},
           colors: {
             background: {
@@ -158,8 +158,7 @@ module.exports = {
           },
         },
       },
-      defaultTheme: 'dark',
-      defaultExtendTheme: 'dark',
+      defaultTheme: 'telegram',
     }),
   ],
 };
