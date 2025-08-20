@@ -54,7 +54,7 @@ export default function OrderSummaryCard({
           <h3 className="text-sm font-semibold">Order #{id}</h3>
           <p className="text-xs text-gray-500">
             {formatSafeDate(createdAt, DATE_FORMATS.SHORT, 'Unknown date')} —{' '}
-            <span className="text-gray-400">{store.displayName}</span>
+            <span className="text-default">{store.displayName}</span>
           </p>
         </div>
         <OrderStatusChip status={status} />

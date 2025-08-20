@@ -12,7 +12,7 @@ export default function PreviewStoresSection({
   title: string;
 }) {
   return (
-    <section className="space-y-4">
+    <section className="space-y-4" id="preview-stores-section">
       <Divider />
       <h1>{title}</h1>
       <div className="grid grid-cols-2 gap-3">

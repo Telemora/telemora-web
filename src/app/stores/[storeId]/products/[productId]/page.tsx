@@ -27,7 +27,7 @@ export default function ProductDetailsPage() {
     return (
       <AppLayout>
         <div className="space-y-4">
-          <Skeleton className="h-52 w-full rounded-xl" />
+          <Skeleton className="h-52 w-full rounded-lg" />
           <Skeleton className="h-6 w-3/4 rounded" />
           <Skeleton className="h-6 w-1/2 rounded" />
           <Skeleton className="h-10 w-full rounded" />
@@ -50,7 +50,7 @@ export default function ProductDetailsPage() {
                 width={240}
                 height={240}
                 alt={product.name}
-                className="aspect-square w-60 shrink-0 rounded-xl object-cover"
+                className="aspect-square w-60 shrink-0 rounded-lg object-cover"
               />
             ))}
           </ScrollShadow>

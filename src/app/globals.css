@@ -46,6 +46,7 @@
 }
 
 body {
+  background-color: var(--tg-theme-secondary-bg-color);
   font-family: Arial, Helvetica, sans-serif;
   overscroll-behavior: none;
   -webkit-overflow-scrolling: touch;

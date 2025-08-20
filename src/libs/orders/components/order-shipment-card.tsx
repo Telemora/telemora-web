@@ -56,14 +56,14 @@ export function OrderShipmentCard({
             {trackingNumber ? (
               escapeHtml(trackingNumber)
             ) : (
-              <span className="text-gray-400">No Tracking</span>
+              <span className="text-default">No Tracking</span>
             )}
           </span>
           <span className="text-xs text-gray-500">
             {courierService ? (
               escapeHtml(courierService)
             ) : (
-              <span className="text-gray-400">No Courier</span>
+              <span className="text-default">No Courier</span>
             )}
           </span>
         </div>
@@ -112,7 +112,7 @@ export function OrderShipmentCard({
                 <button
                   type="button"
                   aria-label="Copy tracking number"
-                  className="ml-1 text-gray-400 hover:text-blue-600 focus:outline-none"
+                  className="text-default ml-1 hover:text-blue-600 focus:outline-none"
                   onClick={() => navigator.clipboard.writeText(trackingNumber)}
                   tabIndex={0}
                 >
@@ -134,21 +134,21 @@ export function OrderShipmentCard({
                 </button>
               </span>
             ) : (
-              <span className="text-gray-400">Not available</span>
+              <span className="text-default">Not available</span>
             )}
           </ShipmentDetail>
           <ShipmentDetail label="Courier:">
             {courierService ? (
               <span title={courierService}>{escapeHtml(courierService)}</span>
             ) : (
-              <span className="text-gray-400">Not available</span>
+              <span className="text-default">Not available</span>
             )}
           </ShipmentDetail>
           <ShipmentDetail label="Shipped:">
             {isValidDate(shippedAt) ? (
               <time dateTime={shippedAt}>{format(new Date(shippedAt!), 'PPP')}</time>
             ) : (
-              <span className="text-gray-400">Not available</span>
+              <span className="text-default">Not available</span>
             )}
           </ShipmentDetail>
           <ShipmentDetail label="Est. Delivery:">
@@ -157,7 +157,7 @@ export function OrderShipmentCard({
                 {format(new Date(expectedDeliveryDate!), 'PPP')}
               </time>
             ) : (
-              <span className="text-gray-400">Not available</span>
+              <span className="text-default">Not available</span>
             )}
           </ShipmentDetail>
         </dl>
