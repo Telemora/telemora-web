@@ -40,11 +40,15 @@ export default function BottomTabs() {
       placement="bottom"
       items={tabList}
       classNames={{
-        tabWrapper: 'px-2 mb-6 fixed bottom-0 z-50 w-full md:max-w-md translate-x-1/2 right-1/2',
-        base: 'rounded-md',
-        tabList: 'bg-background shadow-md',
+        tabWrapper: 'px-2 fixed bottom-0 z-50 w-full md:max-w-md translate-x-1/2 right-1/2',
+        base: '',
+        tabList: '',
         tab: 'h-16',
-        cursor: 'bg-overlay shadow-sm',
+        cursor: '',
+      }}
+      style={{
+        marginBottom:
+          'calc(var(--tg-safe-area-inset-bottom) + var(--tg-content-safe-area-inset-bottom))',
       }}
       onSelectionChange={(key) => route.push(key as string)}
     >

@@ -2,7 +2,8 @@
 
 @config "../../tailwind.config.js";
 
-:root {
+:root,
+[data-theme='light'] {
   --tg-theme-accent-text-color: #168acd;
   --tg-color-scheme: light;
   --tg-theme-bg-color: #ffffff;
@@ -19,20 +20,10 @@
   --tg-theme-section-separator-color: #e7e7e7;
   --tg-theme-subtitle-text-color: #999999;
   --tg-theme-text-color: #000000;
-  --tg-viewport-height: 0;
-  --tg-viewport-stable-height: 0;
-  --tg-safe-area-inset-top: 0;
-  --tg-safe-area-inset-bottom: 0;
-  --tg-safe-area-inset-left: 0;
-  --tg-safe-area-inset-right: 0;
-  --tg-content-safe-area-inset-top: 0;
-  --tg-content-safe-area-inset-bottom: 0;
-  --tg-content-safe-area-inset-left: 0;
-  --tg-content-safe-area-inset-right: 0;
 }
 
-/*
-:root {
+:root,
+[data-theme='dark'] {
   --tg-theme-accent-text-color: #6ab2f2;
   --tg-color-scheme: dark;
   --tg-theme-bg-color: #17212b;
@@ -49,18 +40,21 @@
   --tg-theme-section-separator-color: #111921;
   --tg-theme-subtitle-text-color: #708499;
   --tg-theme-text-color: #f5f5f5;
+}
+
+:root {
   --tg-viewport-height: 0;
   --tg-viewport-stable-height: 0;
-  --tg-safe-area-inset-top: 0;
-  --tg-safe-area-inset-bottom: 0;
-  --tg-safe-area-inset-left: 0;
-  --tg-safe-area-inset-right: 0;
-  --tg-content-safe-area-inset-top: 0;
-  --tg-content-safe-area-inset-bottom: 0;
-  --tg-content-safe-area-inset-left: 0;
-  --tg-content-safe-area-inset-right: 0;
+  --tg-safe-area-inset-top: 1rem;
+  --tg-safe-area-inset-bottom: 1rem;
+  --tg-safe-area-inset-left: 1rem;
+  --tg-safe-area-inset-right: 1rem;
+  --tg-content-safe-area-inset-top: 1rem;
+  --tg-content-safe-area-inset-bottom: 1rem;
+  --tg-content-safe-area-inset-left: 1rem;
+  --tg-content-safe-area-inset-right: 1rem;
 }
-*/
+
 ::-webkit-scrollbar {
   width: 0;
   height: 0;
@@ -76,7 +70,10 @@
 }
 
 body {
-  background-color: var(--tg-theme-secondary-bg-color);
+  padding: calc(var(--tg-safe-area-inset-top) + var(--tg-content-safe-area-inset-top))
+    calc(var(--tg-safe-area-inset-right) + var(--tg-content-safe-area-inset-right))
+    calc(var(--tg-safe-area-inset-bottom) + var(--tg-content-safe-area-inset-bottom))
+    calc(var(--tg-safe-area-inset-left) + var(--tg-content-safe-area-inset-left));
   font-family: Arial, Helvetica, sans-serif;
   overscroll-behavior: none;
   -webkit-overflow-scrolling: touch;
