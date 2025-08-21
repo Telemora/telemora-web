@@ -70,7 +70,7 @@
 }
 
 body {
-  background-color: var(--tg-theme-bg-color);
+  background-color: var(--tg-theme-secondary-bg-color);
   padding: calc(var(--tg-safe-area-inset-top) + var(--tg-content-safe-area-inset-top))
     calc(var(--tg-safe-area-inset-right) + var(--tg-content-safe-area-inset-right))
     calc(var(--tg-safe-area-inset-bottom) + var(--tg-content-safe-area-inset-bottom))
