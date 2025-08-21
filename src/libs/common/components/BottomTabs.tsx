@@ -41,10 +41,10 @@ export default function BottomTabs() {
       items={tabList}
       classNames={{
         tabWrapper: 'px-2 mb-6 fixed bottom-0 z-50 w-full md:max-w-md translate-x-1/2 right-1/2',
-        base: 'rounded-md backdrop-blur-sm bg-background/70',
-        tabList: '',
+        base: 'rounded-md',
+        tabList: 'bg-background shadow-md',
         tab: 'h-16',
-        cursor: 'bg-default-200 text-primary',
+        cursor: 'bg-overlay shadow-sm',
       }}
       onSelectionChange={(key) => route.push(key as string)}
     >

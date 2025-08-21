@@ -36,6 +36,7 @@ module.exports = {
       },
       textColor: {
         DEFAULT: 'var(--tg-theme-text-color)',
+        foreground: 'var(--tg-theme-text-color)',
         primary: 'var(--tg-theme-button-text-color)',
         hint: 'var(--tg-theme-hint-color)',
         subtitle: 'var(--tg-theme-subtitle-text-color)',
@@ -85,7 +86,7 @@ module.exports = {
       addCommonColors: true,
       themes: {
         telegram: {
-          extend: 'var(--tg-color-scheme)',
+          // extend: 'var(--tg-color-scheme)',
           layout: {
             disabledOpacity: '0.5',
             fontSize: {
@@ -118,6 +119,7 @@ module.exports = {
               large: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
             },
           },
+          colors: {},
         },
       },
       defaultTheme: 'telegram',
