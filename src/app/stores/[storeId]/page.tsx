@@ -15,6 +15,7 @@ import ProductPreviewCard from '@/libs/products/components/preview-card';
 import { useStoreDetailsQuery } from '@/libs/stores/hooks';
 import { useUserState } from '@/libs/users/context/userContext';
 import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
+import { PageHeader } from '@/libs/common/components/PageHeader';
 
 export default function StoreDetailsPage() {
   const { webApp, loading } = useTelegramWebApp();
@@ -61,7 +62,7 @@ export default function StoreDetailsPage() {
             />
           )}
           <div>
-            <h1 className="text-xl font-bold">{store.displayName}</h1>
+            <PageHeader title={store.displayName} />
             <div>
               {store.categories?.map((tag) => (
                 <Chip className="m-0.5" key={tag}>

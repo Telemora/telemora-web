@@ -3,6 +3,7 @@ import React from 'react';
 
 import OrderSummaryCard from '@/libs/orders/components/summary-card';
 import { OrderSummary } from '@/libs/orders/types';
+import { PageHeader } from '@/libs/common/components/PageHeader';
 
 export default function SummaryOrdersSection({
   orders,
@@ -13,7 +14,7 @@ export default function SummaryOrdersSection({
 }) {
   return (
     <section className="space-y-4">
-      <h1>{title}</h1>
+      <PageHeader title={title} />
       <div className="space-y-4">
         {orders.length === 0 ? (
           <Button as={'link'} href="/orders">

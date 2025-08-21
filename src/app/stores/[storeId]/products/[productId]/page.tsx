@@ -65,7 +65,7 @@ export default function ProductDetailsPage() {
         </div>
 
         <div>
-          <h1 className="text-lg font-bold">{product.name}</h1>
+          <PageHeader title={product.name} />
           <PriceComponent amount={product.price} />
         </div>
 

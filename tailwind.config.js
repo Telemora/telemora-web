@@ -17,6 +17,9 @@ module.exports = {
         medium: '1rem',
         large: '1.125rem',
       },
+      color: {
+        default: 'var(--tg-theme-text-color)',
+      },
     },
     container: {
       center: true,

@@ -3,6 +3,7 @@ import React from 'react';
 
 import { StorePreviewCard } from '@/libs/stores/components/preview-card';
 import { StorePreviewDto } from '@/libs/stores/types';
+import { PageHeader } from '@/libs/common/components/PageHeader';
 
 export default function PreviewStoresSection({
   stores,
@@ -14,7 +15,7 @@ export default function PreviewStoresSection({
   return (
     <section className="space-y-4" id="preview-stores-section">
       <Divider />
-      <h1>{title}</h1>
+      <PageHeader title={title} />
       <div className="grid grid-cols-2 gap-3">
         {stores.length === 0 ? (
           <Button as={'link'} href="/stores/create">
