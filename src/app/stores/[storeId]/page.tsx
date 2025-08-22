@@ -65,7 +65,7 @@ export default function StoreDetailsPage() {
             <PageHeader title={store.displayName} />
             <div>
               {store.categories?.map((tag) => (
-                <Chip className="m-0.5" key={tag}>
+                <Chip color="primary" className="m-0.5" key={tag}>
                   {tag}
                 </Chip>
               ))}
@@ -76,7 +76,7 @@ export default function StoreDetailsPage() {
 
         <div className="flex gap-2">
           <Tooltip content="Share store link">
-            <Button isIconOnly size="sm" variant="flat" onPress={handleShare}>
+            <Button isIconOnly size="sm" color="default" variant="bordered" onPress={handleShare}>
               <FaShareAlt />
             </Button>
           </Tooltip>

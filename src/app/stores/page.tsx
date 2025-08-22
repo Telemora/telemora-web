@@ -49,7 +49,7 @@ export default function StoreListPage() {
             </div>
           ))}
 
-          <Button fullWidth variant="bordered" size="lg" onPress={handleCreateStore}>
+          <Button fullWidth color="primary" size="lg" onPress={handleCreateStore}>
             + New Store
           </Button>
         </div>
