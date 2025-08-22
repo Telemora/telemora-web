@@ -20,7 +20,7 @@ export function useTelegramWebApp() {
 
       tgWebApp.ready();
     }
-  }, [setTheme]);
+  }, []);
 
   return { webApp, loading };
 }
