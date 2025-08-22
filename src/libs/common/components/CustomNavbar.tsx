@@ -1,16 +1,18 @@
 import { Avatar, Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@heroui/react';
 import Link from 'next/link';
-import { FaGear } from 'react-icons/fa6';
 
 import { useUserState } from '@/libs/users/context/userContext';
+import { FaChevronLeft } from 'react-icons/fa';
+import { useRouter } from 'next/navigation';
 
 export default function CustomNavbar() {
   const { data } = useUserState();
+  const router = useRouter();
   return (
     <Navbar>
       <NavbarBrand>
         <Link href="/profile/preferences">
-          <FaGear aria-label="Preferences" />
+          <FaChevronLeft onClick={() => router.back()} />
         </Link>
       </NavbarBrand>
       <NavbarContent justify="end">
