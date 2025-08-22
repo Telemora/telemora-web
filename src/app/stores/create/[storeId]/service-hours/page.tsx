@@ -24,7 +24,7 @@ import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 import { PageHeader } from '@/libs/common/components/PageHeader';
 
 export default function ServiceHoursPage() {
-  const { webApp, loading } = useTelegramWebApp();
+  const { webApp, isLoaded } = useTelegramWebApp();
   const router = useRouter();
   const { storeId } = useParams<{ storeId: string }>();
   const { mutateAsync, isPending } = useSubmitStoreServiceHoursMutation(storeId);

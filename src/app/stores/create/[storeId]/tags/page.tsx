@@ -32,7 +32,7 @@ const TAG_SUGGESTIONS = [
 ];
 
 export default function CreateStoreTags() {
-  const { webApp, loading } = useTelegramWebApp();
+  const { webApp, isLoaded } = useTelegramWebApp();
   const { storeId } = useParams<{ storeId: string }>();
   const router = useRouter();
 

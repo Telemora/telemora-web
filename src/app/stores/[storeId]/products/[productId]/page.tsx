@@ -15,7 +15,7 @@ import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 import { HorizontalScroll } from '@/libs/common/components/HorizontalScroll';
 
 export default function ProductDetailsPage() {
-  const { webApp, loading } = useTelegramWebApp();
+  const { webApp, isLoaded } = useTelegramWebApp();
   const { storeId, productId } = useParams();
   const storeIdNum = parseInt(storeId as string, 10);
   const productIdNum = parseInt(productId as string, 10);

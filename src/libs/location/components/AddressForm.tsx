@@ -32,7 +32,7 @@ export function AddressForm({ isPending, onSubmit }: Props) {
     resolver: zodResolver(createAddressSchema),
   });
 
-  const { webApp, loading } = useTelegramWebApp();
+  const { webApp, isLoaded } = useTelegramWebApp();
   const router = useRouter();
   const [coords, setCoords] = useState<{ lat?: number; lng?: number } | null>(null);
   const [isDetecting, setIsDetecting] = useState(false);
