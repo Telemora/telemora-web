@@ -4,6 +4,12 @@ const { heroui } = require('@heroui/react');
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}', './node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}'],
   theme: {
+    screens: {
+      sm: '320px',
+      md: '375px',
+      lg: '425px',
+      xl: '768px',
+    },
     borderRadius: {
       DEFAULT: '0.25rem',
       sm: '0.375rem',

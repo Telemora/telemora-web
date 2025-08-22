@@ -40,7 +40,7 @@ export default function BottomTabs() {
       placement="bottom"
       items={tabList}
       classNames={{
-        tabWrapper: 'px-2 fixed bottom-0 z-50 w-full md:max-w-md translate-x-1/2 right-1/2',
+        tabWrapper: 'px-2 fixed bottom-0 z-50 w-full md:max-w-sm translate-x-1/2 right-1/2',
         base: '',
         tabList: '',
         tab: 'h-16',
