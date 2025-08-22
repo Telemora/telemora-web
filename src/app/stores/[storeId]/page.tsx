@@ -65,7 +65,7 @@ export default function StoreDetailsPage() {
             <PageHeader title={store.displayName} />
             <div>
               {store.categories?.map((tag) => (
-                <Chip color="primary" className="m-0.5" key={tag}>
+                <Chip className="m-0.5" key={tag}>
                   {tag}
                 </Chip>
               ))}

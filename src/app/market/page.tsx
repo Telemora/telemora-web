@@ -1,11 +1,12 @@
 'use client';
 
-import { ScrollShadow, Skeleton } from '@heroui/react';
+import { Skeleton } from '@heroui/react';
 import React from 'react';
 
 import AppLayout from '@/libs/common/components/AppLayout';
 import { StorePreviewCard } from '@/libs/stores/components/preview-card';
 import { useDiscoverableStoresQuery, useFeaturedStoresQuery } from '@/libs/stores/hooks';
+import { HorizontalScroll } from '@/libs/common/components/HorizontalScroll';
 
 export default function MarketPage() {
   const { data: discoverStores, isLoading: isDiscoverStoresLoading } = useDiscoverableStoresQuery();
@@ -51,13 +52,5 @@ export default function MarketPage() {
         </section>
       )}
     </AppLayout>
-  );
-}
-
-function HorizontalScroll({ children }: { children: React.ReactNode }) {
-  return (
-    <ScrollShadow className="flex h-36 max-w-full gap-x-4" hideScrollBar orientation="horizontal">
-      {children}
-    </ScrollShadow>
   );
 }

@@ -112,7 +112,7 @@ export function OrderShipmentCard({
                 <button
                   type="button"
                   aria-label="Copy tracking number"
-                  className="text-default ml-1 hover:text-blue-600 focus:outline-none"
+                  className="ml-1 hover:text-blue-600 focus:outline-none"
                   onClick={() => navigator.clipboard.writeText(trackingNumber)}
                   tabIndex={0}
                 >

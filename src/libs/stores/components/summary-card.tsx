@@ -36,7 +36,7 @@ const StoreSummaryCard = ({ store }: { store: StoreSummary }) => {
           <p className="truncate text-xs">{formatAddresses(store.businessLocations)}</p>
           <div className="flex gap-2">
             {store.categories?.slice(0, 3).map((tag) => (
-              <Chip color="secondary" key={tag} size="sm">
+              <Chip key={tag} size="sm">
                 {tag}
               </Chip>
             ))}

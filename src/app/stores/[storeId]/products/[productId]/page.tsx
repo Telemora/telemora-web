@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Divider, ScrollShadow, Skeleton, User } from '@heroui/react';
+import { Button, Divider, Skeleton, User } from '@heroui/react';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 
@@ -12,6 +12,7 @@ import StarRating from '@/libs/common/components/StarRating';
 import { useProductDetails } from '@/libs/products/hooks';
 import ReviewPreviewCard from '@/libs/reviews/components/preview-card';
 import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
+import { HorizontalScroll } from '@/libs/common/components/HorizontalScroll';
 
 export default function ProductDetailsPage() {
   const { webApp, loading } = useTelegramWebApp();
@@ -40,9 +41,9 @@ export default function ProductDetailsPage() {
 
   return (
     <AppLayout>
-      <main className="space-y-6 px-2 py-4">
+      <main className="space-y-6">
         {product.images?.length ? (
-          <ScrollShadow orientation="horizontal" className="flex gap-x-4 overflow-x-auto pb-2">
+          <HorizontalScroll>
             {product.images.map((img, index) => (
               <Image
                 key={index}
@@ -53,7 +54,7 @@ export default function ProductDetailsPage() {
                 className="aspect-square w-60 shrink-0 rounded-lg object-cover"
               />
             ))}
-          </ScrollShadow>
+          </HorizontalScroll>
         ) : null}
 
         <div>

@@ -9,7 +9,11 @@ export default function CustomNavbar() {
   const { data } = useUserState();
   const router = useRouter();
   return (
-    <Navbar>
+    <Navbar
+      classNames={{
+        base: 'shadow-sm',
+      }}
+    >
       <NavbarBrand>
         <Link href="/profile/preferences">
           <FaChevronLeft onClick={() => router.back()} />
