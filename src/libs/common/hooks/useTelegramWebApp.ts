@@ -1,26 +1,31 @@
 import { useEffect, useState } from 'react';
-import { TelegramWebApp } from '@/telegram';
 import { useTheme } from 'next-themes';
+import { TelegramWebApp } from '@/telegram';
 
-/**
- * A custom hook to safely access the Telegram WebApp object.
- * It ensures the object is available and handles the app's lifecycle.
- */
 export function useTelegramWebApp() {
   const [webApp, setWebApp] = useState<TelegramWebApp | null>(null);
-  const [loading, setLoading] = useState(true);
-  const { theme, setTheme } = useTheme();
+  const [isLoaded, setIsLoaded] = useState(false);
+  const { setTheme } = useTheme();
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.Telegram && window.Telegram.WebApp) {
-      setTheme(window.Telegram.WebApp.colorScheme);
       const tgWebApp = window.Telegram.WebApp;
+
+      setTheme(tgWebApp.colorScheme);
+
       setWebApp(tgWebApp);
-      setLoading(false);
+      setIsLoaded(true);
 
-      tgWebApp.ready();
+      const handleThemeChange = () => {
+        setTheme(tgWebApp.colorScheme);
+      };
+      tgWebApp.onEvent('themeChanged', handleThemeChange);
+
+      return () => {
+        tgWebApp.offEvent('themeChanged', handleThemeChange);
+      };
     }
-  }, []);
+  }, [setTheme]);
 
-  return { webApp, loading };
+  return { webApp, isLoaded };
 }
