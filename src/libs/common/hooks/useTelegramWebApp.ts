@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { TelegramWebApp } from '@/telegram';
+import { useTheme } from 'next-themes';
 
 /**
  * A custom hook to safely access the Telegram WebApp object.
@@ -8,16 +9,18 @@ import { TelegramWebApp } from '@/telegram';
 export function useTelegramWebApp() {
   const [webApp, setWebApp] = useState<TelegramWebApp | null>(null);
   const [loading, setLoading] = useState(true);
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.Telegram && window.Telegram.WebApp) {
+      setTheme(window.Telegram.WebApp.colorScheme);
       const tgWebApp = window.Telegram.WebApp;
       setWebApp(tgWebApp);
       setLoading(false);
 
       tgWebApp.ready();
     }
-  }, []);
+  }, [setTheme]);
 
   return { webApp, loading };
 }
