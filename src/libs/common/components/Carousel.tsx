@@ -26,10 +26,10 @@ export function Carousel() {
       <div className="flex">
         <div className="min-w-0 px-2" style={{ flex: '0 0 100%' }}>
           <div className="relative">
-            <span className="text-default-50 absolute start-3 top-1/3 font-semibold drop-shadow-sm">
+            <span className="absolute start-3 top-1/3 font-semibold text-white drop-shadow-sm">
               Global trading
             </span>
-            <p className="text-default-50 absolute start-3 top-1/2 max-w-1/2 text-xs drop-shadow-lg">
+            <p className="absolute start-3 top-1/2 max-w-1/2 text-xs text-white drop-shadow-lg">
               with crypto-native simplicity
             </p>
             <img
@@ -43,10 +43,10 @@ export function Carousel() {
         </div>
         <div className="min-w-0 px-2" style={{ flex: '0 0 100%' }}>
           <div className="relative">
-            <span className="text-default-50 absolute start-2/5 top-1/3 font-semibold drop-shadow-sm">
+            <span className="absolute start-2/5 top-1/3 font-semibold text-white drop-shadow-sm">
               Telegram login
             </span>
-            <p className="text-default-50 absolute start-2/5 top-1/2 max-w-1/2 text-xs drop-shadow-lg">
+            <p className="absolute start-2/5 top-1/2 max-w-1/2 text-xs text-white drop-shadow-lg">
               no extra signups needed
             </p>
             <img
@@ -60,10 +60,10 @@ export function Carousel() {
         </div>
         <div className="min-w-0 px-2" style={{ flex: '0 0 100%' }}>
           <div className="relative">
-            <span className="text-default-50 absolute start-3 top-1/3 font-semibold drop-shadow-sm">
+            <span className="absolute start-3 top-1/3 font-semibold text-white drop-shadow-sm">
               Sell anything
             </span>
-            <p className="text-default-50 absolute start-3 top-1/2 max-w-1/2 text-xs drop-shadow-lg">
+            <p className="absolute start-3 top-1/2 max-w-1/2 text-xs text-white drop-shadow-lg">
               goods, services, or digital content
             </p>
             <img
