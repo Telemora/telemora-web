@@ -42,6 +42,8 @@
     "axios": "^1.7.9",
     "date-fns": "^4.1.0",
     "decimal.js": "^10.5.0",
+    "embla-carousel-autoplay": "^8.6.0",
+    "embla-carousel-react": "^8.6.0",
     "eruda": "^3.4.1",
     "framer-motion": "^12.23.12",
     "next": "15.4.6",
