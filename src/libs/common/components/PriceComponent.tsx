@@ -27,14 +27,14 @@ function UserCurrencyInfo() {
     .dividedBy(new Decimal(currencyInfo?.localCurrencyToUsdRate || 0))
     .toFixed(2);
   return (
-    <div className="space-x-2 text-xs text-default-500">
+    <div className="space-x-2 text-xs">
       <span>{tonPriceInLocalCurrency}</span>
       <span>{currencyInfo.localCurrencyCode}</span>
     </div>
   );
 }
 
-function TonCurrencyIcon() {
+export function TonCurrencyIcon() {
   return (
     <svg
       width="14"
