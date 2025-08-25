@@ -1,11 +1,11 @@
 import { Button } from '@heroui/react';
 import React from 'react';
 
-import OrderSummaryCard from '@/libs/orders/components/summary-card';
+import OrderSummaryCard from '@/libs/orders/components/OrderSummaryCard';
 import { OrderSummary } from '@/libs/orders/types';
 import { PageHeader } from '@/libs/common/components/PageHeader';
 
-export default function SummaryOrdersSection({
+export default function OrderSummaries({
   orders,
   title,
 }: {

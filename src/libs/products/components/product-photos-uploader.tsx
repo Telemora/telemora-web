@@ -146,7 +146,7 @@ export function ProductPhotosUploader() {
                 ))}
               </HorizontalScroll>
             ) : (
-              <p className="text-sm text-gray-500">No images selected</p>
+              <p className="text-default-500 text-sm">No images selected</p>
             )}
           </ModalBody>
 

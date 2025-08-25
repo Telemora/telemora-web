@@ -8,7 +8,7 @@ import { FaBoxOpen } from 'react-icons/fa6';
 import AppLayout from '@/libs/common/components/AppLayout';
 import ErrorPage from '@/libs/common/components/ErrorPage';
 import { PageHeader } from '@/libs/common/components/PageHeader';
-import OrderSummaryCard from '@/libs/orders/components/summary-card';
+import OrderSummaryCard from '@/libs/orders/components/OrderSummaryCard';
 import { useMyOrders } from '@/libs/orders/hooks';
 
 export default function OrdersPage() {

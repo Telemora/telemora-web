@@ -7,7 +7,7 @@ import PriceComponent from '@/libs/common/components/PriceComponent';
 import { DATE_FORMATS, formatSafeDate } from '@/libs/common/utils/date';
 import { OrderSummary } from '@/libs/orders/types';
 
-import OrderStatusChip from './order-status-chip';
+import OrderStatusChip from './OrderStatusChip';
 
 interface OrderSummaryCardProps {
   order: OrderSummary;
@@ -52,18 +52,18 @@ export default function OrderSummaryCard({
       <CardHeader className="flex items-center justify-between">
         <div>
           <h3 className="text-sm font-semibold">Order #{id}</h3>
-          <p className="text-xs text-gray-500">
+          <p className="text-default-500 text-xs">
             {formatSafeDate(createdAt, DATE_FORMATS.SHORT, 'Unknown date')} —{' '}
-            <span className="text-default">{store.displayName}</span>
+            <span className="text-default-500">{store.displayName}</span>
           </p>
         </div>
         <OrderStatusChip status={status} />
       </CardHeader>
 
-      <CardBody className="text-sm text-gray-700">
+      <CardBody className="text-default-500 text-sm">
         <div className="flex items-center justify-between">
           <PriceComponent amount={totalAmount} />
-          <div className="text-right text-xs text-gray-500">
+          <div className="text-default-500 text-right text-xs">
             <p className="font-medium">Est. Delivery</p>
             <p>{formatSafeDate(expectedDeliveryDate, DATE_FORMATS.SHORT, 'TBD')}</p>
           </div>

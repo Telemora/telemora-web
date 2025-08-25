@@ -48,11 +48,11 @@ export function StoreHeader({ store, isOwner }: { store: StoreDetail; isOwner?: 
       </div>
       {/* Store Description */}
       {store.storeBio && (
-        <p className="mb-4 text-sm leading-snug text-gray-700">{store.storeBio} </p>
+        <p className="text-default-700 mb-4 text-sm leading-snug">{store.storeBio} </p>
       )}
 
       {/* Contact & Working Hours */}
-      <div className="col-span-12 row-span-1 mb-6 space-y-1 text-sm text-gray-600">
+      <div className="text-default-600 col-span-12 row-span-1 mb-6 space-y-1 text-sm">
         {store.supportPhone && <p>📞 {store.supportPhone}</p>}
         {store.supportEmail && <p>✉️ {store.supportEmail}</p>}
 

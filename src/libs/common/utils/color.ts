@@ -29,6 +29,15 @@ export type GeneratedPalette = {
   baseIndex: number;
 };
 
+export type GeneratedBasePalette = {
+  /** Original user input normalized */
+  input: string;
+  /** Base shades (light → dark) */
+  base: Color[];
+  /** Index in maps closest to base color lightness (0–9) */
+  baseIndex: number;
+};
+
 /**
  * Safely turn a string into a chroma Color.
  */
@@ -102,6 +111,20 @@ export function generatePalettes(inputColor: string, fallback = '#000000'): Gene
   const hueDown = makeHueDownShades(base, baseIndex);
 
   return { input: user.hex(), base, hueUp, hueDown, baseIndex };
+}
+
+/**
+ * One-call generator: pass a color string, get all three swatches.
+ */
+export function generateBasePalettes(
+  inputColor: string,
+  fallback = '#000000',
+): GeneratedBasePalette {
+  const user = getUserColorChroma(inputColor, fallback);
+  const baseIndex = getBaseIndexForLightness(user);
+  const base = makeBaseShades(user, baseIndex);
+
+  return { input: user.hex(), base, baseIndex };
 }
 
 /** Convenience: turn Color[] into hex strings */

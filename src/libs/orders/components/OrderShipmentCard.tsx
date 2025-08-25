@@ -7,10 +7,10 @@ import { FaExternalLinkAlt, FaTruck } from 'react-icons/fa';
 import { OrderShipment } from '@/libs/orders/types';
 
 const SHIPMENT_STATUS_STYLES: Record<NonNullable<OrderShipment['status']>, string> = {
-  created: 'bg-gray-200 text-gray-800',
+  created: 'bg-gray-200 text-default-800',
   in_transit: 'bg-blue-100 text-blue-800',
   delivered: 'bg-green-100 text-green-800',
-  failed: 'bg-red-100 text-red-800',
+  failed: 'bg-red-100 text-danger-800',
 };
 
 export function OrderShipmentCard({
@@ -31,7 +31,7 @@ export function OrderShipmentCard({
 
   const statusStyle =
     SHIPMENT_STATUS_STYLES[status] ||
-    'bg-gray-100 text-gray-600 border border-dashed border-gray-400';
+    'bg-gray-100 text-default-600 border border-dashed border-gray-400';
   const statusLabel = typeof status === 'string' ? status.replace('_', ' ') : 'unknown';
 
   if (collapsed) {
@@ -41,7 +41,7 @@ export function OrderShipmentCard({
         aria-label="Shipment Summary"
       >
         <div className="flex min-w-0 flex-1 items-center gap-2">
-          <FaTruck aria-hidden="true" className="text-gray-500" />
+          <FaTruck aria-hidden="true" className="text-default-500" />
           <span
             className={clsx('rounded-full px-2 py-1 text-xs capitalize', statusStyle)}
             aria-label={`Status: ${statusLabel}`}
@@ -49,7 +49,7 @@ export function OrderShipmentCard({
             {statusLabel}
           </span>
           <span
-            className="max-w-[100px] truncate text-xs text-gray-700"
+            className="text-default-700 max-w-[100px] truncate text-xs"
             title={trackingNumber || ''}
             aria-label={trackingNumber || ''}
           >
@@ -59,7 +59,7 @@ export function OrderShipmentCard({
               <span className="text-default">No Tracking</span>
             )}
           </span>
-          <span className="text-xs text-gray-500">
+          <span className="text-default-500 text-xs">
             {courierService ? (
               escapeHtml(courierService)
             ) : (

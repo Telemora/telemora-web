@@ -36,7 +36,7 @@ export default function StoreListPage() {
       {stores && stores.length === 0 ? (
         <div className="mt-12 text-center">
           <div className="mb-2 text-5xl">🏪</div>
-          <p className="mb-4 text-gray-600">You don’t own any stores yet.</p>
+          <p className="text-default-600 mb-4">You don’t own any stores yet.</p>
           <Button size="lg" onPress={handleCreateStore}>
             Create Your First Store
           </Button>

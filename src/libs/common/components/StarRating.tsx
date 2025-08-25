@@ -45,7 +45,7 @@ export const StarRating: React.FC<StarRatingProps> = ({
       {Array.from({ length: emptyStars }).map((_, i) => (
         <FaRegStar key={`empty-${i}`} aria-hidden="true" />
       ))}
-      {showNumber && <span className="ml-1 text-xs text-gray-600">{rating.toFixed(1)}</span>}
+      {showNumber && <span className="text-default-600 ml-1 text-xs">{rating.toFixed(1)}</span>}
     </div>
   );
 };

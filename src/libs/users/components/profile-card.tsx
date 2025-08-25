@@ -73,7 +73,7 @@ export default function UserProfileCard({
               {displayName}
             </h2>
             {user.username && (
-              <p className="text-xs text-gray-500 sm:text-sm">
+              <p className="text-default-500 text-xs sm:text-sm">
                 <span className="sr-only">Username: </span>@{user.username}
               </p>
             )}

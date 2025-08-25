@@ -111,7 +111,7 @@ export default function ServiceHoursPage() {
     <div className="mx-auto max-w-2xl p-5">
       <PageHeader title={editIndex !== null ? 'Edit' : 'Manage' + 'Store Service Hours'} />
 
-      {error && <div className="mb-3 text-red-500">{error}</div>}
+      {error && <div className="text-danger-500 mb-3">{error}</div>}
 
       <div className="mb-5">
         <Button color="primary" onPress={onOpen}>

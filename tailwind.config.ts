@@ -1,7 +1,9 @@
-const { heroui } = require('@heroui/react');
+import type { Config } from 'tailwindcss';
+import { heroui } from '@heroui/react';
+import { darkThemeColors, darkThemeShadeColors } from './src/libs/common/constants/colors';
+import { getColorNumber } from './src/libs/common/utils/color';
 
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: ['./src/**/*.{js,ts,jsx,tsx}', './node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}'],
   theme: {
     borderRadius: {
@@ -147,32 +149,28 @@ module.exports = {
         dark: {
           colors: {
             primary: {
-              50: '#002147',
-              100: '#0F265C',
-              200: '#1A376F',
-              300: '#294F8A',
-              400: '#3B6AA5',
-              500: '#5288C1',
-              600: '#7BAED9',
-              700: '#9ACAEC',
-              800: '#BFE3F8',
-              900: '#DEF2FB',
-              foreground: '#ffffff',
-              DEFAULT: '#5288c1',
+              ...darkThemeShadeColors.argentinianBlue.reverse().reduce((acc, rgb, i) => {
+                const label = getColorNumber(i);
+                return { ...acc, [label]: rgb };
+              }, {}),
+              foreground: darkThemeColors.whiteSmoke,
+              DEFAULT: darkThemeColors.silverLakeBlue,
+            },
+            default: {
+              ...darkThemeShadeColors.gunmetal.reverse().reduce((acc, rgb, i) => {
+                const label = getColorNumber(i);
+                return { ...acc, [label]: rgb };
+              }, {}),
+              DEFAULT: darkThemeColors.gunmetal,
+              foreground: darkThemeColors.whiteSmoke,
             },
             secondary: {
-              50: '#E9F3F9',
-              100: '#E0EDF5',
-              200: '#C4DAEB',
-              300: '#93ADC4',
-              400: '#5E738A',
-              500: '#232E3C',
-              600: '#192333',
-              700: '#111A2B',
-              800: '#0B1222',
-              900: '#060C1C',
-              foreground: '#fff',
-              DEFAULT: '#232E3C',
+              ...darkThemeShadeColors.richBlack.reverse().reduce((acc, rgb, i) => {
+                const label = getColorNumber(i);
+                return { ...acc, [label]: rgb };
+              }, {}),
+              foreground: darkThemeColors.whiteSmoke,
+              DEFAULT: darkThemeColors.richBlack,
             },
             success: {
               50: '#f5fede',
@@ -185,7 +183,7 @@ module.exports = {
               700: '#567705',
               800: '#334800',
               900: '#0f1900',
-              foreground: '#000000',
+              foreground: darkThemeColors.whiteSmoke,
               DEFAULT: '#78a70c',
             },
             warning: {
@@ -199,43 +197,34 @@ module.exports = {
               700: '#FDDA78',
               800: '#FEEAA5',
               900: '#FEF6D2',
-              foreground: '#000',
+              foreground: darkThemeColors.whiteSmoke,
               DEFAULT: '#f5a524',
             },
             danger: {
-              50: '#49051d',
-              100: '#3C081D',
-              200: '#460A1D',
-              300: '#5B0D1F',
-              400: '#72111F',
-              500: '#ec3942',
-              600: '#F68A86',
-              700: '#FBD1CB',
-              800: '#FCDED6',
-              900: '#FDF7F4',
-              foreground: '#fff',
-              DEFAULT: '#ec3942',
+              ...darkThemeShadeColors.imperialRed,
+              foreground: darkThemeColors.whiteSmoke,
+              DEFAULT: darkThemeColors.imperialRed,
             },
             content1: {
-              DEFAULT: '#1b1b1b',
+              DEFAULT: darkThemeColors.richBlack2,
             },
             content2: {
-              DEFAULT: '#1b1b1b',
+              DEFAULT: darkThemeColors.richBlack,
             },
             content3: {
-              DEFAULT: '#1b1b1b',
+              DEFAULT: darkThemeColors.richBlack2,
             },
             content4: {
-              DEFAULT: '#1b1b1b',
+              DEFAULT: darkThemeColors.richBlack,
             },
-            background: '#1f1f1f',
-            foreground: '#f0f0f0',
-            focus: '#6ab3f3',
-            overlay: '#ffffff',
+            background: darkThemeColors.gunmetal,
+            foreground: darkThemeColors.whiteSmoke,
+            focus: darkThemeColors.silverLakeBlue,
+            overlay: darkThemeColors.whiteSmoke,
           },
         },
       },
       defaultTheme: 'dark',
     }),
   ],
-};
+} satisfies Config;
