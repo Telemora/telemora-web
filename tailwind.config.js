@@ -235,6 +235,7 @@ module.exports = {
           },
         },
       },
+      defaultTheme: 'dark',
     }),
   ],
 };

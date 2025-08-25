@@ -12,7 +12,7 @@ export function AppProvider({ children }: PropsWithChildren) {
   return (
     <>
       <HeroUIProvider>
-        <NextThemesProvider attribute="class" defaultTheme="light">
+        <NextThemesProvider attribute="class" defaultTheme="dark">
           <TonConnectClientProvider>
             <QueryContext>
               <UserProvider>{children}</UserProvider>

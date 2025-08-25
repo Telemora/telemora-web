@@ -1,4 +1,3 @@
-// /lib/color-utils.ts
 import chroma, { Color } from 'chroma-js';
 
 /**
@@ -60,12 +59,10 @@ export function getBaseIndexForLightness(c: Color): number {
  * relative to the baseIndex using SATURATION_MAP.
  */
 export function makeBaseShades(user: Color, baseIndex: number): Color[] {
-  // 1) set lightness
   const withLightness = LIGHTNESS_MAP.map((l) => user.set('hsl.l', clamp01(l))).map((c) =>
     chroma(c),
   );
 
-  // 2) relative saturation tweak
   return withLightness.map((c, i) => {
     const delta = SATURATION_MAP[i] - SATURATION_MAP[baseIndex];
     return delta >= 0 ? c.saturate(delta) : c.desaturate(-delta);
@@ -78,7 +75,6 @@ export function makeBaseShades(user: Color, baseIndex: number): Color[] {
 export function makeHueUpShades(baseShades: Color[], baseIndex: number): Color[] {
   return baseShades.map((c, i) => {
     const delta = HUE_MAP[i] - HUE_MAP[baseIndex];
-    // keep shifts gentle when moving opposite of direction
     const shift = delta >= 0 ? delta : (Math.abs(delta) / 2) * -1;
     return c.set('hsl.h', `+${shift}`);
   });
@@ -125,7 +121,6 @@ export function getColorNumber(i: number): ShadeLabel {
 
 /** hex -> contrast color (black/white) for legible text */
 export function getReadableText(hex: string): '#000000' | '#FFFFFF' {
-  // WCAG-ish: use luminance threshold
   try {
     const l = chroma(hex).luminance();
     return l > 0.4 ? '#000000' : '#FFFFFF';
