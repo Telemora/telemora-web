@@ -60,8 +60,8 @@ export default {
           colors: {
             primary: generateShades(light.pictonBlue, light.antiflashWhite),
             secondary: generateShades(light.blueNcs, light.antiflashWhite),
-            success: generateShades('#7fd115', light.antiflashWhite),
-            warning: generateShades('#f5a524', light.antiflashWhite),
+            success: generateShades(light.castletonGreen, light.antiflashWhite),
+            warning: generateShades(light.amber, light.antiflashWhite),
             danger: generateShades(light.indianRed, light.antiflashWhite),
             content1: {
               DEFAULT: light.antiflashWhite,
@@ -86,8 +86,8 @@ export default {
             primary: generateShades(dark.silverLakeBlue, dark.whiteSmoke, { darkMode: true }),
             default: generateShades(dark.gunmetal, dark.whiteSmoke, { darkMode: true }),
             secondary: generateShades(dark.richBlack, dark.whiteSmoke, { darkMode: true }),
-            success: generateShades('#78a70c', dark.whiteSmoke, { darkMode: true }),
-            warning: generateShades('#f5a524', dark.whiteSmoke, { darkMode: true }),
+            success: generateShades(dark.midnightGreen, dark.whiteSmoke, { darkMode: true }),
+            warning: generateShades(dark.caramel, dark.whiteSmoke, { darkMode: true }),
             danger: generateShades(dark.imperialRed, dark.whiteSmoke, { darkMode: true }),
             content1: {
               DEFAULT: dark.richBlack2,

@@ -6,6 +6,8 @@ export const light = {
   indianRed: '#d14e4eff',
   pictonBlue: '#40a7e3ff',
   platinum: '#e7e7e7ff',
+  amber: '#FFBF00',
+  castletonGreen: '#00563B',
 };
 
 export const dark = {
@@ -19,4 +21,6 @@ export const dark = {
   slateGray: '#708499ff',
   white: '#ffffffff',
   whiteSmoke: '#f5f5f5ff',
+  caramel: '#CC7F3B',
+  midnightGreen: '#004953',
 };
