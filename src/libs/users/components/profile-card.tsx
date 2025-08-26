@@ -84,8 +84,8 @@ export default function UserProfileCard({
         <Button
           fullWidth
           size="sm"
-          color="default"
-          variant="bordered"
+          color="secondary"
+          variant="solid"
           onPress={() => handleNavigation(routes.edit)}
           className="flex items-center justify-center gap-2"
         >
@@ -95,8 +95,8 @@ export default function UserProfileCard({
         <Button
           fullWidth
           size="sm"
-          color="default"
-          variant="bordered"
+          color="secondary"
+          variant="solid"
           onPress={() => handleNavigation(routes.preferences)}
           className="flex items-center justify-center gap-2"
         >

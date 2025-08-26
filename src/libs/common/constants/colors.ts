@@ -1,4 +1,4 @@
-export const lightThemeColors = {
+export const light = {
   antiflashWhite: '#f1f1f1ff',
   battleshipGray: '#999999ff',
   black: '#000000ff',
@@ -8,7 +8,7 @@ export const lightThemeColors = {
   platinum: '#e7e7e7ff',
 };
 
-export const darkThemeColors = {
+export const dark = {
   argentinianBlue: '#6ab2f2ff',
   argentinianBlue2: '#6ab3f3ff',
   gunmetal: '#232e3cff',

@@ -1,6 +1,6 @@
 import type { Config } from 'tailwindcss';
 import { heroui } from '@heroui/react';
-import { darkThemeColors, lightThemeColors } from './src/libs/common/constants/colors';
+import { dark, light } from './src/libs/common/constants/colors';
 import { generateShades } from './src/libs/common/utils/color';
 
 export default {
@@ -58,11 +58,11 @@ export default {
       themes: {
         light: {
           colors: {
-            primary: generateShades('#1d89c8', lightThemeColors.antiflashWhite),
-            secondary: generateShades(lightThemeColors.blueNcs, lightThemeColors.antiflashWhite),
-            success: generateShades('#7fd115', lightThemeColors.antiflashWhite),
-            warning: generateShades('#f5a524', lightThemeColors.antiflashWhite),
-            danger: generateShades('#d14e4e', lightThemeColors.antiflashWhite),
+            primary: generateShades('#1d89c8', light.antiflashWhite),
+            secondary: generateShades(light.blueNcs, light.antiflashWhite),
+            success: generateShades('#7fd115', light.antiflashWhite),
+            warning: generateShades('#f5a524', light.antiflashWhite),
+            danger: generateShades('#d14e4e', light.antiflashWhite),
             background: '#f1f1f1',
             foreground: '#000000',
             focus: '#168acd',
@@ -71,28 +71,28 @@ export default {
         },
         dark: {
           colors: {
-            primary: generateShades(darkThemeColors.silverLakeBlue, darkThemeColors.whiteSmoke),
-            default: generateShades(darkThemeColors.gunmetal, darkThemeColors.whiteSmoke),
-            secondary: generateShades(darkThemeColors.richBlack, darkThemeColors.whiteSmoke),
-            success: generateShades('#78a70c', darkThemeColors.whiteSmoke),
-            warning: generateShades('#f5a524', darkThemeColors.whiteSmoke),
-            danger: generateShades(darkThemeColors.imperialRed, darkThemeColors.whiteSmoke),
+            primary: generateShades(dark.silverLakeBlue, dark.whiteSmoke, { darkMode: true }),
+            default: generateShades(dark.gunmetal, dark.whiteSmoke, { darkMode: true }),
+            secondary: generateShades(dark.richBlack, dark.whiteSmoke, { darkMode: true }),
+            success: generateShades('#78a70c', dark.whiteSmoke, { darkMode: true }),
+            warning: generateShades('#f5a524', dark.whiteSmoke, { darkMode: true }),
+            danger: generateShades(dark.imperialRed, dark.whiteSmoke, { darkMode: true }),
             content1: {
-              DEFAULT: darkThemeColors.richBlack2,
+              DEFAULT: dark.richBlack2,
             },
             content2: {
-              DEFAULT: darkThemeColors.richBlack,
+              DEFAULT: dark.richBlack,
             },
             content3: {
-              DEFAULT: darkThemeColors.richBlack2,
+              DEFAULT: dark.richBlack2,
             },
             content4: {
-              DEFAULT: darkThemeColors.richBlack,
+              DEFAULT: dark.richBlack,
             },
-            background: darkThemeColors.gunmetal,
-            foreground: darkThemeColors.whiteSmoke,
-            focus: darkThemeColors.silverLakeBlue,
-            overlay: darkThemeColors.whiteSmoke,
+            background: dark.gunmetal,
+            foreground: dark.whiteSmoke,
+            focus: dark.silverLakeBlue,
+            overlay: dark.whiteSmoke,
           },
         },
       },
