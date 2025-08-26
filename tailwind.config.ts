@@ -1,6 +1,6 @@
 import type { Config } from 'tailwindcss';
 import { heroui } from '@heroui/react';
-import { darkThemeColors, darkThemeShadeColors } from './src/libs/common/constants/colors';
+import { darkThemeColors } from './src/libs/common/constants/colors';
 import { generateShades } from './src/libs/common/utils/color';
 
 export default {
@@ -76,11 +76,7 @@ export default {
             secondary: generateShades(darkThemeColors.richBlack, darkThemeColors.whiteSmoke),
             success: generateShades('#78a70c', darkThemeColors.whiteSmoke),
             warning: generateShades('#f5a524', darkThemeColors.whiteSmoke),
-            danger: {
-              ...darkThemeShadeColors.imperialRed,
-              foreground: darkThemeColors.whiteSmoke,
-              DEFAULT: darkThemeColors.imperialRed,
-            },
+            danger: generateShades(darkThemeColors.imperialRed, darkThemeColors.whiteSmoke),
             content1: {
               DEFAULT: darkThemeColors.richBlack2,
             },
