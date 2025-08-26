@@ -1,6 +1,6 @@
 import type { Config } from 'tailwindcss';
 import { heroui } from '@heroui/react';
-import { darkThemeColors } from './src/libs/common/constants/colors';
+import { darkThemeColors, lightThemeColors } from './src/libs/common/constants/colors';
 import { generateShades } from './src/libs/common/utils/color';
 
 export default {
@@ -58,11 +58,11 @@ export default {
       themes: {
         light: {
           colors: {
-            primary: generateShades('#1d89c8', '#ffffff'),
-            secondary: generateShades('#168ccf', '#ffffff'),
-            success: generateShades('#7fd115', '#ffffff'),
-            warning: generateShades('#f5a524', '#ffffff'),
-            danger: generateShades('#d14e4e', '#ffffff'),
+            primary: generateShades('#1d89c8', lightThemeColors.antiflashWhite),
+            secondary: generateShades(lightThemeColors.blueNcs, lightThemeColors.antiflashWhite),
+            success: generateShades('#7fd115', lightThemeColors.antiflashWhite),
+            warning: generateShades('#f5a524', lightThemeColors.antiflashWhite),
+            danger: generateShades('#d14e4e', lightThemeColors.antiflashWhite),
             background: '#f1f1f1',
             foreground: '#000000',
             focus: '#168acd',
