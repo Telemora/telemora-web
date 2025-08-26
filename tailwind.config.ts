@@ -58,15 +58,27 @@ export default {
       themes: {
         light: {
           colors: {
-            primary: generateShades('#1d89c8', light.antiflashWhite),
+            primary: generateShades(light.pictonBlue, light.antiflashWhite),
             secondary: generateShades(light.blueNcs, light.antiflashWhite),
             success: generateShades('#7fd115', light.antiflashWhite),
             warning: generateShades('#f5a524', light.antiflashWhite),
-            danger: generateShades('#d14e4e', light.antiflashWhite),
-            background: '#f1f1f1',
-            foreground: '#000000',
-            focus: '#168acd',
-            overlay: '#000000',
+            danger: generateShades(light.indianRed, light.antiflashWhite),
+            content1: {
+              DEFAULT: light.antiflashWhite,
+            },
+            content2: {
+              DEFAULT: light.antiflashWhite,
+            },
+            content3: {
+              DEFAULT: light.antiflashWhite,
+            },
+            content4: {
+              DEFAULT: light.antiflashWhite,
+            },
+            background: light.platinum,
+            foreground: dark.richBlack2,
+            focus: light.blueNcs,
+            overlay: dark.richBlack2,
           },
         },
         dark: {
