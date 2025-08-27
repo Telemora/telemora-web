@@ -58,8 +58,8 @@ export default {
       themes: {
         light: {
           colors: {
-            primary: generateShades(light.pictonBlue, light.antiflashWhite),
-            secondary: generateShades(light.blueNcs, light.antiflashWhite),
+            primary: generateShades(light.blueNcs, light.antiflashWhite),
+            secondary: generateShades(light.antiflashWhite, light.black),
             success: generateShades(light.castletonGreen, light.antiflashWhite),
             warning: generateShades(light.amber, light.antiflashWhite),
             danger: generateShades(light.indianRed, light.antiflashWhite),
@@ -83,25 +83,25 @@ export default {
         },
         dark: {
           colors: {
-            primary: generateShades(dark.silverLakeBlue, dark.whiteSmoke, { darkMode: true }),
+            primary: generateShades(light.blueNcs, dark.whiteSmoke, { darkMode: true }),
             default: generateShades(dark.gunmetal, dark.whiteSmoke, { darkMode: true }),
             secondary: generateShades(dark.richBlack, dark.whiteSmoke, { darkMode: true }),
             success: generateShades(dark.midnightGreen, dark.whiteSmoke, { darkMode: true }),
             warning: generateShades(dark.caramel, dark.whiteSmoke, { darkMode: true }),
             danger: generateShades(dark.imperialRed, dark.whiteSmoke, { darkMode: true }),
             content1: {
-              DEFAULT: dark.richBlack2,
+              DEFAULT: dark.richBlack,
             },
             content2: {
               DEFAULT: dark.richBlack,
             },
             content3: {
-              DEFAULT: dark.richBlack2,
+              DEFAULT: dark.richBlack,
             },
             content4: {
               DEFAULT: dark.richBlack,
             },
-            background: dark.gunmetal,
+            background: dark.richBlack2,
             foreground: dark.whiteSmoke,
             focus: dark.silverLakeBlue,
             overlay: dark.whiteSmoke,

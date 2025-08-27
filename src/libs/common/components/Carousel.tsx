@@ -71,18 +71,16 @@ export function CarouselItem(item: Props) {
     <div className="min-w-0 px-2" style={{ flex: '0 0 100%' }}>
       <div className="relative">
         <span
-          style={{ fontSize: '90%' }}
           className={cn(
-            'absolute top-1/3 max-w-1/2 font-semibold text-white drop-shadow-lg',
+            'absolute top-1/3 max-w-1/2 text-sm font-semibold text-white drop-shadow-lg xl:text-3xl',
             position,
           )}
         >
           {item.title}
         </span>
         <p
-          style={{ fontSize: '90%' }}
           className={cn(
-            'absolute top-1/2 max-w-1/2 font-semibold text-white drop-shadow-lg',
+            'absolute top-1/2 max-w-1/2 text-xs font-semibold text-white drop-shadow-lg xl:text-xl',
             position,
           )}
         >
