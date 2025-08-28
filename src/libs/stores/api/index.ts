@@ -9,30 +9,37 @@ import {
 } from '@/libs/stores/types';
 
 export async function fetchUserStores() {
+  /* httpClient.get<StoreSummary[]>('/stores') */
   return generateMockStoreSummaries();
 }
 
 export async function fetchStoreDetails(storeId: string) {
+  /* httpClient.get<StoreDetail>(`/stores/${storeId}`) */
   return generateMockStoreDetail();
 }
 
 export async function fetchDiscoverableStores() {
+  /* httpClient.get<StoreSummary[]>('/stores/discover') */
   return generateMockStoreSummaries();
 }
 
 export async function fetchFeaturedStores() {
+  /* httpClient.get<StoreSummary[]>('/stores/featured') */
   return generateMockStoreSummaries();
 }
 
 export async function submitStoreBasicInfo(data: CreateStoreBasicDto) {
+  /* httpClient.post<StoreDetail>('/stores/create/basic', data) */
   return generateMockStoreDetail();
 }
 
 export async function submitStoreAddressUpdate(storeId: string, data: AddressDto) {
+  /* httpClient.patch<StoreDetail>(`/stores/${storeId}/address`, data) */
   return generateMockStoreDetail();
 }
 
 export async function submitStoreTagsSelection(storeId: string, data: CreateStoreTagsDto) {
+  /*  */
   return generateMockStoreDetail();
 }
 

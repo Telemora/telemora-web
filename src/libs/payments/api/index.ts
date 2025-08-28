@@ -2,13 +2,13 @@ import { generateMockPaymentDetail, generateMockPaymentSummaries } from '@/libs/
 import { CreatePaymentDto } from '@/libs/payments/types';
 
 export async function getPayments() {
-  return generateMockPaymentSummaries();
+  return generateMockPaymentSummaries(); /* httpClient.get<PaymentSummary[]>('/payments'); */
 }
 
 export async function getPaymentDetails(id: number) {
-  return generateMockPaymentDetail();
+  return generateMockPaymentDetail(); /* httpClient.get<PaymentDetail>(`/payments/${id}`); */
 }
 
 export async function createPayment(data: CreatePaymentDto) {
-  return generateMockPaymentDetail();
+  return generateMockPaymentDetail(); /* httpClient.post<PaymentDetail>('/payments/create', data); */
 }

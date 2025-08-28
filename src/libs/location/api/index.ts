@@ -7,15 +7,15 @@ import {
 import { NearestLocationResponseDto } from '../types';
 
 export async function getCountries() {
-  return generateMockCountries();
+  return generateMockCountries(); /* httpClient.get<CanonicalLocationDto[]>(`/locations/countries`); */
 }
 
 export async function getStatesByCountry(countryId: number) {
-  return generateMockStates();
+  return generateMockStates(); /* httpClient.get<CanonicalLocationDto[]>(`countries/${countryId}/states`); */
 }
 
 export async function getCitiesByState(stateId: number) {
-  return generateMockCities();
+  return generateMockCities(); /* httpClient.get<CanonicalLocationDto[]>(`states/${stateId}/cities`); */
 }
 
 export async function getNearestLocation(lat: number, lng: number) {
