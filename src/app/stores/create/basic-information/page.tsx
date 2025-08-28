@@ -14,7 +14,7 @@ import { createStoreBasicSchema } from '@/libs/stores/schemas';
 import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 
 export default function CreateStoreBasicInformation() {
-  const { webApp, loading } = useTelegramWebApp();
+  const { webApp, isLoaded } = useTelegramWebApp();
   const {
     register,
     handleSubmit,

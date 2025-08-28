@@ -16,7 +16,7 @@ import { createStoreLogoSchema } from '@/libs/stores/schemas';
 import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 
 export default function CreateStoreLogoUpload() {
-  const { webApp, loading } = useTelegramWebApp();
+  const { webApp, isLoaded } = useTelegramWebApp();
   const router = useRouter();
   const { storeId } = useParams<{ storeId: string }>();
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);

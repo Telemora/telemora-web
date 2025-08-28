@@ -11,7 +11,7 @@ import { AddressForm } from '@/libs/location/components/AddressForm';
 import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 
 export default function CreateStoreLocation() {
-  const { webApp, loading } = useTelegramWebApp();
+  const { webApp, isLoaded } = useTelegramWebApp();
   const { storeId } = useParams<{ storeId: string }>();
   const router = useRouter();
 

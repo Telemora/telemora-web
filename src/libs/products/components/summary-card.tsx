@@ -51,8 +51,8 @@ export default function ProductSummaryCard({ product, className }: ProductSummar
         </div>
 
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1 text-xs text-gray-500">
-            <FaStore className="text-gray-400" />
+          <div className="text-default-500 flex items-center gap-1 text-xs">
+            <FaStore className="text-default" />
             <span className="line-clamp-1">{store.displayName}</span>
           </div>
           <Badge size="sm" color={typeColor[productType]}>

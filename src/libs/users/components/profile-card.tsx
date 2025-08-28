@@ -73,7 +73,7 @@ export default function UserProfileCard({
               {displayName}
             </h2>
             {user.username && (
-              <p className="text-xs text-gray-500 sm:text-sm">
+              <p className="text-default-500 text-xs sm:text-sm">
                 <span className="sr-only">Username: </span>@{user.username}
               </p>
             )}
@@ -84,7 +84,8 @@ export default function UserProfileCard({
         <Button
           fullWidth
           size="sm"
-          variant="flat"
+          color="secondary"
+          variant="solid"
           onPress={() => handleNavigation(routes.edit)}
           className="flex items-center justify-center gap-2"
         >
@@ -94,7 +95,8 @@ export default function UserProfileCard({
         <Button
           fullWidth
           size="sm"
-          variant="flat"
+          color="secondary"
+          variant="solid"
           onPress={() => handleNavigation(routes.preferences)}
           className="flex items-center justify-center gap-2"
         >

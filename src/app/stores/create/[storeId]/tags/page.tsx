@@ -32,7 +32,7 @@ const TAG_SUGGESTIONS = [
 ];
 
 export default function CreateStoreTags() {
-  const { webApp, loading } = useTelegramWebApp();
+  const { webApp, isLoaded } = useTelegramWebApp();
   const { storeId } = useParams<{ storeId: string }>();
   const router = useRouter();
 
@@ -91,7 +91,7 @@ export default function CreateStoreTags() {
 
         {/* Suggestions */}
         <div className="mt-4">
-          <p className="mb-2 text-sm font-medium text-gray-600">Suggestions</p>
+          <p className="text-default-600 mb-2 text-sm font-medium">Suggestions</p>
           <div className="flex flex-wrap gap-2">
             {TAG_SUGGESTIONS.map((tag) => (
               <Tag
@@ -123,7 +123,7 @@ export default function CreateStoreTags() {
               Add &#34;{input.trim()}&#34;
             </Button>
           )}
-          {errors.tags && <p className="mt-2 text-sm text-red-500">{errors.tags.message}</p>}
+          {errors.tags && <p className="text-danger-500 mt-2 text-sm">{errors.tags.message}</p>}
         </div>
 
         {/* Navigation */}

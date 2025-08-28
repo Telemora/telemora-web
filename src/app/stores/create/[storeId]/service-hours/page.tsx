@@ -21,9 +21,10 @@ import { ServiceHoursDto, SetStoreServiceHoursDto, Weekday } from '@/libs/stores
 import { serviceHoursDtoSchema, setStoreServiceHoursSchema } from '@/libs/stores/schemas';
 import toast from 'react-hot-toast';
 import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
+import { PageHeader } from '@/libs/common/components/PageHeader';
 
 export default function ServiceHoursPage() {
-  const { webApp, loading } = useTelegramWebApp();
+  const { webApp, isLoaded } = useTelegramWebApp();
   const router = useRouter();
   const { storeId } = useParams<{ storeId: string }>();
   const { mutateAsync, isPending } = useSubmitStoreServiceHoursMutation(storeId);
@@ -108,11 +109,9 @@ export default function ServiceHoursPage() {
 
   return (
     <div className="mx-auto max-w-2xl p-5">
-      <h1 className="mb-5 text-2xl">
-        {editIndex !== null ? 'Edit' : 'Manage'} Store Service Hours
-      </h1>
+      <PageHeader title={editIndex !== null ? 'Edit' : 'Manage' + 'Store Service Hours'} />
 
-      {error && <div className="mb-3 text-red-500">{error}</div>}
+      {error && <div className="text-danger-500 mb-3">{error}</div>}
 
       <div className="mb-5">
         <Button color="primary" onPress={onOpen}>

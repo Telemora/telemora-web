@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Divider, ScrollShadow, Skeleton, User } from '@heroui/react';
+import { Button, Divider, Skeleton, User } from '@heroui/react';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 
@@ -12,9 +12,10 @@ import StarRating from '@/libs/common/components/StarRating';
 import { useProductDetails } from '@/libs/products/hooks';
 import ReviewPreviewCard from '@/libs/reviews/components/preview-card';
 import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
+import { HorizontalScroll } from '@/libs/common/components/HorizontalScroll';
 
 export default function ProductDetailsPage() {
-  const { webApp, loading } = useTelegramWebApp();
+  const { webApp, isLoaded } = useTelegramWebApp();
   const { storeId, productId } = useParams();
   const storeIdNum = parseInt(storeId as string, 10);
   const productIdNum = parseInt(productId as string, 10);
@@ -27,7 +28,7 @@ export default function ProductDetailsPage() {
     return (
       <AppLayout>
         <div className="space-y-4">
-          <Skeleton className="h-52 w-full rounded-xl" />
+          <Skeleton className="h-52 w-full rounded-lg" />
           <Skeleton className="h-6 w-3/4 rounded" />
           <Skeleton className="h-6 w-1/2 rounded" />
           <Skeleton className="h-10 w-full rounded" />
@@ -40,9 +41,9 @@ export default function ProductDetailsPage() {
 
   return (
     <AppLayout>
-      <main className="space-y-6 px-2 py-4">
+      <main className="space-y-6">
         {product.images?.length ? (
-          <ScrollShadow orientation="horizontal" className="flex gap-x-4 overflow-x-auto pb-2">
+          <HorizontalScroll>
             {product.images.map((img, index) => (
               <Image
                 key={index}
@@ -50,10 +51,10 @@ export default function ProductDetailsPage() {
                 width={240}
                 height={240}
                 alt={product.name}
-                className="aspect-square w-60 shrink-0 rounded-xl object-cover"
+                className="aspect-square w-60 shrink-0 rounded-lg object-cover"
               />
             ))}
-          </ScrollShadow>
+          </HorizontalScroll>
         ) : null}
 
         <div>
@@ -65,7 +66,7 @@ export default function ProductDetailsPage() {
         </div>
 
         <div>
-          <h1 className="text-lg font-bold">{product.name}</h1>
+          <PageHeader title={product.name} />
           <PriceComponent amount={product.price} />
         </div>
 

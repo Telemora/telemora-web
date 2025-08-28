@@ -21,7 +21,7 @@ export function TonPaymentButton({
   sellerAddress,
   orderId = '0',
 }: TonPaymentButtonProps) {
-  const { webApp, loading } = useTelegramWebApp();
+  const { webApp, isLoaded } = useTelegramWebApp();
   const [tonConnectUI] = useTonConnectUI();
   const wallet = useTonWallet();
   const userAddress = useTonAddress(false);

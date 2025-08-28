@@ -1,17 +1,18 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-@config "../../tailwind.config.js";
+@config "../../tailwind.config.ts";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --tg-viewport-height: 0;
+  --tg-viewport-stable-height: 0;
+  --tg-safe-area-inset-top: 0;
+  --tg-safe-area-inset-bottom: 0.5rem;
+  --tg-safe-area-inset-left: 0;
+  --tg-safe-area-inset-right: 0;
+  --tg-content-safe-area-inset-top: 0;
+  --tg-content-safe-area-inset-bottom: 0.5rem;
+  --tg-content-safe-area-inset-left: 0;
+  --tg-content-safe-area-inset-right: 0;
 }
 
 ::-webkit-scrollbar {
@@ -29,8 +30,10 @@
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  padding: calc(var(--tg-safe-area-inset-top) + var(--tg-content-safe-area-inset-top))
+    calc(var(--tg-safe-area-inset-right) + var(--tg-content-safe-area-inset-right))
+    calc(var(--tg-safe-area-inset-bottom) + var(--tg-content-safe-area-inset-bottom))
+    calc(var(--tg-safe-area-inset-left) + var(--tg-content-safe-area-inset-left));
   font-family: Arial, Helvetica, sans-serif;
   overscroll-behavior: none;
   -webkit-overflow-scrolling: touch;

@@ -17,7 +17,7 @@ import { updateProductDtoSchema } from '@/libs/products/schemas';
 import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 
 export default function EditProductPage() {
-  const { webApp, loading } = useTelegramWebApp();
+  const { webApp, isLoaded } = useTelegramWebApp();
   const { storeId, productId } = useParams<{ storeId: string; productId: string }>();
   const storeIdNum = parseInt(storeId, 10);
   const productIdNum = parseInt(productId, 10);

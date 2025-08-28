@@ -1,14 +1,6 @@
 'use client';
 
-import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ScrollShadow,
-} from '@heroui/react';
+import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/react';
 import { FaPaperclip, FaTrash } from 'react-icons/fa';
 import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
@@ -16,6 +8,7 @@ import toast from 'react-hot-toast';
 import { useUploadProductPhotosMutation } from '@/libs/products/hooks';
 import { useForm } from 'react-hook-form';
 import { ProductImageDto } from '@/libs/products/types';
+import { HorizontalScroll } from '@/libs/common/components/HorizontalScroll';
 
 const DEFAULT_ACCEPT = [
   'image/jpeg',
@@ -112,7 +105,7 @@ export function ProductPhotosUploader() {
       </Button>
 
       {uploadedImageUrls.length > 0 && (
-        <ScrollShadow orientation="horizontal" className="flex gap-2">
+        <HorizontalScroll>
           {uploadedImageUrls.map((src, i) => (
             <Image
               key={`preview-${i}`}
@@ -123,7 +116,7 @@ export function ProductPhotosUploader() {
               className="rounded border"
             />
           ))}
-        </ScrollShadow>
+        </HorizontalScroll>
       )}
 
       <Modal isOpen={modalOpen} onOpenChange={setModalOpen}>
@@ -132,7 +125,7 @@ export function ProductPhotosUploader() {
 
           <ModalBody>
             {previews.length > 0 ? (
-              <ScrollShadow orientation="horizontal" className="flex gap-2">
+              <HorizontalScroll>
                 {previews.map((src, i) => (
                   <div key={src} className="relative">
                     <Image
@@ -151,9 +144,9 @@ export function ProductPhotosUploader() {
                     </button>
                   </div>
                 ))}
-              </ScrollShadow>
+              </HorizontalScroll>
             ) : (
-              <p className="text-sm text-gray-500">No images selected</p>
+              <p className="text-default-500 text-sm">No images selected</p>
             )}
           </ModalBody>
 

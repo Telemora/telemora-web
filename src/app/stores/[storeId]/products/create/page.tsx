@@ -17,7 +17,7 @@ import { createProductDtoSchema } from '@/libs/products/schemas';
 import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 
 export default function CreateProductPage() {
-  const { webApp, loading } = useTelegramWebApp();
+  const { webApp, isLoaded } = useTelegramWebApp();
   const { storeId } = useParams();
   const {
     register,

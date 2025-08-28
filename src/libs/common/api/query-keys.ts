@@ -16,6 +16,12 @@ export const queryKeys = {
       ['products', storeId, productId] as const,
     byStore: (storeId: string | number) => ['products', 'store', storeId] as const,
   },
+  discounts: {
+    all: ['discounts'] as const,
+    detail: (id: string | number, discountId: string | number) =>
+      ['discounts', id, discountId] as const,
+    byStore: (storeId: string | number) => ['discounts', 'store', storeId] as const,
+  },
   reviews: {
     all: ['reviews'] as const,
     detail: (id: string | number) => ['reviews', 'detail', id] as const,

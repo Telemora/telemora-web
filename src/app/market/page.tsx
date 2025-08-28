@@ -1,11 +1,13 @@
 'use client';
 
-import { ScrollShadow, Skeleton } from '@heroui/react';
+import { Skeleton } from '@heroui/react';
 import React from 'react';
 
 import AppLayout from '@/libs/common/components/AppLayout';
 import { StorePreviewCard } from '@/libs/stores/components/preview-card';
 import { useDiscoverableStoresQuery, useFeaturedStoresQuery } from '@/libs/stores/hooks';
+import { HorizontalScroll } from '@/libs/common/components/HorizontalScroll';
+import { Carousel } from '@/libs/common/components/Carousel';
 
 export default function MarketPage() {
   const { data: discoverStores, isLoading: isDiscoverStoresLoading } = useDiscoverableStoresQuery();
@@ -13,8 +15,10 @@ export default function MarketPage() {
 
   return (
     <AppLayout>
+      <Carousel />
       {isDiscoverStoresLoading && (
         <section>
+          <h1 className="font-semibold">New Openings</h1>
           <HorizontalScroll>
             {new Array<number>(4).map((_) => (
               <Skeleton key={_} />
@@ -24,6 +28,7 @@ export default function MarketPage() {
       )}
       {discoverStores && (
         <section>
+          <h1 className="font-semibold">New Openings</h1>
           <HorizontalScroll>
             {discoverStores.map((store) => (
               <StorePreviewCard key={store.id} store={store} />
@@ -34,6 +39,7 @@ export default function MarketPage() {
 
       {isFeaturedStoresLoading && (
         <section>
+          <h1 className="font-semibold">Top Selling Stores</h1>
           <HorizontalScroll>
             {new Array<number>(4).map((_) => (
               <Skeleton key={_} />
@@ -43,6 +49,7 @@ export default function MarketPage() {
       )}
       {featuredStores && (
         <section>
+          <h1 className="font-semibold">Top Selling Stores</h1>
           <HorizontalScroll>
             {featuredStores.map((store) => (
               <StorePreviewCard key={store.id} store={store} />
@@ -51,13 +58,5 @@ export default function MarketPage() {
         </section>
       )}
     </AppLayout>
-  );
-}
-
-function HorizontalScroll({ children }: { children: React.ReactNode }) {
-  return (
-    <ScrollShadow className="flex max-w-full gap-x-4" hideScrollBar orientation="horizontal">
-      {children}
-    </ScrollShadow>
   );
 }
