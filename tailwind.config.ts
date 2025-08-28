@@ -85,23 +85,23 @@ export default {
           colors: {
             primary: generateShades(light.blueNcs, dark.whiteSmoke, { darkMode: true }),
             default: generateShades(dark.gunmetal, dark.whiteSmoke, { darkMode: true }),
-            secondary: generateShades(dark.richBlack, dark.whiteSmoke, { darkMode: true }),
+            secondary: generateShades(dark.gunmetal, dark.whiteSmoke, { darkMode: true }),
             success: generateShades(dark.midnightGreen, dark.whiteSmoke, { darkMode: true }),
             warning: generateShades(dark.caramel, dark.whiteSmoke, { darkMode: true }),
             danger: generateShades(dark.imperialRed, dark.whiteSmoke, { darkMode: true }),
             content1: {
-              DEFAULT: dark.richBlack,
+              DEFAULT: dark.gunmetal,
             },
             content2: {
-              DEFAULT: dark.richBlack,
+              DEFAULT: dark.gunmetal,
             },
             content3: {
-              DEFAULT: dark.richBlack,
+              DEFAULT: dark.gunmetal,
             },
             content4: {
-              DEFAULT: dark.richBlack,
+              DEFAULT: dark.gunmetal,
             },
-            background: dark.richBlack2,
+            background: dark.richBlack,
             foreground: dark.whiteSmoke,
             focus: dark.silverLakeBlue,
             overlay: dark.whiteSmoke,

@@ -40,12 +40,11 @@ export default function BottomTabs() {
       placement="bottom"
       items={tabList}
       classNames={{
-        base: 'fixed bottom-0 px-1 z-50 w-full md:max-w-sm translate-x-1/2 right-1/2',
-        tab: 'h-16',
+        base: 'fixed bottom-0 px-1 z-50 w-full md:max-w-md translate-x-1/2 right-1/2',
+        tab: 'h-14',
       }}
       style={{
-        marginBottom:
-          'calc(var(--tg-safe-area-inset-bottom) + var(--tg-content-safe-area-inset-bottom))',
+        marginBottom: 'var(--tg-safe-area-inset-bottom)',
         marginRight:
           'calc(var(--tg-safe-area-inset-right) + var(--tg-content-safe-area-inset-right))',
         marginLeft: 'calc(var(--tg-safe-area-inset-left) + var(--tg-content-safe-area-inset-left))',
@@ -56,7 +55,7 @@ export default function BottomTabs() {
         <Tab
           key={key}
           title={
-            <div className="flex flex-col items-center gap-1 text-sm">
+            <div className="flex flex-col items-center gap-1 text-xs">
               {icon} <span>{label}</span>
             </div>
           }
