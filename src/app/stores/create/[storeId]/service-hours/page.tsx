@@ -22,6 +22,7 @@ import { serviceHoursDtoSchema, setStoreServiceHoursSchema } from '@/libs/stores
 import toast from 'react-hot-toast';
 import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 import { PageHeader } from '@/libs/common/components/PageHeader';
+import { StoreCreationStepsNav } from '@/libs/stores/components/StoreCreationStepsNav';
 
 export default function ServiceHoursPage() {
   const { webApp, isLoaded } = useTelegramWebApp();
@@ -147,9 +148,11 @@ export default function ServiceHoursPage() {
         )}
       </div>
 
-      <Button color="primary" onPress={handleSubmit} isDisabled={isPending} className="w-full">
-        {isPending ? 'Saving...' : 'Save Service Hours'}
-      </Button>
+      <StoreCreationStepsNav>
+        <Button color="primary" onPress={handleSubmit} isDisabled={isPending} className="w-full">
+          {isPending ? 'Saving...' : 'Save Service Hours'}
+        </Button>
+      </StoreCreationStepsNav>
 
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>

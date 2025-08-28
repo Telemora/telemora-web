@@ -12,6 +12,7 @@ import { useSubmitStoreBasicInfoMutation } from '@/libs/stores/hooks';
 import { CreateStoreBasicDto } from '@/libs/stores/types';
 import { createStoreBasicSchema } from '@/libs/stores/schemas';
 import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
+import { StoreCreationStepsNav } from '@/libs/stores/components/StoreCreationStepsNav';
 
 export default function CreateStoreBasicInformation() {
   const { webApp, isLoaded } = useTelegramWebApp();
@@ -76,16 +77,7 @@ export default function CreateStoreBasicInformation() {
           isInvalid={!!errors.supportEmail}
           errorMessage={errors.supportEmail?.message}
         />
-        <div className="flex justify-between">
-          <Button
-            type="submit"
-            color="primary"
-            isDisabled={isSubmitting || isPending}
-            isLoading={isSubmitting || isPending}
-          >
-            {isSubmitting || isPending ? 'Creating...' : 'Next'}
-          </Button>
-
+        <StoreCreationStepsNav>
           <Button
             type="button"
             color="default"
@@ -94,7 +86,15 @@ export default function CreateStoreBasicInformation() {
           >
             Back
           </Button>
-        </div>
+          <Button
+            type="submit"
+            color="primary"
+            isDisabled={isSubmitting || isPending}
+            isLoading={isSubmitting || isPending}
+          >
+            {isSubmitting || isPending ? 'Creating...' : 'Next'}
+          </Button>
+        </StoreCreationStepsNav>
       </Form>
     </AppLayout>
   );

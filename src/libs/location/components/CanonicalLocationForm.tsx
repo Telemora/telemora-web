@@ -10,7 +10,7 @@ interface Props {
 
 export function CanonicalLocationForm({ reg, data, type }: Props) {
   return (
-    <Select {...reg(`${type}.id`)}>
+    <Select {...reg(`${type}.id`)} label={type}>
       {data.map((item) => (
         <SelectItem key={item.id}>{item.name}</SelectItem>
       ))}

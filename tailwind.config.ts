@@ -85,7 +85,7 @@ export default {
           colors: {
             primary: generateShades(light.blueNcs, dark.whiteSmoke, { darkMode: true }),
             default: generateShades(dark.gunmetal, dark.whiteSmoke, { darkMode: true }),
-            secondary: generateShades(dark.richBlack, dark.whiteSmoke, { darkMode: true }),
+            secondary: generateShades(dark.richBlack2, dark.whiteSmoke, { darkMode: true }),
             success: generateShades(dark.midnightGreen, dark.whiteSmoke, { darkMode: true }),
             warning: generateShades(dark.caramel, dark.whiteSmoke, { darkMode: true }),
             danger: generateShades(dark.imperialRed, dark.whiteSmoke, { darkMode: true }),
