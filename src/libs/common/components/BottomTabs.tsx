@@ -12,7 +12,7 @@ const TAB_KEYS = {
 };
 
 function getBaseTabKey(pathname: string): string | null {
-  if (pathname.startsWith(TAB_KEYS.MARKET)) return TAB_KEYS.MARKET;
+  if (pathname === TAB_KEYS.MARKET) return TAB_KEYS.MARKET;
   if (pathname.startsWith(TAB_KEYS.STORES)) return TAB_KEYS.STORES;
   if (pathname.startsWith(TAB_KEYS.ORDERS)) return TAB_KEYS.ORDERS;
   if (pathname.startsWith(TAB_KEYS.PROFILE)) return TAB_KEYS.PROFILE;
