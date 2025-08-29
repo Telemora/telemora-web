@@ -14,6 +14,7 @@ import { useSubmitStoreTagsMutation } from '@/libs/stores/hooks';
 import { CreateStoreTagsDto } from '@/libs/stores/types';
 import { createStoreTagsSchema } from '@/libs/stores/schemas';
 import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
+import { StoreCreationStepsNav } from '@/libs/stores/components/StoreCreationStepsNav';
 
 const TAG_SUGGESTIONS = [
   'Clothing',
@@ -127,14 +128,14 @@ export default function CreateStoreTags() {
         </div>
 
         {/* Navigation */}
-        <div className="mt-8 flex gap-x-2">
+        <StoreCreationStepsNav>
           <Button variant="flat" type="button" onPress={() => router.back()}>
             Back
           </Button>
           <Button
             variant="flat"
             type="button"
-            onPress={() => router.push(`/stores/${storeId}/working-hours`)}
+            onPress={() => router.push(`/stores/${storeId}/service-hours`)}
           >
             Skip
           </Button>
@@ -147,7 +148,7 @@ export default function CreateStoreTags() {
           >
             Save & Next
           </Button>
-        </div>
+        </StoreCreationStepsNav>
       </Form>
     </AppLayout>
   );

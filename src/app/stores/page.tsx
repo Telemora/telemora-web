@@ -7,7 +7,7 @@ import React from 'react';
 import AppLayout from '@/libs/common/components/AppLayout';
 import ErrorPage from '@/libs/common/components/ErrorPage';
 import { PageHeader } from '@/libs/common/components/PageHeader';
-import StoreSummaryCard from '@/libs/stores/components/summary-card';
+import StoreSummaryCard from '@/libs/stores/components/SummaryCard';
 import { useUserStoresQuery } from '@/libs/stores/hooks';
 
 export default function StoreListPage() {

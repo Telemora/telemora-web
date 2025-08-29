@@ -1,7 +1,7 @@
 import { Button, Divider } from '@heroui/react';
 import React from 'react';
 
-import { StorePreviewCard } from '@/libs/stores/components/preview-card';
+import { StorePreviewCard } from '@/libs/stores/components/PreviewCard';
 import { StorePreviewDto } from '@/libs/stores/types';
 import { PageHeader } from '@/libs/common/components/PageHeader';
 

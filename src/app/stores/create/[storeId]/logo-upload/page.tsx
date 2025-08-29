@@ -14,6 +14,7 @@ import { useSubmitStoreLogoMutation } from '@/libs/stores/hooks';
 import { CreateStoreLogoDto } from '@/libs/stores/types';
 import { createStoreLogoSchema } from '@/libs/stores/schemas';
 import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
+import { StoreCreationStepsNav } from '@/libs/stores/components/StoreCreationStepsNav';
 
 export default function CreateStoreLogoUpload() {
   const { webApp, isLoaded } = useTelegramWebApp();
@@ -155,14 +156,16 @@ export default function CreateStoreLogoUpload() {
           </div>
         )}
 
-        <Button
-          type="submit"
-          className="mt-6"
-          isDisabled={isProcessing || !form.watch('logoFile')}
-          isLoading={isPending}
-        >
-          Submit Store
-        </Button>
+        <StoreCreationStepsNav>
+          <Button
+            type="submit"
+            className="mt-6"
+            isDisabled={isProcessing || !form.watch('logoFile')}
+            isLoading={isPending}
+          >
+            Submit Store
+          </Button>
+        </StoreCreationStepsNav>
       </Form>
     </AppLayout>
   );

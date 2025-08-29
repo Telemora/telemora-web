@@ -39,9 +39,10 @@ export default function BottomTabs() {
       fullWidth
       placement="bottom"
       items={tabList}
+      color="primary"
       classNames={{
-        base: 'fixed bottom-0 px-1 z-50 w-full md:max-w-md translate-x-1/2 right-1/2',
-        tab: 'h-14',
+        base: 'fixed bottom-0 z-50 w-full md:max-w-sm translate-x-1/2 right-1/2',
+        tab: 'h-16',
       }}
       style={{
         marginBottom: 'var(--tg-safe-area-inset-bottom)',
@@ -55,7 +56,7 @@ export default function BottomTabs() {
         <Tab
           key={key}
           title={
-            <div className="flex flex-col items-center gap-1 text-xs">
+            <div className="flex flex-col items-center gap-1 text-sm">
               {icon} <span>{label}</span>
             </div>
           }

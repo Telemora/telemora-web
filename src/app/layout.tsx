@@ -1,6 +1,6 @@
 import './globals.css';
 
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import type { PropsWithChildren } from 'react';
 
 import { AppProvider } from '@/providers/AppProvider';
@@ -12,6 +12,14 @@ export const metadata: Metadata = {
   description: 'Telegram mini app',
   applicationName: 'Telemora',
   manifest: '/manifest.json',
+};
+
+export const viewport: Viewport = {
+  width: 'device-fit',
+  initialScale: 1,
+  minimumScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {

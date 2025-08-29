@@ -15,6 +15,7 @@ import { AddressDto, AddressType, CanonicalLocationType } from '@/libs/location/
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createAddressSchema } from '@/libs/location/schemas';
 import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
+import { StoreCreationStepsNav } from '@/libs/stores/components/StoreCreationStepsNav';
 
 interface Props {
   isPending: boolean;
@@ -118,23 +119,26 @@ export function AddressForm({ isPending, onSubmit }: Props) {
       <Input {...register('streetLine1')} label="Street Line 1" />
       <Input {...register('streetLine2')} label="Street Line 2" />
       <Input {...register('postalCode')} label="Postal Code" />
-      <Select {...register('type')}>
+      <Select {...register('type')} label="Type">
         {Object.values<string>(AddressType).map((type) => (
           <SelectItem key={type}>{type}</SelectItem>
         ))}
       </Select>
       <GeoPointForm register={register} />
-      <Switch {...register('isDefault')} />
+      <div className="my-2 flex w-full items-center justify-between">
+        <label className="text-xs">Save as Default location</label>
+        <Switch {...register('isDefault')} />
+      </div>
 
       {/* Buttons */}
-      <div className="mt-6 flex gap-4">
-        <Button type="button" variant="bordered" onPress={() => router.back()}>
+      <StoreCreationStepsNav>
+        <Button type="button" onPress={() => router.back()}>
           Back
         </Button>
         <Button type="submit" color="primary" isLoading={isPending}>
           Save & Continue
         </Button>
-      </div>
+      </StoreCreationStepsNav>
     </Form>
   );
 }
