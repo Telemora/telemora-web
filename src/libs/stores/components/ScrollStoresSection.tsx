@@ -3,6 +3,7 @@ import { Skeleton } from '@heroui/react';
 import { StorePreviewCard } from '@/libs/stores/components/PreviewCard';
 import React from 'react';
 import { StoreSummary } from '@/libs/stores/types';
+import { EmptyState } from '@/libs/common/components/EmptyState';
 
 export function ScrollStoresSection({
   stores,
@@ -23,7 +24,13 @@ export function ScrollStoresSection({
           </HorizontalScroll>
         </section>
       )}
-      {stores && (
+      {stores && stores.length === 0 && (
+        <section>
+          <h1 className="font-semibold">New Openings</h1>
+          <EmptyState />
+        </section>
+      )}
+      {stores && stores.length > 0 && (
         <section>
           <h1 className="font-semibold">New Openings</h1>
           <HorizontalScroll>

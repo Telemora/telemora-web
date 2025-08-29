@@ -9,6 +9,8 @@ import ErrorPage from '@/libs/common/components/ErrorPage';
 import { PageHeader } from '@/libs/common/components/PageHeader';
 import StoreSummaryCard from '@/libs/stores/components/SummaryCard';
 import { useUserStoresQuery } from '@/libs/stores/hooks';
+import { EmptyState } from '@/libs/common/components/EmptyState';
+import { FaPlus } from 'react-icons/fa6';
 
 export default function StoreListPage() {
   const router = useRouter();
@@ -35,10 +37,15 @@ export default function StoreListPage() {
 
       {stores && stores.length === 0 ? (
         <div className="mt-12 text-center">
-          <div className="mb-2 text-5xl">🏪</div>
-          <p className="text-default-600 mb-4">You don’t own any stores yet.</p>
-          <Button size="lg" onPress={handleCreateStore}>
-            Create Your First Store
+          <EmptyState />
+          <Button
+            size="lg"
+            fullWidth
+            color="primary"
+            onPress={handleCreateStore}
+            startContent={<FaPlus />}
+          >
+            Create A New Store
           </Button>
         </div>
       ) : (
