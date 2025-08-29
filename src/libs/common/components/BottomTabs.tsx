@@ -2,10 +2,10 @@
 
 import { Tab, Tabs } from '@heroui/react';
 import { usePathname, useRouter } from 'next/navigation';
-import { FaClipboard, FaHome, FaStore, FaUser } from 'react-icons/fa';
+import { FaClipboard, FaShoppingCart, FaStore, FaUser } from 'react-icons/fa';
 
 const TAB_KEYS = {
-  MARKET: '/market',
+  MARKET: '/',
   STORES: '/stores',
   ORDERS: '/orders',
   PROFILE: '/profile',
@@ -20,7 +20,7 @@ function getBaseTabKey(pathname: string): string | null {
 }
 
 const tabList = [
-  { key: TAB_KEYS.MARKET, label: 'Market', icon: <FaHome size={15} aria-label="Market" /> },
+  { key: TAB_KEYS.MARKET, label: 'Market', icon: <FaShoppingCart size={15} aria-label="Market" /> },
   { key: TAB_KEYS.STORES, label: 'Stores', icon: <FaStore size={15} aria-label="Stores" /> },
   { key: TAB_KEYS.ORDERS, label: 'Orders', icon: <FaClipboard size={15} aria-label="Orders" /> },
   { key: TAB_KEYS.PROFILE, label: 'Profile', icon: <FaUser size={15} aria-label="Profile" /> },

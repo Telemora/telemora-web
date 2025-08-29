@@ -1,16 +1,21 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import React from 'react';
 
-import SplashScreen from '@/libs/common/components/SplashScreen';
+import AppLayout from '@/libs/common/components/AppLayout';
+import { useDiscoverableStoresQuery, useFeaturedStoresQuery } from '@/libs/stores/hooks';
+import { Carousel } from '@/libs/common/components/Carousel';
+import { ScrollStoresSection } from '@/libs/stores/components/ScrollStoresSection';
 
-export default function Redirect() {
-  const router = useRouter();
+export default function MarketPage() {
+  const { data: discoverStores, isLoading: isDiscoverStoresLoading } = useDiscoverableStoresQuery();
+  const { data: featuredStores, isLoading: isFeaturedStoresLoading } = useFeaturedStoresQuery();
 
-  useEffect(() => {
-    router.replace('/market');
-  }, [router]);
-
-  return <SplashScreen />;
+  return (
+    <AppLayout>
+      <Carousel />
+      <ScrollStoresSection stores={discoverStores} isLoading={isDiscoverStoresLoading} />
+      <ScrollStoresSection stores={featuredStores} isLoading={isFeaturedStoresLoading} />
+    </AppLayout>
+  );
 }

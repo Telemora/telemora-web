@@ -15,7 +15,7 @@ export default function OrdersPage() {
   const router = useRouter();
   const { data: orders, error, isLoading } = useMyOrders();
 
-  const goToMarket = () => router.push('/market');
+  const goToMarket = () => router.push('/');
 
   if (isLoading || !orders) {
     return (
