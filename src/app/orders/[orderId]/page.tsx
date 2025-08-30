@@ -1,27 +1,25 @@
 'use client';
 
-import { Alert, Button, Card, CardBody, CardFooter, Divider, Spinner } from '@heroui/react';
-import { useParams, useRouter } from 'next/navigation';
+import { Alert, Card, CardBody, CardFooter, Divider, Spinner } from '@heroui/react';
+import { useParams } from 'next/navigation';
 import React from 'react';
 
 import AppLayout from '@/libs/common/components/AppLayout';
 import ErrorPage from '@/libs/common/components/ErrorPage';
 import { PageHeader } from '@/libs/common/components/PageHeader';
-import PriceComponent from '@/libs/common/components/PriceComponent';
 import { formatSafeDate } from '@/libs/common/utils/date';
 import OrderItemPreviewCard from '@/libs/orders/components/OrderItemPreview';
 import { OrderShipmentCard } from '@/libs/orders/components/OrderShipmentCard';
-import OrderStatusChip from '@/libs/orders/components/OrderStatusChip';
+import { OrderStatusChip } from '@/libs/orders/components/OrderStatusChip';
 import { useOrderDetails } from '@/libs/orders/hooks';
 import { OrderStatus } from '@/libs/orders/types';
 import { PaymentStatusChip } from '@/libs/payments/components/payment-status-chip';
 import { TonPaymentButton } from '@/libs/payments/components/ton-payment-button';
 import { PaymentStatus } from '@/libs/payments/types';
+import { OrderInfoSummary } from '@/libs/orders/components/OrderInfoSummary';
 
 export default function OrderDetailsPage() {
   const { orderId } = useParams<{ orderId: string }>();
-  const router = useRouter();
-
   const { data: order, isLoading, error } = useOrderDetails(Number(orderId));
 
   if (isLoading) {
@@ -48,11 +46,21 @@ export default function OrderDetailsPage() {
         subtitle={`Placed on ${formatSafeDate(order.createdAt)}`}
       />
 
-      <div className="mb-4 flex items-center justify-between">
-        <OrderStatusChip status={order.status} />
+      <div className="mb-4 grid grid-cols-2">
+        <div className="space-x-1">
+          <span className="text-sm">Order Status:</span>
+          <OrderStatusChip status={order.status} />
+        </div>
 
-        {order.payment && <PaymentStatusChip status={order.payment.status} />}
+        {order.payment && (
+          <div className="space-x-1">
+            <span className="text-sm">Payment Status:</span>
+            <PaymentStatusChip status={order.payment.status} />
+          </div>
+        )}
       </div>
+
+      <OrderInfoSummary order={order} />
 
       {isPendingPayment && (
         <Card>
@@ -74,9 +82,8 @@ export default function OrderDetailsPage() {
 
       <Divider className="my-4" />
 
-      {/* Items */}
       <div className="space-y-4">
-        <h2 className="text-lg font-semibold">Items</h2>
+        <PageHeader title="Items" />
         {order.items.map((item) => (
           <OrderItemPreviewCard orderItem={item} key={item.product.id} />
         ))}
@@ -84,29 +91,7 @@ export default function OrderDetailsPage() {
 
       <Divider className="my-4" />
 
-      {/* Shipping Info */}
       {order.shipment && <OrderShipmentCard shipment={order.shipment} />}
-
-      <Divider className="my-4" />
-
-      {/* Order Summary */}
-      <div className="mb-12">
-        <h2 className="mb-2 text-lg font-semibold">Summary</h2>
-        <div className="space-y-1 text-sm">
-          <div className="flex gap-x-2">
-            <span>Total Amount: </span>
-            <PriceComponent amount={order.totalAmount} />
-          </div>
-          <p>Delivery Date: {formatSafeDate(order.expectedDeliveryDate)}</p>
-          <p className="text-sm">
-            Estimated Delivery {formatSafeDate(order.shipment?.expectedDeliveryDate ?? '-')}
-          </p>
-        </div>
-      </div>
-
-      <Button variant="bordered" fullWidth onPress={() => router.push('/orders')}>
-        Back to Orders
-      </Button>
     </AppLayout>
   );
 }

@@ -1,205 +1,46 @@
-'use client';
-
-import clsx from 'clsx';
-import { format } from 'date-fns';
-import { FaExternalLinkAlt, FaTruck } from 'react-icons/fa';
-
 import { OrderShipment } from '@/libs/orders/types';
+import { PageHeader } from '@/libs/common/components/PageHeader';
+import { formatSafeDate } from '@/libs/common/utils/date';
 
-const SHIPMENT_STATUS_STYLES: Record<NonNullable<OrderShipment['status']>, string> = {
-  created: 'bg-gray-200 text-default-800',
-  in_transit: 'bg-blue-100 text-blue-800',
-  delivered: 'bg-green-100 text-green-800',
-  failed: 'bg-red-100 text-danger-800',
-};
-
-export function OrderShipmentCard({
-  shipment,
-  collapsed = false,
-}: {
-  shipment: OrderShipment;
-  collapsed?: boolean;
-}) {
-  const {
-    trackingNumber,
-    courierService,
-    status = 'created',
-    expectedDeliveryDate,
-    shippedAt,
-    carrierTrackingUrl,
-  } = shipment;
-
-  const statusStyle =
-    SHIPMENT_STATUS_STYLES[status] ||
-    'bg-gray-100 text-default-600 border border-dashed border-gray-400';
-  const statusLabel = typeof status === 'string' ? status.replace('_', ' ') : 'unknown';
-
-  if (collapsed) {
-    return (
-      <section
-        className="flex flex-col gap-2 rounded-md border bg-white p-3 shadow-sm sm:flex-row sm:items-center sm:gap-4"
-        aria-label="Shipment Summary"
-      >
-        <div className="flex min-w-0 flex-1 items-center gap-2">
-          <FaTruck aria-hidden="true" className="text-default-500" />
-          <span
-            className={clsx('rounded-full px-2 py-1 text-xs capitalize', statusStyle)}
-            aria-label={`Status: ${statusLabel}`}
-          >
-            {statusLabel}
-          </span>
-          <span
-            className="text-default-700 max-w-[100px] truncate text-xs"
-            title={trackingNumber || ''}
-            aria-label={trackingNumber || ''}
-          >
-            {trackingNumber ? (
-              escapeHtml(trackingNumber)
-            ) : (
-              <span className="text-default">No Tracking</span>
-            )}
-          </span>
-          <span className="text-default-500 text-xs">
-            {courierService ? (
-              escapeHtml(courierService)
-            ) : (
-              <span className="text-default">No Courier</span>
-            )}
-          </span>
-        </div>
-        {carrierTrackingUrl && (
-          <a
-            href={escapeHtml(carrierTrackingUrl)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center text-xs text-blue-600 hover:underline"
-            aria-label="Track shipment external link"
-          >
-            Track
-            <FaExternalLinkAlt className="ml-1 h-3 w-3" aria-hidden="true" />
-          </a>
-        )}
-      </section>
-    );
+export function OrderShipmentCard({ shipment }: { shipment: OrderShipment }) {
+  if (!shipment) {
+    return null;
   }
+
   return (
-    <section
-      className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-6"
-      aria-label="Shipment Information"
-    >
-      <div className="flex-1 space-y-3">
-        <header className="flex items-center justify-between">
-          <div className="mb-2 flex items-center gap-x-2 text-lg font-semibold">
-            <FaTruck aria-hidden="true" />
-            <h2 className="text-lg font-semibold" id="shipment-info-heading">
-              <span className="sr-only">Section: </span>Shipment Info
-            </h2>
-          </div>
-          <span
-            className={clsx('rounded-full px-2 py-1 text-xs capitalize', statusStyle)}
-            aria-label={`Status: ${statusLabel}`}
-          >
-            {statusLabel}
-          </span>
-        </header>
-        <dl className="grid grid-cols-1 gap-x-6 gap-y-1 text-xs sm:grid-cols-2">
-          <ShipmentDetail label="Tracking:">
-            {trackingNumber ? (
-              <span title={trackingNumber} className="inline-flex items-center gap-1">
-                <span className="max-w-[120px] truncate align-middle" aria-label={trackingNumber}>
-                  {escapeHtml(trackingNumber)}
-                </span>
-                <button
-                  type="button"
-                  aria-label="Copy tracking number"
-                  className="ml-1 hover:text-blue-600 focus:outline-none"
-                  onClick={() => navigator.clipboard.writeText(trackingNumber)}
-                  tabIndex={0}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-3 w-3"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <title>Copy</title>
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M8 16h8a2 2 0 002-2V8a2 2 0 00-2-2H8a2 2 0 00-2 2v6a2 2 0 002 2zm0 0v2a2 2 0 002 2h6a2 2 0 002-2v-2"
-                    />
-                  </svg>
-                </button>
-              </span>
-            ) : (
-              <span className="text-default">Not available</span>
-            )}
-          </ShipmentDetail>
-          <ShipmentDetail label="Courier:">
-            {courierService ? (
-              <span title={courierService}>{escapeHtml(courierService)}</span>
-            ) : (
-              <span className="text-default">Not available</span>
-            )}
-          </ShipmentDetail>
-          <ShipmentDetail label="Shipped:">
-            {isValidDate(shippedAt) ? (
-              <time dateTime={shippedAt}>{format(new Date(shippedAt!), 'PPP')}</time>
-            ) : (
-              <span className="text-default">Not available</span>
-            )}
-          </ShipmentDetail>
-          <ShipmentDetail label="Est. Delivery:">
-            {isValidDate(expectedDeliveryDate) ? (
-              <time dateTime={expectedDeliveryDate}>
-                {format(new Date(expectedDeliveryDate!), 'PPP')}
-              </time>
-            ) : (
-              <span className="text-default">Not available</span>
-            )}
-          </ShipmentDetail>
-        </dl>
-        {carrierTrackingUrl && (
-          <div>
+    <>
+      <PageHeader title="Shipment Details" />
+
+      <div className="bg-default-100 grid grid-cols-2 gap-3 rounded-lg p-4 text-sm shadow">
+        <span className="text-default-600">Tracking Number</span>
+        <span className="truncate">{shipment.trackingNumber}</span>
+
+        <span className="text-default-600">Courier Service</span>
+        <span>{shipment.courierService}</span>
+
+        <span className="text-default-600">Status</span>
+        <span>{shipment.status || 'unknown'}</span>
+
+        <span className="text-default-600">Expected Delivery</span>
+        <span>{formatSafeDate(shipment.expectedDeliveryDate)}</span>
+
+        <span className="text-default-600">Shipped At</span>
+        <span>{formatSafeDate(shipment.shippedAt)}</span>
+
+        {shipment.carrierTrackingUrl && (
+          <div className="flex flex-col">
+            <span className="text-default-600">Track Shipment</span>
             <a
-              href={escapeHtml(carrierTrackingUrl)}
+              href={shipment.carrierTrackingUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center text-sm text-blue-600 hover:underline"
-              aria-label="Track shipment external link"
+              className="text-blue-500 underline hover:text-blue-700"
             >
-              Track Shipment
-              <FaExternalLinkAlt className="ml-1 h-3 w-3" aria-hidden="true" />
+              Click here to track
             </a>
           </div>
         )}
       </div>
-    </section>
-  );
-}
-
-function isValidDate(date: unknown): date is string {
-  if (!date || typeof date !== 'string') return false;
-  const parsed = new Date(date);
-  return !isNaN(parsed.getTime());
-}
-
-function ShipmentDetail({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div className="flex items-baseline gap-1">
-      <dt className="min-w-[70px] font-semibold">{label}</dt>
-      <dd>{children}</dd>
-    </div>
-  );
-}
-export function escapeHtml(str: string) {
-  return str.replace(
-    /[&<>'"`]/g,
-    (tag) =>
-      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;', '`': '&#96;' })[
-        tag
-      ] || tag,
+    </>
   );
 }
