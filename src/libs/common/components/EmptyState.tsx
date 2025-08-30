@@ -12,6 +12,7 @@ export function EmptyState({ text }: Props) {
         width={165}
         height={165}
         alt="empty"
+        priority
         className="mx-auto w-1/5 drop-shadow-md"
       />
       <div className="text-default-600 text-sm">{text || 'No items found'}</div>
