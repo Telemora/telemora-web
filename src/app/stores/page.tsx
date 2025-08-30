@@ -50,7 +50,7 @@ export default function StoreListPage() {
             </div>
           ))}
 
-          <Button fullWidth color="primary" size="lg" onPress={handleCreateStore}>
+          <Button fullWidth color="primary" onPress={handleCreateStore}>
             + New Store
           </Button>
         </div>
