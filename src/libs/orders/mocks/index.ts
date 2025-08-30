@@ -44,7 +44,7 @@ export async function generateMockOrderDetail(): Promise<OrderDetail> {
 }
 
 export async function generateMockOrderSummaries(): Promise<OrderSummary[]> {
-  return Promise.all(Array.from({ length: 3 }, () => generateMockOrderSummary()));
+  return Promise.all(Array.from({ length: 0 }, () => generateMockOrderSummary()));
 }
 
 export async function generateMockOrderItemPreviews(): Promise<OrderItemPreviewDto[]> {

@@ -8,7 +8,6 @@ import {
   getOrderDetails,
   updateOrder,
 } from '@/libs/orders/api';
-import { generateMockOrderDetail, generateMockOrderSummaries } from '@/libs/orders/mocks';
 import {
   CreateOrderDto,
   CreateOrderShipmentDto,
@@ -16,19 +15,18 @@ import {
   OrderSummary,
   UpdateOrderDto,
 } from '@/libs/orders/types';
-import { isDev } from '../../common/utils';
 
 export function useMyOrders() {
   return useQuery<OrderSummary[]>({
     queryKey: queryKeys.orders.all,
-    queryFn: isDev ? generateMockOrderSummaries : getMyOrders,
+    queryFn: getMyOrders,
   });
 }
 
 export function useOrderDetails(id: number) {
   return useQuery<OrderDetail>({
     queryKey: queryKeys.orders.detail(id),
-    queryFn: () => (isDev ? generateMockOrderDetail() : getOrderDetails(id)),
+    queryFn: () => getOrderDetails(id),
     enabled: !!id,
   });
 }
@@ -37,11 +35,11 @@ export function useCreateOrder() {
   const queryClient = useQueryClient();
 
   return useMutation<OrderDetail, Error, CreateOrderDto>({
-    mutationFn: (data) => (isDev ? generateMockOrderDetail() : createOrder(data)),
+    mutationFn: (data) => createOrder(data),
     onSuccess: async () => {
       await queryClient.prefetchQuery({
         queryKey: queryKeys.orders.all,
-        queryFn: isDev ? generateMockOrderSummaries : getMyOrders,
+        queryFn: getMyOrders,
       });
       queryClient.invalidateQueries({ queryKey: queryKeys.orders.all });
     },
@@ -52,7 +50,7 @@ export function useUpdateOrder(id: number) {
   const queryClient = useQueryClient();
 
   return useMutation<OrderDetail, Error, UpdateOrderDto>({
-    mutationFn: (data) => (isDev ? generateMockOrderDetail() : updateOrder(id, data)),
+    mutationFn: (data) => updateOrder(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.orders.all });
       queryClient.invalidateQueries({ queryKey: queryKeys.orders.detail(id) });
@@ -64,7 +62,7 @@ export function useAddShipment(id: number) {
   const queryClient = useQueryClient();
 
   return useMutation<OrderDetail, Error, CreateOrderShipmentDto>({
-    mutationFn: (data) => (isDev ? generateMockOrderDetail() : addShipment(id, data)),
+    mutationFn: (data) => addShipment(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.orders.detail(id) });
     },

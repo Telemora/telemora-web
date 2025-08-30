@@ -14,7 +14,7 @@ export function EmptyState({ text }: Props) {
         alt="empty"
         className="mx-auto w-1/5 drop-shadow-md"
       />
-      <div className="text-default-600 text-sm font-semibold">{text || 'No items found'}</div>
+      <div className="text-default-600 text-sm">{text || 'No items found'}</div>
     </div>
   );
 }

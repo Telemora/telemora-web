@@ -38,13 +38,7 @@ export default function StoreListPage() {
       {stores && stores.length === 0 ? (
         <div className="mt-12 text-center">
           <EmptyState />
-          <Button
-            size="lg"
-            fullWidth
-            color="primary"
-            onPress={handleCreateStore}
-            startContent={<FaPlus />}
-          >
+          <Button fullWidth color="primary" onPress={handleCreateStore} startContent={<FaPlus />}>
             Create A New Store
           </Button>
         </div>
