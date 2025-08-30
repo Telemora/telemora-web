@@ -1,7 +1,7 @@
 'use client';
 
-import { Spinner } from '@heroui/react';
-import { useParams } from 'next/navigation';
+import { Button, Spinner } from '@heroui/react';
+import { useParams, useRouter } from 'next/navigation';
 import React from 'react';
 
 import AppLayout from '@/libs/common/components/AppLayout';
@@ -13,14 +13,17 @@ import { useGetStoreDiscounts } from '@/libs/discount/hooks';
 import { StoreHeader } from '@/libs/stores/components/StoreHeader';
 import { ProductsSection } from '@/libs/stores/components/ProductsSection';
 import { faker } from '@faker-js/faker';
+import { FaTrashAlt } from 'react-icons/fa';
 
 export default function StoreDetailsPage() {
+  const router = useRouter();
   const { storeId } = useParams<{ storeId: string }>();
   const { data: user } = useUserState();
   const { data: store, isLoading, error } = useStoreDetailsQuery(storeId);
   const { data: discounts } = useGetStoreDiscounts(storeId);
   const isOwner =
     user && store && faker.datatype.boolean(); /* && store.vendor.userId === user.userId */
+  const handleDelete = () => router.push(`/stores/${store?.id}/delete`);
 
   if (isLoading) {
     return (
@@ -44,6 +47,22 @@ export default function StoreDetailsPage() {
 
       {/* Products Section */}
       <ProductsSection store={store} isOwner={isOwner} />
+
+      {/* Danger Zone (Owner Only) */}
+      {isOwner && (
+        <div className="mt-4">
+          <p className="text-danger my-1 text-sm">be careful! this action cannot be undone</p>
+          <Button
+            variant="bordered"
+            color="danger"
+            fullWidth
+            onPress={handleDelete}
+            startContent={<FaTrashAlt />}
+          >
+            Delete Store
+          </Button>
+        </div>
+      )}
     </AppLayout>
   );
 }
