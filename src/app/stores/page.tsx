@@ -33,13 +33,16 @@ export default function StoreListPage() {
 
   return (
     <AppLayout>
-      <PageHeader title="My Stores" subtitle="Manage your business from here" />
+      <PageHeader
+        title="Your Store Portfolio"
+        subtitle="View and manage all your stores in one place"
+      />
 
       {stores && stores.length === 0 ? (
         <div className="mt-12 text-center">
-          <EmptyState />
+          <EmptyState text="Create your first store to begin your journey" />
           <Button fullWidth color="primary" onPress={handleCreateStore} startContent={<FaPlus />}>
-            Create A New Store
+            Create New Store
           </Button>
         </div>
       ) : (
@@ -50,8 +53,8 @@ export default function StoreListPage() {
             </div>
           ))}
 
-          <Button fullWidth color="primary" onPress={handleCreateStore}>
-            + New Store
+          <Button fullWidth color="primary" onPress={handleCreateStore} startContent={<FaPlus />}>
+            Create New Store
           </Button>
         </div>
       )}
