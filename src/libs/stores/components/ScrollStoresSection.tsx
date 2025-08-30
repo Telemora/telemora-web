@@ -8,15 +8,17 @@ import { EmptyState } from '@/libs/common/components/EmptyState';
 export function ScrollStoresSection({
   stores,
   isLoading,
+  title,
 }: {
   stores?: StoreSummary[];
   isLoading: boolean;
+  title: string;
 }) {
   return (
     <>
       {isLoading && (
         <section>
-          <h1 className="font-semibold">New Openings</h1>
+          <h1 className="font-semibold">{title}</h1>
           <HorizontalScroll>
             {new Array<number>(4).map((_) => (
               <Skeleton key={_} />

@@ -14,8 +14,16 @@ export default function MarketPage() {
   return (
     <AppLayout>
       <Carousel />
-      <ScrollStoresSection stores={discoverStores} isLoading={isDiscoverStoresLoading} />
-      <ScrollStoresSection stores={featuredStores} isLoading={isFeaturedStoresLoading} />
+      <ScrollStoresSection
+        title="Featured"
+        stores={discoverStores}
+        isLoading={isDiscoverStoresLoading}
+      />
+      <ScrollStoresSection
+        title="New Openings"
+        stores={featuredStores}
+        isLoading={isFeaturedStoresLoading}
+      />
     </AppLayout>
   );
 }
