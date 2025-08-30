@@ -4,17 +4,17 @@ interface Props {
   text?: string;
 }
 
-export function EmptyState({ props }: { props?: Props }) {
+export function EmptyState({ text }: Props) {
   return (
-    <div className="bg-default-200 text-default-800 border-default-400 my-4 space-y-4 rounded-lg border p-4 text-center">
+    <div className="bg-default-200 border-default-400 my-4 w-full space-y-4 rounded-lg border p-4 text-center">
       <Image
         src="/empty-state.svg"
         width={165}
         height={165}
         alt="empty"
-        className="mx-auto w-1/4 drop-shadow-md"
+        className="mx-auto w-1/5 drop-shadow-md"
       />
-      <div className="text-sm">{props?.text || 'No items found'}</div>
+      <div className="text-default-600 text-sm font-semibold">{text || 'No items found'}</div>
     </div>
   );
 }
