@@ -11,12 +11,7 @@ export function DiscountPreview({
   storeId: number | string;
 }) {
   return (
-    <Badge
-      isOneChar
-      size="lg"
-      content={DiscountStatusToIcon(data.status)}
-      color={DiscountStatusToColor(data.status)}
-    >
+    <Badge isOneChar size="lg" content={DiscountStatusToIcon(data.status)} color="primary">
       <Link className="w-full" href={`/stores/${storeId}/discounts/${data.id}`}>
         <Card>
           <CardHeader>
@@ -40,8 +35,6 @@ export function DiscountPreview({
   );
 }
 
-type StatusColors = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
-
 function DiscountStatusToIcon(status: DiscountStatus) {
   switch (status) {
     case DiscountStatus.ACTIVE:
@@ -52,18 +45,5 @@ function DiscountStatusToIcon(status: DiscountStatus) {
       return <FaInfo />;
     case DiscountStatus.SCHEDULED:
       return <FaClock />;
-  }
-}
-
-function DiscountStatusToColor(status: DiscountStatus): StatusColors {
-  switch (status) {
-    case DiscountStatus.ACTIVE:
-      return 'success';
-    case DiscountStatus.DRAFT:
-      return 'warning';
-    case DiscountStatus.EXPIRED:
-      return 'danger';
-    case DiscountStatus.SCHEDULED:
-      return 'secondary';
   }
 }
