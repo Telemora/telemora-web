@@ -51,7 +51,7 @@ export default function StoreDetailsPage() {
       {/* Danger Zone (Owner Only) */}
       {isOwner && (
         <div className="mt-4">
-          <p className="text-danger my-1 text-sm">be careful! this action cannot be undone</p>
+          <p className="text-danger my-1 text-sm">This action will permanently delete your store</p>
           <Button
             variant="bordered"
             color="danger"
