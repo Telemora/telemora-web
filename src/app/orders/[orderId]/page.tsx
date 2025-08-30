@@ -48,13 +48,13 @@ export default function OrderDetailsPage() {
 
       <div className="mb-4 grid grid-cols-2">
         <div className="space-x-1">
-          <span className="text-sm">Order Status:</span>
+          <span className="text-sm">Order:</span>
           <OrderStatusChip status={order.status} />
         </div>
 
         {order.payment && (
           <div className="space-x-1">
-            <span className="text-sm">Payment Status:</span>
+            <span className="text-sm">Payment:</span>
             <PaymentStatusChip status={order.payment.status} />
           </div>
         )}
