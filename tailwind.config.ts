@@ -23,14 +23,14 @@ export default {
     screens: {
       sm: '320px',
       md: '375px',
-      lg: '425px',
+      lg: '435px',
       xl: '768px',
     },
     container: {
       screens: {
         sm: '320px',
         md: '375px',
-        lg: '425px',
+        lg: '435px',
         xl: '768px',
       },
       center: true,
