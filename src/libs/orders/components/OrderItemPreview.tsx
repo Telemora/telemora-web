@@ -1,71 +1,41 @@
 import { Card, CardBody, Chip } from '@heroui/react';
 import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react';
-
 import PriceComponent from '@/libs/common/components/PriceComponent';
 import { OrderItemPreviewDto } from '@/libs/orders/types';
+import Link from 'next/link';
 
 export default function OrderItemPreviewCard({ orderItem }: { orderItem: OrderItemPreviewDto }) {
   return (
-    <Card>
-      <CardBody className="flex flex-row justify-between text-sm">
-        <div className="flex gap-x-4">
-          {orderItem.product.slug ? (
-            <Link
-              href={`/products/${orderItem.product.slug}`}
-              aria-label={`View details for ${orderItem.product.name}`}
-              className="focus:ring-primary rounded focus:ring-2 focus:outline-none"
-            >
-              <Image
-                src={orderItem.product.primaryImage.url || '/fallback-order.png'}
-                alt={sanitizeAltText(orderItem.product.name)}
-                width={64}
-                height={64}
-                className="aspect-square rounded object-cover"
-                loading="lazy"
-              />
-            </Link>
-          ) : (
+    <Link
+      className="block"
+      href={`/stores/${orderItem.product.storeId}/products/${orderItem.product.id}}`}
+    >
+      <Card>
+        <CardBody className="flex flex-row justify-between text-sm">
+          <div className="flex gap-x-4">
             <Image
               src={orderItem.product.primaryImage.url || '/fallback-order.png'}
-              alt={sanitizeAltText(orderItem.product.name)}
+              alt="product photo"
               width={64}
               height={64}
               className="aspect-square rounded object-cover"
               loading="lazy"
             />
-          )}
-          <div className="space-y-4">
-            {orderItem.product.slug ? (
-              <Link
-                href={`/products/${orderItem.product.slug}`}
-                aria-label={`View details for ${orderItem.product.name}`}
-                className="focus:ring-primary line-clamp-1 block max-w-40 truncate rounded font-bold text-inherit focus:ring-2 focus:outline-none"
-              >
-                <h3 className="truncate" aria-label={orderItem.product.name}>
-                  {orderItem.product.name}
-                </h3>
-              </Link>
-            ) : (
+            <div className="space-y-4">
               <h3
-                className="line-clamp-1 block max-w-40 truncate"
+                className="block max-w-40 truncate font-semibold"
                 aria-label={orderItem.product.name}
               >
-                <strong>{orderItem.product.name}</strong>
+                {orderItem.product.name}
               </h3>
-            )}
-            <PriceComponent amount={orderItem.totalPrice} />
+              <PriceComponent amount={orderItem.totalPrice} />
+            </div>
           </div>
-        </div>
-        <Chip size="sm">x{orderItem.quantity}</Chip>
-      </CardBody>
-    </Card>
+          <Chip color="primary" size="md">
+            x{orderItem.quantity}
+          </Chip>
+        </CardBody>
+      </Card>
+    </Link>
   );
-}
-
-function sanitizeAltText(text: string): string {
-  if (!text) return 'Product image';
-  const safe = text.replace(/[^\w\s\-.,]/g, '').trim();
-  return safe.length > 80 ? safe.slice(0, 77) + '...' : safe;
 }

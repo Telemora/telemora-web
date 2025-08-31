@@ -6,7 +6,7 @@ import { OrderDetail } from '@/libs/orders/types';
 export function OrderInfoSummary({ order }: { order: OrderDetail }) {
   return (
     <>
-      <div className="bg-default-100 grid grid-cols-2 gap-3 rounded-lg p-4 text-sm shadow">
+      <div className="bg-content1 grid grid-cols-2 gap-3 rounded-lg p-4 text-sm shadow">
         <span className="text-default-600">Total Amount</span>
         <span>
           <PriceComponent amount={order.totalAmount} />

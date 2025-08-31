@@ -11,7 +11,7 @@ export function OrderShipmentCard({ shipment }: { shipment: OrderShipment }) {
     <>
       <PageHeader title="Shipment Details" />
 
-      <div className="bg-default-100 grid grid-cols-2 gap-3 rounded-lg p-4 text-sm shadow">
+      <div className="bg-content1 grid grid-cols-2 gap-3 rounded-lg p-4 text-sm shadow">
         <span className="text-default-600">Tracking Number</span>
         <span className="truncate">{shipment.trackingNumber}</span>
 
