@@ -4,7 +4,7 @@ import { Spinner } from '@heroui/react';
 import React from 'react';
 
 import AppLayout from '@/libs/common/components/AppLayout';
-import OrderSummaries from '@/libs/orders/components/OrderSummaries';
+import { OrderSummaries } from '@/libs/orders/components/OrderSummaries';
 import PreviewStoresSection from '@/libs/stores/components/PreviewStoresSection';
 import ProfileCard from '@/libs/users/components/profile-card';
 import { useUserState } from '@/libs/users/context/userContext';

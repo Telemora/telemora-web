@@ -19,6 +19,7 @@ import {
   CreateStoreTagsDto,
   SetStoreServiceHoursDto,
   StoreDetail,
+  StorePreviewDto,
   StoreSummary,
 } from '@/libs/stores/types';
 
@@ -37,14 +38,14 @@ export function useStoreDetailsQuery(storeId: string) {
 }
 
 export function useDiscoverableStoresQuery() {
-  return useQuery<StoreSummary[]>({
+  return useQuery<StorePreviewDto[]>({
     queryKey: queryKeys.stores.discover,
     queryFn: fetchDiscoverableStores,
   });
 }
 
 export function useFeaturedStoresQuery() {
-  return useQuery<StoreSummary[]>({
+  return useQuery<StorePreviewDto[]>({
     queryKey: queryKeys.stores.featured,
     queryFn: fetchFeaturedStores,
   });

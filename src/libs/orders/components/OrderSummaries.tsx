@@ -1,17 +1,11 @@
 import { Button } from '@heroui/react';
 import React from 'react';
 
-import OrderSummaryCard from '@/libs/orders/components/OrderSummaryCard';
+import { OrderSummaryCard } from '@/libs/orders/components/OrderSummaryCard';
 import { OrderSummary } from '@/libs/orders/types';
 import { PageHeader } from '@/libs/common/components/PageHeader';
 
-export default function OrderSummaries({
-  orders,
-  title,
-}: {
-  orders: OrderSummary[];
-  title: string;
-}) {
+export function OrderSummaries({ orders, title }: { orders: OrderSummary[]; title: string }) {
   return (
     <section className="space-y-4">
       <PageHeader title={title} />

@@ -8,7 +8,7 @@ import AppLayout from '@/libs/common/components/AppLayout';
 import ErrorPage from '@/libs/common/components/ErrorPage';
 import { PageHeader } from '@/libs/common/components/PageHeader';
 import { formatSafeDate } from '@/libs/common/utils/date';
-import OrderItemPreviewCard from '@/libs/orders/components/OrderItemPreview';
+import { OrderItemPreviewCard } from '@/libs/orders/components/OrderItemPreview';
 import { OrderShipmentCard } from '@/libs/orders/components/OrderShipmentCard';
 import { OrderStatusChip } from '@/libs/orders/components/OrderStatusChip';
 import { useOrderDetails } from '@/libs/orders/hooks';

@@ -36,7 +36,7 @@ const OrderSummaryCardSkeleton = () => (
   </Card>
 );
 
-export default function OrderSummaryCard({ order, isLoading = false }: OrderSummaryCardProps) {
+export function OrderSummaryCard({ order, isLoading = false }: OrderSummaryCardProps) {
   const { id, status, totalAmount, store, expectedDeliveryDate, createdAt } = order;
 
   const cardContent = useMemo(() => {

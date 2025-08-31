@@ -2,11 +2,11 @@ import { HorizontalScroll } from '@/libs/common/components/HorizontalScroll';
 import { Skeleton } from '@heroui/react';
 import { StorePreviewCard } from '@/libs/stores/components/PreviewCard';
 import React, { useMemo } from 'react';
-import { StoreSummary } from '@/libs/stores/types';
+import { StorePreviewDto } from '@/libs/stores/types';
 import { EmptyState } from '@/libs/common/components/EmptyState';
 
 interface ScrollStoresSectionProps {
-  stores?: StoreSummary[];
+  stores?: StorePreviewDto[];
   isLoading: boolean;
   title: string;
 }

@@ -7,7 +7,7 @@ import React, { useCallback, useMemo } from 'react';
 import AppLayout from '@/libs/common/components/AppLayout';
 import ErrorPage from '@/libs/common/components/ErrorPage';
 import { PageHeader } from '@/libs/common/components/PageHeader';
-import OrderSummaryCard from '@/libs/orders/components/OrderSummaryCard';
+import { OrderSummaryCard } from '@/libs/orders/components/OrderSummaryCard';
 import { useMyOrders } from '@/libs/orders/hooks';
 import { EmptyState } from '@/libs/common/components/EmptyState';
 
