@@ -12,8 +12,6 @@ import { OrderStatusChip } from './OrderStatusChip';
 
 interface OrderSummaryCardProps {
   order: OrderSummary;
-  href?: string;
-  className?: string;
   isLoading?: boolean;
 }
 
@@ -38,43 +36,40 @@ const OrderSummaryCardSkeleton = () => (
   </Card>
 );
 
-export default function OrderSummaryCard({
-  order,
-  href,
-  className,
-  isLoading = false,
-}: OrderSummaryCardProps) {
+export default function OrderSummaryCard({ order, isLoading = false }: OrderSummaryCardProps) {
   const { id, status, totalAmount, store, expectedDeliveryDate, createdAt } = order;
 
   const cardContent = useMemo(() => {
     return (
-      <Card className={`w-full ${className}`}>
-        <CardHeader className="flex items-center justify-between">
-          <div>
-            <h3 className="text-sm font-semibold">Order #{id}</h3>
-            <p className="text-default-500 text-xs">
-              {formatSafeDate(createdAt, DATE_FORMATS.SHORT, 'Unknown date')} —{' '}
-              <span className="text-default-500">{store.displayName}</span>
-            </p>
-          </div>
-          <OrderStatusChip status={status} />
-        </CardHeader>
-        <CardBody className="text-default-500 text-sm">
-          <div className="flex items-center justify-between">
-            <PriceComponent amount={totalAmount} />
-            <div className="text-default-500 text-right text-xs">
-              <p className="font-medium">Est. Delivery</p>
-              <p>{formatSafeDate(expectedDeliveryDate, DATE_FORMATS.SHORT, 'TBD')}</p>
+      <Link className="block" href={`/orders/${id}`}>
+        <Card>
+          <CardHeader className="flex items-center justify-between">
+            <div>
+              <h3 className="text-sm font-semibold">Order #{id}</h3>
+              <p className="text-default-500 text-xs">
+                {formatSafeDate(createdAt, DATE_FORMATS.SHORT, 'Unknown date')} —{' '}
+                <span className="text-default-500">{store.displayName}</span>
+              </p>
             </div>
-          </div>
-        </CardBody>
-      </Card>
+            <OrderStatusChip status={status} />
+          </CardHeader>
+          <CardBody className="text-default-500 text-sm">
+            <div className="flex items-center justify-between">
+              <PriceComponent amount={totalAmount} />
+              <div className="text-default-500 text-right text-xs">
+                <p className="font-medium">Est. Delivery</p>
+                <p>{formatSafeDate(expectedDeliveryDate, DATE_FORMATS.SHORT, 'TBD')}</p>
+              </div>
+            </div>
+          </CardBody>
+        </Card>
+      </Link>
     );
-  }, [id, className, createdAt, store.displayName, status, totalAmount, expectedDeliveryDate]);
+  }, [id, createdAt, store.displayName, status, totalAmount, expectedDeliveryDate]);
 
   if (isLoading) {
     return <OrderSummaryCardSkeleton />;
   }
 
-  return href ? <Link href={href}>{cardContent}</Link> : cardContent;
+  return cardContent;
 }

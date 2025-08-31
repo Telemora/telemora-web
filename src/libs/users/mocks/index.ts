@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 
 import { generateMockAddress } from '@/libs/location/mocks';
-import { generateMockOrderSummary } from '@/libs/orders/mocks';
+import { generateMockOrderSummaries } from '@/libs/orders/mocks';
 import { generateMockStorePreviews } from '@/libs/stores/mocks';
 
 import {
@@ -49,7 +49,7 @@ export async function generateMockUserPrivateProfile(): Promise<UserPrivateProfi
     cryptoWalletAddress: faker.finance.ethereumAddress(),
     addresses: [generateMockAddress()],
     stores: await generateMockStorePreviews(),
-    orders: await Promise.all(Array.from({ length: 5 }, generateMockOrderSummary)),
+    orders: await generateMockOrderSummaries(),
     currencyInfo: await generateMockCurrencyInfo(),
   };
 }

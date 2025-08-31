@@ -47,9 +47,9 @@ export async function generateMockStoreDetail(): Promise<StoreDetail> {
 }
 
 export async function generateMockStoreSummaries(): Promise<StoreSummary[]> {
-  return Promise.all(Array.from({ length: 0 }, () => generateMockStoreSummary()));
+  return Promise.all(Array.from({ length: 1 }, () => generateMockStoreSummary()));
 }
 
 export async function generateMockStorePreviews(): Promise<StorePreviewDto[]> {
-  return Promise.all(Array.from({ length: 5 }, () => generateMockStorePreview()));
+  return Promise.all(Array.from({ length: 1 }, () => generateMockStorePreview()));
 }
