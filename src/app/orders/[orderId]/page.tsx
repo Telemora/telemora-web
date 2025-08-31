@@ -14,7 +14,6 @@ import { OrderStatusChip } from '@/libs/orders/components/OrderStatusChip';
 import { useOrderDetails } from '@/libs/orders/hooks';
 import { OrderStatus } from '@/libs/orders/types';
 import { PaymentStatusChip } from '@/libs/payments/components/payment-status-chip';
-import { TonPaymentButton } from '@/libs/payments/components/ton-payment-button';
 import { PaymentStatus } from '@/libs/payments/types';
 import { OrderInfoSummary } from '@/libs/orders/components/OrderInfoSummary';
 
@@ -72,10 +71,10 @@ export default function OrderDetailsPage() {
           </CardBody>
           <CardFooter>
             {/* TODO: I must to edit this part, to access store's wallet address */}
-            <TonPaymentButton
+            {/* <TonPaymentButton
               amountTon={order.totalAmount}
               sellerAddress={order.store.displayName}
-            />
+            /> */}
           </CardFooter>
         </Card>
       )}
