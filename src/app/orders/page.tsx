@@ -56,7 +56,10 @@ export default function OrdersPage() {
 
   return (
     <AppLayout>
-      <PageHeader title="My Orders" subtitle="Track your purchases and check order status." />
+      <PageHeader
+        title="Order History"
+        subtitle="View and manage your orders with detailed tracking information."
+      />
       {renderContent}
     </AppLayout>
   );

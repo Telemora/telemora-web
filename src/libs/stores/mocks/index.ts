@@ -51,5 +51,5 @@ export async function generateMockStoreSummaries(): Promise<StoreSummary[]> {
 }
 
 export async function generateMockStorePreviews(): Promise<StorePreviewDto[]> {
-  return Promise.all(Array.from({ length: 1 }, () => generateMockStorePreview()));
+  return Promise.all(Array.from({ length: 3 }, () => generateMockStorePreview()));
 }

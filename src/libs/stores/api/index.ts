@@ -1,5 +1,9 @@
 import { AddressDto } from '@/libs/location/types';
-import { generateMockStoreDetail, generateMockStoreSummaries } from '@/libs/stores/mocks';
+import {
+  generateMockStoreDetail,
+  generateMockStorePreviews,
+  generateMockStoreSummaries,
+} from '@/libs/stores/mocks';
 import {
   CreateStoreBasicDto,
   CreateStoreLogoDto,
@@ -20,12 +24,12 @@ export async function fetchStoreDetails(storeId: string) {
 
 export async function fetchDiscoverableStores() {
   /* httpClient.get<StoreSummary[]>('/stores/discover') */
-  return generateMockStoreSummaries();
+  return generateMockStorePreviews();
 }
 
 export async function fetchFeaturedStores() {
   /* httpClient.get<StoreSummary[]>('/stores/featured') */
-  return generateMockStoreSummaries();
+  return generateMockStorePreviews();
 }
 
 export async function submitStoreBasicInfo(data: CreateStoreBasicDto) {
