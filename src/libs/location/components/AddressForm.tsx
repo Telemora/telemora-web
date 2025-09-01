@@ -88,6 +88,10 @@ export function AddressForm({ isPending, onSubmit }: Props) {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
+      <pre>isInited: {webApp?.LocationManager.isInited}</pre>
+      <pre>isLocationAvailable: {webApp?.LocationManager.isLocationAvailable}</pre>
+      <pre>isAccessRequested: {webApp?.LocationManager.isAccessRequested}</pre>
+      <pre>isAccessGranted: {webApp?.LocationManager.isAccessGranted}</pre>
       <Input {...register('label')} label="Label" />
       <div className="mb-4 flex gap-4">
         <Button
