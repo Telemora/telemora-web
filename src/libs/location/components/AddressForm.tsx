@@ -39,27 +39,39 @@ export function AddressForm({ isPending, onSubmit }: Props) {
     webApp?.LocationManager.init();
   }, [webApp?.LocationManager]);
 
+  if (!webApp) {
+    return null;
+  }
+
+  const openSettings = () => {
+    webApp.LocationManager.openSettings();
+  };
+
   const detectLocation = async () => {
-    try {
-      webApp?.LocationManager.getLocation((data) => {
-        setValue('geoPoint.latitude', data?.latitude);
-        setValue('geoPoint.longitude', data?.longitude);
-      });
-    } catch (err) {
-      if (err instanceof Error) toast.error(err.message);
+    if (webApp.LocationManager.isAccessRequested) {
+      if (!webApp.LocationManager.isLocationAvailable) {
+        toast.error('Location is not supported on your device');
+      }
+      if (!webApp.LocationManager.isAccessGranted) {
+        toast.error('Location access is not granted');
+      }
     }
+    webApp.LocationManager.getLocation((data) => {
+      setValue('geoPoint.latitude', data?.latitude);
+      setValue('geoPoint.longitude', data?.longitude);
+    });
   };
 
   return (
     <FormProvider {...addressForm}>
       <Form onSubmit={addressForm.handleSubmit(onSubmit)}>
-        <pre>isInited: {webApp?.LocationManager.isInited || 'unavailable'}</pre>
+        <pre>isInited: {webApp.LocationManager.isInited || 'unavailable'}</pre>
         <pre>
-          isLocationAvailable: {webApp?.LocationManager.isLocationAvailable || 'unavailable'}
+          isLocationAvailable: {webApp.LocationManager.isLocationAvailable || 'unavailable'}
         </pre>
-        <pre>isAccessRequested: {webApp?.LocationManager.isAccessRequested || 'unavailable'}</pre>
-        <pre>isAccessGranted: {webApp?.LocationManager.isAccessGranted || 'unavailable'}</pre>
-        <pre>version: {webApp?.version}</pre>
+        <pre>isAccessRequested: {webApp.LocationManager.isAccessRequested || 'unavailable'}</pre>
+        <pre>isAccessGranted: {webApp.LocationManager.isAccessGranted || 'unavailable'}</pre>
+        <pre>version: {webApp.version}</pre>
         <Input {...register('label')} label="Label" />
         <div className="mb-4 flex gap-4">
           <Button
@@ -78,7 +90,7 @@ export function AddressForm({ isPending, onSubmit }: Props) {
             size="sm"
             variant="flat"
             type="button"
-            onPress={() => webApp?.LocationManager.openSettings()}
+            onPress={openSettings}
             startContent={<FaGear />}
           >
             Open Telegram Settings
