@@ -65,15 +65,7 @@ export function AddressForm({ isPending, onSubmit }: Props) {
   return (
     <FormProvider {...addressForm}>
       <Form onSubmit={addressForm.handleSubmit(onSubmit)}>
-        <pre>isInited: {webApp.LocationManager.isInited || 'unavailable'}</pre>
-        <pre>
-          isLocationAvailable: {webApp.LocationManager.isLocationAvailable || 'unavailable'}
-        </pre>
-        <pre>isAccessRequested: {webApp.LocationManager.isAccessRequested || 'unavailable'}</pre>
-        <pre>isAccessGranted: {webApp.LocationManager.isAccessGranted || 'unavailable'}</pre>
-        <pre>version: {webApp.version}</pre>
-        <Input {...register('label')} label="Label" />
-        <div className="mb-4 flex gap-4">
+        <div className="mb-4 flex w-full gap-4">
           <Button
             fullWidth
             size="sm"
@@ -96,6 +88,7 @@ export function AddressForm({ isPending, onSubmit }: Props) {
             Open Telegram Settings
           </Button>
         </div>
+        <Input {...register('label')} label="Label" />
         <CanonicalLocationForm data={countries} type={CanonicalLocationType.COUNTRY} />
         <CanonicalLocationForm data={states} type={CanonicalLocationType.STATE} />
         <CanonicalLocationForm data={cities} type={CanonicalLocationType.CITY} />
