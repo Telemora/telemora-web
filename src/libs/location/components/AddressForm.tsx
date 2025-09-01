@@ -40,30 +40,13 @@ export function AddressForm({ isPending, onSubmit }: Props) {
   }, [webApp?.LocationManager]);
 
   const detectLocation = async () => {
-    const isSupported = webApp?.LocationManager.isLocationAvailable;
-    const isAccessGranted = webApp?.LocationManager.isAccessGranted;
-
-    if (!isSupported) {
-      toast.error('Location detection is not supported.');
-      return;
-    }
-
-    if (!isAccessGranted) {
-      toast.error('Location access is denied.');
-      return;
-    }
-
     try {
       webApp?.LocationManager.getLocation((data) => {
         setValue('geoPoint.latitude', data?.latitude);
         setValue('geoPoint.longitude', data?.longitude);
       });
     } catch (err) {
-      if (!isAccessGranted) {
-        toast.error('Telegram denied location access. Please enable it in settings.');
-      } else {
-        toast.error('Location detection failed. Please try manually.');
-      }
+      if (err instanceof Error) toast.error(err.message);
     }
   };
 
