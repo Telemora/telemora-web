@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import { Button, Form, Input, Select, SelectItem, Switch } from '@heroui/react';
 import { FaGear, FaLocationDot } from 'react-icons/fa6';
 import {
@@ -24,13 +24,7 @@ interface Props {
 }
 
 export function AddressForm({ isPending, onSubmit }: Props) {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    setValue,
-    formState: { errors },
-  } = useForm<AddressDto>({
+  const addressForm = useForm<AddressDto>({
     resolver: zodResolver(createAddressSchema),
   });
 
@@ -40,8 +34,8 @@ export function AddressForm({ isPending, onSubmit }: Props) {
   const [isDetecting, setIsDetecting] = useState(false);
   const [detectError, setDetectError] = useState<string | null>(null);
 
-  const countryId = watch('country.id');
-  const stateId = watch('state.id');
+  const countryId = addressForm.watch('country.id');
+  const stateId = addressForm.watch('state.id');
 
   const { data: nearest, isFetching: nearestLoading } = useNearestLocation(
     coords?.lat,
@@ -53,16 +47,16 @@ export function AddressForm({ isPending, onSubmit }: Props) {
 
   useEffect(() => {
     if (nearest && coords) {
-      setValue('country.id', nearest.country.id);
-      if (nearest.state?.id) setValue('state.id', nearest.state.id);
+      addressForm.setValue('country.id', nearest.country.id);
+      if (nearest.state?.id) addressForm.setValue('state.id', nearest.state.id);
       if (nearest.city?.id) {
-        setValue('city.id', nearest.city.id);
-        setValue('postalCode', nearest.city.postalCode ?? '');
+        addressForm.setValue('city.id', nearest.city.id);
+        addressForm.setValue('postalCode', nearest.city.postalCode ?? '');
       }
-      setValue('geoPoint.latitude', coords.lat);
-      setValue('geoPoint.longitude', coords.lng);
+      addressForm.setValue('geoPoint.latitude', coords.lat);
+      addressForm.setValue('geoPoint.longitude', coords.lng);
     }
-  }, [nearest, coords, setValue, webApp?.LocationManager]);
+  }, [nearest, coords, addressForm.setValue, webApp?.LocationManager, addressForm]);
 
   const detectLocation = async () => {
     webApp?.LocationManager.init();
@@ -100,60 +94,64 @@ export function AddressForm({ isPending, onSubmit }: Props) {
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
-      <pre>isInited: {webApp?.LocationManager.isInited || 'unavailable'}</pre>
-      <pre>isLocationAvailable: {webApp?.LocationManager.isLocationAvailable || 'unavailable'}</pre>
-      <pre>isAccessRequested: {webApp?.LocationManager.isAccessRequested || 'unavailable'}</pre>
-      <pre>isAccessGranted: {webApp?.LocationManager.isAccessGranted || 'unavailable'}</pre>
-      <pre>version: {webApp?.version}</pre>
-      <Input {...register('label')} label="Label" />
-      <div className="mb-4 flex gap-4">
-        <Button
-          fullWidth
-          size="sm"
-          variant="flat"
-          onPress={detectLocation}
-          startContent={<FaLocationDot />}
-        >
-          Use Telegram Location
-        </Button>
+    <FormProvider {...addressForm}>
+      <Form onSubmit={addressForm.handleSubmit(onSubmit)}>
+        <pre>isInited: {webApp?.LocationManager.isInited || 'unavailable'}</pre>
+        <pre>
+          isLocationAvailable: {webApp?.LocationManager.isLocationAvailable || 'unavailable'}
+        </pre>
+        <pre>isAccessRequested: {webApp?.LocationManager.isAccessRequested || 'unavailable'}</pre>
+        <pre>isAccessGranted: {webApp?.LocationManager.isAccessGranted || 'unavailable'}</pre>
+        <pre>version: {webApp?.version}</pre>
+        <Input {...addressForm.register('label')} label="Label" />
+        <div className="mb-4 flex gap-4">
+          <Button
+            fullWidth
+            size="sm"
+            variant="flat"
+            onPress={detectLocation}
+            startContent={<FaLocationDot />}
+          >
+            Use Telegram Location
+          </Button>
 
-        <Button
-          fullWidth
-          size="sm"
-          variant="flat"
-          onPress={() => webApp?.LocationManager.openSettings()}
-          startContent={<FaGear />}
-        >
-          Open Telegram Settings
-        </Button>
-      </div>
-      <CanonicalLocationForm reg={register} data={countries} type={CanonicalLocationType.COUNTRY} />
-      <CanonicalLocationForm reg={register} data={states} type={CanonicalLocationType.STATE} />
-      <CanonicalLocationForm reg={register} data={cities} type={CanonicalLocationType.CITY} />
-      <Input {...register('streetLine1')} label="Street Line 1" />
-      <Input {...register('streetLine2')} label="Street Line 2" />
-      <Input {...register('postalCode')} label="Postal Code" />
-      <Select {...register('type')} label="Type">
-        {Object.values<string>(AddressType).map((type) => (
-          <SelectItem key={type}>{type}</SelectItem>
-        ))}
-      </Select>
-      <GeoPointForm register={register} />
-      <div className="my-2 flex w-full items-center justify-between">
-        <label className="text-xs">Save as Default location</label>
-        <Switch {...register('isDefault')} />
-      </div>
+          <Button
+            fullWidth
+            size="sm"
+            variant="flat"
+            onPress={() => webApp?.LocationManager.openSettings()}
+            startContent={<FaGear />}
+          >
+            Open Telegram Settings
+          </Button>
+        </div>
+        <CanonicalLocationForm data={countries} type={CanonicalLocationType.COUNTRY} />
+        <CanonicalLocationForm data={states} type={CanonicalLocationType.STATE} />
+        <CanonicalLocationForm data={cities} type={CanonicalLocationType.CITY} />
+        <Input {...addressForm.register('streetLine1')} label="Street Line 1" />
+        <Input {...addressForm.register('streetLine2')} label="Street Line 2" />
+        <Input {...addressForm.register('postalCode')} label="Postal Code" />
+        <Select {...addressForm.register('type')} label="Type">
+          {Object.values<string>(AddressType).map((type) => (
+            <SelectItem key={type}>{type}</SelectItem>
+          ))}
+        </Select>
+        <GeoPointForm />
+        <div className="my-2 flex w-full items-center justify-between">
+          <label className="text-xs">Save as Default location</label>
+          <Switch {...addressForm.register('isDefault')} />
+        </div>
 
-      {/* Buttons */}
-      <StoreCreationStepsNav>
-        <Button type="button" onPress={() => router.back()}>
-          Back
-        </Button>
-        <Button type="submit" color="primary" isLoading={isPending}>
-          Save & Continue
-        </Button>
-      </StoreCreationStepsNav>
-    </Form>
+        {/* Buttons */}
+        <StoreCreationStepsNav>
+          <Button type="button" onPress={() => router.back()}>
+            Back
+          </Button>
+          <Button type="submit" color="primary" isLoading={isPending}>
+            Save & Continue
+          </Button>
+        </StoreCreationStepsNav>
+      </Form>
+    </FormProvider>
   );
 }
