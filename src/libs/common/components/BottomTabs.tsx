@@ -45,10 +45,11 @@ export default function BottomTabs() {
         tab: 'h-16',
       }}
       style={{
-        marginBottom: 'var(--tg-safe-area-inset-bottom)',
-        marginRight:
+        paddingBottom: 'var(--tg-safe-area-inset-bottom)',
+        paddingRight:
           'calc(var(--tg-safe-area-inset-right) + var(--tg-content-safe-area-inset-right))',
-        marginLeft: 'calc(var(--tg-safe-area-inset-left) + var(--tg-content-safe-area-inset-left))',
+        paddingLeft:
+          'calc(var(--tg-safe-area-inset-left) + var(--tg-content-safe-area-inset-left))',
       }}
       onSelectionChange={(key) => route.push(key as string)}
     >

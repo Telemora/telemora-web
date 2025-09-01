@@ -1,11 +1,10 @@
 'use client';
 
-import { Spinner } from '@heroui/react';
+import { Divider, Spinner } from '@heroui/react';
 import React from 'react';
 
 import AppLayout from '@/libs/common/components/AppLayout';
 import { OrderSummaries } from '@/libs/orders/components/OrderSummaries';
-import PreviewStoresSection from '@/libs/stores/components/PreviewStoresSection';
 import ProfileCard from '@/libs/users/components/profile-card';
 import { useUserState } from '@/libs/users/context/userContext';
 
@@ -26,8 +25,14 @@ export default function ProfilePage() {
     <AppLayout>
       <main className="mx-auto space-y-10 py-6">
         <ProfileCard user={data} />
-        {data.stores && <PreviewStoresSection stores={data.stores} title="My Stores" />}
-        {data.orders && <OrderSummaries orders={data.orders} title="Recent Orders" />}
+        <Divider />
+        {data.orders && (
+          <OrderSummaries
+            orders={data.orders}
+            title="Incoming Orders"
+            subtitle="Prepare shipments which recieves to your stores"
+          />
+        )}
       </main>
     </AppLayout>
   );

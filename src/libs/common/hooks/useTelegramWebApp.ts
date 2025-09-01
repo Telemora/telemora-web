@@ -11,6 +11,8 @@ export function useTelegramWebApp() {
     if (typeof window !== 'undefined' && window.Telegram && window.Telegram.WebApp) {
       const tgWebApp = window.Telegram.WebApp;
 
+      tgWebApp.requestFullscreen();
+
       setTheme(tgWebApp.colorScheme);
 
       setWebApp(tgWebApp);
