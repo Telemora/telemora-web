@@ -64,7 +64,7 @@ export function AddressForm({ isPending, onSubmit }: Props) {
       setValue('geoPoint.latitude', coords.lat);
       setValue('geoPoint.longitude', coords.lng);
     }
-  }, [nearest, coords, setValue]);
+  }, [nearest, coords, setValue, webApp?.LocationManager]);
 
   const detectLocation = async () => {
     setIsDetecting(true);
