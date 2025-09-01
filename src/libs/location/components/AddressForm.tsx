@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
 import { Button, Form, Input, Select, SelectItem, Switch } from '@heroui/react';
@@ -23,13 +23,13 @@ export function AddressForm({ isPending, onSubmit }: Props) {
     resolver: zodResolver(createAddressSchema),
   });
 
+  const { register, watch, setValue } = addressForm;
+
   const { webApp, isLoaded } = useTelegramWebApp();
   const router = useRouter();
-  const [isDetecting, setIsDetecting] = useState(false);
-  const [detectError, setDetectError] = useState<string | null>(null);
 
-  const countryId = addressForm.watch('country.id');
-  const stateId = addressForm.watch('state.id');
+  const countryId = watch('country.id');
+  const stateId = watch('state.id');
 
   const { data: countries = [], isLoading: loadingCountries } = useCountries();
   const { data: states = [], isLoading: loadingStates } = useStatesByCountry(countryId);
@@ -53,23 +53,17 @@ export function AddressForm({ isPending, onSubmit }: Props) {
       return;
     }
 
-    setIsDetecting(true);
-    setDetectError(null);
-
     try {
       webApp?.LocationManager.getLocation((data) => {
-        addressForm.setValue('geoPoint.latitude', data?.latitude);
-        addressForm.setValue('geoPoint.longitude', data?.longitude);
+        setValue('geoPoint.latitude', data?.latitude);
+        setValue('geoPoint.longitude', data?.longitude);
       });
     } catch (err) {
-      console.error(err);
       if (!isAccessGranted) {
-        setDetectError('Telegram denied location access. Please enable it in settings.');
+        toast.error('Telegram denied location access. Please enable it in settings.');
       } else {
-        setDetectError('Location detection failed. Please try manually.');
+        toast.error('Location detection failed. Please try manually.');
       }
-    } finally {
-      setIsDetecting(false);
     }
   };
 
@@ -83,7 +77,7 @@ export function AddressForm({ isPending, onSubmit }: Props) {
         <pre>isAccessRequested: {webApp?.LocationManager.isAccessRequested || 'unavailable'}</pre>
         <pre>isAccessGranted: {webApp?.LocationManager.isAccessGranted || 'unavailable'}</pre>
         <pre>version: {webApp?.version}</pre>
-        <Input {...addressForm.register('label')} label="Label" />
+        <Input {...register('label')} label="Label" />
         <div className="mb-4 flex gap-4">
           <Button
             fullWidth
@@ -110,10 +104,10 @@ export function AddressForm({ isPending, onSubmit }: Props) {
         <CanonicalLocationForm data={countries} type={CanonicalLocationType.COUNTRY} />
         <CanonicalLocationForm data={states} type={CanonicalLocationType.STATE} />
         <CanonicalLocationForm data={cities} type={CanonicalLocationType.CITY} />
-        <Input {...addressForm.register('streetLine1')} label="Street Line 1" />
-        <Input {...addressForm.register('streetLine2')} label="Street Line 2" />
-        <Input {...addressForm.register('postalCode')} label="Postal Code" />
-        <Select {...addressForm.register('type')} label="Type">
+        <Input {...register('streetLine1')} label="Street Line 1" />
+        <Input {...register('streetLine2')} label="Street Line 2" />
+        <Input {...register('postalCode')} label="Postal Code" />
+        <Select {...register('type')} label="Type">
           {Object.values<string>(AddressType).map((type) => (
             <SelectItem key={type}>{type}</SelectItem>
           ))}
@@ -121,7 +115,7 @@ export function AddressForm({ isPending, onSubmit }: Props) {
         <GeoPointForm />
         <div className="my-2 flex w-full items-center justify-between">
           <label className="text-xs">Save as Default location</label>
-          <Switch {...addressForm.register('isDefault')} />
+          <Switch {...register('isDefault')} />
         </div>
 
         {/* Buttons */}
