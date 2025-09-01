@@ -1,9 +1,25 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
-import { Button, Form, Input, Select, SelectItem, Switch } from '@heroui/react';
-import { FaGear, FaLocationDot } from 'react-icons/fa6';
-import { useCitiesByState, useCountries, useStatesByCountry } from '@/libs/location/hooks';
+import {
+  Button,
+  Form,
+  Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  Select,
+  SelectItem,
+  Switch,
+  useDisclosure,
+} from '@heroui/react';
+import {
+  useCitiesByState,
+  useCountries,
+  useNearestLocation,
+  useStatesByCountry,
+} from '@/libs/location/hooks';
 import { CanonicalLocationForm } from '@/libs/location/components/CanonicalLocationForm';
 import { GeoPointForm } from '@/libs/location/components/GeoPointForm';
 import { AddressDto, AddressType, CanonicalLocationType } from '@/libs/location/types';
@@ -11,7 +27,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { createAddressSchema } from '@/libs/location/schemas';
 import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 import { StoreCreationStepsNav } from '@/libs/stores/components/StoreCreationStepsNav';
-import toast from 'react-hot-toast';
 
 interface Props {
   isPending: boolean;
@@ -23,6 +38,8 @@ export function AddressForm({ isPending, onSubmit }: Props) {
     resolver: zodResolver(createAddressSchema),
   });
 
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   const { register, watch, setValue } = addressForm;
 
   const { webApp, isLoaded } = useTelegramWebApp();
@@ -30,10 +47,13 @@ export function AddressForm({ isPending, onSubmit }: Props) {
 
   const countryId = watch('country.id');
   const stateId = watch('state.id');
+  const longitude = watch('geoPoint.longitude');
+  const latitude = watch('geoPoint.latitude');
 
   const { data: countries = [], isLoading: loadingCountries } = useCountries();
   const { data: states = [], isLoading: loadingStates } = useStatesByCountry(countryId);
   const { data: cities = [], isLoading: loadingCities } = useCitiesByState(stateId);
+  const { data: nearest, isFetching: nearestLoading } = useNearestLocation(latitude, longitude);
 
   useEffect(() => {
     webApp?.LocationManager.init();
@@ -48,14 +68,6 @@ export function AddressForm({ isPending, onSubmit }: Props) {
   };
 
   const detectLocation = async () => {
-    if (webApp.LocationManager.isAccessRequested) {
-      if (!webApp.LocationManager.isLocationAvailable) {
-        toast.error('Location is not supported on your device');
-      }
-      if (!webApp.LocationManager.isAccessGranted) {
-        toast.error('Location access is not granted');
-      }
-    }
     webApp.LocationManager.getLocation((data) => {
       setValue('geoPoint.latitude', data?.latitude);
       setValue('geoPoint.longitude', data?.longitude);
@@ -65,29 +77,22 @@ export function AddressForm({ isPending, onSubmit }: Props) {
   return (
     <FormProvider {...addressForm}>
       <Form onSubmit={addressForm.handleSubmit(onSubmit)}>
-        <div className="mb-4 flex w-full gap-4">
-          <Button
-            fullWidth
-            size="sm"
-            variant="flat"
-            type="button"
-            onPress={detectLocation}
-            startContent={<FaLocationDot />}
-          >
-            Use Telegram Location
-          </Button>
-
-          <Button
-            fullWidth
-            size="sm"
-            variant="flat"
-            type="button"
-            onPress={openSettings}
-            startContent={<FaGear />}
-          >
-            Open Telegram Settings
-          </Button>
-        </div>
+        <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="center">
+          <ModalContent>
+            <ModalBody>
+              Would you like to allow access to your location to help fill out this form
+              automatically?
+            </ModalBody>
+            <ModalFooter>
+              <Button type="button" color="primary" onPress={detectLocation}>
+                Allow
+              </Button>
+              <Button type="button" color="danger" onPress={onOpen}>
+                Deny
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
         <Input {...register('label')} label="Label" />
         <CanonicalLocationForm data={countries} type={CanonicalLocationType.COUNTRY} />
         <CanonicalLocationForm data={states} type={CanonicalLocationType.STATE} />
