@@ -72,6 +72,8 @@ export function AddressForm({ isPending, onSubmit }: Props) {
 
     try {
       webApp?.LocationManager.getLocation((data) => {
+        setValue('geoPoint.longitude', data?.longitude);
+        setValue('geoPoint.latitude', data?.latitude);
         setCoords({ lat: data?.latitude, lng: data?.longitude });
       });
     } catch (err) {
@@ -88,10 +90,11 @@ export function AddressForm({ isPending, onSubmit }: Props) {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <pre>isInited: {webApp?.LocationManager.isInited}</pre>
-      <pre>isLocationAvailable: {webApp?.LocationManager.isLocationAvailable}</pre>
-      <pre>isAccessRequested: {webApp?.LocationManager.isAccessRequested}</pre>
-      <pre>isAccessGranted: {webApp?.LocationManager.isAccessGranted}</pre>
+      <pre>isInited: {webApp?.LocationManager.isInited || 'unavailable'}</pre>
+      <pre>isLocationAvailable: {webApp?.LocationManager.isLocationAvailable || 'unavailable'}</pre>
+      <pre>isAccessRequested: {webApp?.LocationManager.isAccessRequested || 'unavailable'}</pre>
+      <pre>isAccessGranted: {webApp?.LocationManager.isAccessGranted || 'unavailable'}</pre>
+      <pre>version: {webApp?.version}</pre>
       <Input {...register('label')} label="Label" />
       <div className="mb-4 flex gap-4">
         <Button
