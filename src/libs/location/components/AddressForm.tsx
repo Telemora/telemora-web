@@ -53,6 +53,7 @@ export function AddressForm({ isPending, onSubmit }: Props) {
   const { data: cities = [], isLoading: loadingCities } = useCitiesByState(stateId);
 
   useEffect(() => {
+    webApp?.LocationManager.init();
     if (nearest && coords) {
       setValue('country.id', nearest.country.id);
       if (nearest.state?.id) setValue('state.id', nearest.state.id);
@@ -70,7 +71,6 @@ export function AddressForm({ isPending, onSubmit }: Props) {
     setDetectError(null);
 
     try {
-      webApp?.LocationManager.init();
       webApp?.LocationManager.getLocation((data) => {
         setCoords({ lat: data?.latitude, lng: data?.longitude });
       });
