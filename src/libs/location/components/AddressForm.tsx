@@ -95,7 +95,7 @@ export function AddressForm({ isPending, onSubmit }: Props) {
           size="sm"
           variant="flat"
           onPress={detectLocation}
-          isDisabled={!isSupported || isDetecting || nearestLoading}
+          // isDisabled={!isSupported || isDetecting || nearestLoading}
         >
           <FaLocationDot />
           {isDetecting ? 'Detecting…' : 'Use Telegram Location'}
