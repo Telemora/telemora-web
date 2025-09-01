@@ -9,8 +9,8 @@ interface Props {
 export function GeoPointForm({ register }: Props) {
   return (
     <div className="flex w-full gap-x-3">
-      <Input {...register('geoPoint.latitude')} label="Latitude"></Input>
-      <Input {...register('geoPoint.longitude')} label="Longitude"></Input>
+      <Input disabled {...register('geoPoint.latitude')} label="Latitude"></Input>
+      <Input disabled {...register('geoPoint.longitude')} label="Longitude"></Input>
     </div>
   );
 }

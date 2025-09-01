@@ -16,6 +16,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { createAddressSchema } from '@/libs/location/schemas';
 import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 import { StoreCreationStepsNav } from '@/libs/stores/components/StoreCreationStepsNav';
+import toast from 'react-hot-toast';
 
 interface Props {
   isPending: boolean;
@@ -46,14 +47,11 @@ export function AddressForm({ isPending, onSubmit }: Props) {
     coords?.lat,
     coords?.lng,
   );
-  const isSupported = webApp?.LocationManager.isLocationAvailable;
-  const isAccessGranted = webApp?.LocationManager.isAccessGranted;
   const { data: countries = [], isLoading: loadingCountries } = useCountries();
   const { data: states = [], isLoading: loadingStates } = useStatesByCountry(countryId);
   const { data: cities = [], isLoading: loadingCities } = useCitiesByState(stateId);
 
   useEffect(() => {
-    webApp?.LocationManager.init();
     if (nearest && coords) {
       setValue('country.id', nearest.country.id);
       if (nearest.state?.id) setValue('state.id', nearest.state.id);
@@ -67,13 +65,26 @@ export function AddressForm({ isPending, onSubmit }: Props) {
   }, [nearest, coords, setValue, webApp?.LocationManager]);
 
   const detectLocation = async () => {
+    webApp?.LocationManager.init();
+
+    const isSupported = webApp?.LocationManager.isLocationAvailable;
+    const isAccessGranted = webApp?.LocationManager.isAccessGranted;
+
+    if (!isSupported) {
+      toast.error('Location detection is not supported.');
+      return;
+    }
+
+    if (!isAccessGranted) {
+      toast.error('Location access is denied.');
+      return;
+    }
+
     setIsDetecting(true);
     setDetectError(null);
 
     try {
       webApp?.LocationManager.getLocation((data) => {
-        setValue('geoPoint.longitude', data?.longitude);
-        setValue('geoPoint.latitude', data?.latitude);
         setCoords({ lat: data?.latitude, lng: data?.longitude });
       });
     } catch (err) {
@@ -102,23 +113,20 @@ export function AddressForm({ isPending, onSubmit }: Props) {
           size="sm"
           variant="flat"
           onPress={detectLocation}
-          // isDisabled={!isSupported || isDetecting || nearestLoading}
+          startContent={<FaLocationDot />}
         >
-          <FaLocationDot />
-          {isDetecting ? 'Detecting…' : 'Use Telegram Location'}
+          Use Telegram Location
         </Button>
 
-        {!isAccessGranted && (
-          <Button
-            fullWidth
-            size="sm"
-            variant="flat"
-            onPress={() => webApp?.LocationManager.openSettings()}
-          >
-            <FaGear />
-            Open Telegram Settings
-          </Button>
-        )}
+        <Button
+          fullWidth
+          size="sm"
+          variant="flat"
+          onPress={() => webApp?.LocationManager.openSettings()}
+          startContent={<FaGear />}
+        >
+          Open Telegram Settings
+        </Button>
       </div>
       <CanonicalLocationForm reg={register} data={countries} type={CanonicalLocationType.COUNTRY} />
       <CanonicalLocationForm reg={register} data={states} type={CanonicalLocationType.STATE} />
