@@ -3,12 +3,7 @@ import { useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
 import { Button, Form, Input, Select, SelectItem, Switch } from '@heroui/react';
 import { FaGear, FaLocationDot } from 'react-icons/fa6';
-import {
-  useCitiesByState,
-  useCountries,
-  useNearestLocation,
-  useStatesByCountry,
-} from '@/libs/location/hooks';
+import { useCitiesByState, useCountries, useStatesByCountry } from '@/libs/location/hooks';
 import { CanonicalLocationForm } from '@/libs/location/components/CanonicalLocationForm';
 import { GeoPointForm } from '@/libs/location/components/GeoPointForm';
 import { AddressDto, AddressType, CanonicalLocationType } from '@/libs/location/types';
@@ -30,37 +25,21 @@ export function AddressForm({ isPending, onSubmit }: Props) {
 
   const { webApp, isLoaded } = useTelegramWebApp();
   const router = useRouter();
-  const [coords, setCoords] = useState<{ lat?: number; lng?: number } | null>(null);
   const [isDetecting, setIsDetecting] = useState(false);
   const [detectError, setDetectError] = useState<string | null>(null);
 
   const countryId = addressForm.watch('country.id');
   const stateId = addressForm.watch('state.id');
 
-  const { data: nearest, isFetching: nearestLoading } = useNearestLocation(
-    coords?.lat,
-    coords?.lng,
-  );
   const { data: countries = [], isLoading: loadingCountries } = useCountries();
   const { data: states = [], isLoading: loadingStates } = useStatesByCountry(countryId);
   const { data: cities = [], isLoading: loadingCities } = useCitiesByState(stateId);
 
   useEffect(() => {
-    if (nearest && coords) {
-      addressForm.setValue('country.id', nearest.country.id);
-      if (nearest.state?.id) addressForm.setValue('state.id', nearest.state.id);
-      if (nearest.city?.id) {
-        addressForm.setValue('city.id', nearest.city.id);
-        addressForm.setValue('postalCode', nearest.city.postalCode ?? '');
-      }
-      addressForm.setValue('geoPoint.latitude', coords.lat);
-      addressForm.setValue('geoPoint.longitude', coords.lng);
-    }
-  }, [nearest, coords, addressForm.setValue, webApp?.LocationManager, addressForm]);
+    webApp?.LocationManager.init();
+  }, [webApp?.LocationManager]);
 
   const detectLocation = async () => {
-    webApp?.LocationManager.init();
-
     const isSupported = webApp?.LocationManager.isLocationAvailable;
     const isAccessGranted = webApp?.LocationManager.isAccessGranted;
 
@@ -79,7 +58,8 @@ export function AddressForm({ isPending, onSubmit }: Props) {
 
     try {
       webApp?.LocationManager.getLocation((data) => {
-        setCoords({ lat: data?.latitude, lng: data?.longitude });
+        addressForm.setValue('geoPoint.latitude', data?.latitude);
+        addressForm.setValue('geoPoint.longitude', data?.longitude);
       });
     } catch (err) {
       console.error(err);
@@ -109,6 +89,7 @@ export function AddressForm({ isPending, onSubmit }: Props) {
             fullWidth
             size="sm"
             variant="flat"
+            type="button"
             onPress={detectLocation}
             startContent={<FaLocationDot />}
           >
@@ -119,6 +100,7 @@ export function AddressForm({ isPending, onSubmit }: Props) {
             fullWidth
             size="sm"
             variant="flat"
+            type="button"
             onPress={() => webApp?.LocationManager.openSettings()}
             startContent={<FaGear />}
           >
