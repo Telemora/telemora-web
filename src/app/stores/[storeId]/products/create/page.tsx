@@ -47,7 +47,7 @@ export default function CreateProductPage() {
     try {
       const result = await mutateAsync(data);
       toast.success('Product created successfully!');
-      webApp.HapticFeedback.impactOccurred('light');
+      webApp?.HapticFeedback.impactOccurred('light');
       router.push(`/stores/${result.store.id}`);
     } catch (error) {
       console.error(error);

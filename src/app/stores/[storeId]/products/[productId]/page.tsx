@@ -75,7 +75,7 @@ export default function ProductDetailsPage() {
           size="lg"
           className="mt-4"
           onPress={() => {
-            webApp.HapticFeedback.impactOccurred('light');
+            webApp?.HapticFeedback.impactOccurred('light');
           }}
         >
           Add to Cart

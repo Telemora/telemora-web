@@ -14,11 +14,5 @@ export function useTelegramWebApp() {
     }
   }, [setTheme]);
 
-  if (!webApp) {
-    throw new Error(
-      'Telegram WebApp is not available. Ensure you are in a Telegram context and a parent component is handling the loading state.',
-    );
-  }
-
   return { webApp };
 }

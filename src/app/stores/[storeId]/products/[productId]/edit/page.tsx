@@ -39,7 +39,7 @@ export default function EditProductPage() {
     try {
       const result = await mutateAsync(data);
       toast.success('Product updated successfully!');
-      webApp.HapticFeedback.impactOccurred('light');
+      webApp?.HapticFeedback.impactOccurred('light');
       router.push(`/stores/${result.store.id}/${result.id}`);
     } catch (error) {
       console.error(error);

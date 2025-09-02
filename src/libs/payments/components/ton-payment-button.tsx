@@ -53,7 +53,7 @@ export function TonPaymentButton({
         toWalletAddress: sellerAddress,
       });
       toast.success('Payment sent & saved!');
-      webApp.HapticFeedback.impactOccurred('light');
+      webApp?.HapticFeedback.impactOccurred('light');
     } catch (error) {
       console.error('TON payment failed:', error);
       toast.error('Payment failed or cancelled');

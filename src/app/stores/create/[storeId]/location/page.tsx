@@ -21,7 +21,7 @@ export default function CreateStoreLocation() {
     try {
       await updateLocation(data);
       toast.success('Store location updated!');
-      webApp.HapticFeedback.impactOccurred('light');
+      webApp?.HapticFeedback.impactOccurred('light');
       router.push(`/stores/create/${storeId}/tags`);
     } catch (error) {
       console.error(error);

@@ -15,7 +15,7 @@ export function StoreHeader({ store, isOwner }: { store: StoreDetail; isOwner?: 
 
   const handleShare = () => {
     copyToClipboard(window.location.href);
-    webApp.HapticFeedback.impactOccurred('light');
+    webApp?.HapticFeedback.impactOccurred('light');
   };
 
   const handleEdit = () => router.push(`/stores/${store?.id}/edit`);

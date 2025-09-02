@@ -101,7 +101,7 @@ export default function ServiceHoursPage() {
       setStoreServiceHoursSchema.parse(payload);
       await mutateAsync(payload);
       toast.success('Working hours saved');
-      webApp.HapticFeedback.impactOccurred('light');
+      webApp?.HapticFeedback.impactOccurred('light');
       router.push(`/stores/create/${storeId}/logo-upload`);
     } catch (err) {
       setError('Failed to save service hours. Please try again.');

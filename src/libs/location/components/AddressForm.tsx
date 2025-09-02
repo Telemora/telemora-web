@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -9,6 +11,7 @@ import {
   ModalBody,
   ModalContent,
   ModalFooter,
+  ModalHeader,
   Select,
   SelectItem,
   Switch,
@@ -39,7 +42,7 @@ export function AddressForm({ isPending, onSubmit }: Props) {
     resolver: zodResolver(createAddressSchema),
   });
   const { register, watch, setValue } = addressForm;
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
   const router = useRouter();
 
   const countryId = watch('country.id');
@@ -53,44 +56,50 @@ export function AddressForm({ isPending, onSubmit }: Props) {
   const { data: nearest, isFetching: nearestLoading } = useNearestLocation(latitude, longitude);
 
   useEffect(() => {
-    webApp.LocationManager.init();
+    webApp?.LocationManager.init();
 
     onOpen();
 
-    webApp.onEvent('locationRequested', (e) => {
+    webApp?.onEvent('locationRequested', (e) => {
       console.log('logger event in code:', e);
     });
-    webApp.onEvent('locationManagerUpdated', (e) => {
+    webApp?.onEvent('locationManagerUpdated', (e) => {
       console.log('logger event in code:', e);
     });
-  }, [onOpen, webApp, webApp.LocationManager]);
+  }, [onOpen, webApp, webApp?.LocationManager]);
 
   const openSettings = () => {
-    webApp.LocationManager.openSettings();
+    webApp?.LocationManager.openSettings();
   };
 
   const detectLocation = async () => {
-    webApp.LocationManager.getLocation((data) => {
+    webApp?.LocationManager.getLocation((data) => {
       setValue('geoPoint.latitude', data?.latitude);
       setValue('geoPoint.longitude', data?.longitude);
     });
   };
 
+  const onAllowAccess = async () => {
+    await detectLocation();
+    onClose();
+  };
+
   return (
     <FormProvider {...addressForm}>
       <Form onSubmit={addressForm.handleSubmit(onSubmit)}>
-        <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="center">
+        <Modal isOpen={isOpen} onOpenChange={onOpenChange} hideCloseButton placement="center">
           <ModalContent>
+            <ModalHeader>Location Access</ModalHeader>
             <ModalBody>
               Would you like to allow access to your location to help fill out this form
               automatically?
             </ModalBody>
             <ModalFooter>
-              <Button type="button" color="primary" onPress={detectLocation}>
-                Allow
-              </Button>
-              <Button type="button" color="danger" onPress={onOpen}>
+              <Button type="button" onPress={onClose}>
                 Deny
+              </Button>
+              <Button type="button" color="primary" onPress={onAllowAccess}>
+                Allow
               </Button>
             </ModalFooter>
           </ModalContent>
