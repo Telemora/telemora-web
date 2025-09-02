@@ -80,7 +80,14 @@ export function AddressForm({ isPending, onSubmit }: Props) {
     });
   }, [onOpen, onOpenSettingsModal, webApp, webApp?.LocationManager]);
 
-  const openSettings = () => {
+  useEffect(() => {
+    if (!nearest) return;
+    setValue('country', nearest.country);
+    setValue('state', nearest.state);
+    setValue('city', nearest.city);
+  }, [nearest, setValue]);
+
+  const navigateToSettings = () => {
     webApp?.LocationManager.openSettings();
     onCloseSettingsModal();
   };
@@ -103,6 +110,7 @@ export function AddressForm({ isPending, onSubmit }: Props) {
   return (
     <FormProvider {...addressForm}>
       <Form onSubmit={addressForm.handleSubmit(onSubmit)}>
+        {/* allow access to geolocation modal */}
         <Modal
           classNames={{ backdrop: 'bg-black/50' }}
           isOpen={isOpen}
@@ -126,6 +134,8 @@ export function AddressForm({ isPending, onSubmit }: Props) {
             </ModalFooter>
           </ModalContent>
         </Modal>
+
+        {/* settings modal */}
         <Modal
           classNames={{ backdrop: 'bg-black/50' }}
           isOpen={isOpenSettingsModal}
@@ -140,7 +150,7 @@ export function AddressForm({ isPending, onSubmit }: Props) {
               this form. You can do this by going to your Telegram settings.
             </ModalBody>
             <ModalFooter>
-              <Button fullWidth color="primary" type="button" onPress={openSettings}>
+              <Button fullWidth color="primary" type="button" onPress={navigateToSettings}>
                 Allow Geolocation Access
               </Button>
             </ModalFooter>
