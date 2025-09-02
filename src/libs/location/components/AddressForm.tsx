@@ -58,8 +58,12 @@ export function AddressForm({ isPending, onSubmit }: Props) {
   useEffect(() => {
     webApp?.LocationManager.init();
 
-    webApp?.onEvent('locationRequested', () => {});
-    webApp?.onEvent('locationManagerUpdated', () => {});
+    webApp?.onEvent('locationRequested', (e) => {
+      console.log(e);
+    });
+    webApp?.onEvent('locationManagerUpdated', (e) => {
+      console.log(e);
+    });
   }, [webApp, webApp?.LocationManager]);
 
   if (!webApp) {
