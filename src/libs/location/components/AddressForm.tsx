@@ -61,10 +61,10 @@ export function AddressForm({ isPending, onSubmit }: Props) {
     onOpen();
 
     webApp?.onEvent('locationRequested', (e) => {
-      console.log('logger event in code:', e);
+      console.log('locationRequested =>', e);
     });
     webApp?.onEvent('locationManagerUpdated', (e) => {
-      console.log('logger event in code:', e);
+      console.log('locationManagerUpdated =>', e);
     });
   }, [onOpen, webApp, webApp?.LocationManager]);
 
