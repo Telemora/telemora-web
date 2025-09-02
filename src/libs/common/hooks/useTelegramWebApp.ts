@@ -10,17 +10,7 @@ export function useTelegramWebApp() {
     if (typeof window !== 'undefined' && window.Telegram && window.Telegram.WebApp) {
       const tgWebApp = window.Telegram.WebApp;
       setWebApp(tgWebApp);
-
       setTheme(tgWebApp.colorScheme);
-
-      const handleThemeChange = () => {
-        setTheme(tgWebApp.colorScheme);
-      };
-      tgWebApp.onEvent('themeChanged', handleThemeChange);
-
-      return () => {
-        tgWebApp.offEvent('themeChanged', handleThemeChange);
-      };
     }
   }, [setTheme]);
 
