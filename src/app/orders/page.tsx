@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Spinner } from '@heroui/react';
+import { Button, Spinner, Tab, Tabs } from '@heroui/react';
 import { useRouter } from 'next/navigation';
 import React, { useCallback, useMemo } from 'react';
 
@@ -56,10 +56,20 @@ export default function OrdersPage() {
 
   return (
     <AppLayout>
-      <PageHeader
-        title="Order History"
-        subtitle="View and manage your orders with detailed tracking information."
-      />
+      <Tabs>
+        <Tab key="sales" title="Sales">
+          <PageHeader
+            title="Order History"
+            subtitle="View and manage your orders with detailed tracking information."
+          />
+        </Tab>
+        <Tab key="purchases" title="Purchases">
+          <PageHeader
+            title="Incoming Orders"
+            subtitle="Prepare shipments which recieves to your stores"
+          />
+        </Tab>
+      </Tabs>
       {renderContent}
     </AppLayout>
   );
