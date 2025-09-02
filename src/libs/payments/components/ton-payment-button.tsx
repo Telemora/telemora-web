@@ -21,7 +21,7 @@ export function TonPaymentButton({
   sellerAddress,
   orderId = '0',
 }: TonPaymentButtonProps) {
-  const { webApp, isLoaded } = useTelegramWebApp();
+  const { webApp } = useTelegramWebApp();
   const [tonConnectUI] = useTonConnectUI();
   const wallet = useTonWallet();
   const userAddress = useTonAddress(false);
@@ -53,7 +53,7 @@ export function TonPaymentButton({
         toWalletAddress: sellerAddress,
       });
       toast.success('Payment sent & saved!');
-      webApp?.HapticFeedback.impactOccurred('light');
+      webApp.HapticFeedback.impactOccurred('light');
     } catch (error) {
       console.error('TON payment failed:', error);
       toast.error('Payment failed or cancelled');

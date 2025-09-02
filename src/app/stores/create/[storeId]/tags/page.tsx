@@ -33,7 +33,7 @@ const TAG_SUGGESTIONS = [
 ];
 
 export default function CreateStoreTags() {
-  const { webApp, isLoaded } = useTelegramWebApp();
+  const { webApp } = useTelegramWebApp();
   const { storeId } = useParams<{ storeId: string }>();
   const router = useRouter();
 
@@ -73,7 +73,7 @@ export default function CreateStoreTags() {
     try {
       await mutateAsync(data);
       toast.success('Tags saved!');
-      webApp?.HapticFeedback.impactOccurred('light');
+      webApp.HapticFeedback.impactOccurred('light');
       router.push(`/stores/create/${storeId}/working-hours`);
     } catch {
       toast.error('Failed to save tags');

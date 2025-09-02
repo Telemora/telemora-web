@@ -9,13 +9,13 @@ import { useRouter } from 'next/navigation';
 import { StoreDetail } from '@/libs/stores/types';
 
 export function StoreHeader({ store, isOwner }: { store: StoreDetail; isOwner?: boolean }) {
-  const { webApp, isLoaded } = useTelegramWebApp();
+  const { webApp } = useTelegramWebApp();
 
   const router = useRouter();
 
   const handleShare = () => {
     copyToClipboard(window.location.href);
-    webApp?.HapticFeedback.impactOccurred('light');
+    webApp.HapticFeedback.impactOccurred('light');
   };
 
   const handleEdit = () => router.push(`/stores/${store?.id}/edit`);

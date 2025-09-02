@@ -42,7 +42,7 @@ export function AddressForm({ isPending, onSubmit }: Props) {
 
   const { register, watch, setValue } = addressForm;
 
-  const { webApp, isLoaded } = useTelegramWebApp();
+  const { webApp } = useTelegramWebApp();
   const router = useRouter();
 
   const countryId = watch('country.id');
@@ -56,17 +56,17 @@ export function AddressForm({ isPending, onSubmit }: Props) {
   const { data: nearest, isFetching: nearestLoading } = useNearestLocation(latitude, longitude);
 
   useEffect(() => {
-    webApp?.LocationManager.init();
+    webApp.LocationManager.init();
 
     onOpen();
 
-    webApp?.onEvent('locationRequested', (e) => {
+    webApp.onEvent('locationRequested', (e) => {
       console.log('logger event in code:', e);
     });
-    webApp?.onEvent('locationManagerUpdated', (e) => {
+    webApp.onEvent('locationManagerUpdated', (e) => {
       console.log('logger event in code:', e);
     });
-  }, [onOpen, webApp, webApp?.LocationManager]);
+  }, [onOpen, webApp, webApp.LocationManager]);
 
   if (!webApp) {
     return null;

@@ -17,7 +17,7 @@ import { updateProductDtoSchema } from '@/libs/products/schemas';
 import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 
 export default function EditProductPage() {
-  const { webApp, isLoaded } = useTelegramWebApp();
+  const { webApp } = useTelegramWebApp();
   const { storeId, productId } = useParams<{ storeId: string; productId: string }>();
   const storeIdNum = parseInt(storeId, 10);
   const productIdNum = parseInt(productId, 10);
@@ -39,7 +39,7 @@ export default function EditProductPage() {
     try {
       const result = await mutateAsync(data);
       toast.success('Product updated successfully!');
-      webApp?.HapticFeedback.impactOccurred('light');
+      webApp.HapticFeedback.impactOccurred('light');
       router.push(`/stores/${result.store.id}/${result.id}`);
     } catch (error) {
       console.error(error);

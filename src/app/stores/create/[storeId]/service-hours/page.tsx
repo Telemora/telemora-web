@@ -25,7 +25,7 @@ import { PageHeader } from '@/libs/common/components/PageHeader';
 import { StoreCreationStepsNav } from '@/libs/stores/components/StoreCreationStepsNav';
 
 export default function ServiceHoursPage() {
-  const { webApp, isLoaded } = useTelegramWebApp();
+  const { webApp } = useTelegramWebApp();
   const router = useRouter();
   const { storeId } = useParams<{ storeId: string }>();
   const { mutateAsync, isPending } = useSubmitStoreServiceHoursMutation(storeId);
@@ -101,7 +101,7 @@ export default function ServiceHoursPage() {
       setStoreServiceHoursSchema.parse(payload);
       await mutateAsync(payload);
       toast.success('Working hours saved');
-      webApp?.HapticFeedback.impactOccurred('light');
+      webApp.HapticFeedback.impactOccurred('light');
       router.push(`/stores/create/${storeId}/logo-upload`);
     } catch (err) {
       setError('Failed to save service hours. Please try again.');

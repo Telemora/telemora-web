@@ -17,7 +17,7 @@ import { createProductDtoSchema } from '@/libs/products/schemas';
 import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 
 export default function CreateProductPage() {
-  const { webApp, isLoaded } = useTelegramWebApp();
+  const { webApp } = useTelegramWebApp();
   const { storeId } = useParams();
   const {
     register,
@@ -47,7 +47,7 @@ export default function CreateProductPage() {
     try {
       const result = await mutateAsync(data);
       toast.success('Product created successfully!');
-      webApp?.HapticFeedback.impactOccurred('light');
+      webApp.HapticFeedback.impactOccurred('light');
       router.push(`/stores/${result.store.id}`);
     } catch (error) {
       console.error(error);

@@ -15,7 +15,7 @@ import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 import { StoreCreationStepsNav } from '@/libs/stores/components/StoreCreationStepsNav';
 
 export default function CreateStoreBasicInformation() {
-  const { webApp, isLoaded } = useTelegramWebApp();
+  const { webApp } = useTelegramWebApp();
   const {
     register,
     handleSubmit,
@@ -37,7 +37,7 @@ export default function CreateStoreBasicInformation() {
       const result = await mutateAsync(formData);
       console.log('Store created:', result);
       toast.success('Store created successfully!');
-      webApp?.HapticFeedback.impactOccurred('light');
+      webApp.HapticFeedback.impactOccurred('light');
       router.push(`/stores/create/${result.id}/location`);
     } catch (err) {
       console.error('Create store error:', err);

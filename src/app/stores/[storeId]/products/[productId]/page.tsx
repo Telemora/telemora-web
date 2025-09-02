@@ -15,7 +15,7 @@ import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 import { HorizontalScroll } from '@/libs/common/components/HorizontalScroll';
 
 export default function ProductDetailsPage() {
-  const { webApp, isLoaded } = useTelegramWebApp();
+  const { webApp } = useTelegramWebApp();
   const { storeId, productId } = useParams();
   const storeIdNum = parseInt(storeId as string, 10);
   const productIdNum = parseInt(productId as string, 10);
@@ -75,7 +75,7 @@ export default function ProductDetailsPage() {
           size="lg"
           className="mt-4"
           onPress={() => {
-            webApp?.HapticFeedback.impactOccurred('light');
+            webApp.HapticFeedback.impactOccurred('light');
           }}
         >
           Add to Cart

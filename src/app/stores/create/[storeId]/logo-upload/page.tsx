@@ -17,7 +17,7 @@ import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 import { StoreCreationStepsNav } from '@/libs/stores/components/StoreCreationStepsNav';
 
 export default function CreateStoreLogoUpload() {
-  const { webApp, isLoaded } = useTelegramWebApp();
+  const { webApp } = useTelegramWebApp();
   const router = useRouter();
   const { storeId } = useParams<{ storeId: string }>();
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -115,7 +115,7 @@ export default function CreateStoreLogoUpload() {
     try {
       const result = await mutateAsync(data);
       toast.success('Store created successfully!');
-      webApp?.HapticFeedback.impactOccurred('light');
+      webApp.HapticFeedback.impactOccurred('light');
       router.push(`/stores/${result.id}`);
     } catch {
       toast.error('Store submission failed.');

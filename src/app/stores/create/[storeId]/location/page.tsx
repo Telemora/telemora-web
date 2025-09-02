@@ -11,7 +11,7 @@ import { AddressForm } from '@/libs/location/components/AddressForm';
 import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 
 export default function CreateStoreLocation() {
-  const { webApp, isLoaded } = useTelegramWebApp();
+  const { webApp } = useTelegramWebApp();
   const { storeId } = useParams<{ storeId: string }>();
   const router = useRouter();
 
@@ -21,7 +21,7 @@ export default function CreateStoreLocation() {
     try {
       await updateLocation(data);
       toast.success('Store location updated!');
-      webApp?.HapticFeedback.impactOccurred('light');
+      webApp.HapticFeedback.impactOccurred('light');
       router.push(`/stores/create/${storeId}/tags`);
     } catch (error) {
       console.error(error);
