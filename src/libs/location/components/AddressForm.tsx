@@ -87,7 +87,13 @@ export function AddressForm({ isPending, onSubmit }: Props) {
   return (
     <FormProvider {...addressForm}>
       <Form onSubmit={addressForm.handleSubmit(onSubmit)}>
-        <Modal isOpen={isOpen} onOpenChange={onOpenChange} hideCloseButton placement="center">
+        <Modal
+          classNames={{ backdrop: 'bg-black/50' }}
+          isOpen={isOpen}
+          onOpenChange={onOpenChange}
+          hideCloseButton
+          placement="center"
+        >
           <ModalContent>
             <ModalHeader>Location Access</ModalHeader>
             <ModalBody>
