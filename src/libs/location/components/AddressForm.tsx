@@ -34,15 +34,12 @@ interface Props {
 }
 
 export function AddressForm({ isPending, onSubmit }: Props) {
+  const { webApp } = useTelegramWebApp();
   const addressForm = useForm<AddressDto>({
     resolver: zodResolver(createAddressSchema),
   });
-
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
   const { register, watch, setValue } = addressForm;
-
-  const { webApp } = useTelegramWebApp();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const router = useRouter();
 
   const countryId = watch('country.id');
@@ -67,10 +64,6 @@ export function AddressForm({ isPending, onSubmit }: Props) {
       console.log('logger event in code:', e);
     });
   }, [onOpen, webApp, webApp.LocationManager]);
-
-  if (!webApp) {
-    return null;
-  }
 
   const openSettings = () => {
     webApp.LocationManager.openSettings();
