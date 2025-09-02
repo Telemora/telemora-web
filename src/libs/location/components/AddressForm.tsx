@@ -56,16 +56,25 @@ export function AddressForm({ isPending, onSubmit }: Props) {
   const { data: nearest, isFetching: nearestLoading } = useNearestLocation(latitude, longitude);
 
   useEffect(() => {
-    webApp?.LocationManager.init();
+    webApp?.LocationManager.init(() => {
+      const isInited = webApp?.LocationManager.isInited;
+      const isLocationAvailable = webApp?.LocationManager.isLocationAvailable;
+      const isAccessRequested = webApp?.LocationManager.isAccessRequested;
+      const isAccessGranted = webApp?.LocationManager.isAccessGranted;
+
+      console.log(
+        'isInited?',
+        isInited,
+        'isLocationAvailable?',
+        isLocationAvailable,
+        'isAccessRequested?',
+        isAccessRequested,
+        'isAccessGranted?',
+        isAccessGranted,
+      );
+    });
 
     onOpen();
-
-    webApp?.onEvent('locationRequested', (e) => {
-      console.log('locationRequested =>', e);
-    });
-    webApp?.onEvent('locationManagerUpdated', (e) => {
-      console.log('locationManagerUpdated =>', e);
-    });
   }, [onOpen, webApp, webApp?.LocationManager]);
 
   const openSettings = () => {
@@ -74,6 +83,9 @@ export function AddressForm({ isPending, onSubmit }: Props) {
 
   const detectLocation = async () => {
     webApp?.LocationManager.getLocation((data) => {
+      if (!data) {
+        openSettings();
+      }
       setValue('geoPoint.latitude', data?.latitude);
       setValue('geoPoint.longitude', data?.longitude);
     });
