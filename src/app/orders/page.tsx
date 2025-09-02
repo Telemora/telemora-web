@@ -56,12 +56,13 @@ export default function OrdersPage() {
 
   return (
     <AppLayout>
-      <Tabs>
+      <Tabs fullWidth color="primary" radius="lg">
         <Tab key="sales" title="Sales">
           <PageHeader
             title="Order History"
             subtitle="View and manage your orders with detailed tracking information."
           />
+          {renderContent}
         </Tab>
         <Tab key="purchases" title="Purchases">
           <PageHeader
@@ -70,7 +71,6 @@ export default function OrdersPage() {
           />
         </Tab>
       </Tabs>
-      {renderContent}
     </AppLayout>
   );
 }
