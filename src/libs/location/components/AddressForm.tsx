@@ -30,6 +30,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { createAddressSchema } from '@/libs/location/schemas';
 import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 import { StoreCreationStepsNav } from '@/libs/stores/components/StoreCreationStepsNav';
+import toast from 'react-hot-toast';
 
 interface Props {
   isPending: boolean;
@@ -43,6 +44,12 @@ export function AddressForm({ isPending, onSubmit }: Props) {
   });
   const { register, watch, setValue } = addressForm;
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
+  const {
+    isOpen: isOpenSettingsModal,
+    onOpen: onOpenSettingsModal,
+    onClose: onCloseSettingsModal,
+    onOpenChange: onOpenSettingsModalChange,
+  } = useDisclosure();
   const router = useRouter();
 
   const countryId = watch('country.id');
@@ -62,29 +69,26 @@ export function AddressForm({ isPending, onSubmit }: Props) {
       const isAccessRequested = webApp?.LocationManager.isAccessRequested;
       const isAccessGranted = webApp?.LocationManager.isAccessGranted;
 
-      console.log(
-        'isInited?',
-        isInited,
-        'isLocationAvailable?',
-        isLocationAvailable,
-        'isAccessRequested?',
-        isAccessRequested,
-        'isAccessGranted?',
-        isAccessGranted,
-      );
+      if (!isInited) throw new Error('LocationManager is not initialized');
+      if (!isLocationAvailable) toast.error('Location is not available');
+      if (!isAccessRequested) {
+        onOpen();
+      }
+      if (!isAccessGranted) {
+        onOpenSettingsModal();
+      }
     });
-
-    onOpen();
-  }, [onOpen, webApp, webApp?.LocationManager]);
+  }, [onOpen, onOpenSettingsModal, webApp, webApp?.LocationManager]);
 
   const openSettings = () => {
     webApp?.LocationManager.openSettings();
+    onCloseSettingsModal();
   };
 
   const detectLocation = async () => {
     webApp?.LocationManager.getLocation((data) => {
       if (!data) {
-        openSettings();
+        onOpenSettingsModal();
       }
       setValue('geoPoint.latitude', data?.latitude);
       setValue('geoPoint.longitude', data?.longitude);
@@ -118,6 +122,26 @@ export function AddressForm({ isPending, onSubmit }: Props) {
               </Button>
               <Button type="button" color="primary" onPress={onAllowAccess}>
                 Allow
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+        <Modal
+          classNames={{ backdrop: 'bg-black/50' }}
+          isOpen={isOpenSettingsModal}
+          onOpenChange={onOpenSettingsModalChange}
+          hideCloseButton
+          placement="center"
+        >
+          <ModalContent>
+            <ModalHeader>Open Settings</ModalHeader>
+            <ModalBody>
+              Please allow geolocation access in your settings to help us automatically fill out
+              this form. You can do this by going to your Telegram settings.
+            </ModalBody>
+            <ModalFooter>
+              <Button fullWidth color="primary" type="button" onPress={openSettings}>
+                Allow Geolocation Access
               </Button>
             </ModalFooter>
           </ModalContent>
