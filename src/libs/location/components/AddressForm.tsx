@@ -1,17 +1,13 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
 import {
+  Alert,
   Button,
   Form,
   Input,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
   Select,
   SelectItem,
   Switch,
@@ -51,6 +47,8 @@ export function AddressForm({ isPending, onSubmit }: Props) {
     onOpenChange: onOpenSettingsModalChange,
   } = useDisclosure();
   const router = useRouter();
+  const [isAccessRequested, setIsAccessRequested] = useState<boolean>(false);
+  const [isAccessGranted, setIsAccessGranted] = useState<boolean>(false);
 
   const countryId = watch('country.id');
   const stateId = watch('state.id');
@@ -66,19 +64,14 @@ export function AddressForm({ isPending, onSubmit }: Props) {
     webApp?.LocationManager.init(() => {
       const isInited = webApp?.LocationManager.isInited;
       const isLocationAvailable = webApp?.LocationManager.isLocationAvailable;
-      const isAccessRequested = webApp?.LocationManager.isAccessRequested;
-      const isAccessGranted = webApp?.LocationManager.isAccessGranted;
+
+      setIsAccessRequested(webApp?.LocationManager.isAccessRequested);
+      setIsAccessGranted(webApp?.LocationManager.isAccessGranted);
 
       if (!isInited) throw new Error('LocationManager is not initialized');
       if (!isLocationAvailable) toast.error('Location is not available');
-      if (!isAccessRequested) {
-        onOpen();
-      }
-      if (!isAccessGranted) {
-        onOpenSettingsModal();
-      }
     });
-  }, [onOpen, onOpenSettingsModal, webApp, webApp?.LocationManager]);
+  }, [onOpenSettingsModal, webApp, webApp?.LocationManager]);
 
   useEffect(() => {
     if (!nearest) return;
@@ -87,6 +80,11 @@ export function AddressForm({ isPending, onSubmit }: Props) {
     setValue('city', nearest.city);
   }, [nearest, setValue]);
 
+  useEffect(() => {
+    if (!isAccessRequested) {
+      onOpen();
+    }
+  }, [isAccessRequested]);
   const navigateToSettings = () => {
     webApp?.LocationManager.openSettings();
     onCloseSettingsModal();
@@ -109,53 +107,31 @@ export function AddressForm({ isPending, onSubmit }: Props) {
 
   return (
     <FormProvider {...addressForm}>
+      {!isAccessGranted && (
+        <Alert
+          color="primary"
+          title="Allow Location Access"
+          description="Allow geolocation access in your settings"
+          endContent={
+            <Button color="primary" size="sm" onPress={onOpenSettingsModal}>
+              Open Settings
+            </Button>
+          }
+        />
+      )}
+      {!isAccessRequested && (
+        <Alert
+          color="danger"
+          title="Allow Location Access"
+          description="Allow location access to help fill out this form"
+          endContent={
+            <Button color="primary" size="sm" onPress={onAllowAccess}>
+              Allow Access
+            </Button>
+          }
+        />
+      )}
       <Form onSubmit={addressForm.handleSubmit(onSubmit)}>
-        {/* allow access to geolocation modal */}
-        <Modal
-          classNames={{ backdrop: 'bg-black/50' }}
-          isOpen={isOpen}
-          onOpenChange={onOpenChange}
-          hideCloseButton
-          placement="center"
-        >
-          <ModalContent>
-            <ModalHeader>Location Access</ModalHeader>
-            <ModalBody>
-              Would you like to allow access to your location to help fill out this form
-              automatically?
-            </ModalBody>
-            <ModalFooter>
-              <Button type="button" onPress={onClose}>
-                Deny
-              </Button>
-              <Button type="button" color="primary" onPress={onAllowAccess}>
-                Allow
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
-
-        {/* settings modal */}
-        <Modal
-          classNames={{ backdrop: 'bg-black/50' }}
-          isOpen={isOpenSettingsModal}
-          onOpenChange={onOpenSettingsModalChange}
-          hideCloseButton
-          placement="center"
-        >
-          <ModalContent>
-            <ModalHeader>Open Settings</ModalHeader>
-            <ModalBody>
-              Please allow geolocation access in your settings to help us automatically fill out
-              this form. You can do this by going to your Telegram settings.
-            </ModalBody>
-            <ModalFooter>
-              <Button fullWidth color="primary" type="button" onPress={navigateToSettings}>
-                Allow Geolocation Access
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
         <Input {...register('label')} label="Label" />
         <CanonicalLocationForm data={countries} type={CanonicalLocationType.COUNTRY} />
         <CanonicalLocationForm data={states} type={CanonicalLocationType.STATE} />
