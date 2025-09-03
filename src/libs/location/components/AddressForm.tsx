@@ -50,12 +50,10 @@ export function AddressForm({ isPending, onSubmit }: Props) {
         }
       });
     }
-  }, [webApp]);
+  }, [webApp, setValue]);
 
-  /* I want to get location of user by default whenever it comes to a page that contains this form */
   const detectLocation = () => {
     webApp?.LocationManager.getLocation((data) => {
-      /* if data was null, it means that our app doesn't access to geolocation, so we open the setting to user give access*/
       if (!data) {
         toast.error('Location access denied. Please enable it in settings.');
         openSettings();
@@ -73,7 +71,7 @@ export function AddressForm({ isPending, onSubmit }: Props) {
   return (
     <FormProvider {...addressForm}>
       <Alert
-        color="danger"
+        color="primary"
         title="Detect My location"
         description="Allow location access to help fill out this form"
         endContent={
