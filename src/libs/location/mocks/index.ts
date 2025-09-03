@@ -1,6 +1,12 @@
 import { faker } from '@faker-js/faker';
 
-import { AddressDto, AddressType, CanonicalLocationDto, CanonicalLocationType } from '../types';
+import {
+  AddressDto,
+  AddressType,
+  CanonicalLocationDto,
+  CanonicalLocationType,
+  NearestLocationResponseDto,
+} from '../types';
 
 function generateMockCanonicalLocation(type: CanonicalLocationDto['type']): CanonicalLocationDto {
   return {
@@ -52,4 +58,12 @@ export const generateMockStates = (): CanonicalLocationDto[] => {
 
 export const generateMockCities = (): CanonicalLocationDto[] => {
   return Array.from({ length: 5 }, () => generateMockCanonicalLocation(CanonicalLocationType.CITY));
+};
+
+export const generateMockNearestLocation = (): NearestLocationResponseDto => {
+  return {
+    country: generateMockCanonicalLocation(CanonicalLocationType.COUNTRY),
+    state: generateMockCanonicalLocation(CanonicalLocationType.STATE),
+    city: generateMockCanonicalLocation(CanonicalLocationType.CITY),
+  };
 };
