@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
 import { Alert, Button, Form, Input, Select, SelectItem, Switch } from '@heroui/react';
@@ -31,8 +31,6 @@ export function AddressForm({ isPending, onSubmit }: Props) {
   });
   const { register, watch, setValue } = addressForm;
   const router = useRouter();
-  const [isAccessRequested, setIsAccessRequested] = useState<boolean>(false);
-  const [isAccessGranted, setIsAccessGranted] = useState<boolean>(false);
 
   const countryId = watch('country.id');
   const stateId = watch('state.id');
@@ -45,27 +43,26 @@ export function AddressForm({ isPending, onSubmit }: Props) {
   const { data: nearest, isFetching: nearestLoading } = useNearestLocation(latitude, longitude);
 
   useEffect(() => {
-    webApp?.LocationManager.init(() => {
-      const isInited = webApp?.LocationManager.isInited;
-      const isLocationAvailable = webApp?.LocationManager.isLocationAvailable;
+    if (webApp && webApp.LocationManager) {
+      webApp.LocationManager.init(() => {
+        if (webApp.LocationManager.isLocationAvailable && webApp.LocationManager.isAccessGranted) {
+          detectLocation();
+        }
+      });
+    }
+  }, [webApp]);
 
-      setIsAccessRequested(webApp?.LocationManager.isAccessRequested);
-      setIsAccessGranted(webApp?.LocationManager.isAccessGranted);
-
-      if (!isInited) throw new Error('LocationManager is not initialized');
-      if (!isLocationAvailable) toast.error('Location is not available');
-    });
-    detectLocation();
-    if (!nearest) return;
-    setValue('country', nearest.country);
-    setValue('state', nearest.state);
-    setValue('city', nearest.city);
-  }, [nearest, webApp, webApp?.LocationManager]);
-
+  /* I want to get location of user by default whenever it comes to a page that contains this form */
   const detectLocation = () => {
     webApp?.LocationManager.getLocation((data) => {
-      setValue('geoPoint.latitude', data?.latitude);
-      setValue('geoPoint.longitude', data?.longitude);
+      /* if data was null, it means that our app doesn't access to geolocation, so we open the setting to user give access*/
+      if (!data) {
+        toast.error('Location access denied. Please enable it in settings.');
+        openSettings();
+        return;
+      }
+      setValue('geoPoint.latitude', data.latitude);
+      setValue('geoPoint.longitude', data.longitude);
     });
   };
 
@@ -75,18 +72,6 @@ export function AddressForm({ isPending, onSubmit }: Props) {
 
   return (
     <FormProvider {...addressForm}>
-      {!isAccessGranted && (
-        <Alert
-          color="primary"
-          title="Allow Location Access"
-          description="Allow geolocation access in your settings"
-          endContent={
-            <Button color="primary" size="sm" onPress={openSettings}>
-              Open Settings
-            </Button>
-          }
-        />
-      )}
       <Alert
         color="danger"
         title="Detect My location"
