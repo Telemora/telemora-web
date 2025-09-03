@@ -99,7 +99,7 @@ export function AddressForm({ isPending, onSubmit }: Props) {
           title="Allow Location Access"
           description="Allow location access to help fill out this form"
           endContent={
-            <Button color="primary" size="sm" onPress={onAllowAccess}>
+            <Button size="sm" onPress={onAllowAccess}>
               Allow Access
             </Button>
           }
