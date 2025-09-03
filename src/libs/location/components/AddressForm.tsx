@@ -51,9 +51,9 @@ export function AddressForm({ isPending, onSubmit }: Props) {
       });
     }
     if (nearest) {
-      setValue('country', nearest.country);
-      setValue('state', nearest.state);
-      setValue('city', nearest.city);
+      setValue('country.id', nearest.country.id);
+      if (nearest.state) setValue('state.id', nearest.state.id);
+      if (nearest.city) setValue('city.id', nearest.city.id);
     }
   }, [webApp, setValue, nearest]);
 
@@ -75,15 +75,17 @@ export function AddressForm({ isPending, onSubmit }: Props) {
 
   return (
     <FormProvider {...addressForm}>
-      <Alert
-        color="primary"
-        description="Allow location access to help fill out this form"
-        endContent={
-          <Button size="sm" color="primary" onPress={detectLocation}>
-            Allow Access
-          </Button>
-        }
-      />
+      {!latitude && !longitude && (
+        <Alert
+          color="primary"
+          description="Allow location access to help fill out this form"
+          endContent={
+            <Button size="sm" color="primary" onPress={detectLocation}>
+              Allow Access
+            </Button>
+          }
+        />
+      )}
       <Form onSubmit={addressForm.handleSubmit(onSubmit)}>
         <Input {...register('label')} label="Label" />
         <CanonicalLocationForm data={countries} type={CanonicalLocationType.COUNTRY} />
