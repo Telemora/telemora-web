@@ -72,10 +72,9 @@ export function AddressForm({ isPending, onSubmit }: Props) {
     <FormProvider {...addressForm}>
       <Alert
         color="primary"
-        title="Detect My location"
         description="Allow location access to help fill out this form"
         endContent={
-          <Button size="sm" onPress={detectLocation}>
+          <Button size="sm" color="primary" onPress={detectLocation}>
             Allow Access
           </Button>
         }
