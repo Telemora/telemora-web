@@ -8,9 +8,9 @@ interface Props {
 }
 
 export function CanonicalLocationForm({ data, type }: Props) {
-  const { register } = useFormContext<AddressDto>();
+  const { getValues } = useFormContext<AddressDto>();
   return (
-    <Select {...register(`${type}.id`)} label={type}>
+    <Select value={getValues(`${type}.id`)} label={type}>
       {data.map((item) => (
         <SelectItem key={item.id}>{item.name}</SelectItem>
       ))}
