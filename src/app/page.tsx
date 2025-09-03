@@ -4,7 +4,8 @@ import React from 'react';
 
 import AppLayout from '@/libs/common/components/AppLayout';
 import { useDiscoverableStoresQuery, useFeaturedStoresQuery } from '@/libs/stores/hooks';
-import { AddressForm } from '@/libs/location/components/AddressForm';
+import { Carousel } from '@/libs/common/components/Carousel';
+import { ScrollStoresSection } from '@/libs/stores/components/ScrollStoresSection';
 
 export default function MarketPage() {
   const { data: discoverStores, isLoading: isDiscoverStoresLoading } = useDiscoverableStoresQuery();
@@ -12,7 +13,7 @@ export default function MarketPage() {
 
   return (
     <AppLayout>
-      {/* <Carousel />
+      <Carousel />
       <ScrollStoresSection
         title="Featured"
         stores={discoverStores}
@@ -22,8 +23,7 @@ export default function MarketPage() {
         title="New Openings"
         stores={featuredStores}
         isLoading={isFeaturedStoresLoading}
-      /> */}
-      <AddressForm isPending={false} onSubmit={() => {}} />
+      />
     </AppLayout>
   );
 }
