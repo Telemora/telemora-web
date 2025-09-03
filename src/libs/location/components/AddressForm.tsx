@@ -66,9 +66,6 @@ export function AddressForm({ isPending, onSubmit }: Props) {
 
   const detectLocation = async () => {
     webApp?.LocationManager.getLocation((data) => {
-      if (!data) {
-        onOpenSettingsModal();
-      }
       setValue('geoPoint.latitude', data?.latitude);
       setValue('geoPoint.longitude', data?.longitude);
     });
@@ -76,7 +73,10 @@ export function AddressForm({ isPending, onSubmit }: Props) {
 
   const onAllowAccess = async () => {
     await detectLocation();
-    onClose();
+  };
+
+  const openSettings = () => {
+    webApp?.LocationManager.openSettings();
   };
 
   return (
@@ -87,7 +87,7 @@ export function AddressForm({ isPending, onSubmit }: Props) {
           title="Allow Location Access"
           description="Allow geolocation access in your settings"
           endContent={
-            <Button color="primary" size="sm" onPress={onOpenSettingsModal}>
+            <Button color="primary" size="sm" onPress={openSettings}>
               Open Settings
             </Button>
           }
