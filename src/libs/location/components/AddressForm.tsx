@@ -71,10 +71,6 @@ export function AddressForm({ isPending, onSubmit }: Props) {
     });
   };
 
-  const onAllowAccess = async () => {
-    await detectLocation();
-  };
-
   const openSettings = () => {
     webApp?.LocationManager.openSettings();
   };
@@ -93,18 +89,16 @@ export function AddressForm({ isPending, onSubmit }: Props) {
           }
         />
       )}
-      {!isAccessRequested && (
-        <Alert
-          color="danger"
-          title="Allow Location Access"
-          description="Allow location access to help fill out this form"
-          endContent={
-            <Button size="sm" onPress={onAllowAccess}>
-              Allow Access
-            </Button>
-          }
-        />
-      )}
+      <Alert
+        color="danger"
+        title="Detect My location"
+        description="Allow location access to help fill out this form"
+        endContent={
+          <Button size="sm" onPress={detectLocation}>
+            Allow Access
+          </Button>
+        }
+      />
       <Form onSubmit={addressForm.handleSubmit(onSubmit)}>
         <Input {...register('label')} label="Label" />
         <CanonicalLocationForm data={countries} type={CanonicalLocationType.COUNTRY} />
