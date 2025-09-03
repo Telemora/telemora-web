@@ -29,8 +29,8 @@ export function AddressForm({ isPending, onSubmit }: Props) {
 
   const countryId = watch('country.id');
   const stateId = watch('state.id');
-  // const longitude = watch('geoPoint.longitude');
-  // const latitude = watch('geoPoint.latitude');
+  const longitude = watch('geoPoint.longitude');
+  const latitude = watch('geoPoint.latitude');
 
   const { data: countries = [], isLoading: loadingCountries } = useCountries();
   const { data: states = [], isLoading: loadingStates } = useStatesByCountry(countryId);
