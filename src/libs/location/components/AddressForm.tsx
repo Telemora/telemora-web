@@ -55,16 +55,14 @@ export function AddressForm({ isPending, onSubmit }: Props) {
       if (!isInited) throw new Error('LocationManager is not initialized');
       if (!isLocationAvailable) toast.error('Location is not available');
     });
-  }, [webApp, webApp?.LocationManager]);
-
-  useEffect(() => {
+    detectLocation();
     if (!nearest) return;
     setValue('country', nearest.country);
     setValue('state', nearest.state);
     setValue('city', nearest.city);
-  }, [nearest, setValue]);
+  }, [nearest, webApp, webApp?.LocationManager]);
 
-  const detectLocation = async () => {
+  const detectLocation = () => {
     webApp?.LocationManager.getLocation((data) => {
       setValue('geoPoint.latitude', data?.latitude);
       setValue('geoPoint.longitude', data?.longitude);
