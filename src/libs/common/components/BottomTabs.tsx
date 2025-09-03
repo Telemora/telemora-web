@@ -41,15 +41,12 @@ export default function BottomTabs() {
       items={tabList}
       color="primary"
       classNames={{
-        base: 'fixed bottom-0 z-50 w-full md:max-w-sm translate-x-1/2 right-1/2',
+        base: 'fixed bottom-0 z-50 bg-content1 lg:bg-transparent lg:max-w-sm w-full translate-x-1/2 right-1/2',
+        tabList: 'max-w-sm mx-auto',
         tab: 'h-16',
       }}
       style={{
         paddingBottom: 'var(--tg-safe-area-inset-bottom)',
-        paddingRight:
-          'calc(var(--tg-safe-area-inset-right) + var(--tg-content-safe-area-inset-right))',
-        paddingLeft:
-          'calc(var(--tg-safe-area-inset-left) + var(--tg-content-safe-area-inset-left))',
       }}
       onSelectionChange={(key) => route.push(key as string)}
     >
