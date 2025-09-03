@@ -3,16 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
-import {
-  Alert,
-  Button,
-  Form,
-  Input,
-  Select,
-  SelectItem,
-  Switch,
-  useDisclosure,
-} from '@heroui/react';
+import { Alert, Button, Form, Input, Select, SelectItem, Switch } from '@heroui/react';
 import {
   useCitiesByState,
   useCountries,
@@ -39,13 +30,6 @@ export function AddressForm({ isPending, onSubmit }: Props) {
     resolver: zodResolver(createAddressSchema),
   });
   const { register, watch, setValue } = addressForm;
-  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
-  const {
-    isOpen: isOpenSettingsModal,
-    onOpen: onOpenSettingsModal,
-    onClose: onCloseSettingsModal,
-    onOpenChange: onOpenSettingsModalChange,
-  } = useDisclosure();
   const router = useRouter();
   const [isAccessRequested, setIsAccessRequested] = useState<boolean>(false);
   const [isAccessGranted, setIsAccessGranted] = useState<boolean>(false);
@@ -71,7 +55,7 @@ export function AddressForm({ isPending, onSubmit }: Props) {
       if (!isInited) throw new Error('LocationManager is not initialized');
       if (!isLocationAvailable) toast.error('Location is not available');
     });
-  }, [onOpenSettingsModal, webApp, webApp?.LocationManager]);
+  }, [webApp, webApp?.LocationManager]);
 
   useEffect(() => {
     if (!nearest) return;
@@ -79,16 +63,6 @@ export function AddressForm({ isPending, onSubmit }: Props) {
     setValue('state', nearest.state);
     setValue('city', nearest.city);
   }, [nearest, setValue]);
-
-  useEffect(() => {
-    if (!isAccessRequested) {
-      onOpen();
-    }
-  }, [isAccessRequested]);
-  const navigateToSettings = () => {
-    webApp?.LocationManager.openSettings();
-    onCloseSettingsModal();
-  };
 
   const detectLocation = async () => {
     webApp?.LocationManager.getLocation((data) => {
