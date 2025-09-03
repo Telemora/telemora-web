@@ -4,12 +4,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
 import { Alert, Button, Form, Input, Select, SelectItem, Switch } from '@heroui/react';
-import {
-  useCitiesByState,
-  useCountries,
-  useNearestLocation,
-  useStatesByCountry,
-} from '@/libs/location/hooks';
+import { useCitiesByState, useCountries, useStatesByCountry } from '@/libs/location/hooks';
 import { CanonicalLocationForm } from '@/libs/location/components/CanonicalLocationForm';
 import { GeoPointForm } from '@/libs/location/components/GeoPointForm';
 import { AddressDto, AddressType, CanonicalLocationType } from '@/libs/location/types';
@@ -34,13 +29,13 @@ export function AddressForm({ isPending, onSubmit }: Props) {
 
   const countryId = watch('country.id');
   const stateId = watch('state.id');
-  const longitude = watch('geoPoint.longitude');
-  const latitude = watch('geoPoint.latitude');
+  // const longitude = watch('geoPoint.longitude');
+  // const latitude = watch('geoPoint.latitude');
 
   const { data: countries = [], isLoading: loadingCountries } = useCountries();
   const { data: states = [], isLoading: loadingStates } = useStatesByCountry(countryId);
   const { data: cities = [], isLoading: loadingCities } = useCitiesByState(stateId);
-  const { data: nearest, isFetching: nearestLoading } = useNearestLocation(latitude, longitude);
+  // const { data: nearest, isFetching: nearestLoading } = useNearestLocation(latitude, longitude);
 
   useEffect(() => {
     if (webApp && webApp.LocationManager) {
