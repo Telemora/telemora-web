@@ -9,6 +9,9 @@ export function AutocompleteSearch() {
       inputValue={query}
       onInputChange={setQuery}
       isLoading={isLoading}
+      listboxProps={{
+        emptyContent: 'No matching products found',
+      }}
       aria-label="search input"
       placeholder="Shoe, Lingrie, Glassess, etc."
       startContent={<FaSearch />}
