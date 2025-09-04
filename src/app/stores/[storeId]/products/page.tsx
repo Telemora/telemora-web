@@ -1,27 +1,19 @@
 'use client';
 
 import AppLayout from '@/libs/common/components/AppLayout';
-import { Button, Divider, Form, Input } from '@heroui/react';
-import { FaFilter, FaSearch, FaSort } from 'react-icons/fa';
-import { useStoreProducts } from '@/libs/products/hooks';
-import ProductPreviewCard from '@/libs/products/components/preview-card';
+import { Button, Divider } from '@heroui/react';
+import { FaFilter, FaSort } from 'react-icons/fa';
+import { useProductSearch } from '@/libs/products/hooks';
+import ProductPreviewCard from '@/libs/products/components/ProductPreviewCard';
 import { useParams } from 'next/navigation';
+import { SearchInput } from '@/libs/products/components/SearchInput';
 
 export default function StoreProductsPage() {
   const params = useParams<{ storeId: string }>();
-  const { data: products } = useStoreProducts(+params.storeId);
+  const { products, query, setQuery } = useProductSearch();
   return (
     <AppLayout>
-      <Form>
-        <Input
-          label="Search in products"
-          endContent={
-            <Button isIconOnly color="secondary" variant="solid">
-              <FaSearch />
-            </Button>
-          }
-        />
-      </Form>
+      <SearchInput query={query} setQuery={setQuery} />
       <Divider />
       <div className="flex gap-x-2 overflow-x-scroll">
         <Button radius="full" size="sm" startContent={<FaFilter />}>

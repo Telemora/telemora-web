@@ -9,8 +9,8 @@ import toast from 'react-hot-toast';
 
 import AppLayout from '@/libs/common/components/AppLayout';
 import { PageHeader } from '@/libs/common/components/PageHeader';
-import { ProductPhotosUploader } from '@/libs/products/components/product-photos-uploader';
-import { ProductTypeSelector } from '@/libs/products/components/product-type-selector';
+import { ProductPhotosUploader } from '@/libs/products/components/ProductPhotosUploader';
+import { ProductTypeSelector } from '@/libs/products/components/ProductTypeSelector';
 import { useProductDetails, useUpdateProductMutation } from '@/libs/products/hooks';
 import { UpdateProductDto } from '@/libs/products/types';
 import { updateProductDtoSchema } from '@/libs/products/schemas';

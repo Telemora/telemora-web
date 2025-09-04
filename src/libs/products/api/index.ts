@@ -39,3 +39,8 @@ export async function deleteProduct(storeId: number, productId: number) {
   /* httpClient.delete<void>(`/products/store/${storeId}/${productId}/delete`); */
   return;
 }
+
+export async function searchAllProducts(query: string) {
+  /* httpClient.get<ProductPreviewDto[]>(`/products/store/${storeId}/search?query=${query}`); */
+  return generateMockProductPreviews();
+}

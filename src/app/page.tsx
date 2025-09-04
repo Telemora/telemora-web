@@ -6,7 +6,7 @@ import AppLayout from '@/libs/common/components/AppLayout';
 import { useDiscoverableStoresQuery, useFeaturedStoresQuery } from '@/libs/stores/hooks';
 import { Carousel } from '@/libs/common/components/Carousel';
 import { ScrollStoresSection } from '@/libs/stores/components/ScrollStoresSection';
-import { AutocompleteSearch } from '@/libs/common/components/AutocompleteSearch';
+import { AutocompleteSearch } from '@/libs/products/components/AutocompleteSearch';
 
 export default function MarketPage() {
   const { data: discoverStores, isLoading: isDiscoverStoresLoading } = useDiscoverableStoresQuery();

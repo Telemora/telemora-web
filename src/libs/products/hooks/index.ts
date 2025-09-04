@@ -6,10 +6,13 @@ import {
   deleteProduct,
   getProductDetails,
   getStoreProducts,
+  searchAllProducts,
   updateProduct,
   uploadProductPhotos,
 } from '@/libs/products/api';
 import { CreateProductDto, UpdateProductDto } from '@/libs/products/types';
+import { useDebounce } from '@uidotdev/usehooks';
+import { useState } from 'react';
 
 export function useStoreProducts(storeId: number) {
   return useQuery({
@@ -71,3 +74,26 @@ export function useDeleteProductMutation(storeId: number, productId: number) {
     },
   });
 }
+
+export const useProductSearch = (debounceDelay: number = 2000) => {
+  const [query, setQuery] = useState<string>('');
+  const [debouncedQuery] = useDebounce(query, debounceDelay);
+
+  const {
+    data: products = [],
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: [debouncedQuery],
+    queryFn: () => searchAllProducts(debouncedQuery),
+    staleTime: 1000 * 60,
+  });
+
+  return {
+    query,
+    setQuery,
+    products,
+    isLoading,
+    error,
+  };
+};
