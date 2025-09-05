@@ -40,7 +40,7 @@ export async function deleteProduct(storeId: number, productId: number) {
   return;
 }
 
-export async function searchAllProducts(query: string) {
-  /* httpClient.get<ProductPreviewDto[]>(`/products/store/${storeId}/search?query=${query}`); */
+export async function searchAllProducts(query: string, storeId?: number) {
+  /* httpClient.get<ProductPreviewDto[]>(`/products/search?q=${query}`); */
   return generateMockProductPreviews();
 }
