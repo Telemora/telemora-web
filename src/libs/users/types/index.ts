@@ -11,7 +11,7 @@ export enum UserRole {
 }
 
 export interface UserPublicPreview {
-  userId: number | string;
+  userId: string;
   username?: string;
   photo?: MediaDto;
 }

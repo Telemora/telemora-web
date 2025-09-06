@@ -14,7 +14,7 @@ import {
 
 export async function generateMockUserPublicPreview(): Promise<UserPublicPreview> {
   return {
-    userId: faker.number.int(),
+    userId: faker.string.ulid(),
     username: window.Telegram.WebApp.initDataUnsafe.user?.username || faker.internet.username(),
     photo: {
       url: window.Telegram.WebApp.initDataUnsafe.user?.photo_url || faker.image.personPortrait(),
