@@ -25,6 +25,7 @@ export interface UserSummary extends UserPublicPreview {
 export interface CurrencyInfo {
   tonToUsdRate: string;
   localCurrencyToUsdRate: string;
+  /* TODO: investigate why this one implemented as optional in backend and not here */
   localCurrencyCode: string;
 }
 
@@ -42,6 +43,7 @@ export interface UserPrivateProfile extends UserSummary {
 export interface UpdateContactLocationDto {
   contactPhone: string;
   contactEmail: string;
+  /* TODO: updating address location with just an ID? might have mistake */
   addressId: number;
   countryId: number;
   stateId: number;
@@ -58,6 +60,7 @@ export interface UpdateProfileDto {
 }
 
 export interface UpdatePreferencesDto {
+  /* TODO: this is duplication why we have update language dto and this? */
   languageCode: string;
   fiatCurrencyCode: string;
 }
