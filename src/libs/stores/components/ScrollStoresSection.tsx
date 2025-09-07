@@ -21,7 +21,7 @@ export function ScrollStoresSection({ stores, isLoading, title }: ScrollStoresSe
       return <EmptyState />;
     }
 
-    return stores.map((store) => <StorePreviewCard key={store.id} store={store} />);
+    return stores.map((store) => <StorePreviewCard key={store.slug} store={store} />);
   }, [isLoading, stores]);
 
   return (

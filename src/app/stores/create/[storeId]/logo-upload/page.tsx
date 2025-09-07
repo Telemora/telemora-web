@@ -116,7 +116,7 @@ export default function CreateStoreLogoUpload() {
       const result = await mutateAsync(data);
       toast.success('Store created successfully!');
       webApp?.HapticFeedback.impactOccurred('light');
-      router.push(`/stores/${result.id}`);
+      router.push(`/stores/${result.slug}`);
     } catch {
       toast.error('Store submission failed.');
     }

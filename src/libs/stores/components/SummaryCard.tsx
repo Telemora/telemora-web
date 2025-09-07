@@ -9,7 +9,7 @@ import { AddressDto } from '@/libs/location/types';
 import { StoreSummary } from '@/libs/stores/types';
 
 const StoreSummaryCard = ({ store }: { store: StoreSummary }) => {
-  const storeUrl = `/stores/${store.id}`;
+  const storeUrl = `/stores/${store.slug}`;
 
   return (
     <Link href={storeUrl} className="block">

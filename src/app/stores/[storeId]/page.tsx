@@ -23,7 +23,7 @@ export default function StoreDetailsPage() {
   const { data: discounts } = useGetStoreDiscounts(storeId);
   const isOwner =
     user && store && faker.datatype.boolean(); /* && store.vendor.userId === user.userId */
-  const handleDelete = () => router.push(`/stores/${store?.id}/delete`);
+  const handleDelete = () => router.push(`/stores/${store?.slug}/delete`);
 
   if (isLoading) {
     return (

@@ -11,13 +11,16 @@ import Link from 'next/link';
 export function ProductsSection({ store, isOwner }: { store: StoreDetail; isOwner?: boolean }) {
   const router = useRouter();
 
-  const handleAddProduct = () => router.push(`/stores/${store?.id}/products/new`);
+  const handleAddProduct = () => router.push(`/stores/${store?.slug}/products/new`);
 
   return (
     <section>
       <div className="flex items-start justify-between">
         <PageHeader title="Products" />
-        <Link className="flex items-center gap-x-2 text-sm" href={`/stores/${store?.id}/products`}>
+        <Link
+          className="flex items-center gap-x-2 text-sm"
+          href={`/stores/${store?.slug}/products`}
+        >
           <span>View All</span>
           <FaChevronRight size={12} />
         </Link>

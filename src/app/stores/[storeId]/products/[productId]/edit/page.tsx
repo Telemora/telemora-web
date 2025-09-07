@@ -40,7 +40,7 @@ export default function EditProductPage() {
       const result = await mutateAsync(data);
       toast.success('Product updated successfully!');
       webApp?.HapticFeedback.impactOccurred('light');
-      router.push(`/stores/${result.store.id}/${result.id}`);
+      router.push(`/stores/${result.store.slug}/${result.id}`);
     } catch (error) {
       console.error(error);
       toast.error('Failed to create components');

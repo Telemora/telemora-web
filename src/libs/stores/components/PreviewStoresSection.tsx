@@ -22,7 +22,7 @@ export default function PreviewStoresSection({
             Create your first Store
           </Button>
         ) : (
-          stores.map((store) => <StorePreviewCard key={store.id} store={store} />)
+          stores.map((store) => <StorePreviewCard key={store.slug} store={store} />)
         )}
       </div>
     </section>

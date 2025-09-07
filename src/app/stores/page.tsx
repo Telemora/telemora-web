@@ -17,7 +17,7 @@ export default function StoreListPage() {
   const { data: stores, error, isLoading } = useUserStoresQuery();
 
   const handleCreateStore = () => router.push('/stores/create/basic-information');
-  const handleOpenStore = (id: number) => router.push(`/stores/${id}`);
+  const handleOpenStore = (id: string) => router.push(`/stores/${id}`);
 
   if (isLoading) {
     return (
@@ -48,7 +48,7 @@ export default function StoreListPage() {
       ) : (
         <div className="space-y-4">
           {stores!.map((store) => (
-            <div key={store.id} onClick={() => handleOpenStore(+store.id)}>
+            <div key={store.slug} onClick={() => handleOpenStore(store.slug)}>
               <StoreSummaryCard store={store} />
             </div>
           ))}

@@ -8,7 +8,6 @@ import { StoreDetail, StorePreviewDto, StoreStatusEnum, StoreSummary } from '../
 
 export async function generateMockStorePreview(): Promise<StorePreviewDto> {
   return {
-    id: faker.number.int(),
     displayName: faker.company.name(),
     slug: faker.helpers.slugify(faker.company.name()),
     logo: {

@@ -18,7 +18,7 @@ export function StoreHeader({ store, isOwner }: { store: StoreDetail; isOwner?: 
     webApp?.HapticFeedback.impactOccurred('light');
   };
 
-  const handleEdit = () => router.push(`/stores/${store?.id}/edit`);
+  const handleEdit = () => router.push(`/stores/${store?.slug}/edit`);
 
   return (
     <section>

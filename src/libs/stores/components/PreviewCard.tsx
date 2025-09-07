@@ -8,7 +8,7 @@ import { StorePreviewDto } from '@/libs/stores/types';
 
 export const StorePreviewCard = ({ store }: { store: StorePreviewDto }) => {
   return (
-    <Link href={`/stores/${store.id}`} className="block">
+    <Link href={`/stores/${store.slug}`} className="block">
       <Card>
         <CardBody className="flex flex-col items-center space-y-2 text-center">
           <Image

@@ -38,7 +38,7 @@ export default function CreateStoreBasicInformation() {
       console.log('Store created:', result);
       toast.success('Store created successfully!');
       webApp?.HapticFeedback.impactOccurred('light');
-      router.push(`/stores/create/${result.id}/location`);
+      router.push(`/stores/create/${result.slug}/location`);
     } catch (err) {
       console.error('Create store error:', err);
       toast.error('Failed to create store');
