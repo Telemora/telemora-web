@@ -1,10 +1,11 @@
 import { FaChevronRight } from 'react-icons/fa';
 import { Button } from '@heroui/react';
 import Link from 'next/link';
+import { ReactNode } from 'react';
 
 interface ItemNotificationProps {
   text: string;
-  icon: React.ReactNode;
+  icon: ReactNode;
   url?: string;
 }
 
