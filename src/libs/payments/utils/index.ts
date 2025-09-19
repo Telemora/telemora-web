@@ -1,31 +1,29 @@
-import { Address, beginCell, toNano } from '@ton/core';
+import { Address, beginCell } from '@ton/core';
 
 import { BuildTxOpts } from '@/libs/payments/types';
 
 export function buildMarketplaceTransaction({
-  amountTon,
-  sellerAddress,
+  nanoAmount,
+  recipientWalletAddress,
   smartContractAddress,
   opcode = 0,
   orderId,
 }: BuildTxOpts) {
-  if (amountTon <= 0) {
-    throw new Error('Amount must be greater than zero');
+  if (nanoAmount <= 0) {
+    throw new Error(`Payment amount must be greater than zero, received: ${nanoAmount}`);
   }
-
-  const amountNano = toNano(amountTon);
 
   let parsedSeller: Address;
   try {
-    parsedSeller = Address.parse(sellerAddress);
+    parsedSeller = Address.parse(recipientWalletAddress);
   } catch {
-    throw new Error('Invalid seller address');
+    throw new Error(`Invalid seller address: ${recipientWalletAddress}`);
   }
 
   const body = beginCell()
     .storeUint(opcode, 32)
     .storeUint(BigInt(orderId), 64)
-    .storeCoins(amountNano)
+    .storeCoins(nanoAmount)
     .storeAddress(parsedSeller)
     .endCell();
 
@@ -34,7 +32,7 @@ export function buildMarketplaceTransaction({
     messages: [
       {
         address: smartContractAddress,
-        amount: amountNano.toString(),
+        amount: nanoAmount.toString(),
         payload: body.toBoc().toString('base64'),
       },
     ],

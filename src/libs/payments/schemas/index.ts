@@ -24,8 +24,8 @@ export const updatePaymentDtoSchema = z.object({
 }) satisfies z.ZodType<UpdatePaymentDto>;
 
 export const buildTxOptsSchema = z.object({
-  amountTon: z.number().nonnegative(),
-  sellerAddress: z.string(),
+  nanoAmount: z.bigint().nonnegative(),
+  recipientWalletAddress: z.string(),
   smartContractAddress: z.string(),
   opcode: z.number().int().optional(),
   orderId: z.string(),

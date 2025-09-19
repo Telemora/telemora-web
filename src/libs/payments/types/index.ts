@@ -49,8 +49,8 @@ export class UpdatePaymentDto {
 }
 
 export interface BuildTxOpts {
-  amountTon: number;
-  sellerAddress: string;
+  nanoAmount: bigint;
+  recipientWalletAddress: string;
   smartContractAddress: string;
   opcode?: number;
   orderId: string;
