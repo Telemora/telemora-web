@@ -16,6 +16,7 @@ export async function generateMockStorePreview(): Promise<StorePreviewDto> {
     },
     vendorScore: faker.number.float({ min: 1, max: 5, fractionDigits: 1 }),
     status: StoreStatusEnum.ACTIVE,
+    paymentWalletAddress: faker.finance.bitcoinAddress(),
   };
 }
 

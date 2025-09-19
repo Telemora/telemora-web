@@ -19,7 +19,7 @@ export async function generateMockOrderItemPreview(): Promise<OrderItemPreviewDt
 export async function generateMockOrderSummary(): Promise<OrderSummary> {
   return {
     id: faker.number.int({ min: 100, max: 900 }),
-    status: faker.helpers.enumValue(OrderStatus),
+    status: OrderStatus.PENDING,
     totalAmount: Number(faker.commerce.price({ min: 50, max: 500 })),
     store: await generateMockStorePreview(),
     expectedDeliveryDate: faker.date.soon(),

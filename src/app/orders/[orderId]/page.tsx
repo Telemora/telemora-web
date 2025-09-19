@@ -13,9 +13,10 @@ import { OrderShipmentCard } from '@/libs/orders/components/OrderShipmentCard';
 import { OrderStatusChip } from '@/libs/orders/components/OrderStatusChip';
 import { useOrderDetails } from '@/libs/orders/hooks';
 import { OrderStatus } from '@/libs/orders/types';
-import { PaymentStatusChip } from '@/libs/payments/components/payment-status-chip';
+import { PaymentStatusChip } from '@/libs/payments/components/PaymentStatusChip';
 import { PaymentStatus } from '@/libs/payments/types';
 import { OrderInfoSummary } from '@/libs/orders/components/OrderInfoSummary';
+import { TonPaymentButton } from '@/libs/payments/components/TonPaymentButton';
 
 export default function OrderDetailsPage() {
   const { orderId } = useParams<{ orderId: string }>();
@@ -70,11 +71,11 @@ export default function OrderDetailsPage() {
             />
           </CardBody>
           <CardFooter>
-            {/* TODO: I must to edit this part, to access store's wallet address */}
-            {/* <TonPaymentButton
-              amountTon={order.totalAmount}
-              sellerAddress={order.store.displayName}
-            /> */}
+            <TonPaymentButton
+              paymentAmount={order.totalAmount}
+              recipientWalletAddress={order.store.paymentWalletAddress}
+              orderId={orderId}
+            />
           </CardFooter>
         </Card>
       )}

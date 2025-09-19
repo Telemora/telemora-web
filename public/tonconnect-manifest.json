@@ -1,5 +1,5 @@
 {
-  "url": "https://telemora.shop",
-  "name": "Telemart",
-  "iconUrl": "https://ton.vote/logo.png"
+  "url": "https://telemora-web.vercel.app",
+  "name": "Telemora",
+  "iconUrl": "./apple-icon.png"
 }

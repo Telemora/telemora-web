@@ -9,7 +9,7 @@ export async function generateMockPaymentSummary(): Promise<PaymentSummary> {
   return {
     id: faker.string.uuid(),
     tokenSymbol: faker.helpers.arrayElement(['USDC', 'ETH']) as TokenSymbol,
-    status: faker.helpers.arrayElement(['PENDING', 'COMPLETED', 'FAILED']) as PaymentStatus,
+    status: PaymentStatus.PENDING,
     amount: faker.finance.amount(),
     transactionHash: faker.string.hexadecimal({ length: 64 }),
     createdAt: faker.date.past(),

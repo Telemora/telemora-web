@@ -38,6 +38,7 @@ export interface StorePreviewDto {
   logo?: MediaDto;
   vendorScore: number;
   status: StoreStatusEnum;
+  paymentWalletAddress: string;
 }
 
 export interface StoreSummary extends StorePreviewDto {

@@ -1,9 +1,9 @@
 import { z } from 'zod';
 import {
-  PaymentStatus,
-  type CreatePaymentDto,
-  type UpdatePaymentDto,
   type BuildTxOpts,
+  type CreatePaymentDto,
+  PaymentStatus,
+  type UpdatePaymentDto,
 } from '@/libs/payments/types';
 
 export const paymentStatusSchema = z.nativeEnum(PaymentStatus);
@@ -13,6 +13,7 @@ export const createPaymentDtoSchema = z.object({
   amount: z.string(),
   fromWalletAddress: z.string().optional(),
   toWalletAddress: z.string().optional(),
+  boc: z.string(),
 }) satisfies z.ZodType<CreatePaymentDto>;
 
 export const updatePaymentDtoSchema = z.object({
