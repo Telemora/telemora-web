@@ -7,7 +7,7 @@ import {
 import { CreateReviewDto, CreateReviewReplyDto, CreateReviewReportDto } from '@/libs/reviews/types';
 
 export async function createReview(productId: number, data: CreateReviewDto) {
-  /* httpClient.post<ReviewDetail>(`/reviews/product/${productId}/create`, data); */
+  /* httpClient.post<ReviewDetail>(`/reviews/product/${productId}`, data); */
   return generateMockReviewDetail();
 }
 
@@ -32,6 +32,6 @@ export async function reportReview(reviewId: number, data: CreateReviewReportDto
 }
 
 export async function deleteReviews(id: string | number) {
-  /* httpClient.delete<void>(`/reviews/${id}/delete`); */
+  /* httpClient.delete<void>(`/reviews/${id}`); */
   return;
 }
