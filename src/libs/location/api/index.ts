@@ -10,11 +10,11 @@ export async function getCountries() {
 }
 
 export async function getStatesByCountry(countryId: number) {
-  return generateMockStates(); /* httpClient.get<CanonicalLocationDto[]>(`countries/${countryId}/states`); */
+  return generateMockStates(); /* httpClient.get<CanonicalLocationDto[]>(`/locations/countries/${countryId}/states`); */
 }
 
 export async function getCitiesByState(stateId: number) {
-  return generateMockCities(); /* httpClient.get<CanonicalLocationDto[]>(`states/${stateId}/cities`); */
+  return generateMockCities(); /* httpClient.get<CanonicalLocationDto[]>(`/locations/states/${stateId}/cities`); */
 }
 
 export async function getNearestLocation(lat: number, lng: number) {
