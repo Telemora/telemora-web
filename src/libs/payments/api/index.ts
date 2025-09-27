@@ -10,5 +10,5 @@ export async function getPaymentDetails(id: number) {
 }
 
 export async function createPayment(data: CreatePaymentDto) {
-  return generateMockPaymentDetail(); /* httpClient.post<PaymentDetail>('/payments/create', data); */
+  return generateMockPaymentDetail(); /* httpClient.post<PaymentDetail>('/payments', data); */
 }
