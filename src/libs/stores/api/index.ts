@@ -43,11 +43,12 @@ export async function submitStoreAddressUpdate(storeId: string, data: AddressDto
 }
 
 export async function submitStoreTagsSelection(storeId: string, data: CreateStoreTagsDto) {
-  /*  */
+  /* httpClient.patch<StoreDetail>(`/stores/${storeId}/tags`, data) */
   return generateMockStoreDetail();
 }
 
 export async function submitStoreWorkingHours(storeId: string, data: SetStoreServiceHoursDto) {
+  /* httpClient.patch<StoreDetail>(`/stores/${storeId}/working-hours`, data) */
   return generateMockStoreDetail();
 }
 
@@ -61,5 +62,6 @@ export async function submitStoreLogoUpload(storeId: string, data: CreateStoreLo
 }
 
 export async function submitStoreUpdate(storeId: string, data: UpdateStoreDto) {
+  /* httpClient.patch<StoreDetail>(`/stores/${storeId}/update`, data) */
   return generateMockStoreDetail();
 }
