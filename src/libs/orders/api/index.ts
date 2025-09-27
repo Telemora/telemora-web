@@ -12,12 +12,12 @@ export async function getOrderDetails(id: number) {
 }
 
 export async function createOrder(data: CreateOrderDto) {
-  /* return httpClient.post<OrderDetail>(`/orders/create`, data); */
+  /* return httpClient.post<OrderDetail>(`/orders`, data); */
   return generateMockOrderDetail();
 }
 
 export async function updateOrder(id: number, data: UpdateOrderDto) {
-  /* return httpClient.patch<OrderDetail>(`/orders/update/${id}`, data); */
+  /* return httpClient.patch<OrderDetail>(`/orders/${id}`, data); */
   return generateMockOrderDetail();
 }
 
