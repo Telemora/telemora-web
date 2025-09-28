@@ -7,7 +7,6 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
-import AppLayout from '@/libs/common/components/AppLayout';
 import { PageHeader } from '@/libs/common/components/PageHeader';
 import { ProductPhotosUploader } from '@/libs/products/components/ProductPhotosUploader';
 import { ProductTypeSelector } from '@/libs/products/components/ProductTypeSelector';
@@ -48,7 +47,7 @@ export default function EditProductPage() {
   };
 
   return (
-    <AppLayout>
+    <>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <PageHeader title="Edit Product" />
 
@@ -87,6 +86,6 @@ export default function EditProductPage() {
           {isSubmitting ? 'Updating...' : 'Edit Product'}
         </Button>
       </Form>
-    </AppLayout>
+    </>
   );
 }

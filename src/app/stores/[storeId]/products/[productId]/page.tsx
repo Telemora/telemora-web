@@ -4,11 +4,10 @@ import { Button, Divider, Skeleton, User } from '@heroui/react';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 
-import AppLayout from '@/libs/common/components/AppLayout';
 import ErrorPage from '@/libs/common/components/ErrorPage';
 import { PageHeader } from '@/libs/common/components/PageHeader';
-import PriceComponent from '@/libs/common/components/PriceComponent';
-import StarRating from '@/libs/common/components/StarRating';
+import { PriceComponent } from '@/libs/common/components/PriceComponent';
+import { StarRating } from '@/libs/common/components/StarRating';
 import { useProductDetails } from '@/libs/products/hooks';
 import ReviewPreviewCard from '@/libs/reviews/components/preview-card';
 import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
@@ -26,21 +25,21 @@ export default function ProductDetailsPage() {
 
   if (isLoading) {
     return (
-      <AppLayout>
+      <>
         <div className="space-y-4">
           <Skeleton className="h-52 w-full rounded-lg" />
           <Skeleton className="h-6 w-3/4 rounded" />
           <Skeleton className="h-6 w-1/2 rounded" />
           <Skeleton className="h-10 w-full rounded" />
         </div>
-      </AppLayout>
+      </>
     );
   }
 
   if (error || !product) return <ErrorPage reset={refetch} />;
 
   return (
-    <AppLayout>
+    <>
       <main className="space-y-6">
         {product.images?.length ? (
           <HorizontalScroll>
@@ -123,6 +122,6 @@ export default function ProductDetailsPage() {
           </div>
         )}
       </main>
-    </AppLayout>
+    </>
   );
 }

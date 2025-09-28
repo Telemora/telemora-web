@@ -1,7 +1,4 @@
-'use client';
-
 import clsx from 'clsx';
-import React from 'react';
 import { FaRegStar, FaStar, FaStarHalfAlt } from 'react-icons/fa';
 
 interface StarRatingProps {
@@ -19,14 +16,14 @@ const sizeMap = {
   lg: 'text-xl',
 };
 
-export const StarRating: React.FC<StarRatingProps> = ({
+export function StarRating({
   rating,
   max = 5,
   size = 'sm',
   showNumber = true,
   className = '',
   colorClass = 'text-orange-400',
-}) => {
+}: StarRatingProps) {
   const fullStars = Math.floor(rating);
   const hasHalfStar = rating - fullStars >= 0.25 && rating - fullStars < 0.75;
   const emptyStars = max - fullStars - (hasHalfStar ? 1 : 0);
@@ -48,6 +45,4 @@ export const StarRating: React.FC<StarRatingProps> = ({
       {showNumber && <span className="text-default-600 ml-1 text-xs">{rating.toFixed(1)}</span>}
     </div>
   );
-};
-
-export default StarRating;
+}

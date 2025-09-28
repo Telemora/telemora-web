@@ -8,7 +8,6 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
-import AppLayout from '@/libs/common/components/AppLayout';
 import { PageHeader } from '@/libs/common/components/PageHeader';
 import { useSubmitStoreLogoMutation } from '@/libs/stores/hooks';
 import { CreateStoreLogoDto } from '@/libs/stores/types';
@@ -129,7 +128,7 @@ export default function CreateStoreLogoUpload() {
   }, [previewUrl]);
 
   return (
-    <AppLayout>
+    <>
       <Form onSubmit={form.handleSubmit(onSubmit)}>
         <Progress label="Final Step" maxValue={5} value={5} size="sm" />
         <PageHeader title="Upload Store Logo" subtitle="blah blah" />
@@ -167,6 +166,6 @@ export default function CreateStoreLogoUpload() {
           </Button>
         </StoreCreationStepsNav>
       </Form>
-    </AppLayout>
+    </>
   );
 }

@@ -1,6 +1,5 @@
 'use client';
 
-import AppLayout from '@/libs/common/components/AppLayout';
 import { Button, Divider } from '@heroui/react';
 import { FaFilter, FaSort } from 'react-icons/fa';
 import { useProductSearch } from '@/libs/products/hooks';
@@ -12,7 +11,7 @@ export default function StoreProductsPage() {
   const params = useParams<{ storeId: string }>();
   const { products, query, setQuery } = useProductSearch();
   return (
-    <AppLayout>
+    <>
       <SearchInput query={query} setQuery={setQuery} />
       <Divider />
       <div className="flex gap-x-2 overflow-x-scroll">
@@ -26,6 +25,6 @@ export default function StoreProductsPage() {
       <main className="grid grid-cols-2 gap-2 lg:grid-cols-3">
         {products?.map((product) => <ProductPreviewCard key={product.id} product={product} />)}
       </main>
-    </AppLayout>
+    </>
   );
 }

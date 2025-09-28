@@ -1,5 +1,5 @@
 import { Alert, Card, CardBody, CardFooter, Divider } from '@heroui/react';
-import AppLayout from '@/libs/common/components/AppLayout';
+
 import { PageHeader } from '@/libs/common/components/PageHeader';
 import { formatSafeDate } from '@/libs/common/utils/date';
 import { OrderItemPreviewCard } from '@/libs/orders/components/OrderItemPreview';
@@ -24,7 +24,7 @@ export default async function OrderDetailsPage({
     order.status === OrderStatus.PENDING && order.payment?.status !== PaymentStatus.COMPLETED;
 
   return (
-    <AppLayout>
+    <>
       <PageHeader
         title={`Order #${order.id}`}
         subtitle={`Placed on ${formatSafeDate(order.createdAt)}`}
@@ -76,6 +76,6 @@ export default async function OrderDetailsPage({
       <Divider className="my-4" />
 
       {order.shipment && <OrderShipmentCard shipment={order.shipment} />}
-    </AppLayout>
+    </>
   );
 }

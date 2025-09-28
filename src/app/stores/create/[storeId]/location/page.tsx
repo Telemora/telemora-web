@@ -3,7 +3,7 @@
 import { Progress } from '@heroui/react';
 import { useParams, useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
-import AppLayout from '@/libs/common/components/AppLayout';
+
 import { PageHeader } from '@/libs/common/components/PageHeader';
 import { useSubmitStoreAddressMutation } from '@/libs/stores/hooks';
 import { AddressDto } from '@/libs/location/types';
@@ -30,7 +30,7 @@ export default function CreateStoreLocation() {
   };
 
   return (
-    <AppLayout>
+    <>
       <Progress label="Step 2 of 5" maxValue={5} value={2} size="sm" />
 
       <PageHeader
@@ -38,6 +38,6 @@ export default function CreateStoreLocation() {
         subtitle="Help customers find you by setting your store address."
       />
       <AddressForm onSubmit={onSubmit} isPending={isPending} />
-    </AppLayout>
+    </>
   );
 }

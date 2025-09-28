@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Button } from '@heroui/react';
+import { Button } from '@heroui/button';
 import { FaPen } from 'react-icons/fa';
 import { FaGear } from 'react-icons/fa6';
 import { UserPrivateProfile } from '@/libs/users/types';
@@ -11,11 +11,7 @@ export default function UserProfileCard({ user }: { user: UserPrivateProfile }) 
   const displayName = `${firstName} ${lastName}`;
 
   return (
-    <section
-      aria-labelledby="profile-heading"
-      role="region"
-      className="mx-auto w-full max-w-sm space-y-2 sm:space-y-4"
-    >
+    <section aria-labelledby="profile-heading" role="region" className="space-y-4">
       <div className="text-center">
         <figure className="mx-auto">
           <div className="relative mx-auto h-24 w-24 overflow-hidden rounded-full sm:h-32 sm:w-32">
@@ -42,7 +38,7 @@ export default function UserProfileCard({ user }: { user: UserPrivateProfile }) 
         </figure>
       </div>
       <nav className="mt-2 flex flex-col gap-2 sm:flex-row sm:gap-4">
-        <Link href="/profile/edit">
+        <Link href="/profile/edit" className="w-full">
           <Button
             fullWidth
             size="sm"
@@ -54,7 +50,7 @@ export default function UserProfileCard({ user }: { user: UserPrivateProfile }) 
             <span>Edit Profile</span>
           </Button>
         </Link>
-        <Link href="/profile/preferences">
+        <Link href="/profile/preferences" className="w-full">
           <Button
             fullWidth
             size="sm"

@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { Accordion, AccordionItem, Chip, Divider } from '@heroui/react';
-import StarRating from '@/libs/common/components/StarRating';
+import { StarRating } from '@/libs/common/components/StarRating';
 import { FaPen, FaShare } from 'react-icons/fa';
 import React from 'react';
 import { copyToClipboard } from '@/libs/common/utils/clipboard';

@@ -9,7 +9,7 @@ import toast from 'react-hot-toast';
 import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 import { useCreatePayment } from '@/libs/payments/hooks';
 import { buildMarketplaceTransaction } from '@/libs/payments/utils';
-import PriceComponent from '@/libs/common/components/PriceComponent';
+import { PriceComponent } from '@/libs/common/components/PriceComponent';
 
 interface TonPaymentButtonProps {
   /** Payment amount in TON */

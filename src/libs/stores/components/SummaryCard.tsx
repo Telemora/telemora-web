@@ -1,18 +1,14 @@
-'use client';
-
-import { Card, CardBody, CardFooter, CardHeader, Chip } from '@heroui/react';
+import { Card, CardBody, CardFooter, CardHeader } from '@heroui/card';
+import { Chip } from '@heroui/chip';
 import Image from 'next/image';
-import Link from 'next/link';
-
-import StarRating from '@/libs/common/components/StarRating';
+import { StarRating } from '@/libs/common/components/StarRating';
 import { AddressDto } from '@/libs/location/types';
 import { StoreSummary } from '@/libs/stores/types';
+import Link from 'next/link';
 
-const StoreSummaryCard = ({ store }: { store: StoreSummary }) => {
-  const storeUrl = `/stores/${store.slug}`;
-
+export function StoreSummaryCard({ store }: { store: StoreSummary }) {
   return (
-    <Link href={storeUrl} className="block">
+    <Link href={store.id} className="block">
       <Card>
         <CardHeader>
           <div className="flex items-end gap-x-4">
@@ -45,12 +41,10 @@ const StoreSummaryCard = ({ store }: { store: StoreSummary }) => {
       </Card>
     </Link>
   );
-};
+}
 
 const formatAddresses = (address: AddressDto[]) => {
   return [address[0].city?.name, address[0].state?.name, address[0].country.name]
     .filter(Boolean)
     .join(', ');
 };
-
-export default StoreSummaryCard;

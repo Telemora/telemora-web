@@ -6,7 +6,6 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
-import AppLayout from '@/libs/common/components/AppLayout';
 import { PageHeader } from '@/libs/common/components/PageHeader';
 import { useSubmitStoreBasicInfoMutation } from '@/libs/stores/hooks';
 import { CreateStoreBasicDto } from '@/libs/stores/types';
@@ -46,7 +45,7 @@ export default function CreateStoreBasicInformation() {
   };
 
   return (
-    <AppLayout>
+    <>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Progress label="Step 1 of 5" maxValue={5} aria-label="Step 1 of 5" size="sm" value={1} />
         <PageHeader
@@ -96,6 +95,6 @@ export default function CreateStoreBasicInformation() {
           </Button>
         </StoreCreationStepsNav>
       </Form>
-    </AppLayout>
+    </>
   );
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 
-import AppLayout from '@/libs/common/components/AppLayout';
 import { Carousel } from '@/libs/common/components/Carousel';
 import { ScrollStoresSection } from '@/libs/stores/components/ScrollStoresSection';
 import { AutocompleteSearch } from '@/libs/products/components/AutocompleteSearch';
@@ -11,11 +10,11 @@ export default async function MarketPage() {
   const featuredStores = await fetchFeaturedStores();
 
   return (
-    <AppLayout>
+    <>
       <AutocompleteSearch />
       <Carousel />
       <ScrollStoresSection title="Featured" stores={discoverStores} />
       <ScrollStoresSection title="New Openings" stores={featuredStores} />
-    </AppLayout>
+    </>
   );
 }

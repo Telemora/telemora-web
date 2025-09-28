@@ -1,6 +1,4 @@
-import { Button } from '@heroui/react';
-import React from 'react';
-
+import { Button } from '@heroui/button';
 import { OrderSummaryCard } from '@/libs/orders/components/OrderSummaryCard';
 import { OrderSummary } from '@/libs/orders/types';
 import { PageHeader } from '@/libs/common/components/PageHeader';
@@ -19,7 +17,7 @@ export function OrderSummaries({
       <PageHeader title={title} subtitle={subtitle} />
       <div className="space-y-4">
         {orders.length === 0 ? (
-          <Button as={'link'} href="/orders">
+          <Button as="link" href="/orders">
             Create your first order
           </Button>
         ) : (

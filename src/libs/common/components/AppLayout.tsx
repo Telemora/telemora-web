@@ -1,10 +1,8 @@
-'use client';
-
 import React, { PropsWithChildren } from 'react';
 
 import BottomTabs from '@/libs/common/components/BottomTabs';
 
-import CustomNavbar from './CustomNavbar';
+import { CustomNavbar } from './CustomNavbar';
 
 export default function AppLayout({ children }: PropsWithChildren) {
   return (

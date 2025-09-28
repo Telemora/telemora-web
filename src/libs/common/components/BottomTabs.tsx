@@ -1,6 +1,6 @@
 'use client';
 
-import { Tab, Tabs } from '@heroui/react';
+import { Tab, Tabs } from '@heroui/tabs';
 import { usePathname, useRouter } from 'next/navigation';
 import { FaClipboard, FaShoppingCart, FaStore, FaUser } from 'react-icons/fa';
 

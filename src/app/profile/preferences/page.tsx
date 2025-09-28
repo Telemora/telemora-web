@@ -3,11 +3,8 @@
 import { Button, Form, Select, SelectItem, Spinner } from '@heroui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-
-import AppLayout from '@/libs/common/components/AppLayout';
 import { PageHeader } from '@/libs/common/components/PageHeader';
-import { useUserState } from '@/libs/users/context/userContext';
-import { useUpdatePreferencesMutation } from '@/libs/users/hooks';
+import { useTelegramLoginQuery, useUpdatePreferencesMutation } from '@/libs/users/hooks';
 import { updatePreferencesSchema } from '@/libs/users/schemas';
 import { UpdatePreferencesDto } from '@/libs/users/types';
 import React from 'react';
@@ -29,7 +26,7 @@ const localCurrencies = [
 ];
 
 export default function PreferencesPage() {
-  const { data: user } = useUserState();
+  const { data: user } = useTelegramLoginQuery();
   const { mutate } = useUpdatePreferencesMutation();
   const {
     register,
@@ -49,16 +46,16 @@ export default function PreferencesPage() {
 
   if (!user) {
     return (
-      <AppLayout>
+      <>
         <div className="flex min-h-screen items-center justify-center">
           <Spinner size="lg" />
         </div>
-      </AppLayout>
+      </>
     );
   }
 
   return (
-    <AppLayout>
+    <>
       <PageHeader title="Preferences" />
 
       <Form onSubmit={handleSubmit(onSubmit)}>
@@ -83,6 +80,6 @@ export default function PreferencesPage() {
           Save
         </Button>
       </Form>
-    </AppLayout>
+    </>
   );
 }

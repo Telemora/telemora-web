@@ -7,7 +7,6 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
-import AppLayout from '@/libs/common/components/AppLayout';
 import { PageHeader } from '@/libs/common/components/PageHeader';
 import { ProductTypeSelector } from '@/libs/products/components/ProductTypeSelector';
 import { useCreateProductMutation } from '@/libs/products/hooks';
@@ -56,7 +55,7 @@ export default function CreateProductPage() {
   };
 
   return (
-    <AppLayout>
+    <>
       <Form onSubmit={handleSubmit(onSubmit)} className="space-y-6 pb-20">
         <PageHeader title="Create New Product" />
 
@@ -95,6 +94,6 @@ export default function CreateProductPage() {
           {isSubmitting ? 'Creating...' : 'Create Product'}
         </Button>
       </Form>
-    </AppLayout>
+    </>
   );
 }

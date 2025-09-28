@@ -1,7 +1,6 @@
 import { Button } from '@heroui/react';
 import React from 'react';
 
-import AppLayout from '@/libs/common/components/AppLayout';
 import { PromotionsList } from '@/libs/discount/components/PromotionsList';
 import { StoreHeader } from '@/libs/stores/components/StoreHeader';
 import { ProductsSection } from '@/libs/stores/components/ProductsSection';
@@ -24,7 +23,7 @@ export default async function StoreDetailsPage({
     user && store && faker.datatype.boolean(); /* && store.vendor.userId === user.userId */
 
   return (
-    <AppLayout>
+    <>
       {/* Store Header */}
       <StoreHeader store={store} isOwner={isOwner} />
 
@@ -43,6 +42,6 @@ export default async function StoreDetailsPage({
           </Button>
         </div>
       )}
-    </AppLayout>
+    </>
   );
 }

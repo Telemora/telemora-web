@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Badge,
   Button,
@@ -11,15 +13,10 @@ import {
   PopoverTrigger,
 } from '@heroui/react';
 import Link from 'next/link';
-
-import { useUserState } from '@/libs/users/context/userContext';
 import { FaBell, FaChevronLeft, FaShoppingCart } from 'react-icons/fa';
-import { useRouter } from 'next/navigation';
 import { ItemNotification } from '@/libs/orders/components/ItemNotification';
 
-export default function CustomNavbar() {
-  const { data } = useUserState();
-  const router = useRouter();
+export function CustomNavbar() {
   return (
     <Navbar
       classNames={{
@@ -27,8 +24,8 @@ export default function CustomNavbar() {
       }}
     >
       <NavbarBrand>
-        <Link href="/profile/preferences">
-          <FaChevronLeft onClick={() => router.back()} />
+        <Link href="../">
+          <FaChevronLeft />
         </Link>
       </NavbarBrand>
       <NavbarContent justify="end">

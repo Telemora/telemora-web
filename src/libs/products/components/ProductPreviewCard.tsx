@@ -4,7 +4,7 @@ import { Card, CardBody, CardFooter } from '@heroui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import PriceComponent from '@/libs/common/components/PriceComponent';
+import { PriceComponent } from '@/libs/common/components/PriceComponent';
 import { ProductPreviewDto } from '@/libs/products/types';
 
 interface ProductPreviewCard {

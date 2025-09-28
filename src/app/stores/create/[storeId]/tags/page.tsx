@@ -7,7 +7,6 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
-import AppLayout from '@/libs/common/components/AppLayout';
 import { PageHeader } from '@/libs/common/components/PageHeader';
 import { Tag } from '@/libs/common/components/Tag';
 import { useSubmitStoreTagsMutation } from '@/libs/stores/hooks';
@@ -81,7 +80,7 @@ export default function CreateStoreTags() {
   };
 
   return (
-    <AppLayout>
+    <>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Progress label="Step 3 of 5" maxValue={5} value={3} size="sm" />
 
@@ -150,6 +149,6 @@ export default function CreateStoreTags() {
           </Button>
         </StoreCreationStepsNav>
       </Form>
-    </AppLayout>
+    </>
   );
 }

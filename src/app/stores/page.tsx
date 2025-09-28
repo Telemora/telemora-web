@@ -1,17 +1,16 @@
-import Link from 'next/link';
 import { FaPlus } from 'react-icons/fa6';
-import { Button } from '@heroui/react';
-import AppLayout from '@/libs/common/components/AppLayout';
-import StoreSummaryCard from '@/libs/stores/components/SummaryCard';
+import { Button } from '@heroui/button';
+import { StoreSummaryCard } from '@/libs/stores/components/SummaryCard';
 import { PageHeader } from '@/libs/common/components/PageHeader';
 import { EmptyState } from '@/libs/common/components/EmptyState';
 import { fetchUserStores } from '@/libs/stores/api';
+import Link from 'next/link';
 
 export default async function StoreListPage() {
   const stores = await fetchUserStores();
 
   return (
-    <AppLayout>
+    <>
       <PageHeader
         title="Your Store Portfolio"
         subtitle="View and manage all your stores in one place"
@@ -20,18 +19,20 @@ export default async function StoreListPage() {
       {stores && stores.length === 0 ? (
         <div className="mt-12 text-center">
           <EmptyState text="Create your first store to begin your journey" />
-          <Link href="/stores/create/basic-information">
-            <Button fullWidth color="primary" startContent={<FaPlus />}>
-              Create New Store
-            </Button>
-          </Link>
+          <Button
+            as="link"
+            href="/stores/create/basic-information"
+            fullWidth
+            color="primary"
+            startContent={<FaPlus />}
+          >
+            Create New Store
+          </Button>
         </div>
       ) : (
         <div className="space-y-4">
           {stores!.map((store) => (
-            <Link key={store.id} href={`/stores/${store.id}`}>
-              <StoreSummaryCard store={store} />
-            </Link>
+            <StoreSummaryCard key={store.id} store={store} />
           ))}
 
           <Link href="/stores/create/basic-information">
@@ -41,6 +42,6 @@ export default async function StoreListPage() {
           </Link>
         </div>
       )}
-    </AppLayout>
+    </>
   );
 }

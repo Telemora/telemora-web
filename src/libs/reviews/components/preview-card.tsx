@@ -3,7 +3,7 @@
 import { Card, CardBody, User } from '@heroui/react';
 import { formatDistanceToNow } from 'date-fns';
 
-import StarRating from '@/libs/common/components/StarRating';
+import { StarRating } from '@/libs/common/components/StarRating';
 import { ReviewPreviewDto } from '@/libs/reviews/types';
 
 export default function ReviewPreviewCard({ content }: { content: ReviewPreviewDto }) {

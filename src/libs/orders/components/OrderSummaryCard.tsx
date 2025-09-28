@@ -4,7 +4,7 @@ import { Card, CardBody, CardHeader, Skeleton } from '@heroui/react';
 import Link from 'next/link';
 import React, { useMemo } from 'react';
 
-import PriceComponent from '@/libs/common/components/PriceComponent';
+import { PriceComponent } from '@/libs/common/components/PriceComponent';
 import { DATE_FORMATS, formatSafeDate } from '@/libs/common/utils/date';
 import { OrderSummary } from '@/libs/orders/types';
 

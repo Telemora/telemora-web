@@ -1,4 +1,4 @@
-import PriceComponent from '@/libs/common/components/PriceComponent';
+import { PriceComponent } from '@/libs/common/components/PriceComponent';
 import { formatSafeDate } from '@/libs/common/utils/date';
 import React from 'react';
 import { OrderDetail } from '@/libs/orders/types';
