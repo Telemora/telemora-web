@@ -1,3 +1,5 @@
+'use client';
+
 import { Autocomplete, AutocompleteItem } from '@heroui/react';
 import { FaSearch } from 'react-icons/fa';
 import { useProductSearch } from '@/libs/products/hooks';

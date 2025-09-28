@@ -33,6 +33,7 @@ export enum SocialMediaPlatform {
 }
 
 export interface StorePreviewDto {
+  id: string;
   displayName: string;
   slug: string;
   logo?: MediaDto;

@@ -1,8 +1,8 @@
+'use client';
+
 import { Card, CardBody } from '@heroui/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
-
 import StarRating from '@/libs/common/components/StarRating';
 import { StorePreviewDto } from '@/libs/stores/types';
 

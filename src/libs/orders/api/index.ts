@@ -6,7 +6,7 @@ export async function getMyOrders() {
   return generateMockOrderSummaries();
 }
 
-export async function getOrderDetails(id: number) {
+export async function getOrderDetails(id: string) {
   /* return httpClient.get<OrderDetail>(`/orders/${id}`); */
   return generateMockOrderDetail();
 }
@@ -16,12 +16,12 @@ export async function createOrder(data: CreateOrderDto) {
   return generateMockOrderDetail();
 }
 
-export async function updateOrder(id: number, data: UpdateOrderDto) {
+export async function updateOrder(id: string, data: UpdateOrderDto) {
   /* return httpClient.patch<OrderDetail>(`/orders/${id}`, data); */
   return generateMockOrderDetail();
 }
 
-export async function addShipment(id: number, data: CreateOrderShipmentDto) {
+export async function addShipment(id: string, data: CreateOrderShipmentDto) {
   /* return httpClient.post<OrderDetail>(`/orders/${id}/shipment`, data); */
   return generateMockOrderDetail();
 }

@@ -1,40 +1,24 @@
-'use client';
-
-import { Alert, Card, CardBody, CardFooter, Divider, Spinner } from '@heroui/react';
-import { useParams } from 'next/navigation';
-import React from 'react';
-
+import { Alert, Card, CardBody, CardFooter, Divider } from '@heroui/react';
 import AppLayout from '@/libs/common/components/AppLayout';
-import ErrorPage from '@/libs/common/components/ErrorPage';
 import { PageHeader } from '@/libs/common/components/PageHeader';
 import { formatSafeDate } from '@/libs/common/utils/date';
 import { OrderItemPreviewCard } from '@/libs/orders/components/OrderItemPreview';
 import { OrderShipmentCard } from '@/libs/orders/components/OrderShipmentCard';
 import { OrderStatusChip } from '@/libs/orders/components/OrderStatusChip';
-import { useOrderDetails } from '@/libs/orders/hooks';
 import { OrderStatus } from '@/libs/orders/types';
 import { PaymentStatusChip } from '@/libs/payments/components/PaymentStatusChip';
 import { PaymentStatus } from '@/libs/payments/types';
 import { OrderInfoSummary } from '@/libs/orders/components/OrderInfoSummary';
 import { TonPaymentButton } from '@/libs/payments/components/TonPaymentButton';
+import { getOrderDetails } from '@/libs/orders/api';
 
-export default function OrderDetailsPage() {
-  const { orderId } = useParams<{ orderId: string }>();
-  const { data: order, isLoading, error } = useOrderDetails(Number(orderId));
-
-  if (isLoading) {
-    return (
-      <AppLayout>
-        <div className="flex h-screen items-center justify-center">
-          <Spinner label="Loading order..." />
-        </div>
-      </AppLayout>
-    );
-  }
-
-  if (error || !order) return <ErrorPage error={new Error('Invalid Order')} />;
-  if (!orderId || isNaN(Number(orderId)))
-    return <ErrorPage error={new Error('Invalid order ID')} />;
+export default async function OrderDetailsPage({
+  params,
+}: {
+  params: Promise<{ orderId: string }>;
+}) {
+  const { orderId } = await params;
+  const order = await getOrderDetails(orderId);
 
   const isPendingPayment =
     order.status === OrderStatus.PENDING && order.payment?.status !== PaymentStatus.COMPLETED;

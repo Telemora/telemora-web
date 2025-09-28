@@ -23,7 +23,7 @@ export function useMyOrders() {
   });
 }
 
-export function useOrderDetails(id: number) {
+export function useOrderDetails(id: string) {
   return useQuery<OrderDetail>({
     queryKey: queryKeys.orders.detail(id),
     queryFn: () => getOrderDetails(id),
@@ -46,7 +46,7 @@ export function useCreateOrder() {
   });
 }
 
-export function useUpdateOrder(id: number) {
+export function useUpdateOrder(id: string) {
   const queryClient = useQueryClient();
 
   return useMutation<OrderDetail, Error, UpdateOrderDto>({
@@ -58,7 +58,7 @@ export function useUpdateOrder(id: number) {
   });
 }
 
-export function useAddShipment(id: number) {
+export function useAddShipment(id: string) {
   const queryClient = useQueryClient();
 
   return useMutation<OrderDetail, Error, CreateOrderShipmentDto>({

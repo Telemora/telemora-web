@@ -15,9 +15,9 @@ import {
 export async function generateMockUserPublicPreview(): Promise<UserPublicPreview> {
   return {
     userId: faker.string.ulid(),
-    username: window.Telegram.WebApp.initDataUnsafe.user?.username || faker.internet.username(),
+    username: faker.internet.username(),
     photo: {
-      url: window.Telegram.WebApp.initDataUnsafe.user?.photo_url || faker.image.personPortrait(),
+      url: faker.image.personPortrait(),
     },
   };
 }
@@ -25,8 +25,8 @@ export async function generateMockUserPublicPreview(): Promise<UserPublicPreview
 export async function generateMockUserSummary(): Promise<UserSummary> {
   return {
     ...(await generateMockUserPublicPreview()),
-    firstName: window.Telegram.WebApp.initDataUnsafe.user?.first_name || faker.person.firstName(),
-    lastName: window.Telegram.WebApp.initDataUnsafe.user?.last_name || faker.person.lastName(),
+    firstName: faker.person.firstName(),
+    lastName: faker.person.lastName(),
     role: faker.helpers.arrayElement(Object.values(UserRole)),
   };
 }
@@ -42,8 +42,7 @@ export async function generateMockCurrencyInfo(): Promise<CurrencyInfo> {
 export async function generateMockUserPrivateProfile(): Promise<UserPrivateProfile> {
   return {
     ...(await generateMockUserSummary()),
-    telegramUserId:
-      window.Telegram.WebApp.initDataUnsafe.user?.id.toString() || faker.string.alphanumeric(),
+    telegramUserId: faker.string.alphanumeric(),
     contactPhone: faker.phone.number(),
     contactEmail: faker.internet.email(),
     cryptoWalletAddress: faker.finance.ethereumAddress(),

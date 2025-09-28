@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import { Accordion, AccordionItem, Chip, Divider } from '@heroui/react';
 import StarRating from '@/libs/common/components/StarRating';

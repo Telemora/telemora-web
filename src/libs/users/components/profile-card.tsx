@@ -1,50 +1,14 @@
-import { Button } from '@heroui/react';
+import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import React from 'react';
+import { Button } from '@heroui/react';
 import { FaPen } from 'react-icons/fa';
 import { FaGear } from 'react-icons/fa6';
-
 import { UserPrivateProfile } from '@/libs/users/types';
 
-/**
- * UserProfileCard displays user information with photo and action buttons
- *
- * @param {Object} props - Component props
- * @param {UserPrivateProfile} props.user - User profile data
- * @param {Object} [props.routes] - Optional custom routes for navigation
- * @param {string} [props.routes.edit] - Path for edit profile action
- * @param {string} [props.routes.preferences] - Path for preferences action
- * @returns {JSX.Element} The user profile card component
- */
-export default function UserProfileCard({
-  user,
-  routes = {
-    edit: '/profile/edit',
-    preferences: '/profile/preferences',
-  },
-}: {
-  user: UserPrivateProfile;
-  routes?: {
-    edit?: string;
-    preferences?: string;
-  };
-}) {
-  const router = useRouter();
-
-  const firstName = user?.firstName || '';
-  const lastName = user?.lastName || '';
-  const hasName = firstName || lastName;
-  const displayName = hasName ? `${firstName} ${lastName}`.trim() : 'User';
-
-  const handleNavigation = (route: string | undefined) => {
-    if (!route) return;
-    try {
-      router.push(route);
-    } catch (error) {
-      console.error('Navigation error in profile card:', error);
-    }
-  };
+export default function UserProfileCard({ user }: { user: UserPrivateProfile }) {
+  const firstName = user.firstName;
+  const lastName = user.lastName;
+  const displayName = `${firstName} ${lastName}`;
 
   return (
     <section
@@ -62,9 +26,6 @@ export default function UserProfileCard({
               width={128}
               height={128}
               className="aspect-square object-cover"
-              onError={(e) => {
-                e.currentTarget.src = '/default-profile.png';
-              }}
               priority
             />
           </div>
@@ -81,28 +42,30 @@ export default function UserProfileCard({
         </figure>
       </div>
       <nav className="mt-2 flex flex-col gap-2 sm:flex-row sm:gap-4">
-        <Button
-          fullWidth
-          size="sm"
-          color="secondary"
-          variant="solid"
-          onPress={() => handleNavigation(routes.edit)}
-          className="flex items-center justify-center gap-2"
-        >
-          <FaPen className="text-xs sm:text-sm" aria-hidden="true" />
-          <span>Edit Profile</span>
-        </Button>
-        <Button
-          fullWidth
-          size="sm"
-          color="secondary"
-          variant="solid"
-          onPress={() => handleNavigation(routes.preferences)}
-          className="flex items-center justify-center gap-2"
-        >
-          <FaGear className="text-xs sm:text-sm" aria-hidden="true" />
-          <span>Preferences</span>
-        </Button>
+        <Link href="/profile/edit">
+          <Button
+            fullWidth
+            size="sm"
+            color="secondary"
+            variant="solid"
+            className="flex items-center justify-center gap-2"
+          >
+            <FaPen className="text-xs sm:text-sm" aria-hidden="true" />
+            <span>Edit Profile</span>
+          </Button>
+        </Link>
+        <Link href="/profile/preferences">
+          <Button
+            fullWidth
+            size="sm"
+            color="secondary"
+            variant="solid"
+            className="flex items-center justify-center gap-2"
+          >
+            <FaGear className="text-xs sm:text-sm" aria-hidden="true" />
+            <span>Preferences</span>
+          </Button>
+        </Link>
       </nav>
     </section>
   );

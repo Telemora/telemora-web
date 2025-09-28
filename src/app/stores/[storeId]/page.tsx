@@ -1,41 +1,27 @@
-'use client';
-
-import { Button, Spinner } from '@heroui/react';
-import { useParams, useRouter } from 'next/navigation';
+import { Button } from '@heroui/react';
 import React from 'react';
 
 import AppLayout from '@/libs/common/components/AppLayout';
-import ErrorPage from '@/libs/common/components/ErrorPage';
-import { useStoreDetailsQuery } from '@/libs/stores/hooks';
-import { useUserState } from '@/libs/users/context/userContext';
 import { PromotionsList } from '@/libs/discount/components/PromotionsList';
-import { useGetStoreDiscounts } from '@/libs/discount/hooks';
 import { StoreHeader } from '@/libs/stores/components/StoreHeader';
 import { ProductsSection } from '@/libs/stores/components/ProductsSection';
 import { faker } from '@faker-js/faker';
 import { FaTrashAlt } from 'react-icons/fa';
+import { fetchStoreDetails } from '@/libs/stores/api';
+import { getStoreDiscounts } from '@/libs/discount/api';
+import { telegramLogin } from '@/libs/users/api';
 
-export default function StoreDetailsPage() {
-  const router = useRouter();
-  const { storeId } = useParams<{ storeId: string }>();
-  const { data: user } = useUserState();
-  const { data: store, isLoading, error } = useStoreDetailsQuery(storeId);
-  const { data: discounts } = useGetStoreDiscounts(storeId);
+export default async function StoreDetailsPage({
+  params,
+}: {
+  params: Promise<{ storeId: string }>;
+}) {
+  const { storeId } = await params;
+  const user = await telegramLogin();
+  const store = await fetchStoreDetails(storeId);
+  const discounts = await getStoreDiscounts(storeId);
   const isOwner =
     user && store && faker.datatype.boolean(); /* && store.vendor.userId === user.userId */
-  const handleDelete = () => router.push(`/stores/${store?.slug}/delete`);
-
-  if (isLoading) {
-    return (
-      <AppLayout>
-        <div className="flex min-h-screen items-center justify-center">
-          <Spinner size="lg" />
-        </div>
-      </AppLayout>
-    );
-  }
-
-  if (error || !store) return <ErrorPage />;
 
   return (
     <AppLayout>
@@ -52,13 +38,7 @@ export default function StoreDetailsPage() {
       {isOwner && (
         <div className="mt-4">
           <p className="text-danger my-1 text-sm">This action will permanently delete your store</p>
-          <Button
-            variant="bordered"
-            color="danger"
-            fullWidth
-            onPress={handleDelete}
-            startContent={<FaTrashAlt />}
-          >
+          <Button variant="bordered" color="danger" fullWidth startContent={<FaTrashAlt />}>
             Delete Store
           </Button>
         </div>

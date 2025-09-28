@@ -1,35 +1,14 @@
-'use client';
-
-import { Button, Spinner } from '@heroui/react';
-import { useRouter } from 'next/navigation';
-import React from 'react';
-
-import AppLayout from '@/libs/common/components/AppLayout';
-import ErrorPage from '@/libs/common/components/ErrorPage';
-import { PageHeader } from '@/libs/common/components/PageHeader';
-import StoreSummaryCard from '@/libs/stores/components/SummaryCard';
-import { useUserStoresQuery } from '@/libs/stores/hooks';
-import { EmptyState } from '@/libs/common/components/EmptyState';
+import Link from 'next/link';
 import { FaPlus } from 'react-icons/fa6';
+import { Button } from '@heroui/react';
+import AppLayout from '@/libs/common/components/AppLayout';
+import StoreSummaryCard from '@/libs/stores/components/SummaryCard';
+import { PageHeader } from '@/libs/common/components/PageHeader';
+import { EmptyState } from '@/libs/common/components/EmptyState';
+import { fetchUserStores } from '@/libs/stores/api';
 
-export default function StoreListPage() {
-  const router = useRouter();
-  const { data: stores, error, isLoading } = useUserStoresQuery();
-
-  const handleCreateStore = () => router.push('/stores/create/basic-information');
-  const handleOpenStore = (id: string) => router.push(`/stores/${id}`);
-
-  if (isLoading) {
-    return (
-      <AppLayout>
-        <div className="flex min-h-screen items-center justify-center">
-          <Spinner size="lg" />
-        </div>
-      </AppLayout>
-    );
-  }
-
-  if (error) return <ErrorPage />;
+export default async function StoreListPage() {
+  const stores = await fetchUserStores();
 
   return (
     <AppLayout>
@@ -41,21 +20,25 @@ export default function StoreListPage() {
       {stores && stores.length === 0 ? (
         <div className="mt-12 text-center">
           <EmptyState text="Create your first store to begin your journey" />
-          <Button fullWidth color="primary" onPress={handleCreateStore} startContent={<FaPlus />}>
-            Create New Store
-          </Button>
+          <Link href="/stores/create/basic-information">
+            <Button fullWidth color="primary" startContent={<FaPlus />}>
+              Create New Store
+            </Button>
+          </Link>
         </div>
       ) : (
         <div className="space-y-4">
           {stores!.map((store) => (
-            <div key={store.slug} onClick={() => handleOpenStore(store.slug)}>
+            <Link key={store.id} href={`/stores/${store.id}`}>
               <StoreSummaryCard store={store} />
-            </div>
+            </Link>
           ))}
 
-          <Button fullWidth color="primary" onPress={handleCreateStore} startContent={<FaPlus />}>
-            Create New Store
-          </Button>
+          <Link href="/stores/create/basic-information">
+            <Button fullWidth color="primary" startContent={<FaPlus />}>
+              Create New Store
+            </Button>
+          </Link>
         </div>
       )}
     </AppLayout>
