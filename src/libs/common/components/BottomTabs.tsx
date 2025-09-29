@@ -26,7 +26,7 @@ const tabList = [
   { key: TAB_KEYS.PROFILE, label: 'Profile', icon: <FaUser size={15} aria-label="Profile" /> },
 ];
 
-export default function BottomTabs() {
+export function BottomTabs() {
   const pathname = usePathname();
   const route = useRouter();
   const resolvedTabKey = getBaseTabKey(pathname);
