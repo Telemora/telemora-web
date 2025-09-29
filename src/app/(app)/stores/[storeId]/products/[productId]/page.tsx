@@ -28,6 +28,7 @@ export default async function ProductDetailsPage({
               width={240}
               height={240}
               alt={product.name}
+              priority
               className="aspect-square w-60 shrink-0 rounded-lg object-cover"
             />
           ))}
