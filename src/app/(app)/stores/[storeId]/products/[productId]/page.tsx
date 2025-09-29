@@ -18,80 +18,78 @@ export default async function ProductDetailsPage({
   const product = await getProductDetails(storeId, productId);
 
   return (
-    <>
-      <main className="space-y-6">
-        {product.images?.length ? (
-          <HorizontalScroll>
-            {product.images.map((img, index) => (
-              <Image
-                key={index}
-                src={img.url}
-                width={240}
-                height={240}
-                alt={product.name}
-                className="aspect-square w-60 shrink-0 rounded-lg object-cover"
-              />
-            ))}
-          </HorizontalScroll>
-        ) : null}
+    <div className="space-y-6">
+      {product.images?.length ? (
+        <HorizontalScroll>
+          {product.images.map((img, index) => (
+            <Image
+              key={index}
+              src={img.url}
+              width={240}
+              height={240}
+              alt={product.name}
+              className="aspect-square w-60 shrink-0 rounded-lg object-cover"
+            />
+          ))}
+        </HorizontalScroll>
+      ) : null}
 
+      <div>
+        <User
+          name={product.store.displayName}
+          avatarProps={{ src: product.store.logo?.url }}
+          description={<StarRating rating={product.store.vendorScore} />}
+        />
+      </div>
+
+      <div>
+        <PageHeader title={product.name} />
+        <PriceComponent amount={product.price} />
+      </div>
+
+      <AddToCardButton />
+
+      <Divider />
+
+      {product.description && <PageHeader title={'Description'} subtitle={product.description} />}
+
+      {product.totalQuantityAvailable !== undefined && (
+        <p className=" ">In Stock: {product.totalQuantityAvailable}</p>
+      )}
+
+      {Array.isArray(product.attributes) && product.attributes.length > 0 && (
         <div>
-          <User
-            name={product.store.displayName}
-            avatarProps={{ src: product.store.logo?.url }}
-            description={<StarRating rating={product.store.vendorScore} />}
-          />
-        </div>
-
-        <div>
-          <PageHeader title={product.name} />
-          <PriceComponent amount={product.price} />
-        </div>
-
-        <AddToCardButton />
-
-        <Divider />
-
-        {product.description && <PageHeader title={'Description'} subtitle={product.description} />}
-
-        {product.totalQuantityAvailable !== undefined && (
-          <p className=" ">In Stock: {product.totalQuantityAvailable}</p>
-        )}
-
-        {Array.isArray(product.attributes) && product.attributes.length > 0 && (
-          <div>
-            <h3 className="mb-2 font-semibold">Attributes</h3>
-            <ul className="list-inside list-disc text-sm text-neutral-400">
-              {product.attributes.map((attr, i) => (
-                <li key={i}>
-                  {attr.name}: {attr.value}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {Array.isArray(product.variants) && product.variants.length > 0 && (
-          <div>
-            <h3 className="mb-2 font-semibold">Variants</h3>
-            <ul className="list-inside list-disc text-sm text-neutral-400">
-              {product.variants.map((variant, i) => (
-                <li key={i}>{variant.priceOverride && ` (${variant.priceOverride})`}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        <Divider />
-
-        {product.reviews && product.reviews.length > 0 && (
-          <div className="space-y-2">
-            {product.reviews.map((review) => (
-              <ReviewPreviewCard key={review.id} content={review} />
+          <h3 className="mb-2 font-semibold">Attributes</h3>
+          <ul className="list-inside list-disc text-sm text-neutral-400">
+            {product.attributes.map((attr, i) => (
+              <li key={i}>
+                {attr.name}: {attr.value}
+              </li>
             ))}
-          </div>
-        )}
-      </main>
-    </>
+          </ul>
+        </div>
+      )}
+
+      {Array.isArray(product.variants) && product.variants.length > 0 && (
+        <div>
+          <h3 className="mb-2 font-semibold">Variants</h3>
+          <ul className="list-inside list-disc text-sm text-neutral-400">
+            {product.variants.map((variant, i) => (
+              <li key={i}>{variant.priceOverride && ` (${variant.priceOverride})`}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <Divider />
+
+      {product.reviews && product.reviews.length > 0 && (
+        <div className="space-y-2">
+          {product.reviews.map((review) => (
+            <ReviewPreviewCard key={review.id} content={review} />
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
