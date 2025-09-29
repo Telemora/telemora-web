@@ -16,7 +16,7 @@ export function useCountries() {
   });
 }
 
-export function useStatesByCountry(countryId?: number) {
+export function useStatesByCountry(countryId?: string) {
   return useQuery<CanonicalLocationDto[]>({
     queryKey: queryKeys.location.statesByCountry(countryId!),
     queryFn: () => getStatesByCountry(countryId!),
@@ -24,7 +24,7 @@ export function useStatesByCountry(countryId?: number) {
   });
 }
 
-export function useCitiesByState(stateId?: number) {
+export function useCitiesByState(stateId?: string) {
   return useQuery<CanonicalLocationDto[]>({
     queryKey: queryKeys.location.citiesByState(stateId!),
     queryFn: () => getCitiesByState(stateId!),

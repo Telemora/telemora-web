@@ -14,7 +14,7 @@ import { CreateProductDto, UpdateProductDto } from '@/libs/products/types';
 import { useDebounce } from '@uidotdev/usehooks';
 import { useState } from 'react';
 
-export function useStoreProducts(storeId: number) {
+export function useStoreProducts(storeId: string) {
   return useQuery({
     queryKey: queryKeys.products.byStore(storeId),
     queryFn: () => getStoreProducts(storeId),
@@ -22,11 +22,11 @@ export function useStoreProducts(storeId: number) {
   });
 }
 
-export function useProductDetails(storeId: number, productId: number) {
+export function useProductDetails(storeId: string, productId: string) {
   return useQuery({
     queryKey: queryKeys.products.detail(storeId, productId),
     queryFn: () => getProductDetails(storeId, productId),
-    enabled: !isNaN(storeId) && !isNaN(productId),
+    enabled: !storeId && !productId,
   });
 }
 
@@ -41,7 +41,7 @@ export function useUploadProductPhotosMutation() {
   });
 }
 
-export function useCreateProductMutation(storeId: number) {
+export function useCreateProductMutation(storeId: string) {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -52,7 +52,7 @@ export function useCreateProductMutation(storeId: number) {
   });
 }
 
-export function useUpdateProductMutation(storeId: number, productId: number) {
+export function useUpdateProductMutation(storeId: string, productId: string) {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -64,7 +64,7 @@ export function useUpdateProductMutation(storeId: number, productId: number) {
   });
 }
 
-export function useDeleteProductMutation(storeId: number, productId: number) {
+export function useDeleteProductMutation(storeId: string, productId: string) {
   const queryClient = useQueryClient();
 
   return useMutation({

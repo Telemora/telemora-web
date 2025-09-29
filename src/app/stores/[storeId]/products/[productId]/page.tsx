@@ -15,13 +15,8 @@ import { HorizontalScroll } from '@/libs/common/components/HorizontalScroll';
 
 export default function ProductDetailsPage() {
   const { webApp } = useTelegramWebApp();
-  const { storeId, productId } = useParams();
-  const storeIdNum = parseInt(storeId as string, 10);
-  const productIdNum = parseInt(productId as string, 10);
-  const { data: product, isLoading, error, refetch } = useProductDetails(storeIdNum, productIdNum);
-  if (isNaN(storeIdNum) || isNaN(productIdNum)) {
-    return <div>Error: Invalid store or product ID</div>;
-  }
+  const { storeId, productId } = useParams<{ storeId: string; productId: string }>();
+  const { data: product, isLoading, error, refetch } = useProductDetails(storeId, productId);
 
   if (isLoading) {
     return (

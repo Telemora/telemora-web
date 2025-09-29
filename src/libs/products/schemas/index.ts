@@ -13,7 +13,7 @@ export const productTypeSchema = z.nativeEnum(ProductType);
 export const productVisibilitySchema = z.nativeEnum(ProductVisibility);
 
 export const createProductAttributeValueInputSchema = z.object({
-  attributeId: z.number().int(),
+  attributeId: z.string(),
   value: z.string(),
 }) satisfies z.ZodType<CreateProductAttributeValueInputDto>;
 
@@ -37,7 +37,5 @@ export const createProductDtoSchema = z.object({
   quantityAvailable: z.number().int().nonnegative().optional(),
 }) satisfies z.ZodType<CreateProductDto>;
 
-export const updateProductDtoSchema = createProductDtoSchema.partial().extend({
-  id: z.number().int().optional(),
-  quantityAvailable: z.number().int().nonnegative().optional(),
-}) satisfies z.ZodType<UpdateProductDto>;
+export const updateProductDtoSchema =
+  createProductDtoSchema.partial() satisfies z.ZodType<UpdateProductDto>;

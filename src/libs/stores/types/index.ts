@@ -35,11 +35,11 @@ export enum SocialMediaPlatform {
 export interface StorePreviewDto {
   id: string;
   displayName: string;
-  slug: string;
+  slug?: string;
   logo?: MediaDto;
   vendorScore: number;
   status: StoreStatusEnum;
-  paymentWalletAddress: string;
+  paymentWalletAddress?: string;
 }
 
 export interface StoreSummary extends StorePreviewDto {

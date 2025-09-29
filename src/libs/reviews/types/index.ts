@@ -20,7 +20,7 @@ export enum ReportReason {
 }
 
 export interface ReviewPreviewDto {
-  id: number | string;
+  id: string;
   rating: number;
   comment?: string;
   productId: number | string;
@@ -35,14 +35,14 @@ export interface ReviewDetail extends ReviewPreviewDto {
 }
 
 export interface ReviewReplyPreview {
-  id: number;
+  id: string;
   vendor: UserPublicPreview;
   replyText: string;
   createdAt: Date;
 }
 
 export interface ReviewReportPreview {
-  id: number;
+  id: string;
   reportedBy: UserPublicPreview;
   reason: ReportReason;
   comment?: string;
@@ -52,8 +52,6 @@ export interface ReviewReportPreview {
 export interface CreateReviewDto {
   rating: number;
   comment?: string;
-  images?: string[];
-  videos?: string[];
 }
 
 export interface CreateReviewReplyDto {

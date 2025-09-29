@@ -21,8 +21,12 @@ export function OrderShipmentCard({ shipment }: { shipment: OrderShipment }) {
         <span className="text-default-600">Status</span>
         <span>{shipment.status || 'unknown'}</span>
 
-        <span className="text-default-600">Expected Delivery</span>
-        <span>{formatSafeDate(shipment.expectedDeliveryDate)}</span>
+        {shipment.expectedDeliveryDate && (
+          <>
+            <span className="text-default-600">Expected Delivery</span>
+            <span>{formatSafeDate(shipment.expectedDeliveryDate)}</span>
+          </>
+        )}
 
         <span className="text-default-600">Shipped At</span>
         <span>{formatSafeDate(shipment.shippedAt)}</span>

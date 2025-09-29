@@ -52,7 +52,7 @@ export interface VariantAttributeValueDto {
 }
 
 export interface ProductVariantDto {
-  id: number;
+  id: string;
   sku?: string;
   priceOverride?: number;
   quantityAvailable: number;
@@ -62,13 +62,13 @@ export interface ProductVariantDto {
 }
 
 export interface ProductPreviewDto {
-  id: number | string;
+  id: string;
   name: string;
   slug?: string;
   primaryImage: ProductImageDto;
   price: number;
   currency: string;
-  storeId: number | string;
+  storeId: string;
   storeName: string;
   averageRating?: number;
   numberOfReviews?: number;
@@ -94,7 +94,7 @@ export interface ProductDetailDto extends ProductSummaryDto {
 }
 
 export interface CreateProductAttributeValueInputDto {
-  attributeId: number;
+  attributeId: string;
   value: string;
 }
 
@@ -118,7 +118,4 @@ export interface CreateProductDto {
   quantityAvailable?: number;
 }
 
-export interface UpdateProductDto extends Partial<CreateProductDto> {
-  id?: number;
-  quantityAvailable?: number;
-}
+export interface UpdateProductDto extends Partial<CreateProductDto> {}

@@ -30,5 +30,5 @@ export const createDiscountSchema = z.object({
 }) satisfies z.ZodType<CreateDiscountDto>;
 
 export const updateDiscountSchema = createDiscountSchema.partial().extend({
-  id: z.number(),
+  id: z.string(),
 }) satisfies z.ZodType<UpdateDiscountDto>;

@@ -9,7 +9,7 @@ import { faker } from '@faker-js/faker';
 
 async function generateMockStoreDiscount(): Promise<DiscountPreviewDto> {
   return {
-    id: faker.number.int(),
+    id: faker.string.uuid(),
     name: faker.commerce.productMaterial(),
     code: faker.string.alphanumeric(),
     status: faker.helpers.enumValue(DiscountStatus),

@@ -2,15 +2,16 @@ import { z } from 'zod';
 
 import {
   type CreateOrderDto,
+  CreateOrderItemDto,
   type CreateOrderShipmentDto,
   OrderStatus,
   type UpdateOrderDto,
 } from '@/libs/orders/types';
 
 export const createOrderItemDtoSchema = z.object({
-  productId: z.number().int(),
+  productId: z.string().uuid(),
   quantity: z.number().int().positive(),
-});
+}) satisfies z.ZodType<CreateOrderItemDto>;
 
 export const createOrderDtoSchema = z.object({
   items: z.array(createOrderItemDtoSchema).min(1),

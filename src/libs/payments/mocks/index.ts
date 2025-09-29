@@ -11,7 +11,7 @@ export async function generateMockPaymentSummary(): Promise<PaymentSummary> {
     tokenSymbol: faker.helpers.arrayElement(['USDC', 'ETH']) as TokenSymbol,
     status: PaymentStatus.PENDING,
     amount: faker.finance.amount(),
-    transactionHash: faker.string.hexadecimal({ length: 64 }),
+    txHash: faker.string.hexadecimal({ length: 64 }),
     createdAt: faker.date.past(),
   };
 }
@@ -23,7 +23,7 @@ export async function generateMockPaymentSummaries(): Promise<PaymentSummary[]> 
 export async function generateMockPaymentDetail(): Promise<PaymentDetail> {
   return {
     ...(await generateMockPaymentSummary()),
-    gasFee: faker.finance.amount(),
+    totalFees: faker.finance.amount(),
     commission: faker.finance.amount(),
     fromWalletAddress: faker.finance.ethereumAddress(),
     toWalletAddress: faker.finance.ethereumAddress(),

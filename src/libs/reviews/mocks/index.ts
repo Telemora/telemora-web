@@ -12,7 +12,7 @@ import {
 
 export async function generateMockReviewPreview(productId: number): Promise<ReviewPreviewDto> {
   return {
-    id: faker.number.int(),
+    id: faker.string.uuid(),
     rating: faker.number.int({ min: 1, max: 5 }),
     comment: faker.lorem.sentence(),
     productId,
@@ -32,7 +32,7 @@ export async function generateMockReviewDetail(): Promise<ReviewDetail> {
 
 export async function generateMockReviewReplyPreview(): Promise<ReviewReplyPreview> {
   return {
-    id: faker.number.int(),
+    id: faker.string.uuid(),
     vendor: await generateMockUserPublicPreview(),
     replyText: faker.lorem.sentence(),
     createdAt: faker.date.recent(),
@@ -41,7 +41,7 @@ export async function generateMockReviewReplyPreview(): Promise<ReviewReplyPrevi
 
 export async function generateMockReviewReportPreview(): Promise<ReviewReportPreview> {
   return {
-    id: faker.number.int(),
+    id: faker.string.uuid(),
     reportedBy: await generateMockUserPublicPreview(),
     reason: faker.helpers.arrayElement(Object.values(ReportReason)),
     comment: faker.lorem.sentence(),

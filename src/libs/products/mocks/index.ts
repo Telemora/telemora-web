@@ -18,12 +18,12 @@ export async function generateMockProductPreview(): Promise<ProductPreviewDto> {
     currency: '',
     numberOfReviews: 0,
     storeName: '',
-    id: faker.number.int(),
+    id: faker.string.uuid(),
     name: faker.commerce.productName(),
     slug: faker.helpers.slugify(faker.commerce.productName()),
     price: Number(faker.commerce.price({ min: 10, max: 500 })),
     primaryImage: await generateMockProductPhoto(),
-    storeId: faker.number.int({ min: 10, max: 300 }),
+    storeId: faker.string.uuid(),
   };
 }
 

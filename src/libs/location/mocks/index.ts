@@ -10,7 +10,7 @@ import {
 
 function generateMockCanonicalLocation(type: CanonicalLocationDto['type']): CanonicalLocationDto {
   return {
-    id: faker.number.int(),
+    id: faker.string.uuid(),
     name:
       type === 'city'
         ? faker.location.city()
@@ -31,7 +31,7 @@ export function generateMockAddress(): AddressDto {
       latitude: Number(faker.location.latitude()),
       longitude: Number(faker.location.longitude()),
     },
-    id: faker.number.int(),
+    id: faker.string.uuid(),
     label: 'Home',
     country: generateMockCanonicalLocation(CanonicalLocationType.COUNTRY),
     state: generateMockCanonicalLocation(CanonicalLocationType.STATE),

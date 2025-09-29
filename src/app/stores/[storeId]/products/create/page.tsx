@@ -17,7 +17,7 @@ import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 
 export default function CreateProductPage() {
   const { webApp } = useTelegramWebApp();
-  const { storeId } = useParams();
+  const { storeId } = useParams<{ storeId: string }>();
   const {
     register,
     handleSubmit,
@@ -39,7 +39,7 @@ export default function CreateProductPage() {
     },
   });
 
-  const { mutateAsync } = useCreateProductMutation(parseInt(storeId as string, 10));
+  const { mutateAsync } = useCreateProductMutation(storeId);
   const router = useRouter();
 
   const onSubmit = async (data: CreateProductDto) => {

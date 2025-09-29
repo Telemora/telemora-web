@@ -29,7 +29,7 @@ export function useGetStoreDiscounts(storeId: string) {
   });
 }
 
-export function useGetDiscountDetails(storeId: string, discountId: number) {
+export function useGetDiscountDetails(storeId: string, discountId: string) {
   return useQuery({
     queryKey: queryKeys.discounts.detail(storeId, discountId),
     queryFn: () => getDiscountDetails(storeId, discountId),
@@ -37,7 +37,7 @@ export function useGetDiscountDetails(storeId: string, discountId: number) {
   });
 }
 
-export function useUpdateDiscountMutation(storeId: string, discountId: number) {
+export function useUpdateDiscountMutation(storeId: string, discountId: string) {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -49,7 +49,7 @@ export function useUpdateDiscountMutation(storeId: string, discountId: number) {
   });
 }
 
-export function useDeleteDiscount(storeId: string, discountId: number) {
+export function useDeleteDiscount(storeId: string, discountId: string) {
   const queryClient = useQueryClient();
 
   return useMutation({

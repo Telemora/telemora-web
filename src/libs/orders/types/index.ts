@@ -22,7 +22,7 @@ export interface OrderItemPreviewDto {
 }
 
 export interface OrderSummary {
-  id: number | string;
+  id: string;
   status: OrderStatus;
   totalAmount: number;
   store: StorePreviewDto;
@@ -34,16 +34,16 @@ export interface OrderDetail extends OrderSummary {
   items: OrderItemPreviewDto[];
   shipment?: OrderShipment;
   payment?: PaymentSummary;
-  buyer: UserSummary;
+  customer: UserSummary;
 }
 
 export interface OrderShipment {
-  id: number;
+  id: string;
   trackingNumber: string;
   carrierTrackingUrl?: string;
   status?: 'created' | 'in_transit' | 'delivered' | 'failed';
   courierService: string;
-  expectedDeliveryDate: Date;
+  expectedDeliveryDate?: Date;
   shippedAt: Date;
 }
 
@@ -52,8 +52,8 @@ export interface CreateOrderDto {
   shippingAddress?: string;
 }
 
-interface CreateOrderItemDto {
-  productId: number;
+export interface CreateOrderItemDto {
+  productId: string;
   quantity: number;
 }
 

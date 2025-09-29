@@ -17,21 +17,21 @@ import {
   ReviewPreviewDto,
 } from '@/libs/reviews/types';
 
-export function useProductReviews(productId: number) {
+export function useProductReviews(productId: string) {
   return useQuery<ReviewPreviewDto[]>({
     queryKey: queryKeys.reviews.byProduct(productId),
     queryFn: () => getProductReviews(productId),
   });
 }
 
-export function useReviewDetail(id: string | number) {
+export function useReviewDetail(id: string) {
   return useQuery<ReviewDetail>({
     queryKey: queryKeys.reviews.detail(id),
     queryFn: () => getReviewsById(id),
   });
 }
 
-export function useCreateReviewMutation(productId: number) {
+export function useCreateReviewMutation(productId: string) {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (data: CreateReviewDto) => createReview(productId, data),
@@ -41,13 +41,13 @@ export function useCreateReviewMutation(productId: number) {
   });
 }
 
-export function useReplyToReviewMutation(reviewId: number) {
+export function useReplyToReviewMutation(reviewId: string) {
   return useMutation({
     mutationFn: (data: CreateReviewReplyDto) => replyToReview(reviewId, data),
   });
 }
 
-export function useReportReviewMutation(reviewId: number) {
+export function useReportReviewMutation(reviewId: string) {
   return useMutation({
     mutationFn: (data: CreateReviewReportDto) => reportReview(reviewId, data),
   });
@@ -56,7 +56,7 @@ export function useReportReviewMutation(reviewId: number) {
 export function useDeleteReviewMutation() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (id: string | number) => deleteReviews(id),
+    mutationFn: (id: string) => deleteReviews(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.reviews.all });
     },

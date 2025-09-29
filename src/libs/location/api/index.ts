@@ -9,11 +9,11 @@ export async function getCountries() {
   return generateMockCountries(); /* httpClient.get<CanonicalLocationDto[]>(`/locations/countries`); */
 }
 
-export async function getStatesByCountry(countryId: number) {
+export async function getStatesByCountry(countryId: string) {
   return generateMockStates(); /* httpClient.get<CanonicalLocationDto[]>(`/locations/countries/${countryId}/states`); */
 }
 
-export async function getCitiesByState(stateId: number) {
+export async function getCitiesByState(stateId: string) {
   return generateMockCities(); /* httpClient.get<CanonicalLocationDto[]>(`/locations/states/${stateId}/cities`); */
 }
 

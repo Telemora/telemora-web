@@ -21,7 +21,7 @@ export enum DiscountApplicabilityEntityType {
  * Used for the seller's dashboard list.
  */
 export interface DiscountPreviewDto {
-  id: number;
+  id: string;
   name: string;
   code?: string;
   status: DiscountStatus;
@@ -66,7 +66,7 @@ export interface CreateDiscountDto {
  * This is a partial type of ICreateDiscount.
  */
 export interface UpdateDiscountDto extends Partial<CreateDiscountDto> {
-  id: number;
+  id: string;
 }
 
 /**

@@ -20,12 +20,12 @@ export interface PaymentSummary {
   status: PaymentStatus;
   amount: string;
   tokenSymbol: TokenSymbol;
-  transactionHash: string;
+  txHash?: string;
   createdAt: Date;
 }
 
 export interface PaymentDetail extends PaymentSummary {
-  gasFee?: string;
+  totalFees?: string;
   commission?: string;
   fromWalletAddress?: string;
   toWalletAddress?: string;
@@ -39,13 +39,6 @@ export interface CreatePaymentDto {
   fromWalletAddress?: string;
   toWalletAddress?: string;
   boc: string;
-}
-
-export class UpdatePaymentDto {
-  status?: PaymentStatus;
-  transactionHash?: string;
-  gasFee?: string;
-  commission?: string;
 }
 
 export interface BuildTxOpts {

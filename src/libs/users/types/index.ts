@@ -25,7 +25,6 @@ export interface UserSummary extends UserPublicPreview {
 export interface CurrencyInfo {
   tonToUsdRate: string;
   localCurrencyToUsdRate: string;
-  /* TODO: investigate why this one implemented as optional in backend and not here */
   localCurrencyCode: string;
 }
 

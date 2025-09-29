@@ -15,7 +15,7 @@ interface TonPaymentButtonProps {
   /** Payment amount in TON */
   paymentAmount: number;
   /** The wallet address of the recipient (seller) who will receive the payment in TON. */
-  recipientWalletAddress: string;
+  recipientWalletAddress?: string;
   /** Every payment related to an order so, we need the Order ID */
   orderId: string;
 }
@@ -40,7 +40,7 @@ export function TonPaymentButton({
 
   const handlePay = async () => {
     /* If the wallet is not connected, open the wallet selection modal */
-    if (wallet === null) {
+    if (wallet === null || !recipientWalletAddress) {
       toast.error(
         'Wallet not connected. Please connect your TON wallet to proceed with the payment.',
       );

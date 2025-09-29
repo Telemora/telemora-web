@@ -25,7 +25,7 @@ export interface GeoPoint {
 }
 
 export interface CanonicalLocationDto {
-  id: number;
+  id: string;
   name: string;
   type: CanonicalLocationType;
   parentId?: number;
@@ -35,7 +35,7 @@ export interface CanonicalLocationDto {
 }
 
 export interface AddressDto {
-  id: number;
+  id: string;
   label?: string;
   country: CanonicalLocationDto;
   state?: CanonicalLocationDto;
@@ -49,9 +49,9 @@ export interface AddressDto {
 }
 
 export interface RegionFilterDto {
-  countryId?: number;
-  stateId?: number;
-  cityId?: number;
+  countryId?: string;
+  stateId?: string;
+  cityId?: string;
 }
 
 export interface GeoFilterDto {

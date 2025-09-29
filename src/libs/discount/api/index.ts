@@ -21,7 +21,7 @@ export async function getStoreDiscounts(storeId: string): Promise<DiscountPrevie
 
 export async function getDiscountDetails(
   storeId: string,
-  discountId: number,
+  discountId: string,
 ): Promise<DiscountDetailDto> {
   /* return httpClient.get<DiscountDetailDto>(`/stores/${storeId}/discounts/${discountId}`); */
   return generateMockDiscountDetails();
@@ -29,12 +29,12 @@ export async function getDiscountDetails(
 
 export async function updateDiscount(
   storeId: string,
-  discountId: number,
+  discountId: string,
   dto: UpdateDiscountDto,
 ): Promise<DiscountDetailDto> {
   return httpClient.patch<DiscountDetailDto>(`/stores/${storeId}/discounts/${discountId}`, dto);
 }
 
-export async function deleteDiscount(storeId: string, discountId: number): Promise<void> {
+export async function deleteDiscount(storeId: string, discountId: string): Promise<void> {
   return httpClient.delete<void>(`/stores/${storeId}/discounts/${discountId}`);
 }

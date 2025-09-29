@@ -18,9 +18,7 @@ import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 export default function EditProductPage() {
   const { webApp } = useTelegramWebApp();
   const { storeId, productId } = useParams<{ storeId: string; productId: string }>();
-  const storeIdNum = parseInt(storeId, 10);
-  const productIdNum = parseInt(productId, 10);
-  const { data: product } = useProductDetails(storeIdNum, productIdNum);
+  const { data: product } = useProductDetails(storeId, productId);
 
   const {
     register,
@@ -31,7 +29,7 @@ export default function EditProductPage() {
     resolver: zodResolver(updateProductDtoSchema),
   });
 
-  const { mutateAsync } = useUpdateProductMutation(storeIdNum, productIdNum);
+  const { mutateAsync } = useUpdateProductMutation(storeId, productId);
   const router = useRouter();
 
   const onSubmit = async (data: UpdateProductDto) => {

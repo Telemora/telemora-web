@@ -13,7 +13,7 @@ export const geoPointSchema = z.object({
 }) satisfies z.ZodType<GeoPoint>;
 
 export const canonicalLocationSchema = z.object({
-  id: z.number(),
+  id: z.string(),
   name: z.string(),
   type: z.nativeEnum(CanonicalLocationType),
   parentId: z.number().optional(),
@@ -23,7 +23,7 @@ export const canonicalLocationSchema = z.object({
 }) satisfies z.ZodType<CanonicalLocationDto>;
 
 export const createAddressSchema = z.object({
-  id: z.number(),
+  id: z.string(),
   label: z.string().optional(),
   country: canonicalLocationSchema,
   state: canonicalLocationSchema.optional(),
