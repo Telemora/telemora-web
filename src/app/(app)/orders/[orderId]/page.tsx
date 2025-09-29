@@ -1,16 +1,17 @@
-import { Alert, Card, CardBody, CardFooter, Divider } from '@heroui/react';
-
+import { getOrderDetails } from '@/libs/orders/api';
 import { PageHeader } from '@/libs/common/components/PageHeader';
+import { OrderStatusChip } from '@/libs/orders/components/OrderStatusChip';
+import { PaymentStatusChip } from '@/libs/payments/components/PaymentStatusChip';
+import { OrderInfoSummary } from '@/libs/orders/components/OrderInfoSummary';
+import { Card, CardBody, CardFooter } from '@heroui/card';
+import { Alert } from '@heroui/alert';
+import { Divider } from '@heroui/divider';
+import { TonPaymentButton } from '@/libs/payments/components/TonPaymentButton';
 import { formatSafeDate } from '@/libs/common/utils/date';
 import { OrderItemPreviewCard } from '@/libs/orders/components/OrderItemPreview';
 import { OrderShipmentCard } from '@/libs/orders/components/OrderShipmentCard';
-import { OrderStatusChip } from '@/libs/orders/components/OrderStatusChip';
-import { OrderStatus } from '@/libs/orders/types';
-import { PaymentStatusChip } from '@/libs/payments/components/PaymentStatusChip';
 import { PaymentStatus } from '@/libs/payments/types';
-import { OrderInfoSummary } from '@/libs/orders/components/OrderInfoSummary';
-import { TonPaymentButton } from '@/libs/payments/components/TonPaymentButton';
-import { getOrderDetails } from '@/libs/orders/api';
+import { OrderStatus } from '@/libs/orders/types';
 
 export default async function OrderDetailsPage({
   params,
@@ -25,10 +26,7 @@ export default async function OrderDetailsPage({
 
   return (
     <>
-      <PageHeader
-        title={`Order #${order.id}`}
-        subtitle={`Placed on ${formatSafeDate(order.createdAt)}`}
-      />
+      <PageHeader title="Order Detail" subtitle={`Placed on ${formatSafeDate(order.createdAt)}`} />
 
       <div className="mb-4 grid grid-cols-2">
         <div className="space-x-1">

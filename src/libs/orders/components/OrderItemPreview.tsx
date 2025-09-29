@@ -1,4 +1,5 @@
-import { Card, CardBody, Chip } from '@heroui/react';
+import { Card, CardBody } from '@heroui/card';
+import { Chip } from '@heroui/chip';
 import Image from 'next/image';
 import { PriceComponent } from '@/libs/common/components/PriceComponent';
 import { OrderItemPreviewDto } from '@/libs/orders/types';

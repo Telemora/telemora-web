@@ -18,7 +18,7 @@ export function ScrollStoresSection({ stores, title }: ScrollStoresSectionProps)
       <h1 className="font-semibold">{title}</h1>
       <HorizontalScroll>
         {stores.map((store) => (
-          <StorePreviewCard key={store.slug} store={store} />
+          <StorePreviewCard key={store.id} store={store} />
         ))}
       </HorizontalScroll>
     </section>

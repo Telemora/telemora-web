@@ -1,7 +1,8 @@
 import { DiscountPreviewDto } from '@/libs/discount/type';
 import { PageHeader } from '@/libs/common/components/PageHeader';
 import { DiscountPreview } from '@/libs/discount/components/DiscountPreview';
-import { Button, Divider } from '@heroui/react';
+import { Button } from '@heroui/button';
+import { Divider } from '@heroui/divider';
 import { FaPlus } from 'react-icons/fa6';
 
 export function PromotionsList({

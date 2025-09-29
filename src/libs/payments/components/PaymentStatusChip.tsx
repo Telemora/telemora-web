@@ -1,6 +1,5 @@
 import { PaymentStatus } from '@/libs/payments/types';
-import { Chip } from '@heroui/react';
-import { useMemo } from 'react';
+import { Chip } from '@heroui/chip';
 
 type ChipColor = 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
 
@@ -19,7 +18,7 @@ export const getPaymentStatusConfig = (status: PaymentStatus) => {
 };
 
 export function PaymentStatusChip({ status }: { status: PaymentStatus }) {
-  const { color, label } = useMemo(() => getPaymentStatusConfig(status), [status]);
+  const { color, label } = getPaymentStatusConfig(status);
 
   return (
     <Chip color={color} size="sm">

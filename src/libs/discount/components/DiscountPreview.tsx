@@ -1,7 +1,10 @@
-import { DiscountPreviewDto, DiscountStatus } from '@/libs/discount/type';
-import { Badge, Card, CardBody, CardHeader, Divider } from '@heroui/react';
-import { FaCheck, FaChevronRight, FaClock, FaFolderOpen, FaInfo } from 'react-icons/fa';
 import Link from 'next/link';
+import { Badge } from '@heroui/badge';
+import { Card, CardBody, CardHeader } from '@heroui/card';
+import { Divider } from '@heroui/divider';
+import { FaCheck, FaChevronRight, FaClock, FaFolderOpen, FaInfo } from 'react-icons/fa';
+import { DiscountPreviewDto } from '@/libs/discount/type';
+import { DiscountStatus } from '@/libs/discount/enums';
 
 export function DiscountPreview({
   data,

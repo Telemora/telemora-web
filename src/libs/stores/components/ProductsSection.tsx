@@ -1,4 +1,4 @@
-import { Button } from '@heroui/react';
+import { Button } from '@heroui/button';
 import ProductPreviewCard from '@/libs/products/components/ProductPreviewCard';
 import { FaPlus } from 'react-icons/fa6';
 import { FaChevronRight } from 'react-icons/fa';

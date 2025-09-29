@@ -1,6 +1,4 @@
-import { Button } from '@heroui/react';
-import React from 'react';
-
+import { Button } from '@heroui/button';
 import { PromotionsList } from '@/libs/discount/components/PromotionsList';
 import { StoreHeader } from '@/libs/stores/components/StoreHeader';
 import { ProductsSection } from '@/libs/stores/components/ProductsSection';

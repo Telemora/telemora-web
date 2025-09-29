@@ -1,37 +1,21 @@
-'use client';
-
-import { Button, Divider, Skeleton, User } from '@heroui/react';
+import { Divider } from '@heroui/divider';
+import { User } from '@heroui/user';
 import Image from 'next/image';
-import { useParams } from 'next/navigation';
-
-import ErrorPage from '@/libs/common/components/ErrorPage';
 import { PageHeader } from '@/libs/common/components/PageHeader';
 import { PriceComponent } from '@/libs/common/components/PriceComponent';
 import { StarRating } from '@/libs/common/components/StarRating';
-import { useProductDetails } from '@/libs/products/hooks';
 import ReviewPreviewCard from '@/libs/reviews/components/preview-card';
-import { useTelegramWebApp } from '@/libs/common/hooks/useTelegramWebApp';
 import { HorizontalScroll } from '@/libs/common/components/HorizontalScroll';
+import { AddToCardButton } from '@/libs/products/components/AddToCardButton';
+import { getProductDetails } from '@/libs/products/api';
 
-export default function ProductDetailsPage() {
-  const { webApp } = useTelegramWebApp();
-  const { storeId, productId } = useParams<{ storeId: string; productId: string }>();
-  const { data: product, isLoading, error, refetch } = useProductDetails(storeId, productId);
-
-  if (isLoading) {
-    return (
-      <>
-        <div className="space-y-4">
-          <Skeleton className="h-52 w-full rounded-lg" />
-          <Skeleton className="h-6 w-3/4 rounded" />
-          <Skeleton className="h-6 w-1/2 rounded" />
-          <Skeleton className="h-10 w-full rounded" />
-        </div>
-      </>
-    );
-  }
-
-  if (error || !product) return <ErrorPage reset={refetch} />;
+export default async function ProductDetailsPage({
+  params,
+}: {
+  params: Promise<{ storeId: string; productId: string }>;
+}) {
+  const { storeId, productId } = await params;
+  const product = await getProductDetails(storeId, productId);
 
   return (
     <>
@@ -64,16 +48,7 @@ export default function ProductDetailsPage() {
           <PriceComponent amount={product.price} />
         </div>
 
-        <Button
-          fullWidth
-          size="lg"
-          className="mt-4"
-          onPress={() => {
-            webApp?.HapticFeedback.impactOccurred('light');
-          }}
-        >
-          Add to Cart
-        </Button>
+        <AddToCardButton />
 
         <Divider />
 
