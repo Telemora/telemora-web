@@ -1,11 +1,6 @@
 import { z } from 'zod';
-import {
-  CreateDiscountDto,
-  DiscountApplicability,
-  DiscountApplicabilityEntityType,
-  DiscountType,
-  UpdateDiscountDto,
-} from '@/libs/discount/type';
+import { CreateDiscountDto, DiscountApplicability, UpdateDiscountDto } from '@/libs/discount/type';
+import { DiscountApplicabilityEntityType, DiscountType } from '@/libs/discount/enums';
 
 export const discountTypeSchema = z.nativeEnum(DiscountType) satisfies z.ZodType<DiscountType>;
 export const discountApplicabilityEntityTypeSchema = z.nativeEnum(

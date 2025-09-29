@@ -1,11 +1,10 @@
+import { DiscountDetailDto, DiscountPreviewDto } from '@/libs/discount/type';
+import { faker } from '@faker-js/faker';
 import {
   DiscountApplicabilityEntityType,
-  DiscountDetailDto,
-  DiscountPreviewDto,
   DiscountStatus,
   DiscountType,
-} from '@/libs/discount/type';
-import { faker } from '@faker-js/faker';
+} from '@/libs/discount/enums';
 
 async function generateMockStoreDiscount(): Promise<DiscountPreviewDto> {
   return {

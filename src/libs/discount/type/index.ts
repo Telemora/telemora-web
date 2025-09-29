@@ -1,20 +1,8 @@
-export enum DiscountType {
-  PERCENTAGE = 'percentage',
-  FIXED_AMOUNT = 'fixed_amount',
-  FREE_SHIPPING = 'free_shipping',
-}
-
-export enum DiscountStatus {
-  ACTIVE = 'active',
-  SCHEDULED = 'scheduled',
-  EXPIRED = 'expired',
-  DRAFT = 'draft',
-}
-
-export enum DiscountApplicabilityEntityType {
-  PRODUCT = 'product',
-  CATEGORY = 'category',
-}
+import {
+  DiscountApplicabilityEntityType,
+  DiscountStatus,
+  DiscountType,
+} from '@/libs/discount/enums';
 
 /**
  * Interface for a quick, at-a-glance view of a promotion.

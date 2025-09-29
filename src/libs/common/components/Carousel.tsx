@@ -3,8 +3,8 @@
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import { cn } from '@heroui/react';
+import Image from 'next/image';
 
-/* eslint-disable @next/next/no-img-element */
 interface Props {
   title: string;
   subtitle: string;
@@ -88,7 +88,8 @@ export function CarouselItem(item: Props) {
         >
           {item.subtitle}
         </p>
-        <img
+        <Image
+          priority
           src={item.imageSrc}
           className="overflow-clip rounded-lg"
           alt={item.imageAlt}
