@@ -44,8 +44,8 @@ export function OrderSummaryCard({ order, isLoading = false }: OrderSummaryCardP
       <Link className="block" href={`/orders/${id}`}>
         <Card>
           <CardHeader className="flex items-center justify-between">
-            <div>
-              <h3 className="text-sm font-semibold">Order #{id}</h3>
+            <div className="max-w-4/5">
+              <h3 className="truncate text-sm font-semibold">{id}</h3>
               <p className="text-default-500 text-xs">
                 {formatSafeDate(createdAt, DATE_FORMATS.SHORT, 'Unknown date')} —{' '}
                 <span className="text-default-500">{store.displayName}</span>
