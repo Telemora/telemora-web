@@ -22,7 +22,7 @@ const ignoreDirs = [
 ];
 
 // Output file name
-const outputFile = path.join(__dirname, 'output.md');
+const outputFile = path.join(__dirname, 'telemora-web.md');
 
 // === HELPERS ===
 
@@ -58,7 +58,12 @@ function generateMarkdown() {
     if (path.resolve(filePath) === path.resolve(outputFile)) return;
 
     const ext = path.extname(filePath).toLowerCase();
-    if (!fileFormats.includes(ext) || filePath.includes('package-lock.json')) return;
+    if (
+      !fileFormats.includes(ext) ||
+      filePath.includes('package-lock.json') ||
+      filePath.includes('generate-markdown.js')
+    )
+      return;
 
     let content;
     try {
