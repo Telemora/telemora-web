@@ -1,4 +1,4 @@
-name: Build & Publish Docker Image
+name: Build & Publish Web Image
 
 on:
   push:
@@ -14,9 +14,11 @@ jobs:
       packages: write
 
     steps:
+      # 1. Checkout source
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
+      # 2. Log in to GitHub Container Registry
       - name: Log in to GHCR
         uses: docker/login-action@v3
         with:
@@ -24,9 +26,37 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      # 3. Extract metadata (tags & labels)
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/telemora/telemora-web
+          tags: |
+            type=raw,value=latest
+            type=sha,prefix=,format=short
+
+      # 4. Build & Push image
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
-          tags: ghcr.io/telemora/telemora-web:latest
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=registry,ref=ghcr.io/telemora/telemora-web:buildcache
+          cache-to: type=registry,ref=ghcr.io/telemora/telemora-web:buildcache,mode=max
+
+      # 5. Trigger deploy repo workflow
+      - name: Trigger deployment
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.DEPLOY_TOKEN }}
+          repository: telemora/telemora-deploy
+          event-type: trigger-deploy
+          client-payload: |
+            {
+              "service": "web",
+              "image": "ghcr.io/telemora/telemora-web:${{ github.sha }}",
+              "branch": "main"
+            }
