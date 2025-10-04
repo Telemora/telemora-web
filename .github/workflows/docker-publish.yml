@@ -39,7 +39,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Generate GitHub App token
-        id: app-token
+        id: app_token
         uses: tibdex/github-app-token@v2
         with:
           app_id: ${{ secrets.APP_ID }}
@@ -48,7 +48,7 @@ jobs:
       - name: Dispatch to deploy repo
         uses: peter-evans/repository-dispatch@v3
         with:
-          token: ${{ steps.app-token.outputs.token }}
+          token: ${{ steps.app_token.outputs.token }}
           repository: telemora/telemora-deploy
           event-type: trigger-deploy
           client-payload: >-
