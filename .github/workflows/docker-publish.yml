@@ -53,7 +53,7 @@ jobs:
           event-type: trigger-deploy
           client-payload: >-
             {
-              "service": "telemora-web",
+              "service": "next-js",
               "image": "ghcr.io/telemora/telemora-web",
               "tag": "sha-${{ github.sha }}"
             }
