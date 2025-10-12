@@ -1,46 +1,40 @@
+import httpClient from '@/libs/common/utils/httpClient';
 import {
-  generateMockProductDetail,
-  generateMockProductPhotos,
-  generateMockProductPreviews,
-} from '@/libs/products/mocks';
-import { CreateProductDto, UpdateProductDto } from '@/libs/products/types';
+  CreateProductDto,
+  ProductDetailDto,
+  ProductImageDto,
+  ProductPreviewDto,
+  UpdateProductDto,
+} from '@/libs/products/types';
 
 export async function getStoreProducts(storeId: string) {
-  /* httpClient.get<ProductPreviewDto[]>(`/stores/${storeId}`); */
-  return generateMockProductPreviews();
+  return httpClient.get<ProductPreviewDto[]>(`/stores/${storeId}`);
 }
 
 export async function getProductDetails(storeId: string, productId: string) {
-  /* httpClient.get<ProductDetailDto>(`/stores/${storeId}/products/${productId}`); */
-  return generateMockProductDetail();
+  return httpClient.get<ProductDetailDto>(`/stores/${storeId}/products/${productId}`);
 }
 
 export async function uploadProductPhotos(data: File[]) {
-  /* httpClient.post<ProductImageDto[]>(`/stores/products/photo`); */
   const formData = new FormData();
   data.forEach((file) => {
     formData.append('photos', file);
   });
-
-  return generateMockProductPhotos();
+  return httpClient.post<ProductImageDto[]>(`/stores/products/photo`);
 }
 
 export async function createProduct(storeId: string, data: CreateProductDto) {
-  /* httpClient.post<ProductDetailDto>(`/stores/${storeId}`, data); */
-  return generateMockProductDetail();
+  return httpClient.post<ProductDetailDto>(`/stores/${storeId}`, data);
 }
 
 export async function updateProduct(storeId: string, productId: string, data: UpdateProductDto) {
-  /* httpClient.patch<ProductDetailDto>(`/stores/${storeId}/products/${productId}`, data); */
-  return generateMockProductDetail();
+  return httpClient.patch<ProductDetailDto>(`/stores/${storeId}/products/${productId}`, data);
 }
 
 export async function deleteProduct(storeId: string, productId: string) {
-  /* httpClient.delete<void>(`/stores/${storeId}/products/${productId}`); */
-  return;
+  return httpClient.delete<void>(`/stores/${storeId}/products/${productId}`);
 }
 
 export async function searchAllProducts(query: string, storeId?: string) {
-  /* httpClient.get<ProductPreviewDto[]>(`/stores/products?q=${query}`); */
-  return generateMockProductPreviews();
+  return httpClient.get<ProductPreviewDto[]>(`/stores/products?q=${query}`);
 }

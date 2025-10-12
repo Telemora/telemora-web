@@ -1,32 +1,28 @@
-import { generateMockUserPrivateProfile } from '@/libs/users/mocks';
+import httpClient from '@/libs/common/utils/httpClient';
 import {
   UpdateContactLocationDto,
   UpdateLanguageDto,
   UpdatePreferencesDto,
   UpdateProfileDto,
+  UserPrivateProfile,
 } from '@/libs/users/types';
 
 export async function telegramLogin() {
-  /* httpClient.get<UserPrivateProfile>('/users/me') */
-  return generateMockUserPrivateProfile();
+  return httpClient.get<UserPrivateProfile>('/users/me');
 }
 
 export async function updateProfile(data: UpdateProfileDto) {
-  /* httpClient.patch<UserPrivateProfile>(`/users/me`, data) */
-  return generateMockUserPrivateProfile();
+  return httpClient.patch<UserPrivateProfile>(`/users/me`, data);
 }
 
 export async function updateLanguage(data: UpdateLanguageDto) {
-  /* httpClient.patch<UserPrivateProfile>(`/users/me/language`, data) */
-  return generateMockUserPrivateProfile();
+  return httpClient.patch<UserPrivateProfile>(`/users/me/language`, data);
 }
 
 export async function updateContactLocation(data: UpdateContactLocationDto) {
-  /* httpClient.patch<UserPrivateProfile>(`/users/me/contact-location`, data) */
-  return generateMockUserPrivateProfile();
+  return httpClient.patch<UserPrivateProfile>(`/users/me/contact-location`, data);
 }
 
 export async function updateUserPreferences(data: UpdatePreferencesDto) {
-  /* httpClient.patch<UserPrivateProfile>(`/users/me/preferences`, data) */
-  return generateMockUserPrivateProfile();
+  return httpClient.patch<UserPrivateProfile>(`/users/me/preferences`, data);
 }

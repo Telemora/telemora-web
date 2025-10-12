@@ -1,14 +1,14 @@
-import { generateMockPaymentDetail, generateMockPaymentSummaries } from '@/libs/payments/mocks';
-import { CreatePaymentDto } from '@/libs/payments/types';
+import httpClient from '@/libs/common/utils/httpClient';
+import { CreatePaymentDto, PaymentDetail, PaymentSummary } from '@/libs/payments/types';
 
 export async function getPayments() {
-  return generateMockPaymentSummaries(); /* httpClient.get<PaymentSummary[]>('/payments'); */
+  return httpClient.get<PaymentSummary[]>('/payments');
 }
 
 export async function getPaymentDetails(id: number) {
-  return generateMockPaymentDetail(); /* httpClient.get<PaymentDetail>(`/payments/${id}`); */
+  return httpClient.get<PaymentDetail>(`/payments/${id}`);
 }
 
 export async function createPayment(data: CreatePaymentDto) {
-  return generateMockPaymentDetail(); /* httpClient.post<PaymentDetail>('/payments', data); */
+  return httpClient.post<PaymentDetail>('/payments', data);
 }

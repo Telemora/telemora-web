@@ -1,37 +1,34 @@
 import {
-  generateMockReviewDetail,
-  generateMockReviewPreviews,
-  generateMockReviewReplyPreview,
-  generateMockReviewReportPreview,
-} from '@/libs/reviews/mocks';
-import { CreateReviewDto, CreateReviewReplyDto, CreateReviewReportDto } from '@/libs/reviews/types';
+  CreateReviewDto,
+  CreateReviewReplyDto,
+  CreateReviewReportDto,
+  ReviewDetail,
+  ReviewPreviewDto,
+  ReviewReplyPreview,
+  ReviewReportPreview,
+} from '@/libs/reviews/types';
+import httpClient from '@/libs/common/utils/httpClient';
 
 export async function createReview(productId: string, data: CreateReviewDto) {
-  /* httpClient.post<ReviewDetail>(`/products/${productId}/reviews`, data); */
-  return generateMockReviewDetail();
+  return httpClient.post<ReviewDetail>(`/products/${productId}/reviews`, data);
 }
 
 export async function getProductReviews(productId: string) {
-  /* httpClient.get<ReviewPreviewDto[]>(`/products/${productId}/reviews`); */
-  return generateMockReviewPreviews();
+  return httpClient.get<ReviewPreviewDto[]>(`/products/${productId}/reviews`);
 }
 
 export async function getReviewsById(id: string) {
-  /* httpClient.get<ReviewDetail>(`/reviews/${id}`); */
-  return generateMockReviewDetail();
+  return httpClient.get<ReviewDetail>(`/reviews/${id}`);
 }
 
 export async function replyToReview(reviewId: string, data: CreateReviewReplyDto) {
-  /* httpClient.post<ReviewReplyPreview>(`/reviews/${reviewId}/reply`, data); */
-  return generateMockReviewReplyPreview();
+  return httpClient.post<ReviewReplyPreview>(`/reviews/${reviewId}/reply`, data);
 }
 
 export async function reportReview(reviewId: string, data: CreateReviewReportDto) {
-  /* httpClient.post<ReviewReportPreview>(`/reviews/${reviewId}/report`, data); */
-  return generateMockReviewReportPreview();
+  return httpClient.post<ReviewReportPreview>(`/reviews/${reviewId}/report`, data);
 }
 
 export async function deleteReviews(id: string) {
-  /* httpClient.delete<void>(`/reviews/${id}`); */
-  return;
+  return httpClient.delete<void>(`/reviews/${id}`);
 }

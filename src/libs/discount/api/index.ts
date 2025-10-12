@@ -5,7 +5,6 @@ import {
   DiscountPreviewDto,
   UpdateDiscountDto,
 } from '@/libs/discount/type';
-import { generateMockDiscountDetails, generateMockStoreDiscounts } from '@/libs/discount/mocks';
 
 export async function createDiscount(
   storeId: string,
@@ -15,16 +14,14 @@ export async function createDiscount(
 }
 
 export async function getStoreDiscounts(storeId: string): Promise<DiscountPreviewDto[]> {
-  /* return httpClient.get<DiscountPreviewDto[]>(`/stores/${storeId}/discounts`); */
-  return generateMockStoreDiscounts();
+  return httpClient.get<DiscountPreviewDto[]>(`/stores/${storeId}/discounts`);
 }
 
 export async function getDiscountDetails(
   storeId: string,
   discountId: string,
 ): Promise<DiscountDetailDto> {
-  /* return httpClient.get<DiscountDetailDto>(`/stores/${storeId}/discounts/${discountId}`); */
-  return generateMockDiscountDetails();
+  return httpClient.get<DiscountDetailDto>(`/stores/${storeId}/discounts/${discountId}`);
 }
 
 export async function updateDiscount(
