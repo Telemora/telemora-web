@@ -37,6 +37,8 @@ jobs:
             ghcr.io/telemora/telemora-web:latest
             ghcr.io/telemora/telemora-web:sha-${{ github.sha }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
 
       - name: Generate GitHub App token
         id: app_token
