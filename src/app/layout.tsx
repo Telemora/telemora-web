@@ -26,6 +26,8 @@ const vazirmatn = localFont({
   src: '../../public/fonts/Vazirmatn/Vazirmatn[wght].woff2',
 });
 
+export const dynamic = 'force-dynamic';
+
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en" suppressHydrationWarning>
