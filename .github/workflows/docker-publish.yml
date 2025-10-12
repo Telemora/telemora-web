@@ -40,6 +40,7 @@ jobs:
           build-args: |
             NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
             NEXT_PUBLIC_TELEMORA_ADDRESS=${{ secrets.NEXT_PUBLIC_TELEMORA_ADDRESS }}
+            NEXT_PUBLIC_SMART_CONTRACT_ADDRESS=${{ secrets.NEXT_PUBLIC_SMART_CONTRACT_ADDRESS }}
 
       - name: Generate GitHub App token
         id: app_token
