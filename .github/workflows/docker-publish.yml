@@ -27,12 +27,30 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ghcr.io/telemora/telemora-web
+          # optional: set tags= to include :main automatically
+
+      # (Optional but recommended) Run lint/typecheck separately to keep Dockerfile's build lean
+      # - name: Use Node
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: 22
+      #     cache: 'npm'
+      # - name: Install deps
+      #   run: npm ci
+      # - name: Lint
+      #   run: npm run lint
+      # - name: Typecheck
+      #   run: npm run typecheck
 
       - name: Build and push
         uses: docker/build-push-action@v6
+        env:
+          HUSKY: "0"
+          NEXT_TELEMETRY_DISABLED: "1"
         with:
           context: .
           push: true
+          # keep latest + sha; add :main if you want a branch tag
           tags: |
             ghcr.io/telemora/telemora-web:latest
             ghcr.io/telemora/telemora-web:sha-${{ github.sha }}
@@ -41,6 +59,8 @@ jobs:
             NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
             NEXT_PUBLIC_TELEMORA_ADDRESS=${{ secrets.NEXT_PUBLIC_TELEMORA_ADDRESS }}
             NEXT_PUBLIC_SMART_CONTRACT_ADDRESS=${{ secrets.NEXT_PUBLIC_SMART_CONTRACT_ADDRESS }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Generate GitHub App token
         id: app_token

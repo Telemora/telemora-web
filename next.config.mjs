@@ -2,24 +2,12 @@
 const nextConfig = {
   output: 'standalone',
   reactStrictMode: true,
+  // Uncomment the two blocks below ONLY if you run lint & typecheck in separate steps:
+  // eslint: { ignoreDuringBuilds: true },
+  // typescript: { ignoreBuildErrors: true },
   images: {
-    remotePatterns: [
-      {
-        hostname: 'img.freepik.com',
-      },
-      {
-        hostname: 'picsum.photos',
-      },
-      {
-        hostname: 'loremflickr.com',
-      },
-      {
-        hostname: 'avatars.githubusercontent.com',
-      },
-      {
-        hostname: 'cdn.jsdelivr.net',
-      },
-    ],
+    remotePatterns: [],
   },
 };
+
 export default nextConfig;
