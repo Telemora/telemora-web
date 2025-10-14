@@ -1,10 +1,46 @@
 name: Build & Push (web) + Dispatch Deploy
+
 on:
   push:
     branches: [ main ]
+  # (nice-to-have) run quality checks on PRs too
+  pull_request:
+    branches: [ main ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
+  quality:
+    name: Lint & Typecheck
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install deps
+        env:
+          HUSKY: "0"
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
   build:
+    name: Build & Push Image + Dispatch Deploy
+    needs: quality
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -27,20 +63,9 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ghcr.io/telemora/telemora-web
-          # optional: set tags= to include :main automatically
-
-      # (Optional but recommended) Run lint/typecheck separately to keep Dockerfile's build lean
-      # - name: Use Node
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version: 22
-      #     cache: 'npm'
-      # - name: Install deps
-      #   run: npm ci
-      # - name: Lint
-      #   run: npm run lint
-      # - name: Typecheck
-      #   run: npm run typecheck
+          tags: |
+            type=raw,value=latest
+            type=raw,value=sha-${{ github.sha }}
 
       - name: Build and push
         uses: docker/build-push-action@v6
@@ -50,10 +75,7 @@ jobs:
         with:
           context: .
           push: true
-          # keep latest + sha; add :main if you want a branch tag
-          tags: |
-            ghcr.io/telemora/telemora-web:latest
-            ghcr.io/telemora/telemora-web:sha-${{ github.sha }}
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}

@@ -26,9 +26,10 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start",
+    "start": "node server.js",
     "lint": "next lint",
     "format": "prettier ./src --write",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
     "prepare": "husky"
   },
   "dependencies": {
