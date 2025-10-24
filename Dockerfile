@@ -47,6 +47,9 @@ COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/public ./public
 
 # Optional: run as non-root (node image has user `node`)
+RUN chown -R node:node /app/.next \
+    && chown -R node:node /app/public
+    
 USER node
 EXPOSE 3000
 
