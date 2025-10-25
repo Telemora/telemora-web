@@ -1,54 +1,36 @@
-# syntax=docker/dockerfile:1.7
-
-ARG NODE_VERSION=22-alpine
-
-########################
-# Builder
-########################
-FROM node:${NODE_VERSION} AS builder
+FROM node:20-alpine AS base
+FROM base AS deps
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Build-time env (can be overridden by --build-arg)
-ARG NEXT_PUBLIC_API_URL
-ARG NEXT_PUBLIC_TELEMORA_ADDRESS
-ARG NEXT_PUBLIC_SMART_CONTRACT_ADDRESS
+COPY package.json package-lock.json .npmrc* ./
+RUN npm ci
 
-# CI-friendly envs
-ENV CI=true \
-    HUSKY=0 \
-    NEXT_TELEMETRY_DISABLED=1 \
-    NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL} \
-    NEXT_PUBLIC_TELEMORA_ADDRESS=${NEXT_PUBLIC_TELEMORA_ADDRESS} \
-    NEXT_PUBLIC_SMART_CONTRACT_ADDRESS=${NEXT_PUBLIC_SMART_CONTRACT_ADDRESS}
-
-# Install deps with cache
-COPY package*.json ./
-RUN --mount=type=cache,target=/root/.npm \
-    npm ci --prefer-offline --no-audit --no-fund
-
-# Build (cache Next compilation artifacts)
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN --mount=type=cache,target=/app/.next/cache \
-    npm run build
 
-########################
-# Runtime (standalone)
-########################
-FROM node:${NODE_VERSION} AS runner
+RUN npm run build
+
+FROM base AS runner
 WORKDIR /app
-ENV NODE_ENV=production \
-    NEXT_TELEMETRY_DISABLED=1 \
-    PORT=3000
 
-# Copy only what’s needed for standalone runtime
-# .next/standalone contains server.js and minimal node_modules subset
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
+ENV NODE_ENV=production
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
 COPY --from=builder /app/public ./public
 
-# Optional: run as non-root (node image has user `node`)
-USER node
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
+
 EXPOSE 3000
 
-# Standalone output entrypoint
+ENV PORT=3000
+
+ENV HOSTNAME="0.0.0.0"
 CMD ["node", "server.js"]
