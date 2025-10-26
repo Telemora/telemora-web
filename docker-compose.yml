@@ -1,17 +1,18 @@
 services:
-  next-js:
+  web:
     build:
       context: .
       dockerfile: Dockerfile
     env_file:
       - .env
     depends_on:
-      - nest-js
+      api:
+        condition: service_healthy
     restart: no
     ports:
       - "3001:3000"
 
-  nest-js:
+  api:
     image: ghcr.io/telemora/telemora-api:latest
     env_file:
       - .env
@@ -25,6 +26,11 @@ services:
     restart: always
     ports:
       - "3000:3000"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:3000/api/health/readyz" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
 
   postgres:
     image: postgis/postgis:15-3.3
