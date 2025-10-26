@@ -3,9 +3,6 @@ name: Build & Push (web) + Dispatch Deploy
 on:
   push:
     branches: [ main ]
-  # (nice-to-have) run quality checks on PRs too
-  pull_request:
-    branches: [ main ]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

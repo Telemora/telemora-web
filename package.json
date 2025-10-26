@@ -30,7 +30,11 @@
     "lint": "next lint",
     "format": "prettier ./src --write",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "prepare": "husky"
+    "prepare": "husky",
+    "docker:pull": "docker compose pull",
+    "docker:up": "docker compose up -d --build",
+    "docker:down": "docker compose down -v",
+    "docker:logs": "docker compose logs next-js -f"
   },
   "dependencies": {
     "@heroui/react": "^2.8.2",
