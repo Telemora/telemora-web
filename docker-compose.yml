@@ -27,7 +27,7 @@ services:
     ports:
       - "3000:3000"
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:3000/api/health/readyz" ]
+      test: [ "CMD", "curl", "-f", "http://localhost:3000/health/livez" ]
       interval: 10s
       timeout: 5s
       retries: 10

@@ -35,6 +35,6 @@ export async function deleteProduct(storeId: string, productId: string) {
   return httpClient.delete<void>(`/stores/${storeId}/products/${productId}`);
 }
 
-export async function searchAllProducts(query: string, storeId?: string) {
+export async function searchAllProducts(query: string = '', storeId: string = '') {
   return httpClient.get<ProductPreviewDto[]>(`/stores/products?q=${query}`);
 }
