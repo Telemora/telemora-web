@@ -1,18 +1,20 @@
-import { PropsWithChildren, Suspense } from 'react';
+'use client';
+
+import { PropsWithChildren } from 'react';
 import { CustomNavbar } from '@/libs/common/components/CustomNavbar';
 import { BottomTabs } from '@/libs/common/components/BottomTabs';
-import { telegramLogin } from '@/libs/users/api';
+import { useTelegramLoginQuery } from '@/libs/users/hooks';
 
 export default function AppLayout({ children }: PropsWithChildren) {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <AppLayoutWrapper>{children}</AppLayoutWrapper>
-    </Suspense>
-  );
-}
+  const { isLoading, isError } = useTelegramLoginQuery();
 
-async function AppLayoutWrapper({ children }: PropsWithChildren) {
-  const res = await telegramLogin();
+  if (isLoading) {
+    return <pre>we are reading your telegram data...</pre>;
+  }
+
+  if (isError) {
+    return <pre>we can&#39;t recognize your telegram data</pre>;
+  }
 
   return (
     <div className="relative flex min-h-screen flex-col">
