@@ -1,13 +1,15 @@
+'use client';
+
 import { FaPlus } from 'react-icons/fa6';
 import { Button } from '@heroui/button';
 import { StoreSummaryCard } from '@/libs/stores/components/SummaryCard';
 import { PageHeader } from '@/libs/common/components/PageHeader';
 import { EmptyState } from '@/libs/common/components/EmptyState';
-import { fetchUserStores } from '@/libs/stores/api';
 import Link from 'next/link';
+import { useUserStoresQuery } from '@/libs/stores/hooks';
 
-export default async function StoreListPage() {
-  const stores = await fetchUserStores();
+export default function StoreListPage() {
+  const { data: stores } = useUserStoresQuery();
 
   return (
     <>

@@ -1,6 +1,8 @@
+'use client';
+
 import { PageHeader } from '@/libs/common/components/PageHeader';
-import { telegramLogin } from '@/libs/users/api';
 import { ProfilePreferencesForm } from '@/libs/users/components/ProfilePreferencesForm';
+import { useTelegramLoginQuery } from '@/libs/users/hooks';
 
 const supportedLanguages = [
   { key: 'en', label: 'English' },
@@ -18,8 +20,9 @@ const localCurrencies = [
   { key: 'gbp', label: 'GBP' },
 ];
 
-export default async function PreferencesPage() {
-  const user = await telegramLogin();
+export default function PreferencesPage() {
+  const { data: user } = useTelegramLoginQuery();
+  if (!user) return null;
 
   return (
     <>

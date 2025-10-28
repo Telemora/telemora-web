@@ -26,15 +26,13 @@ const vazirmatn = localFont({
   src: '../../public/fonts/Vazirmatn/Vazirmatn[wght].woff2',
 });
 
-export const dynamic = 'force-dynamic';
-
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${vazirmatn.className} antialiased`}>
-        <AppProvider>{children}</AppProvider>
         <Script src="https://telegram.org/js/telegram-web-app.js?59" strategy="beforeInteractive" />
         <Eruda />
+        <AppProvider>{children}</AppProvider>
       </body>
     </html>
   );

@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Carousel } from '@/libs/common/components/Carousel';
 import { ScrollStoresSection } from '@/libs/stores/components/ScrollStoresSection';

@@ -1,11 +1,14 @@
-import { Divider } from '@heroui/react';
+'use client';
 
+import { Divider } from '@heroui/react';
 import { OrderSummaries } from '@/libs/orders/components/OrderSummaries';
 import ProfileCard from '@/libs/users/components/profile-card';
-import { telegramLogin } from '@/libs/users/api';
+import { useTelegramLoginQuery } from '@/libs/users/hooks';
 
-export default async function ProfilePage() {
-  const user = await telegramLogin();
+export default function ProfilePage() {
+  const { data: user } = useTelegramLoginQuery();
+  if (!user) return null;
+
   return (
     <>
       <main className="mx-auto space-y-10 py-6">

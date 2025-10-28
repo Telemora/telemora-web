@@ -1,4 +1,5 @@
-import { getOrderDetails } from '@/libs/orders/api';
+'use client';
+
 import { PageHeader } from '@/libs/common/components/PageHeader';
 import { OrderStatusChip } from '@/libs/orders/components/OrderStatusChip';
 import { PaymentStatusChip } from '@/libs/payments/components/PaymentStatusChip';
@@ -12,14 +13,14 @@ import { OrderItemPreviewCard } from '@/libs/orders/components/OrderItemPreview'
 import { OrderShipmentCard } from '@/libs/orders/components/OrderShipmentCard';
 import { PaymentStatus } from '@/libs/payments/types';
 import { OrderStatus } from '@/libs/orders/types';
+import { useOrderDetails } from '@/libs/orders/hooks';
+import { useParams } from 'next/navigation';
 
-export default async function OrderDetailsPage({
-  params,
-}: {
-  params: Promise<{ orderId: string }>;
-}) {
-  const { orderId } = await params;
-  const order = await getOrderDetails(orderId);
+export default function OrderDetailsPage() {
+  const { orderId } = useParams<{ orderId: string }>();
+  const { data: order } = useOrderDetails(orderId);
+
+  if (!order) return null;
 
   const isPendingPayment =
     order.status === OrderStatus.PENDING && order.payment?.status !== PaymentStatus.COMPLETED;
