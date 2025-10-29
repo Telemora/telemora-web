@@ -1,3 +1,5 @@
+'use client';
+
 import { Divider } from '@heroui/divider';
 import { User } from '@heroui/user';
 import Image from 'next/image';
@@ -7,15 +9,14 @@ import { StarRating } from '@/libs/common/components/StarRating';
 import ReviewPreviewCard from '@/libs/reviews/components/preview-card';
 import { HorizontalScroll } from '@/libs/common/components/HorizontalScroll';
 import { AddToCardButton } from '@/libs/products/components/AddToCardButton';
-import { getProductDetails } from '@/libs/products/api';
+import { useProductDetails } from '@/libs/products/hooks';
+import { useParams } from 'next/navigation';
 
-export default async function ProductDetailsPage({
-  params,
-}: {
-  params: Promise<{ storeId: string; productId: string }>;
-}) {
-  const { storeId, productId } = await params;
-  const product = await getProductDetails(storeId, productId);
+export default function ProductDetailsPage() {
+  const { storeId, productId } = useParams<{ storeId: string; productId: string }>();
+  const { data: product } = useProductDetails(storeId, productId);
+
+  if (!product) return null;
 
   return (
     <div className="space-y-6">

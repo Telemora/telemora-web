@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import { Card, CardBody } from '@heroui/card';
+import { CardFooter } from '@heroui/react';
 
 interface Props {
   text?: string;
@@ -6,16 +8,18 @@ interface Props {
 
 export function EmptyState({ text }: Props) {
   return (
-    <div className="bg-default-200 border-default-400 my-4 w-full space-y-4 rounded-lg border p-4 text-center">
-      <Image
-        src="/empty-state.svg"
-        width={165}
-        height={165}
-        alt="empty"
-        priority
-        className="mx-auto w-1/5 drop-shadow-md"
-      />
-      <div className="text-default-600 text-sm">{text || 'No items found'}</div>
-    </div>
+    <Card>
+      <CardBody>
+        <Image
+          src="/empty-state.svg"
+          width={165}
+          height={165}
+          alt="empty"
+          priority
+          className="mx-auto w-1/5 drop-shadow-md"
+        />
+      </CardBody>
+      <CardFooter className="text-default-600 text-sm">{text || 'No items found'}</CardFooter>
+    </Card>
   );
 }
