@@ -2,6 +2,7 @@ import { Button } from '@heroui/button';
 import { OrderSummaryCard } from '@/libs/orders/components/OrderSummaryCard';
 import { OrderSummary } from '@/libs/orders/types';
 import { PageHeader } from '@/libs/common/components/PageHeader';
+import Link from 'next/link';
 
 export function OrderSummaries({
   orders,
@@ -17,9 +18,9 @@ export function OrderSummaries({
       <PageHeader title={title} subtitle={subtitle} />
       <div className="space-y-4">
         {orders.length === 0 ? (
-          <Button as="link" href="/orders">
-            Create your first order
-          </Button>
+          <Link href="/orders">
+            <Button>Create your first order</Button>
+          </Link>
         ) : (
           orders.map((order) => <OrderSummaryCard key={order.id} order={order} />)
         )}

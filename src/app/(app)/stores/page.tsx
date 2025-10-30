@@ -21,15 +21,11 @@ export default function StoreListPage() {
       {stores && stores.length === 0 ? (
         <div className="mt-12 text-center">
           <EmptyState text="Create your first store to begin your journey" />
-          <Button
-            as="link"
-            href="/stores/create/basic-information"
-            fullWidth
-            color="primary"
-            startContent={<FaPlus />}
-          >
-            Create New Store
-          </Button>
+          <Link href="/stores/create/basic-information">
+            <Button fullWidth color="primary" startContent={<FaPlus />}>
+              Create New Store
+            </Button>
+          </Link>
         </div>
       ) : (
         <div className="space-y-4">
