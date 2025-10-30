@@ -46,9 +46,6 @@ export function BottomTabs() {
         tabList: 'max-w-xs mx-auto',
         tab: 'h-16',
       }}
-      style={{
-        paddingBottom: 'var(--tg-safe-area-inset-bottom)',
-      }}
       onSelectionChange={(key) => route.push(key as string)}
     >
       {({ key, label, icon }) => (
