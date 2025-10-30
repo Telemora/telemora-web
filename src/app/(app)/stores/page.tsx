@@ -11,6 +11,8 @@ import { useUserStoresQuery } from '@/libs/stores/hooks';
 export default function StoreListPage() {
   const { data: stores } = useUserStoresQuery();
 
+  if (!stores) return null;
+
   return (
     <>
       <PageHeader
@@ -18,7 +20,7 @@ export default function StoreListPage() {
         subtitle="View and manage all your stores in one place"
       />
 
-      {stores && stores.length === 0 ? (
+      {stores.length === 0 ? (
         <div className="mt-12 text-center">
           <EmptyState text="Create your first store to begin your journey" />
           <Link href="/stores/create/basic-information">
@@ -29,7 +31,7 @@ export default function StoreListPage() {
         </div>
       ) : (
         <div className="space-y-4">
-          {stores!.map((store) => (
+          {stores.map((store) => (
             <StoreSummaryCard key={store.id} store={store} />
           ))}
 

@@ -40,9 +40,10 @@ export function BottomTabs() {
       placement="bottom"
       items={tabList}
       color="primary"
+      radius="full"
       classNames={{
-        base: 'fixed bottom-0 z-50 bg-default-100 lg:bg-transparent lg:max-w-sm w-full translate-x-1/2 right-1/2',
-        tabList: 'max-w-sm mx-auto',
+        base: 'fixed bottom-6 z-50 bg-default-100/10 backdrop-blur-lg bg-transparent max-w-xs translate-x-1/2 right-1/2',
+        tabList: 'max-w-xs mx-auto',
         tab: 'h-16',
       }}
       style={{
