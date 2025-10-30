@@ -10,11 +10,7 @@ interface ScrollStoresSectionProps {
 
 export function ScrollStoresSection({ stores, title }: ScrollStoresSectionProps) {
   if (!stores || stores.length === 0) {
-    return (
-      <>
-        <EmptyState />
-      </>
-    );
+    return <EmptyState />;
   }
 
   return (

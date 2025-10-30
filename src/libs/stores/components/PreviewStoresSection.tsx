@@ -4,6 +4,7 @@ import React from 'react';
 import { StorePreviewCard } from '@/libs/stores/components/PreviewCard';
 import { StorePreviewDto } from '@/libs/stores/types';
 import { PageHeader } from '@/libs/common/components/PageHeader';
+import Link from 'next/link';
 
 export default function PreviewStoresSection({
   stores,
@@ -16,15 +17,19 @@ export default function PreviewStoresSection({
     <section className="space-y-4" id="preview-stores-section">
       <Divider />
       <PageHeader title={title} />
-      <div className="grid grid-cols-2 gap-3">
-        {stores.length === 0 ? (
-          <Button as={'link'} href="/stores/create">
+      {stores.length === 0 ? (
+        <Link href="/stores/create">
+          <Button fullWidth color="primary">
             Create your first Store
           </Button>
-        ) : (
-          stores.map((store) => <StorePreviewCard key={store.slug} store={store} />)
-        )}
-      </div>
+        </Link>
+      ) : (
+        <div className="grid grid-cols-2 gap-3">
+          {stores.map((store) => (
+            <StorePreviewCard key={store.slug} store={store} />
+          ))}
+        </div>
+      )}
     </section>
   );
 }

@@ -19,7 +19,9 @@ export function OrderSummaries({
       <div className="space-y-4">
         {orders.length === 0 ? (
           <Link href="/orders">
-            <Button>Create your first order</Button>
+            <Button fullWidth color="primary">
+              Create your first order
+            </Button>
           </Link>
         ) : (
           orders.map((order) => <OrderSummaryCard key={order.id} order={order} />)

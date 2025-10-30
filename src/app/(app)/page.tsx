@@ -13,8 +13,8 @@ export default function MarketPage() {
     <>
       <AutocompleteSearch />
       <Carousel />
-      <ScrollStoresSection title="Featured" stores={discoverableStores} />;
-      <ScrollStoresSection title="New Openings" stores={featuredStores} />;
+      <ScrollStoresSection title="Featured" stores={discoverableStores} />
+      <ScrollStoresSection title="New Openings" stores={featuredStores} />
     </>
   );
 }
