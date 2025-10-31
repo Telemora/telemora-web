@@ -8,7 +8,7 @@ import {
 } from '@/libs/products/types';
 
 export async function getStoreProducts(storeId: string) {
-  return httpClient.get<ProductPreviewDto[]>(`/stores/${storeId}`);
+  return httpClient.get<ProductPreviewDto[]>(`/stores/${storeId}/products`);
 }
 
 export async function getProductDetails(storeId: string, productId: string) {
@@ -24,7 +24,7 @@ export async function uploadProductPhotos(data: File[]) {
 }
 
 export async function createProduct(storeId: string, data: CreateProductDto) {
-  return httpClient.post<ProductDetailDto>(`/stores/${storeId}`, data);
+  return httpClient.post<ProductDetailDto>(`/stores/${storeId}/products`, data);
 }
 
 export async function updateProduct(storeId: string, productId: string, data: UpdateProductDto) {
@@ -36,5 +36,5 @@ export async function deleteProduct(storeId: string, productId: string) {
 }
 
 export async function searchAllProducts(query: string = '', storeId: string = '') {
-  return httpClient.get<ProductPreviewDto[]>(`/stores/products?q=${query}`);
+  return httpClient.get<ProductPreviewDto[]>(`/stores/${storeId}/products/search?q=${query}`);
 }

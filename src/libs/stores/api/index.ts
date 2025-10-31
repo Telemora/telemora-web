@@ -28,7 +28,7 @@ export async function fetchFeaturedStores() {
 }
 
 export async function submitStoreBasicInfo(data: CreateStoreBasicDto) {
-  return httpClient.post<StoreDetail>('/stores/create/basic', data);
+  return httpClient.post<StoreDetail>('/stores', data);
 }
 
 export async function submitStoreAddressUpdate(storeId: string, data: AddressDto) {
@@ -53,5 +53,5 @@ export async function submitStoreLogoUpload(storeId: string, data: CreateStoreLo
 }
 
 export async function submitStoreUpdate(storeId: string, data: UpdateStoreDto) {
-  return httpClient.patch<StoreDetail>(`/stores/${storeId}/update`, data);
+  return httpClient.patch<StoreDetail>(`/stores/${storeId}`, data);
 }
