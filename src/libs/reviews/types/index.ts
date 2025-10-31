@@ -20,10 +20,10 @@ export enum ReportReason {
 }
 
 export interface ReviewPreviewDto {
-  id: string;
+  reviewId: string;
   rating: number;
   comment?: string;
-  productId: number | string;
+  productId: string;
   customer: UserPublicPreview;
   createdAt: Date;
 }
@@ -35,14 +35,14 @@ export interface ReviewDetail extends ReviewPreviewDto {
 }
 
 export interface ReviewReplyPreview {
-  id: string;
+  reviewReplyId: string;
   vendor: UserPublicPreview;
   replyText: string;
   createdAt: Date;
 }
 
 export interface ReviewReportPreview {
-  id: string;
+  reviewReportId: string;
   reportedBy: UserPublicPreview;
   reason: ReportReason;
   comment?: string;

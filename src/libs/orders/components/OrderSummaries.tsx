@@ -24,7 +24,7 @@ export function OrderSummaries({
             </Button>
           </Link>
         ) : (
-          orders.map((order) => <OrderSummaryCard key={order.id} order={order} />)
+          orders.map((order) => <OrderSummaryCard key={order.orderId} order={order} />)
         )}
       </div>
     </section>

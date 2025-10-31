@@ -88,7 +88,7 @@ export default function ProductDetailsPage() {
       {product.reviews && product.reviews.length > 0 && (
         <div className="space-y-2">
           {product.reviews.map((review) => (
-            <ReviewPreviewCard key={review.id} content={review} />
+            <ReviewPreviewCard key={review.reviewId} content={review} />
           ))}
         </div>
       )}

@@ -16,7 +16,7 @@ export enum TokenSymbol {
 }
 
 export interface PaymentSummary {
-  id: string;
+  paymentId: string;
   status: PaymentStatus;
   amount: string;
   tokenSymbol: TokenSymbol;

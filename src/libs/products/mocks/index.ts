@@ -18,7 +18,7 @@ export async function generateMockProductPreview(): Promise<ProductPreviewDto> {
     currency: '',
     numberOfReviews: 0,
     storeName: '',
-    id: faker.string.uuid(),
+    productId: faker.string.uuid(),
     name: faker.commerce.productName(),
     slug: faker.helpers.slugify(faker.commerce.productName()),
     price: Number(faker.commerce.price({ min: 10, max: 500 })),

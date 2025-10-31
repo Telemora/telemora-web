@@ -32,7 +32,7 @@ export default function StoreListPage() {
       ) : (
         <div className="space-y-4">
           {stores.map((store) => (
-            <StoreSummaryCard key={store.id} store={store} />
+            <StoreSummaryCard key={store.storeId} store={store} />
           ))}
 
           <Link href="/stores/create/basic-information">

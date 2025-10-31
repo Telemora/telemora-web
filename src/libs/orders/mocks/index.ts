@@ -18,7 +18,7 @@ export async function generateMockOrderItemPreview(): Promise<OrderItemPreviewDt
 
 export async function generateMockOrderSummary(): Promise<OrderSummary> {
   return {
-    id: faker.string.uuid(),
+    orderId: faker.string.uuid(),
     status: OrderStatus.PENDING,
     totalAmount: Number(faker.commerce.price({ min: 50, max: 500 })),
     store: await generateMockStorePreview(),
@@ -32,7 +32,7 @@ export async function generateMockOrderDetail(): Promise<OrderDetail> {
     ...(await generateMockOrderSummary()),
     items: await generateMockOrderItemPreviews(),
     shipment: {
-      id: faker.string.uuid(),
+      orderShipmentId: faker.string.uuid(),
       trackingNumber: faker.string.uuid(),
       courierService: faker.company.name(),
       expectedDeliveryDate: faker.date.future(),

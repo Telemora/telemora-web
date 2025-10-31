@@ -18,7 +18,10 @@ export function ProductsSection({
     <section>
       <div className="flex items-start justify-between">
         <PageHeader title="Products" />
-        <Link className="flex items-center gap-x-2 text-sm" href={`/stores/${store.id}/products`}>
+        <Link
+          className="flex items-center gap-x-2 text-sm"
+          href={`/stores/${store.storeId}/products`}
+        >
           <span>View All</span>
           <FaChevronRight size={12} />
         </Link>
@@ -26,13 +29,13 @@ export function ProductsSection({
 
       <div className="grid grid-cols-2 gap-3">
         {store.products.slice(0, 4).map((product) => (
-          <ProductPreviewCard key={product.id} product={product} />
+          <ProductPreviewCard key={product.productId} product={product} />
         ))}
       </div>
 
       {isOwner && (
         <div className="mt-4 text-center">
-          <Link href={`/stores/${store.id}/products/new`}>
+          <Link href={`/stores/${store.storeId}/products/new`}>
             <Button fullWidth color="primary" startContent={<FaPlus />}>
               Add Product
             </Button>

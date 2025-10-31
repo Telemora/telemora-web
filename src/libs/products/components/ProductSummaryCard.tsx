@@ -14,9 +14,9 @@ interface ProductSummaryCardProps {
 }
 
 export default function ProductSummaryCard({ product, className }: ProductSummaryCardProps) {
-  const { id, slug, name, price, primaryImage, productType, store } = product;
+  const { productId, slug, name, price, primaryImage, productType, store } = product;
 
-  const href = `/products/${slug ?? id}`;
+  const href = `/products/${slug ?? productId}`;
 
   const productTypeLabel: Record<ProductType, string> = {
     [ProductType.PHYSICAL]: 'Physical',

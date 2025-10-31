@@ -7,7 +7,7 @@ import { PaymentDetail, PaymentStatus, PaymentSummary, TokenSymbol } from '../ty
 
 export async function generateMockPaymentSummary(): Promise<PaymentSummary> {
   return {
-    id: faker.string.uuid(),
+    paymentId: faker.string.uuid(),
     tokenSymbol: faker.helpers.arrayElement(['USDC', 'ETH']) as TokenSymbol,
     status: PaymentStatus.PENDING,
     amount: faker.finance.amount(),

@@ -37,15 +37,15 @@ const OrderSummaryCardSkeleton = () => (
 );
 
 export function OrderSummaryCard({ order, isLoading = false }: OrderSummaryCardProps) {
-  const { id, status, totalAmount, store, expectedDeliveryDate, createdAt } = order;
+  const { orderId, status, totalAmount, store, expectedDeliveryDate, createdAt } = order;
 
   const cardContent = useMemo(() => {
     return (
-      <Link className="block" href={`/orders/${id}`}>
+      <Link className="block" href={`/orders/${orderId}`}>
         <Card>
           <CardHeader className="flex items-center justify-between">
             <div className="max-w-4/5">
-              <h3 className="truncate text-sm font-semibold">{id}</h3>
+              <h3 className="truncate text-sm font-semibold">{orderId}</h3>
               <p className="text-default-500 text-xs">
                 {formatSafeDate(createdAt, DATE_FORMATS.SHORT, 'Unknown date')} —{' '}
                 <span className="text-default-500">{store.displayName}</span>
@@ -65,7 +65,7 @@ export function OrderSummaryCard({ order, isLoading = false }: OrderSummaryCardP
         </Card>
       </Link>
     );
-  }, [id, createdAt, store.displayName, status, totalAmount, expectedDeliveryDate]);
+  }, [orderId, createdAt, store.displayName, status, totalAmount, expectedDeliveryDate]);
 
   if (isLoading) {
     return <OrderSummaryCardSkeleton />;

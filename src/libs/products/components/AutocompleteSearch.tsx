@@ -19,7 +19,7 @@ export function AutocompleteSearch() {
       startContent={<FaSearch />}
     >
       {products.map((product) => (
-        <AutocompleteItem key={product.id} textValue={product.name}>
+        <AutocompleteItem key={product.productId} textValue={product.name}>
           {product.name}
         </AutocompleteItem>
       ))}

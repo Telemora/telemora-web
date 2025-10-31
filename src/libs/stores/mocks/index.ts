@@ -8,7 +8,7 @@ import { StoreDetail, StorePreviewDto, StoreStatusEnum, StoreSummary } from '../
 
 export async function generateMockStorePreview(): Promise<StorePreviewDto> {
   return {
-    id: faker.string.uuid(),
+    storeId: faker.string.uuid(),
     displayName: faker.company.name(),
     slug: faker.helpers.slugify(faker.company.name()),
     logo: {

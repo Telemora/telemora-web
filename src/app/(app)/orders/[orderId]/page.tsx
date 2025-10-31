@@ -68,7 +68,7 @@ export default function OrderDetailsPage() {
       <div className="space-y-4">
         <PageHeader title="Items" />
         {order.items.map((item) => (
-          <OrderItemPreviewCard orderItem={item} key={item.product.id} />
+          <OrderItemPreviewCard orderItem={item} key={item.product.productId} />
         ))}
       </div>
 

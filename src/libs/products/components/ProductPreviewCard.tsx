@@ -13,7 +13,7 @@ interface ProductPreviewCard {
 
 export default function ProductPreviewCard({ product }: ProductPreviewCard) {
   return (
-    <Link className="block" href={`/stores/${product.storeId}/products/${product.id}`}>
+    <Link className="block" href={`/stores/${product.storeId}/products/${product.productId}`}>
       <Card>
         <CardBody className="h-32">
           <Image

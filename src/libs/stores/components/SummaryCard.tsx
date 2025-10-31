@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 export function StoreSummaryCard({ store }: { store: StoreSummary }) {
   return (
-    <Link href={`/stores/${store.id}`} className="block">
+    <Link href={`/stores/${store.storeId}`} className="block">
       <Card>
         <CardHeader>
           <div className="flex items-end gap-x-4">

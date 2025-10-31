@@ -35,24 +35,24 @@ export interface ProductImageDto extends MediaDto {
 }
 
 export interface AttributeDto {
-  id: string;
+  attributeId: string;
   name: string;
 }
 
 export interface ProductAttributeValueDto {
-  id: string;
+  productAttributeId: string;
   name: string;
   value: string;
 }
 
 export interface VariantAttributeValueDto {
-  id: string;
+  variantAttributeValueId: string;
   name: string;
   value: string;
 }
 
 export interface ProductVariantDto {
-  id: string;
+  productVariantId: string;
   sku?: string;
   priceOverride?: number;
   quantityAvailable: number;
@@ -62,7 +62,7 @@ export interface ProductVariantDto {
 }
 
 export interface ProductPreviewDto {
-  id: string;
+  productId: string;
   name: string;
   slug?: string;
   primaryImage: ProductImageDto;

@@ -22,7 +22,7 @@ export interface OrderItemPreviewDto {
 }
 
 export interface OrderSummary {
-  id: string;
+  orderId: string;
   status: OrderStatus;
   totalAmount: number;
   store: StorePreviewDto;
@@ -38,7 +38,7 @@ export interface OrderDetail extends OrderSummary {
 }
 
 export interface OrderShipment {
-  id: string;
+  orderShipmentId: string;
   trackingNumber: string;
   carrierTrackingUrl?: string;
   status?: 'created' | 'in_transit' | 'delivered' | 'failed';

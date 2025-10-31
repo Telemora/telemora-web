@@ -23,7 +23,9 @@ export default function StoreProductsPage() {
         </Button>
       </div>
       <main className="grid grid-cols-2 gap-2 lg:grid-cols-3">
-        {products?.map((product) => <ProductPreviewCard key={product.id} product={product} />)}
+        {products?.map((product) => (
+          <ProductPreviewCard key={product.productId} product={product} />
+        ))}
       </main>
     </>
   );

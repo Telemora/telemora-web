@@ -9,7 +9,7 @@ export function OrderItemPreviewCard({ orderItem }: { orderItem: OrderItemPrevie
   return (
     <Link
       className="block"
-      href={`/stores/${orderItem.product.storeId}/products/${orderItem.product.id}}`}
+      href={`/stores/${orderItem.product.storeId}/products/${orderItem.product.productId}}`}
     >
       <Card>
         <CardBody className="flex flex-row justify-between text-sm">
