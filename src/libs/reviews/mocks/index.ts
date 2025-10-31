@@ -10,7 +10,7 @@ import {
   ReviewReportPreview,
 } from '../types';
 
-export async function generateMockReviewPreview(productId: number): Promise<ReviewPreviewDto> {
+export async function generateMockReviewPreview(productId: string): Promise<ReviewPreviewDto> {
   return {
     reviewId: faker.string.uuid(),
     rating: faker.number.int({ min: 1, max: 5 }),
@@ -23,7 +23,7 @@ export async function generateMockReviewPreview(productId: number): Promise<Revi
 
 export async function generateMockReviewDetail(): Promise<ReviewDetail> {
   return {
-    ...(await generateMockReviewPreview(1)),
+    ...(await generateMockReviewPreview(faker.string.uuid())),
     isFlagged: false,
     replies: [await generateMockReviewReplyPreview()],
     reports: [await generateMockReviewReportPreview()],
@@ -51,6 +51,6 @@ export async function generateMockReviewReportPreview(): Promise<ReviewReportPre
 
 export async function generateMockReviewPreviews(): Promise<ReviewPreviewDto[]> {
   return Promise.all(
-    Array.from({ length: 5 }, () => generateMockReviewPreview(faker.number.int())),
+    Array.from({ length: 5 }, () => generateMockReviewPreview(faker.string.uuid())),
   );
 }
