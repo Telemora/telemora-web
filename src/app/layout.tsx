@@ -6,6 +6,7 @@ import localFont from 'next/font/local';
 import { AppProvider } from '@/providers/AppProvider';
 import Script from 'next/script';
 import Eruda from '@/libs/common/components/Eruda';
+import { TelegramProvider } from '@/providers/TelegramProvider';
 
 export const metadata: Metadata = {
   title: 'Telemora',
@@ -32,7 +33,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
       <body className={`${vazirmatn.className} antialiased`}>
         <Script src="https://telegram.org/js/telegram-web-app.js?59" strategy="beforeInteractive" />
         <Eruda />
-        <AppProvider>{children}</AppProvider>
+        <AppProvider>
+          <TelegramProvider>{children}</TelegramProvider>
+        </AppProvider>
       </body>
     </html>
   );

@@ -4,16 +4,36 @@ import { PropsWithChildren } from 'react';
 import { CustomNavbar } from '@/libs/common/components/CustomNavbar';
 import { BottomTabs } from '@/libs/common/components/BottomTabs';
 import { useTelegramLoginQuery } from '@/libs/users/hooks';
+import { useTelegram } from '@/providers/TelegramProvider';
+import { Spinner } from '@heroui/react';
 
 export default function AppLayout({ children }: PropsWithChildren) {
+  const { isReady, initData } = useTelegram();
   const { isLoading, isError } = useTelegramLoginQuery();
 
+  if (!isReady || !initData) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <pre>Initializing Telegram WebApp...</pre>
+      </div>
+    );
+  }
+
   if (isLoading) {
-    return <pre>we are reading your telegram data...</pre>;
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <Spinner />
+        <pre>Reading your Telegram data...</pre>
+      </div>
+    );
   }
 
   if (isError) {
-    return <pre>we can&#39;t recognize your telegram data</pre>;
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <pre>We can&#39;t recognize your Telegram data</pre>
+      </div>
+    );
   }
 
   return (
